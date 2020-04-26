@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +27,9 @@ public class MainLogin extends Application{
     
         Scene scene = new Scene(root);
         
+        Image WindowIcon = new Image(getClass().getResourceAsStream("/View/Images/manLoad.png"));
+        
+        stage.getIcons().add(WindowIcon);
         stage.setTitle("Login");
         stage.setResizable(false);
         stage.setScene(scene);

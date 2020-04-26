@@ -1,11 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
-    
+
+<AnchorPane fx:id="apFundo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="629.0" style="-fx-background-color: #363636;" stylesheets="@Styles/Default.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+   <children>
+      <Rectangle fx:id="fundo" arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="BLACK" strokeType="INSIDE" width="629.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#757575" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <AnchorPane fx:id="apFundoLogin" layoutX="14.0" layoutY="14.0" prefHeight="371.0" prefWidth="310.0" style="-fx-background-color: #8A2BE2;" stylesheets="@Styles/Default.css">
+         <children>
+            <Rectangle fx:id="recFundoL" arcHeight="5.0" arcWidth="5.0" height="371.0" stroke="TRANSPARENT" strokeType="INSIDE" width="344.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLUEVIOLET" />
+                        <Stop color="INDIGO" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Circle fill="#363636" layoutX="53.0" layoutY="53.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="imgPerfil" fitHeight="51.0" fitWidth="50.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true">
+               <image>
+                  <Image url="@Images/user_white.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="22.0" layoutY="111.0" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="23.0" layoutY="202.0" text="Senha" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtLogin" layoutX="22.0" layoutY="148.0" prefHeight="29.0" prefWidth="302.0" promptText="Digite o nome..." style="-fx-border-radius: 10px;">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="txtSenha" layoutX="23.0" layoutY="228.0" prefHeight="29.0" prefWidth="302.0" promptText="Digite a senha...">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </PasswordField>
+            <Button layoutX="16.0" layoutY="298.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="36.0" prefWidth="152.0" style="-fx-background-radius: 1000px; -fx-background-color: #A020F0;" text="Cadastrar">
+               <font>
+                  <Font name="Arial Bold Italic" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="178.0" layoutY="298.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="152.0" style="-fx-background-radius: 1000px; -fx-background-color: #A020F0;" text="Login">
+               <font>
+                  <Font name="Arial Bold Italic" size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="txtEsqueceu" layoutX="28.0" layoutY="271.0" text="Escqueceu a senha? clique aqui" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold Italic" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="410.0" layoutY="51.0" text="AgendaFX" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold Italic" size="36.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="399.0" layoutY="108.0" prefHeight="249.0" prefWidth="202.0" stylesheets="@Styles/Default.css">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="267.0" stroke="TRANSPARENT" strokeType="INSIDE" width="202.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLUEVIOLET" />
+                        <Stop color="INDIGO" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <ImageView fitHeight="51.0" fitWidth="50.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/thunder_white.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="79.0" layoutY="22.0" text="Rápido" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="51.0" fitWidth="50.0" layoutX="16.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Correct_White.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="81.0" layoutY="82.0" text="Fácil" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="51.0" fitWidth="50.0" layoutX="16.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Produtividade_White.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="81.0" layoutY="149.0" text="Produtivo" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="51.0" fitWidth="50.0" layoutX="16.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/more_hospital_white.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="81.0" layoutY="218.0" text="Ajudador" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold Italic" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
