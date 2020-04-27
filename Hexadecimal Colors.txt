@@ -7,17 +7,21 @@
 
  MediumPurple	#9370DB	(147,112,219)
 
- BlueViolet	#8A2BE2	(138,43,226)
+ /* BlueViolet	#8A2BE2	(138,43,226) */
 
- Indigo	#4B0082	(75,0,130)
+  /* Indigo	#4B0082	(75,0,130)  */
 
- DarkViolet	#9400D3	(148,0,211)
+
+////gradient (#8A2BE2	+  #4B0082) ////////	
+
+
+  /* DarkViolet	#9400D3	(148,0,211)  */
 
  DarkOrchid	#9932CC	(153,50,204)
 
  MediumOrchid	#BA55D3	(186,85,211)
 
- Purple	#A020F0	(128,0,128)
+  /*Purple	#A020F0	(128,0,128)*/
 
  DarkMagenta	#8B008B	(139,0,139)
 
@@ -28,4 +32,30 @@
  Orchid	#DA70D6	(218,112,214)
 
  Plum	#DDA0DD	(221,160,221)
+
 //////////////////////////////////////////////////
+
+Tons de Cinza - Gray Colors
+
+
+Black	#000000	(0,0,0)
+
+grey11	#1C1C1C	(28,28,28)
+
+/*grey21 //#363636//	(54,54,54)*/ gradient with #616161
+
+
+
+grey31	#4F4F4F	(79,79,79)
+
+DimGray	#696969	(105,105,105)
+
+Gray	#808080	(128,128,128)
+
+DarkGray #A9A9A9 (169,169,169)
+
+Silver	#C0C0C0	(192,192,192)
+
+LightGrey #D3D3D3 (211,211,211)
+
+Gainsboro #DCDCDC (220,220,220)
