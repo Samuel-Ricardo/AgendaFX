@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -276,6 +278,37 @@ public class UserDAO {
     
         connection = ConnectionFactory.getConnection();
     
+    }
+
+    public boolean exist(User user) {     // look for the user in the bank and return true if it exists  // procura o usuario no banco e retorna verdadeiro se exisstir
+     
+        connect();
+        PreparedStatement statement = null;
+        ResultSet result= null;
+        String sql = "SELECT * FROM usuario WHERE nome = ? and senha = ?;";
+
+        try {
+            
+            statement = connection.prepareStatement(sql);      // prepares the command to be executed  // prepara o comando para ser executado
+            
+                statement.setString(1, user.getNome());      // Filling in the camp "?"  //  Preenchendo os campos "?"
+                statement.setString(2, user.getSenha());
+                
+            result = statement.executeQuery();            //  execute sql statement returning result  //  executa instruçao sql retornando resultado
+            
+            if(result.next()){  // if there is a result it returns true if it does not return false  //se houver resultado ele retorna verdadeiro se nao retorna false
+                return true;
+            }else{
+                return false;
+            }
+            
+         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao consultar o banco: "+ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            return false;
+         } finally {
+            ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
+        }
+        
     }
     
 }

@@ -16,14 +16,14 @@ import javafx.stage.Stage;
  *
  * @author Samuel
  */
-public class MainLogin extends Application{
+public class MainHome extends Application{
 
     private static Stage window;
     
     @Override
     public void start(Stage stage) throws Exception {
    
-    Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));  // Loading a Parent with the JavaFX window fxml  //  Carregando um Parent com o fxml da janela JavaFX
+    Parent root = FXMLLoader.load(getClass().getResource("/View/Home.fxml"));  // Loading a Parent with the JavaFX window fxml  //  Carregando um Parent com o fxml da janela JavaFX
     
         Scene scene = new Scene(root); // Loading Scene with Parent  //  Carregando Scene com o Parent 
         
@@ -47,8 +47,8 @@ public class MainLogin extends Application{
         return window;
     }
 
-    public static void setWindow(Stage janela) {
-        MainLogin.window = janela;
+    public static void setWindow(Stage window) {
+        MainHome.window = window;
     }
     
     
