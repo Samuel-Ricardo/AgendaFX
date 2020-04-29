@@ -28,6 +28,7 @@ public class User {
     
     */
     
+     private String image;
      private Long id;
      private String nome;
      private String sexo;
@@ -37,7 +38,7 @@ public class User {
      private String CPF;
      private String senha;
 
-    public User(Long id, String nome, String sexo, Date nascimento, String telefone, String email, String CPF, String senha) {
+    public User(Long id, String nome, String sexo, Date nascimento, String telefone, String email, String CPF, String senha, String image) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
@@ -46,6 +47,7 @@ public class User {
         this.email = email;
         this.CPF = CPF;
         this.senha = senha;
+        this.image = image;
     }
 
     public User() {
@@ -115,6 +117,14 @@ public class User {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
     
      

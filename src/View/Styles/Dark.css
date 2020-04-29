@@ -11,14 +11,21 @@ and open the template in the editor.
 /*Neste arquivo sera criado um padrao de estilo para as janelas*/
 
 
+.background{
+    -fx-background-color: linear-gradient(to bottom right, #000000,#757575);
+}
 
-.backgroundR{
+.sub-background{
+    -fx-background-color: linear-gradient(#8A2BE2,#4B0082); 
+}
+
+.rectangleR{
     
     -fx-fill: linear-gradient(#8A2BE2,#4B0082);
     
 }
 
-.backgroundB{
+.rectangleB{
     
     -fx-fill: linear-gradient(to bottom right,#000000,#757575);
     
@@ -73,5 +80,11 @@ and open the template in the editor.
     -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-background-radius: 100px;
+    
+}
+
+.data-picker{
+    
+    -fx-border-color: transparent;
     
 }

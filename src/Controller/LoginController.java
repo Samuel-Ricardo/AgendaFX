@@ -8,6 +8,7 @@ package Controller;
 import DAO.UserDAO;
 import Main.MainHome;
 import Main.MainLogin;
+import Main.MainRegister;
 import Model.User;
 import java.net.URL;
 import java.util.List;
@@ -64,7 +65,16 @@ public class LoginController implements Initializable {
 
     @FXML
     void cadastrar() {
-
+        
+        MainRegister register = new MainRegister();
+        
+          try {
+              
+              register.start(new Stage());
+              
+          } catch (Exception ex) {
+               JOptionPane.showMessageDialog(null, "Nao foi possivel abrir a janela: "+ex);
+          }
     }
 
     @FXML

@@ -33,7 +33,7 @@ public class UserDAO {
     public boolean insert(User user){
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO usuario (nome , sexo , dataNascimento , telefone , email , cpf , senha) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO usuario (nome , sexo , dataNascimento , telefone , email , cpf , senha, image) VALUES (?,?, ?, ?, ?, ?, ?, ?);";
         
             /*
             
@@ -47,7 +47,8 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
-            
+            image varchar(10000)
+        
             */
             
         try {
@@ -61,6 +62,7 @@ public class UserDAO {
                 statement.setString(5, user.getEmail());
                 statement.setString(6, user.getCPF());
                 statement.setString(7, user.getSenha());
+                statement.setString(8, user.getImage());
                 
             statement.execute();    // executing sql instruction   //  executando instruçao sql
                 
@@ -77,7 +79,7 @@ public class UserDAO {
         
           connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE usuario set nome = ? , sexo = ?, dataNascimento = ?, telefone = ?, email = ?, cpf = ?, senha = ? WHERE id = ?;";
+        String sql = "UPDATE usuario set nome = ? , sexo = ?, dataNascimento = ?, telefone = ?, email = ?, cpf = ?, senha = ?, image = ? WHERE id = ?;";
         
             /*
             
@@ -91,6 +93,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
+            image varchar(10000)
             
             */
             
@@ -106,6 +109,7 @@ public class UserDAO {
                 statement.setString(6, user.getCPF());
                 statement.setString(7, user.getSenha());
                 statement.setLong(8, user.getId());
+                statement.setString(9, user.getImage());
                 
             statement.execute();    // executing sql instruction   //  executando instruçao sql
                 
@@ -123,7 +127,7 @@ public class UserDAO {
         
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE usuario set nome = ? , sexo = ?, dataNascimento = ?, telefone = ?, email = ?, cpf = ?, senha = ? WHERE id = ?;";
+        String sql = "DELETE FROM usuario WHERE id = ?;";
         
             /*
             
@@ -137,6 +141,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
+            image varchar(10000)
             
             */
             
@@ -180,6 +185,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
+            image varchar(10000)
             
             */
             
@@ -201,6 +207,7 @@ public class UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setCPF(result.getString("cpf"));
                 user.setSenha(result.getString("senha"));
+                user.setImage(result.getString("image"));
                 
                 users.add(user);    // add user created in List users  //  adiciona o usuario criado no List usuarios
             }
@@ -235,6 +242,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
+            image varchar(10000)
             
             */
             
@@ -258,6 +266,7 @@ public class UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setCPF(result.getString("cpf"));
                 user.setSenha(result.getString("senha"));
+                user.setImage(result.getString("image"));
                 
                 users.add(user);    // add user created in List users  //  adiciona o usuario criado no List usuarios
             }
