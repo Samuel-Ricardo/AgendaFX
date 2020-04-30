@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="apFundo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="629.0" style="-fx-background-color: #363636;" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <children>
-      <Rectangle fx:id="fundo" arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="backgroundB" width="629.0">
+      <Rectangle fx:id="fundo" arcHeight="5.0" arcWidth="5.0" height="400.0" layoutX="14.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="backgroundB" width="629.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -43,7 +43,7 @@
                   <Image url="@Images/user_white.png" />
                </image>
             </ImageView>
-            <Label layoutX="22.0" layoutY="111.0" styleClass="Padrao" text="Login" textFill="WHITE">
+            <Label layoutX="22.0" layoutY="111.0" text="Login" textFill="WHITE">
                <font>
                   <Font name="Arial Bold Italic" size="18.0" />
                </font>
@@ -80,7 +80,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="411.0" layoutY="54.0" styleClass="title" text="AgendaFX" textFill="WHITE">
+      <Label layoutX="399.0" layoutY="30.0" prefHeight="78.0" prefWidth="202.0" styleClass="stylized-title" text="AgendaFX" textFill="WHITE">
          <font>
             <Font name="Arial Bold Italic" size="36.0" />
          </font>

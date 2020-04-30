@@ -40,11 +40,11 @@ Tons de Cinza - Gray Colors
 
 Black	#000000	(0,0,0)
 
-grey11	#1C1C1C	(28,28,28)
+/*grey11	#1C1C1C	(28,28,28) */
 
 /*grey21 //#363636//	(54,54,54)*/ gradient with #616161
 
-
+	
 
 grey31	#4F4F4F	(79,79,79)
 

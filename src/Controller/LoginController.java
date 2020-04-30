@@ -97,7 +97,7 @@ public class LoginController implements Initializable {
         }else{
             JOptionPane.showMessageDialog(null,"Senha e ou nome icorretos ou inexistentes");
         }
-       
+        
     }
     
     @Override
