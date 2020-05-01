@@ -9,7 +9,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -51,11 +53,37 @@ public class HomeController implements Initializable {
     private Pane panePerfil;
 
     @FXML
+    private ImageView imgPerfil;
+
+    @FXML
+    private Label lblNome;
+
+    @FXML
+    private Label lblNascimento;
+
+    @FXML
+    private Label lblEmail;
+
+    @FXML
+    private Label lblTelefone;
+
+    @FXML
+    private Label lblSexo;
+
+    @FXML
+    private Label lblCPF;
+
+    @FXML
+    private Label lblID;
+
+    @FXML
+    private PieChart pcActivityDone;
+
+    @FXML
     private Pane paneEvento;
 
     @FXML
     private Pane paneCalendario;
-
     @FXML
     void close() {
 
@@ -63,27 +91,93 @@ public class HomeController implements Initializable {
 
     @FXML
     void openCalendar() {
-
+        
+        paneCalendario.setVisible(true);
+        
+        if(paneEvento.isVisible() == true){
+            paneEvento.setVisible(false);
+        }
+        if(paneHome.isVisible() == true){
+            paneHome.setVisible(false);
+        }
+        if(panePerfil.isVisible() == true){
+            panePerfil.setVisible(false);
+        }
+        
     }
 
     @FXML
     void openEvents() {
 
+         paneEvento.setVisible(true);
+        
+        if(paneCalendario.isVisible() == true){
+            paneCalendario.setVisible(false);
+        }
+        if(paneHome.isVisible() == true){
+            paneHome.setVisible(false);
+        }
+        if(panePerfil.isVisible() == true){
+            panePerfil.setVisible(false);
+        }
+        
     }
 
     @FXML
     void openHomePage() {
 
+         paneHome.setVisible(true);
+        
+        if(paneEvento.isVisible() == true){
+            paneEvento.setVisible(false);
+        }
+        if(paneCalendario.isVisible() == true){
+            paneCalendario.setVisible(false);
+        }
+        if(panePerfil.isVisible() == true){
+            panePerfil.setVisible(false);
+        }
+        
     }
 
     @FXML
     void openPerfil() {
 
+         panePerfil.setVisible(true);
+        
+        if(paneEvento.isVisible() == true){
+            paneEvento.setVisible(false);
+        }
+        if(paneHome.isVisible() == true){
+            paneHome.setVisible(false);
+        }
+        if(paneCalendario.isVisible() == true){
+            paneCalendario.setVisible(false);
+        }
+        
     }
+    
+    
+    @FXML
+    void registerNewUser() {
+
+    }
+
+    @FXML
+    void updateUser() {
+
+    }
+    
+    @FXML
+    void changeUser() {
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
+        
       
     }    
     
