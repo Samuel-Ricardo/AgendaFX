@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXNodesList?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -7,6 +8,7 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -101,7 +103,7 @@
             <Insets top="10.0" />
          </padding>
          <effect>
-            <DropShadow height="52.14" radius="23.715" spread="0.3" width="44.72" />
+            <DropShadow height="66.22" radius="35.39" spread="0.35" width="77.34" />
          </effect>
       </VBox>
       <Pane fx:id="paneHome" layoutX="178.0" prefHeight="599.0" prefWidth="697.0">
@@ -290,11 +292,145 @@
             </SplitPane>
          </children>
       </Pane>
-      <Pane fx:id="paneEvento" layoutX="254.0" layoutY="10.0" prefHeight="589.0" prefWidth="613.0" visible="false">
+      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="708.0" visible="false">
          <children>
-            <Button layoutX="229.0" layoutY="212.0" mnemonicParsing="false" onAction="#close" text="Button" />
-         </children>
-      </Pane>
+            <GridPane layoutX="14.0" layoutY="62.0" prefHeight="318.0" prefWidth="235.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="81.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="154.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Urgente" GridPane.columnIndex="1" />
+                  <Label text="Trabalho" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Exercicio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Atividade" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Evento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Especial" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUEVIOLET" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GOLD" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d4ff00" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKMAGENTA" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIME" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00f6ff" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="NAVY" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <Label text="Lembrete" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label text="Banal" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+               </children>
+            </GridPane>
+            <Label layoutX="25.0" styleClass="stylized-title" text="Legenda :" />
+            <JFXNodesList layoutX="469.0" layoutY="192.0" />
+            <ImageView fx:id="imgLembrete" fitHeight="87.0" fitWidth="176.0" layoutX="607.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/agenda_multi_color.png" />
+               </image>
+               <effect>
+                  <Reflection />
+               </effect>
+            </ImageView>
+            <TabPane fx:id="pTabNotficacoes" layoutX="253.0" prefHeight="354.0" prefWidth="454.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Planejamentos">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView prefHeight="318.0" prefWidth="496.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Atividades">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView prefHeight="318.0" prefWidth="496.0" />
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Meu Dia">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView prefHeight="318.0" prefWidth="496.0" />
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <Button layoutX="25.0" layoutY="409.0" mnemonicParsing="false" onAction="#open" prefHeight="33.0" prefWidth="153.0" text="Abrir " />
+            <Button layoutX="25.0" layoutY="534.0" mnemonicParsing="false" onAction="#delet" prefHeight="33.0" prefWidth="153.0" text="Excluir" />
+            <GridPane layoutX="220.0" layoutY="356.0" prefHeight="235.0" prefWidth="200.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Titulo:" />
+                  <Label text="Data:" GridPane.rowIndex="1" />
+                  <Label text="Tipo:" GridPane.rowIndex="3" />
+                  <Label text="Estado:" GridPane.rowIndex="4" />
+                  <Label text="Hora:" GridPane.rowIndex="2" />
+                  <Label text="Avisado:" GridPane.rowIndex="5" />
+                  <Label fx:id="lbTitulo" GridPane.columnIndex="1" />
+                  <Label fx:id="lbData" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lbHora" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lbTipo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="lbEstado" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="lbAvisado" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+            <Button layoutX="25.0" layoutY="467.0" mnemonicParsing="false" onAction="#create" prefHeight="33.0" prefWidth="153.0" text="Criar" />
+         </children></Pane>
       <Pane fx:id="paneCalendario" layoutX="254.0" layoutY="10.0" prefHeight="589.0" prefWidth="613.0" visible="false">
          <children>
             <Button layoutX="229.0" layoutY="212.0" mnemonicParsing="false" onAction="#close" text="Button" />

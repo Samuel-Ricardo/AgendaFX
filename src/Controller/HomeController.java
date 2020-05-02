@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -83,7 +84,33 @@ public class HomeController implements Initializable {
     private Pane paneEvento;
 
     @FXML
+    private ImageView imgLembrete;
+
+    @FXML
+    private TabPane pTabNotficacoes;
+
+    @FXML
+    private Label lbTitulo;
+
+    @FXML
+    private Label lbData;
+
+    @FXML
+    private Label lbHora;
+
+    @FXML
+    private Label lbTipo;
+
+    @FXML
+    private Label lbEstado;
+
+    @FXML
+    private Label lbAvisado;
+
+    @FXML
     private Pane paneCalendario;
+
+    
     @FXML
     void close() {
 
@@ -173,6 +200,20 @@ public class HomeController implements Initializable {
 
     }
 
+        @FXML
+    void create() {
+
+    }
+
+    @FXML
+    void delet() {
+
+    }
+
+    @FXML
+    void open() {
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
