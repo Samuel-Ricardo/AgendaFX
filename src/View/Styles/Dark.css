@@ -105,12 +105,6 @@ and open the template in the editor.
     
 }
 
-.data-picker{
-    
-    -fx-border-color: transparent;
-    
-}
-
 .button.rectangle{
     
     -fx-background-color:  #A020F0;
@@ -236,3 +230,22 @@ and open the template in the editor.
     -fx-background-insets: 0.0em;    
     
 }
+
+.date-picker{
+    
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #9370DB;
+    -fx-border-color: #343232;
+    -fx-border-width: 0 0 5 0;
+    
+}
+
+.check-box{
+    
+    -fx-text-fill: white;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    
+}
+
