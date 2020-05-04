@@ -11,7 +11,6 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -124,9 +123,9 @@
             <PieChart layoutX="24.0" layoutY="32.0" prefHeight="150.0" prefWidth="279.0" title="Tipos de eventos mais usados" />
          </children>
       </Pane>
-      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="599.0" prefWidth="686.0" visible="false">
+      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;" visible="false">
          <children>
-            <SplitPane dividerPositions="0.7179856115107913" layoutX="-8.0" prefHeight="599.0" prefWidth="697.0">
+            <SplitPane dividerPositions="0.7326478149100257" layoutX="1.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="308.0" styleClass="simple-background">
                      <children>
@@ -234,13 +233,13 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="240.0" styleClass="simple-background">
                      <children>
-                        <TabPane prefHeight="589.0" prefWidth="697.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane prefHeight="605.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab text="Atividades pra hoje">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" height="43.0" layoutX="-4.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="697.0">
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" height="43.0" layoutX="-4.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="782.0">
                                              <fill>
                                                 <LinearGradient endX="1.0" endY="1.0">
                                                    <stops>
@@ -250,11 +249,11 @@
                                                 </LinearGradient>
                                              </fill>
                                           </Rectangle>
-                                          <TableView layoutY="35.0" prefHeight="537.0" prefWidth="686.0">
+                                          <TableView layoutX="-1.0" layoutY="35.0" prefHeight="537.0" prefWidth="782.0">
                                              <columns>
                                                 <TableColumn prefWidth="57.0" text="Id" />
-                                                <TableColumn prefWidth="412.0" text="Descriçao" />
-                                                <TableColumn prefWidth="216.0" text="Horario" />
+                                                <TableColumn prefWidth="538.0" text="Descriçao" />
+                                                <TableColumn prefWidth="176.0" text="Horario" />
                                              </columns>
                                           </TableView>
                                           <Label layoutX="194.0" layoutY="9.0" text="selecione uma para abrí-la" />
@@ -266,7 +265,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" height="43.0" layoutX="-15.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="706.0">
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" height="43.0" layoutX="-15.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="791.0">
                                              <fill>
                                                 <LinearGradient endX="1.0" endY="1.0">
                                                    <stops>
@@ -276,11 +275,11 @@
                                                 </LinearGradient>
                                              </fill>
                                           </Rectangle>
-                                          <TableView layoutY="35.0" prefHeight="537.0" prefWidth="686.0">
+                                          <TableView layoutY="35.0" prefHeight="537.0" prefWidth="782.0">
                                              <columns>
                                                 <TableColumn prefWidth="57.0" text="Id" />
-                                                <TableColumn prefWidth="402.0" text="Descriçao" />
-                                                <TableColumn prefWidth="216.0" text="Horario" />
+                                                <TableColumn prefWidth="529.0000152587891" text="Descriçao" />
+                                                <TableColumn prefWidth="181.0" text="Horario" />
                                              </columns>
                                           </TableView>
                                           <Label layoutX="194.0" layoutY="9.0" text="selecione uma para abrí-la" />
@@ -296,7 +295,7 @@
             </SplitPane>
          </children>
       </Pane>
-      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="708.0" visible="false">
+      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0">
          <children>
             <GridPane layoutX="14.0" layoutY="62.0" prefHeight="318.0" prefWidth="235.0">
               <columnConstraints>
@@ -366,7 +365,7 @@
             </GridPane>
             <Label layoutX="25.0" styleClass="stylized-title" text="Legenda :" />
             <JFXNodesList layoutX="469.0" layoutY="192.0" />
-            <ImageView fx:id="imgLembrete" fitHeight="87.0" fitWidth="176.0" layoutX="607.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLembrete" fitHeight="87.0" fitWidth="176.0" layoutX="682.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/agenda_multi_color.png" />
                </image>
@@ -374,7 +373,7 @@
                   <Reflection />
                </effect>
             </ImageView>
-            <TabPane fx:id="pTabNotficacoes" layoutX="253.0" prefHeight="354.0" prefWidth="454.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="pTabNotficacoes" layoutX="253.0" prefHeight="354.0" prefWidth="536.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Planejamentos">
                   <content>
@@ -435,7 +434,7 @@
             </GridPane>
             <Button layoutX="25.0" layoutY="467.0" mnemonicParsing="false" onAction="#create" prefHeight="33.0" prefWidth="153.0" text="Criar" />
          </children></Pane>
-      <Pane fx:id="paneCalendario" layoutX="180.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-width: 0 0 2 0; -fx-border-color: #343232;">
+      <Pane fx:id="paneCalendario" layoutX="180.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-width: 0 0 2 0; -fx-border-color: #343232;" visible="false">
          <children>
             <GridPane layoutX="-16.0" layoutY="66.0" prefHeight="318.0" prefWidth="279.0">
                <columnConstraints>
@@ -547,269 +546,6 @@
             <Label layoutX="38.0" styleClass="stylized-title" text="Legenda :" />
             <JFXDatePicker defaultColor="#343232" layoutX="14.0" layoutY="423.0" prefHeight="26.0" prefWidth="216.0" promptText="Escolha a data" styleClass="date-picker" />
             <Button layoutX="53.0" layoutY="504.0" mnemonicParsing="false" text="Pular para" />
-            <GridPane layoutX="249.0" layoutY="66.0" prefHeight="533.0" prefWidth="514.0" style="-fx-vgap-color: #8A2BE2;">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label prefHeight="21.0" prefWidth="19.0" text="D">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin></Label>
-                  <Label text="S" GridPane.columnIndex="1">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin></Label>
-                  <Label text="T" GridPane.columnIndex="2">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin></Label>
-                  <Label text="Q" GridPane.columnIndex="3">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin></Label>
-                  <Label text="Q" GridPane.columnIndex="4">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin></Label>
-                  <Label text="S" GridPane.columnIndex="5">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin></Label>
-                  <Label text="S" GridPane.columnIndex="6">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin></Label>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="75.0" prefWidth="72.0" />
-                    </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                    </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="72.0" />
-                     </content>
-                  </ScrollPane>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </GridPane>
             <Label layoutX="459.0" layoutY="35.0" text="Janeiro" />
             <Button layoutX="280.0" layoutY="33.0" mnemonicParsing="false" rotate="180.0" style="-fx-background-color: transparent;">
                <graphic>
@@ -835,6 +571,36 @@
                   </ImageView>
                </graphic>
             </Button>
+            <GridPane layoutX="291.0" layoutY="85.0" prefHeight="516.0" prefWidth="481.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="D" />
+                  <Label text="S" GridPane.columnIndex="1" />
+                  <Label text="T" GridPane.columnIndex="2" />
+                  <Label text="Q" GridPane.columnIndex="3" />
+                  <Label text="Q" GridPane.columnIndex="4" />
+                  <Label text="S" GridPane.columnIndex="5" />
+                  <Label text="S" GridPane.columnIndex="6" />
+               </children>
+            </GridPane>
          </children>
       </Pane>
    </children>
