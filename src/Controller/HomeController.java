@@ -271,7 +271,7 @@ public class HomeController implements Initializable {
             lblSexo.setText(logUser.getSexo());
             lblTelefone.setText(logUser.getTelefone());
             
-            if(logUser.getImage() != ""){
+            if(logUser.getImage() != null){
             imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
             }
         }

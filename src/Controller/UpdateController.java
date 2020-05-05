@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -52,21 +54,21 @@ public class UpdateController implements Initializable {
     @FXML
     private TextField txtNome;
     @FXML
-    private DatePicker  dpNascimento;
+    private DatePicker dpNascimento;
 
-    private UserDAO dao = new UserDAO();
+    private final UserDAO dao = new UserDAO();
 
-    private User user = UserDAO.getUser();
-    
+    private final User user = UserDAO.getUser();
+
     private String userImage;
 
     @FXML
-   public void atualizar() {
+    public void atualizar() {
 
         User updatedUser = new User();
-        
-        Date nasc = Date.from( dpNascimento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        
+
+        Date nasc = Date.from(dpNascimento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
         updatedUser.setId(user.getId());
         System.out.println(updatedUser.getId());
         updatedUser.setNome(txtNome.getText());
@@ -78,18 +80,23 @@ public class UpdateController implements Initializable {
         updatedUser.setTelefone(txtTelefone.getText());
         updatedUser.setSexo(cbSexo.getSelectionModel().getSelectedItem());
         updatedUser.setImage(userImage);
-        
-        if(dao.update(updatedUser)){
+
+        if (dao.update(updatedUser) == true) {
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
-            loadWindow();
-        }else{
-            
+            try {
+                Thread.sleep(500);
+                loadWindow();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(UpdateController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            MainUpdate.getWindow().close();
+
         }
-        
+
     }
 
     @FXML
-   public void cancelar() {
+    public void cancelar() {
 
         MainUpdate.getWindow().close();
 
@@ -99,24 +106,23 @@ public class UpdateController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         loadWindow();
-        
+
         imgPerfil.setOnMouseClicked((t) -> {
-        
-               FileChooser chooseImage = new FileChooser();
-           
-           File imageF = new File("");
-           
-           imageF = chooseImage.showOpenDialog(new Stage());
-           
-           if (imageF.exists()){
-               
-               imgPerfil.setImage(new Image("file:///"+imageF.getAbsolutePath()));
-               
-               userImage = imageF.getAbsolutePath();
-           }
-           
-           
-       });
+
+            FileChooser chooseImage = new FileChooser();
+
+            File imageF = new File("");
+
+            imageF = chooseImage.showOpenDialog(new Stage());
+
+            if (imageF.exists()) {
+
+                imgPerfil.setImage(new Image("file:///" + imageF.getAbsolutePath()));
+
+                userImage = imageF.getAbsolutePath();
+            }
+
+        });
 
     }
 
@@ -131,19 +137,21 @@ public class UpdateController implements Initializable {
         }
         txtCPF.setText(user.getCPF());
 
+        System.out.println(user.getImage());
+        
         if (user.getImage() != null) {
             imgPerfil.setImage(new Image("file:///" + user.getImage()));
-        }else{
-            imgPerfil.setImage(new Image(getClass().getResource("/View/Images/user_white_2.png")+""));
+        } else {
+            imgPerfil.setImage(new Image(getClass().getResource("/View/Images/user_white_2.png") + ""));
         }
-        
+
         LocalDate nasc = null;
-        if (user.getNascimento() != null){
-         nasc = user.getNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (user.getNascimento() != null) {
+            nasc = user.getNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         }
-        
+
         dpNascimento.setValue(nasc);
-        
+
     }
 
 }

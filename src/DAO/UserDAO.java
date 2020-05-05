@@ -80,7 +80,7 @@ public class UserDAO {
         
     public boolean update(User user){
         
-          connect();
+        connect();
         PreparedStatement statement = null;
         String sql = "UPDATE usuario set nome = ? , sexo = ?, dataNascimento = ?, telefone = ?, email = ?, cpf = ?, senha = ?, image = ? WHERE id = ?;";
         
@@ -113,11 +113,12 @@ public class UserDAO {
                 statement.setString(5, user.getEmail());
                 statement.setString(6, user.getCPF());
                 statement.setString(7, user.getSenha());
-                statement.setLong(8, user.getId());
-                statement.setString(9, user.getImage());
+                statement.setLong(9, user.getId());
+                statement.setString(8, user.getImage());
                 
             statement.execute();    // executing sql instruction   //  executando instruçao sql
                 
+            UserDAO.user = user;
             return true;    //returns true if successful // retorna verdadeiro se for bem sucedido
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao Atualizar: "+ex);  // error message if it occurs // mensagem de erro se ocorrer /
