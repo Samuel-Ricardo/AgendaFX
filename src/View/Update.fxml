@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="483.0" prefWidth="720.0" styleClass="background" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="456.0" prefWidth="693.0" styleClass="sub-background">
+         <children>
+            <ImageView fx:id="imgPerfil" fitHeight="99.0" fitWidth="146.0" layoutX="268.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/user_white_2.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="24.0" layoutY="205.0" text="Senha:" />
+            <Label layoutX="26.0" layoutY="125.0" text="Nome:" />
+            <Label layoutX="28.0" layoutY="277.0" text="Email:" />
+            <Label layoutX="369.0" layoutY="205.0" text="Data de Nascimento:" />
+            <Label layoutX="26.0" layoutY="344.0" text="Sexo:" />
+            <Label layoutX="374.0" layoutY="277.0" text="Telefone:" />
+            <Label layoutX="372.0" layoutY="124.0" text="CPF:" />
+            <TextField fx:id="txtSenha" layoutX="26.0" layoutY="236.0" prefHeight="26.0" prefWidth="264.0" promptText="Digite uma senha..." />
+            <TextField fx:id="txtEmail" layoutX="26.0" layoutY="305.0" prefHeight="26.0" prefWidth="264.0" promptText="Digite um email..." />
+            <TextField fx:id="txtCPF" layoutX="366.0" layoutY="156.0" prefHeight="26.0" prefWidth="264.0" promptText="Digite um CPF..." />
+            <TextField fx:id="txtTelefone" layoutX="369.0" layoutY="305.0" prefHeight="26.0" prefWidth="272.0" promptText="Digite um número de telefone..." />
+            <ComboBox fx:id="cbSexo" layoutX="26.0" layoutY="376.0" prefHeight="25.0" prefWidth="264.0" />
+            <Label layoutX="383.0" layoutY="37.0" prefWidth="269.0" styleClass="coment" text="Clique no avatar" />
+            <Button layoutX="362.0" layoutY="372.0" mnemonicParsing="false" onAction="#atualizar" prefHeight="33.0" prefWidth="127.0" text="Atualizar" />
+            <Label layoutX="383.0" layoutY="64.0" styleClass="coment" text=" para selecionar uma foto de perfil" />
+            <TextField fx:id="txtNome" layoutX="26.0" layoutY="156.0" prefHeight="26.0" prefWidth="264.0" promptText="Digite o nome..." />
+            <Button layoutX="518.0" layoutY="372.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="33.0" prefWidth="113.0" text="Cancelar" />
+            <DatePicker fx:id="dpNascimento" layoutX="360.0" layoutY="235.0" prefHeight="33.0" prefWidth="289.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 0 0;" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

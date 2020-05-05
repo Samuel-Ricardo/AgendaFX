@@ -94,6 +94,7 @@ public class LoginController implements Initializable {
             MainHome home = new MainHome();  
             MainLogin.getWindow().close();   // Close the login window //  Fecha a janela de login
             
+            UserDAO.setUser(dao.search(user));
             try {
                 home.start(new Stage());     // Open the Home window //  Abre a janela de Home
             } catch (Exception ex) {

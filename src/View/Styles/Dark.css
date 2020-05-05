@@ -249,3 +249,10 @@ and open the template in the editor.
     
 }
 
+.date-picker.emp{
+        
+    -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+
+}
+

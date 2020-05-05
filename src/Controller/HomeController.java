@@ -8,6 +8,7 @@ package Controller;
 import DAO.UserDAO;
 import Main.MainLogin;
 import Main.MainRegister;
+import Main.MainUpdate;
 import Model.User;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,8 +37,6 @@ public class HomeController implements Initializable {
     /**
      * Initializes the controller class.
      */
- 
-   
     @FXML
     private VBox vbox;
 
@@ -118,9 +117,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Pane paneCalendario;
-    
+
     private final UserDAO dao = new UserDAO();
-    
+
     @FXML
     void close() {
 
@@ -128,86 +127,85 @@ public class HomeController implements Initializable {
 
     @FXML
     void openCalendar() {
-        
+
         paneCalendario.setVisible(true);
-        
-        if(paneEvento.isVisible() == true){
+
+        if (paneEvento.isVisible() == true) {
             paneEvento.setVisible(false);
         }
-        if(paneHome.isVisible() == true){
+        if (paneHome.isVisible() == true) {
             paneHome.setVisible(false);
         }
-        if(panePerfil.isVisible() == true){
+        if (panePerfil.isVisible() == true) {
             panePerfil.setVisible(false);
         }
-        
+
     }
 
     @FXML
     void openEvents() {
 
-         paneEvento.setVisible(true);
-        
-        if(paneCalendario.isVisible() == true){
+        paneEvento.setVisible(true);
+
+        if (paneCalendario.isVisible() == true) {
             paneCalendario.setVisible(false);
         }
-        if(paneHome.isVisible() == true){
+        if (paneHome.isVisible() == true) {
             paneHome.setVisible(false);
         }
-        if(panePerfil.isVisible() == true){
+        if (panePerfil.isVisible() == true) {
             panePerfil.setVisible(false);
         }
-        
+
     }
 
     @FXML
     void openHomePage() {
 
-         paneHome.setVisible(true);
-        
-        if(paneEvento.isVisible() == true){
+        paneHome.setVisible(true);
+
+        if (paneEvento.isVisible() == true) {
             paneEvento.setVisible(false);
         }
-        if(paneCalendario.isVisible() == true){
+        if (paneCalendario.isVisible() == true) {
             paneCalendario.setVisible(false);
         }
-        if(panePerfil.isVisible() == true){
+        if (panePerfil.isVisible() == true) {
             panePerfil.setVisible(false);
         }
-        
+
     }
 
     @FXML
     void openPerfil() {
-        
-            loadPerfil();
-        
-         panePerfil.setVisible(true);
-        
-        if(paneEvento.isVisible() == true){
+
+        loadPerfil();
+
+        panePerfil.setVisible(true);
+
+        if (paneEvento.isVisible() == true) {
             paneEvento.setVisible(false);
         }
-        if(paneHome.isVisible() == true){
+        if (paneHome.isVisible() == true) {
             paneHome.setVisible(false);
         }
-        if(paneCalendario.isVisible() == true){
+        if (paneCalendario.isVisible() == true) {
             paneCalendario.setVisible(false);
         }
-        
+
         loadPerfil();
-        
+
     }
-    
-    
+
     @FXML
     void registerNewUser() {
-        
+
         MainRegister register = new MainRegister();
-        
+
         try {
             register.start(new Stage());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Nao foi possivel abrir a janela: "+ex);
+            JOptionPane.showMessageDialog(null, "Nao foi possivel abrir a janela: " + ex);
         }
 
     }
@@ -215,16 +213,27 @@ public class HomeController implements Initializable {
     @FXML
     void updateUser() {
 
+        if(MainUpdate.getWindow() != null){
+            MainUpdate.getWindow().close();
+        }
+        MainUpdate updateView = new MainUpdate();
+        
+        try {
+            updateView.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
-    
+
     @FXML
     void changeUser() {
-        
+
         MainLogin.getWindow().show();
 
     }
 
-        @FXML
+    @FXML
     void create() {
 
     }
@@ -241,29 +250,31 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+
         loadPerfil();
-      
-    }    
+
+    }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
-    
+
         User logUser = dao.search(UserDAO.getUser());
-        
-        
-        lblID.setText(logUser.getId()+"");
-        lblNome.setText(logUser.getNome());
-        System.out.println(logUser.getId());
-        lblEmail.setText(logUser.getEmail());
-        if(logUser.getNascimento() != null){
-        lblNascimento.setText(logUser.getFormatedNascimento());
+
+        if (logUser != null) {
+            
+            lblID.setText(logUser.getId() + "");
+            lblNome.setText(logUser.getNome());
+            lblEmail.setText(logUser.getEmail());
+            if (logUser.getNascimento() != null) {
+                lblNascimento.setText(logUser.getFormatedNascimento());
+            }
+            lblCPF.setText(logUser.getCPF());
+            lblSexo.setText(logUser.getSexo());
+            lblTelefone.setText(logUser.getTelefone());
+            
+            if(logUser.getImage() != ""){
+            imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
+            }
         }
-        lblCPF.setText(logUser.getCPF());
-        lblSexo.setText(logUser.getSexo());
-        lblTelefone.setText(logUser.getTelefone());   
-        
-        imgPerfil.setImage(new Image("file:///"+logUser.getImage()));
-    
     }
-    
+
 }
