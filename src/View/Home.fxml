@@ -229,6 +229,7 @@
                         <Button layoutX="14.0" layoutY="543.0" mnemonicParsing="false" onAction="#changeUser" prefHeight="33.0" prefWidth="235.0" styleClass="rectangle" text="Trocar de usuario" />
                         <Button layoutX="14.0" layoutY="497.0" mnemonicParsing="false" onAction="#registerNewUser" prefHeight="33.0" prefWidth="235.0" styleClass="rectangle" text="Cadastrar novo usuario" />
                         <PieChart fx:id="pcActivityDone" layoutX="365.0" layoutY="232.0" prefHeight="351.0" prefWidth="299.0" title="Atividades Realizadas" />
+                        <ImageView fx:id="imgPerfilZoom" fitHeight="483.0" fitWidth="481.0" layoutX="88.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" visible="false" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="240.0" styleClass="simple-background">

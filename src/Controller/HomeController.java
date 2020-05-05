@@ -118,7 +118,12 @@ public class HomeController implements Initializable {
     @FXML
     private Pane paneCalendario;
 
+    @FXML
+    private ImageView imgPerfilZoom;
+
     private final UserDAO dao = new UserDAO();
+
+    private User logUser;
 
     @FXML
     void close() {
@@ -213,17 +218,17 @@ public class HomeController implements Initializable {
     @FXML
     void updateUser() {
 
-        if(MainUpdate.getWindow() != null){
+        if (MainUpdate.getWindow() != null) {
             MainUpdate.getWindow().close();
         }
         MainUpdate updateView = new MainUpdate();
-        
+
         try {
             updateView.start(new Stage());
         } catch (Exception ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     @FXML
@@ -252,15 +257,28 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         loadPerfil();
+        
+        imgPerfil.setOnMouseClicked((t) -> {
+
+            imgPerfilZoom.setImage(new Image("file:///" + logUser.getImage()));
+            imgPerfilZoom.setVisible(true);
+
+        });
+
+        imgPerfilZoom.setOnMouseClicked((t) -> {
+
+            imgPerfilZoom.setVisible(false);
+
+        });
 
     }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
 
-        User logUser = dao.search(UserDAO.getUser());
+        logUser = dao.search(UserDAO.getUser());
 
         if (logUser != null) {
-            
+
             lblID.setText(logUser.getId() + "");
             lblNome.setText(logUser.getNome());
             lblEmail.setText(logUser.getEmail());
@@ -270,9 +288,9 @@ public class HomeController implements Initializable {
             lblCPF.setText(logUser.getCPF());
             lblSexo.setText(logUser.getSexo());
             lblTelefone.setText(logUser.getTelefone());
-            
-            if(logUser.getImage() != null){
-            imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
+
+            if (logUser.getImage() != null) {
+                imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
             }
         }
     }
