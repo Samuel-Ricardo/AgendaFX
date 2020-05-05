@@ -14,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,8 +22,11 @@ import javax.swing.JOptionPane;
  */
 public class UserDAO {
     
-    Connection connection;
-
+    private Connection connection;
+    private static User user;
+    private Date sqlDate;
+    java.util.Date userDate;
+    
     public UserDAO() {
         
     }
@@ -55,9 +56,11 @@ public class UserDAO {
             
             statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
             
+            sqlDate = new Date(user.getNascimento().getTime());  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
+            
                 statement.setString(1, user.getNome());     // Filling in the camp "?"  //  Preenchendo os campos "?"
                 statement.setString(2, user.getSexo());
-                statement.setDate(3, (Date) user.getNascimento());
+                statement.setDate(3, sqlDate);
                 statement.setString(4, user.getTelefone());
                 statement.setString(5, user.getEmail());
                 statement.setString(6, user.getCPF());
@@ -101,9 +104,11 @@ public class UserDAO {
             
             statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
             
+             sqlDate = new Date(user.getNascimento().getTime());  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
+            
                 statement.setString(1, user.getNome());     // Filling in the camp "?"  //  Preenchendo os campos "?"
                 statement.setString(2, user.getSexo());
-                statement.setDate(3, (Date) user.getNascimento());
+                statement.setDate(3, sqlDate);
                 statement.setString(4, user.getTelefone());
                 statement.setString(5, user.getEmail());
                 statement.setString(6, user.getCPF());
@@ -199,10 +204,12 @@ public class UserDAO {
                 
                 User user = new User();     // create user with database data  // criando usuario com dados do banco de dados
                 
+                userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                
                 user.setId(result.getLong("id"));
                 user.setNome(result.getString("nome"));
                 user.setSexo(result.getString("sexo"));
-                user.setNascimento(result.getDate("dataNascimento"));
+                user.setNascimento(userDate);
                 user.setTelefone(result.getString("telefone"));
                 user.setEmail(result.getString("email"));
                 user.setCPF(result.getString("cpf"));
@@ -258,10 +265,12 @@ public class UserDAO {
                 
                 User user = new User();     // create user with database data  // criando usuario com dados do banco de dados
                 
+                userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                
                 user.setId(result.getLong("id"));
                 user.setNome(result.getString("nome"));
                 user.setSexo(result.getString("sexo"));
-                user.setNascimento(result.getDate("dataNascimento"));
+                user.setNascimento(userDate);
                 user.setTelefone(result.getString("telefone"));
                 user.setEmail(result.getString("email"));
                 user.setCPF(result.getString("cpf"));
@@ -278,7 +287,69 @@ public class UserDAO {
         
         return users;
     }    
-         
+    
+    
+    public User search(User logUser){
+        
+        connect();
+        PreparedStatement statement = null;
+        ResultSet result= null;
+        User findUser = new User();     // create user with database data  // criando usuario com dados do banco de dados
+        String sql = "SELECT * FROM usuario WHERE nome = ? and senha = ?;";
+        
+        
+            /*
+            
+            // Columns:  //  Colunas: //
+            
+            id int(11) AI PK
+            nome varchar(50)
+            sexo enum('Masculino','Feminino')
+            dataNascimento date
+            telefone varchar(20)
+            email varchar(1000)
+            cpf char(11)
+            senha varchar(50)
+            image varchar(10000)
+            
+            */
+            
+            
+        try {
+            
+            statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
+                
+                statement.setString(1, logUser.getNome());   // Filling in the camp "?"  //  Preenchendo os campos "?"
+                statement.setString(2, logUser.getSenha());
+                
+            result = statement.executeQuery();          //  execute sql statement returning result  //  executa instruçao sql retornando resultado
+            
+             
+            
+            if (result.next()){
+                
+                if(result.getDate("dataNascimento") != null){
+                   userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                }
+                
+                findUser.setId(result.getLong("id"));
+                findUser.setNome(result.getString("nome"));
+                findUser.setSexo(result.getString("sexo"));
+                findUser.setNascimento(userDate);
+                findUser.setTelefone(result.getString("telefone"));
+                findUser.setEmail(result.getString("email"));
+                findUser.setCPF(result.getString("cpf"));
+                findUser.setSenha(result.getString("senha"));
+                findUser.setImage(result.getString("image"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao consultar o banco: "+ex);  // error message if it occurs // mensagem de erro se ocorrer /
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
+        }
+        
+        return findUser;
+    }         
            
          
     
@@ -319,5 +390,15 @@ public class UserDAO {
         }
         
     }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        UserDAO.user = user;
+    }
+    
+    
     
 }

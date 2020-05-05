@@ -5,17 +5,26 @@
  */
 package Controller;
 
+import DAO.UserDAO;
+import Main.MainLogin;
+import Main.MainRegister;
+import Model.User;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -109,7 +118,8 @@ public class HomeController implements Initializable {
 
     @FXML
     private Pane paneCalendario;
-
+    
+    private final UserDAO dao = new UserDAO();
     
     @FXML
     void close() {
@@ -169,7 +179,9 @@ public class HomeController implements Initializable {
 
     @FXML
     void openPerfil() {
-
+        
+            loadPerfil();
+        
          panePerfil.setVisible(true);
         
         if(paneEvento.isVisible() == true){
@@ -182,11 +194,21 @@ public class HomeController implements Initializable {
             paneCalendario.setVisible(false);
         }
         
+        loadPerfil();
+        
     }
     
     
     @FXML
     void registerNewUser() {
+        
+        MainRegister register = new MainRegister();
+        
+        try {
+            register.start(new Stage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Nao foi possivel abrir a janela: "+ex);
+        }
 
     }
 
@@ -197,6 +219,8 @@ public class HomeController implements Initializable {
     
     @FXML
     void changeUser() {
+        
+        MainLogin.getWindow().show();
 
     }
 
@@ -218,8 +242,28 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
-        
+        loadPerfil();
       
     }    
+
+    private void loadPerfil() { // load  Profile  //  Carrega o perfil
+    
+        User logUser = dao.search(UserDAO.getUser());
+        
+        
+        lblID.setText(logUser.getId()+"");
+        lblNome.setText(logUser.getNome());
+        System.out.println(logUser.getId());
+        lblEmail.setText(logUser.getEmail());
+        if(logUser.getNascimento() != null){
+        lblNascimento.setText(logUser.getFormatedNascimento());
+        }
+        lblCPF.setText(logUser.getCPF());
+        lblSexo.setText(logUser.getSexo());
+        lblTelefone.setText(logUser.getTelefone());   
+        
+        imgPerfil.setImage(new Image("file:///"+logUser.getImage()));
+    
+    }
     
 }

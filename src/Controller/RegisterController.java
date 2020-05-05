@@ -122,10 +122,8 @@ public class RegisterController implements Initializable {
     
     @FXML
     void cancelar() {
-
-          MainRegister.getWindow().close();
-          MainLogin.getWindow().show();
         
+          MainRegister.getWindow().close();
     }
 
     

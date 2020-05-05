@@ -85,7 +85,12 @@ public class LoginController implements Initializable {
         user.setSenha(txtSenha.getText());
 
         if(dao.exist(user)){                 // if the user exists he closes the window and opens the main screen  //  se o usuario existir ele fecha a janela e abre a tela principal
+          
+            UserDAO.setUser(user);  // set the user who was logged in to know which user is logged in  //  setar o usuario que foi logado para saber qual usuário está logado
             
+            if(MainHome.getWindow() != null){
+                MainHome.getWindow().close();
+            }
             MainHome home = new MainHome();  
             MainLogin.getWindow().close();   // Close the login window //  Fecha a janela de login
             
@@ -97,6 +102,7 @@ public class LoginController implements Initializable {
         }else{
             JOptionPane.showMessageDialog(null,"Senha e ou nome icorretos ou inexistentes");
         }
+        
         
     }
     

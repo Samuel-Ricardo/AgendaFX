@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -125,6 +126,12 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getFormatedNascimento() {
+        SimpleDateFormat formated = new SimpleDateFormat("dd/MM/yyyy");
+        
+        return formated.format(nascimento);
     }
     
      
