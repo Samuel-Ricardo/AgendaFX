@@ -29,6 +29,15 @@ and open the template in the editor.
     
 }
 
+.combo-box{
+    
+    -fx-text-fill: #8A2BE2;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px; 
+    -fx-background-color: #343232;
+    
+}
+
 .rectangleB{
     
     -fx-fill: linear-gradient(to bottom right,#000000,#757575);
@@ -267,5 +276,12 @@ and open the template in the editor.
     -fx-text-fill: #ffffff;
     -fx-background-color: transparent;
 
+}
+
+.row-notification{
+    
+    -fx-background-color: white;
+    -fx-background-radius: 100px;
+    
 }
 

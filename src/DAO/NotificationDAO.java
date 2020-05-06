@@ -35,7 +35,7 @@ public class NotificationDAO {
     public boolean insert(Notification notification) {
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo , anexo , musica) VALUES (?,?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo , anexo , musica, corDoTipo) VALUES (?,?,?, ?, ?, ?, ?, ?, ?);";
 
         /*
             
@@ -50,6 +50,7 @@ public class NotificationDAO {
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
+                corDoTipo varchar(7)
         
          */
         try {
@@ -63,10 +64,11 @@ public class NotificationDAO {
             statement.setString(3, notification.getImage());
             statement.setDate(4, sqlDate);
             statement.setBoolean(5, notification.isWarned());
-            statement.setString(5, notification.getType());
-            statement.setString(6, notification.getAttachment().getAbsolutePath());
-            statement.setString(7, notification.getMusic().getAbsolutePath());
-
+            statement.setString(6, notification.getType());
+            statement.setString(7, notification.getAttachment().getAbsolutePath());
+            statement.setString(8, notification.getMusic().getAbsolutePath());
+            statement.setString(9, notification.getTypeColor());
+            
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
             return true;    //returns true if successful // retorna verdadeiro se for bem sucedido
@@ -82,7 +84,7 @@ public class NotificationDAO {
 
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo = ?, anexo = ?, musica = ? WHERE idNotific = ?;";
+        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo = ?, anexo = ?, musica = ?, corDoTipo = ? WHERE idNotific = ?;";
 
         /*
             
@@ -97,6 +99,7 @@ public class NotificationDAO {
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
+                corDoTipo varchar(7)
             
          */
         try {
@@ -113,7 +116,8 @@ public class NotificationDAO {
             statement.setString(5, notification.getType());
             statement.setString(6, notification.getAttachment().getAbsolutePath());
             statement.setString(7, notification.getMusic().getAbsolutePath());
-
+            statement.setString(9, notification.getTypeColor());
+            
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
             return true;    //returns true if successful // retorna verdadeiro se for bem sucedido
@@ -145,6 +149,7 @@ public class NotificationDAO {
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
+                corDoTipo varchar(7)
             
          */
         try {
@@ -171,7 +176,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Notification> notifications = new ArrayList<>();
-        String sql = "SELECT * FROM notificacao;";
+        String sql = "SELECT * FROM notificacao ORDER BY horario;";
 
         /*
             
@@ -185,7 +190,8 @@ public class NotificationDAO {
                 avisado tinyint(1) 
                 tipo varchar(30) 
                 anexo varchar(5000) 
-                musica varchar(5000)
+                musica varchar(5000).
+                corDoTipo varchar(7)
             
          */
         try {
@@ -211,6 +217,7 @@ public class NotificationDAO {
                 notification.setScheduledDay(notificationDate);
                 notification.setType(result.getString("tipo"));
                 notification.setWarned(result.getBoolean("avisado"));
+                notification.setTypeColor(result.getString("corDoTipo"));
 
                 notifications.add(notification);    // add Notification created in List Notifications  //  adiciona o notificacao criado no List notificacaos
             }
@@ -244,6 +251,7 @@ public class NotificationDAO {
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
+                corDoTipo varchar(7)
             
          */
         try {
@@ -272,7 +280,8 @@ public class NotificationDAO {
                 notification.setScheduledDay(notificationDate);
                 notification.setType(result.getString("tipo"));
                 notification.setWarned(result.getBoolean("avisado"));
-
+                notification.setTypeColor(result.getString("corDoTipo"));
+                
                 notifications.add(notification);    // add Notification created in List Notifications  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
@@ -305,6 +314,7 @@ public class NotificationDAO {
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
+                corDoTipo varchar(7)
             
          */
         try {
@@ -330,6 +340,7 @@ public class NotificationDAO {
                 notification.setScheduledDay(notificationDate);
                 notification.setType(result.getString("tipo"));
                 notification.setWarned(result.getBoolean("avisado"));
+                notification.setTypeColor(result.getString("corDoTipo"));
 
                 findNotification = notification;
             }

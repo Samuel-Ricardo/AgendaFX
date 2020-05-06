@@ -13,44 +13,16 @@ import java.util.Date;
  *
  * @author Samuel
  */
-public class Notification {
-
-    private int id;
-    private String title;
-    private String description;
+public class Notification extends PostIt{
+   
     private String image;
-    private Date scheduledDay;
-    private boolean warned;
-    private String type;
     private File attachment;
     private File music;
 
     public Notification() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  
 
     public String getImage() {
         return image;
@@ -59,31 +31,7 @@ public class Notification {
     public void setImage(String image) {
         this.image = image;
     }
-
-    public Date getScheduledDay() {
-        return scheduledDay;
-    }
-
-    public void setScheduledDay(Date scheduledDay) {
-        this.scheduledDay = scheduledDay;
-    }
-
-    public boolean isWarned() {
-        return warned;
-    }
-
-    public void setWarned(boolean warned) {
-        this.warned = warned;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
+    
     public File getAttachment() {
         return attachment;
     }
@@ -98,27 +46,6 @@ public class Notification {
 
     public void setMusic(File music) {
         this.music = music;
-    }
-
-    public java.sql.Date getSQLScheduledDay() {
-
-        java.sql.Date sqlDate = new java.sql.Date(scheduledDay.getTime());
-
-        return sqlDate;
-    }
-
-    public String getScheduledDate() {
-
-        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-
-        return date.format(scheduledDay);
-    }
-
-    public String getScheduledHour() {
-
-        SimpleDateFormat date = new SimpleDateFormat("HH:mm");
-
-        return date.format(scheduledDay);
     }
 
 }

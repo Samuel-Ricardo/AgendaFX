@@ -5,21 +5,32 @@
  */
 package Controller;
 
+import DAO.NotificationDAO;
 import DAO.UserDAO;
+import Main.MainChooser;
 import Main.MainLogin;
 import Main.MainRegister;
 import Main.MainUpdate;
+import Model.ChooserPane;
+import Model.Notification;
+import Model.PostIt;
+import Model.RowNotification;
 import Model.User;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -96,6 +107,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private TabPane pTabNotficacoes;
+    
+   @FXML
+    private VBox vboxAtividadesHoje;
 
     @FXML
     private Label lbTitulo;
@@ -121,9 +135,18 @@ public class HomeController implements Initializable {
     @FXML
     private ImageView imgPerfilZoom;
 
-    private final UserDAO dao = new UserDAO();
+    private final UserDAO userDao = new UserDAO();
+    
+    private final NotificationDAO notDAO = new NotificationDAO();
 
     private User logUser;
+    
+    private ArrayList<Notification> notifications;
+    
+    private ArrayList<PostIt> postIt;
+    
+    private static int index;
+
 
     @FXML
     void close() {
@@ -162,6 +185,8 @@ public class HomeController implements Initializable {
             panePerfil.setVisible(false);
         }
 
+     
+        
     }
 
     @FXML
@@ -240,7 +265,15 @@ public class HomeController implements Initializable {
 
     @FXML
     void create() {
-
+        
+        MainChooser chooser = new MainChooser();
+        
+        try {
+            chooser.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @FXML
@@ -275,7 +308,7 @@ public class HomeController implements Initializable {
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
 
-        logUser = dao.search(UserDAO.getUser());
+        logUser = userDao.search(UserDAO.getUser());
 
         if (logUser != null) {
 
@@ -292,7 +325,288 @@ public class HomeController implements Initializable {
             if (logUser.getImage() != null) {
                 imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
             }
+            
+            notificationLoad();
         }
     }
 
+    private void notificationLoad() {
+        
+        notifications = (ArrayList<Notification>) notDAO.selectAll();
+        int cont = 0;
+        
+        for (Notification notification : notifications) {
+            
+            RowNotification row = new RowNotification(notifications.get(cont));
+            
+              vboxAtividadesHoje.getChildren().add(row);
+              cont++;
+        }
+      
+
+}
+
+    public VBox getVbox() {
+        return vbox;
+    }
+
+    public void setVbox(VBox vbox) {
+        this.vbox = vbox;
+    }
+
+    public ImageView getImgLogo() {
+        return imgLogo;
+    }
+
+    public void setImgLogo(ImageView imgLogo) {
+        this.imgLogo = imgLogo;
+    }
+
+    public Button getBtnHomePage() {
+        return btnHomePage;
+    }
+
+    public void setBtnHomePage(Button btnHomePage) {
+        this.btnHomePage = btnHomePage;
+    }
+
+    public Button getBtnPerfil() {
+        return btnPerfil;
+    }
+
+    public void setBtnPerfil(Button btnPerfil) {
+        this.btnPerfil = btnPerfil;
+    }
+
+    public Button getBtnEventos() {
+        return btnEventos;
+    }
+
+    public void setBtnEventos(Button btnEventos) {
+        this.btnEventos = btnEventos;
+    }
+
+    public Button getBtnCalendario() {
+        return btnCalendario;
+    }
+
+    public void setBtnCalendario(Button btnCalendario) {
+        this.btnCalendario = btnCalendario;
+    }
+
+    public Pane getPaneHome() {
+        return paneHome;
+    }
+
+    public void setPaneHome(Pane paneHome) {
+        this.paneHome = paneHome;
+    }
+
+    public Pane getPanePerfil() {
+        return panePerfil;
+    }
+
+    public void setPanePerfil(Pane panePerfil) {
+        this.panePerfil = panePerfil;
+    }
+
+    public ImageView getImgPerfil() {
+        return imgPerfil;
+    }
+
+    public void setImgPerfil(ImageView imgPerfil) {
+        this.imgPerfil = imgPerfil;
+    }
+
+    public Label getLblNome() {
+        return lblNome;
+    }
+
+    public void setLblNome(Label lblNome) {
+        this.lblNome = lblNome;
+    }
+
+    public Label getLblNascimento() {
+        return lblNascimento;
+    }
+
+    public void setLblNascimento(Label lblNascimento) {
+        this.lblNascimento = lblNascimento;
+    }
+
+    public Label getLblEmail() {
+        return lblEmail;
+    }
+
+    public void setLblEmail(Label lblEmail) {
+        this.lblEmail = lblEmail;
+    }
+
+    public Label getLblTelefone() {
+        return lblTelefone;
+    }
+
+    public void setLblTelefone(Label lblTelefone) {
+        this.lblTelefone = lblTelefone;
+    }
+
+    public Label getLblSexo() {
+        return lblSexo;
+    }
+
+    public void setLblSexo(Label lblSexo) {
+        this.lblSexo = lblSexo;
+    }
+
+    public Label getLblCPF() {
+        return lblCPF;
+    }
+
+    public void setLblCPF(Label lblCPF) {
+        this.lblCPF = lblCPF;
+    }
+
+    public Label getLblID() {
+        return lblID;
+    }
+
+    public void setLblID(Label lblID) {
+        this.lblID = lblID;
+    }
+
+    public PieChart getPcActivityDone() {
+        return pcActivityDone;
+    }
+
+    public void setPcActivityDone(PieChart pcActivityDone) {
+        this.pcActivityDone = pcActivityDone;
+    }
+
+    public Pane getPaneEvento() {
+        return paneEvento;
+    }
+
+    public void setPaneEvento(Pane paneEvento) {
+        this.paneEvento = paneEvento;
+    }
+
+    public ImageView getImgLembrete() {
+        return imgLembrete;
+    }
+
+    public void setImgLembrete(ImageView imgLembrete) {
+        this.imgLembrete = imgLembrete;
+    }
+
+    public TabPane getpTabNotficacoes() {
+        return pTabNotficacoes;
+    }
+
+    public void setpTabNotficacoes(TabPane pTabNotficacoes) {
+        this.pTabNotficacoes = pTabNotficacoes;
+    }
+
+    public VBox getVboxAtividadesHoje() {
+        return vboxAtividadesHoje;
+    }
+
+    public void setVboxAtividadesHoje(VBox vboxAtividadesHoje) {
+        this.vboxAtividadesHoje = vboxAtividadesHoje;
+    }
+
+    public Label getLbTitulo() {
+        return lbTitulo;
+    }
+
+    public void setLbTitulo(Label lbTitulo) {
+        this.lbTitulo = lbTitulo;
+    }
+
+    public Label getLbData() {
+        return lbData;
+    }
+
+    public void setLbData(Label lbData) {
+        this.lbData = lbData;
+    }
+
+    public Label getLbHora() {
+        return lbHora;
+    }
+
+    public void setLbHora(Label lbHora) {
+        this.lbHora = lbHora;
+    }
+
+    public Label getLbTipo() {
+        return lbTipo;
+    }
+
+    public void setLbTipo(Label lbTipo) {
+        this.lbTipo = lbTipo;
+    }
+
+    public Label getLbEstado() {
+        return lbEstado;
+    }
+
+    public void setLbEstado(Label lbEstado) {
+        this.lbEstado = lbEstado;
+    }
+
+    public Label getLbAvisado() {
+        return lbAvisado;
+    }
+
+    public void setLbAvisado(Label lbAvisado) {
+        this.lbAvisado = lbAvisado;
+    }
+
+    public Pane getPaneCalendario() {
+        return paneCalendario;
+    }
+
+    public void setPaneCalendario(Pane paneCalendario) {
+        this.paneCalendario = paneCalendario;
+    }
+
+    public ImageView getImgPerfilZoom() {
+        return imgPerfilZoom;
+    }
+
+    public void setImgPerfilZoom(ImageView imgPerfilZoom) {
+        this.imgPerfilZoom = imgPerfilZoom;
+    }
+
+    public User getLogUser() {
+        return logUser;
+    }
+
+    public void setLogUser(User logUser) {
+        this.logUser = logUser;
+    }
+
+    public ArrayList<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(ArrayList<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public ArrayList<PostIt> getPostIt() {
+        return postIt;
+    }
+
+    public void setPostIt(ArrayList<PostIt> postIt) {
+        this.postIt = postIt;
+    }
+
+    public static int getIndex() {
+        return index;
+    }
+
+    public static void setIndex(int index) {
+        HomeController.index = index;
+    }
 }
