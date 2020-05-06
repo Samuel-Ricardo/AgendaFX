@@ -105,6 +105,19 @@ and open the template in the editor.
     
 }
 
+.text-area-empyt{
+    
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-background-radius: 100px;
+    -fx-border-width: 2 2 2 2;
+    -fx-border-color: #8A2BE2;
+    
+}
+
+
 .button.rectangle{
     
     -fx-background-color:  #A020F0;
