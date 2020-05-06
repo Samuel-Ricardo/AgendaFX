@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author Samuel
  */
-public class Notificacao {
+public class Notification {
 
     private int id;
     private String title;
@@ -21,10 +22,10 @@ public class Notificacao {
     private Date scheduledDay;
     private boolean warned;
     private String type;
-    private String attachment;
-    private String music;
+    private File attachment;
+    private File music;
 
-    public Notificacao() {
+    public Notification() {
     }
 
     public int getId() {
@@ -83,41 +84,41 @@ public class Notificacao {
         this.type = type;
     }
 
-    public String getAttachment() {
+    public File getAttachment() {
         return attachment;
     }
 
-    public void setAttachment(String attachment) {
+    public void setAttachment(File attachment) {
         this.attachment = attachment;
     }
 
-    public String getMusic() {
+    public File getMusic() {
         return music;
     }
 
-    public void setMusic(String music) {
+    public void setMusic(File music) {
         this.music = music;
     }
 
-    public java.sql.Date getSQLScheduledDay(){
-        
+    public java.sql.Date getSQLScheduledDay() {
+
         java.sql.Date sqlDate = new java.sql.Date(scheduledDay.getTime());
-        
+
         return sqlDate;
     }
-    
-    public String getScheduledDate(){
-        
+
+    public String getScheduledDate() {
+
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         return date.format(scheduledDay);
     }
-    
-    public String getScheduledHour(){
-        
+
+    public String getScheduledHour() {
+
         SimpleDateFormat date = new SimpleDateFormat("HH:mm");
-        
+
         return date.format(scheduledDay);
     }
-    
+
 }
