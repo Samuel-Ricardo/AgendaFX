@@ -11,7 +11,6 @@ import Main.MainChooser;
 import Main.MainLogin;
 import Main.MainRegister;
 import Main.MainUpdate;
-import Model.ChooserPane;
 import Model.Notification;
 import Model.PostIt;
 import Model.RowNotification;
@@ -333,6 +332,7 @@ public class HomeController implements Initializable {
     private void notificationLoad() {
         
         notifications = (ArrayList<Notification>) notDAO.selectAll();
+        
         int cont = 0;
         
         for (Notification notification : notifications) {

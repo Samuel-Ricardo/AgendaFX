@@ -6,9 +6,12 @@
 package Controller;
 
 import Main.MainChooser;
+import Main.MainNotificationCreator;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -30,6 +34,7 @@ public class ChooserController implements Initializable {
     private ComboBox<String> cbType;
     private ArrayList<String> alTypes = new ArrayList<>();
     private ObservableList<String> obsTypes ;
+    private int index;
    
     
     /**
@@ -52,7 +57,28 @@ public class ChooserController implements Initializable {
     @FXML
     public void createThis(ActionEvent event) {
         
-        HomeController.setIndex(cbType.getSelectionModel().getSelectedIndex());
+       index = cbType.getSelectionModel().getSelectedIndex();
+       
+       switch (index) {
+           
+           case 0:
+              
+               MainNotificationCreator.getWindow().close();
+               
+               MainNotificationCreator not = new MainNotificationCreator();
+               
+           
+               try {
+                   not.start(new Stage());
+               } catch (Exception ex) {
+                   Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           
+               
+               break;
+
+           
+       }
         MainChooser.getWindow().close();
     }
 

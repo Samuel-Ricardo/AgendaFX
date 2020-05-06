@@ -45,11 +45,14 @@ public class RowNotification extends Pane{
 
         this.setPrefWidth(782);
         this.setPrefHeight(75);
-        this.setStyle("  -fx-background-color: white;\n" +
-                      "  -fx-background-radius: 100px;\n" +
-                      "  -fx-border-radius: 30px;\n" +
-                      "  -fx-background-color:#8A2BE2;");
+        this.setStyle("  -fx-background-color: white;" +
+                      "  -fx-background-radius: 100px;" +
+                      "  -fx-border-radius: 30px;");
 
+        this.getChildren().add(title);
+        this.getChildren().add(typeColor);
+        this.getChildren().add(date);
+        
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
         typeColor.setX(21);
@@ -75,7 +78,14 @@ public class RowNotification extends Pane{
 
         this.setPrefWidth(782);
         this.setPrefHeight(75);
-
+        this.getChildren().add(title);
+        this.getChildren().add(typeColor);
+        this.getChildren().add(date);
+        
+        this.setStyle("  -fx-background-color: white;" +
+                      "  -fx-background-radius: 100px;" +
+                      "  -fx-border-radius: 100px;");
+        
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
         typeColor.setX(21);
