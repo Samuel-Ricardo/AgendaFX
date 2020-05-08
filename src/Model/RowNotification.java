@@ -78,13 +78,7 @@ public class RowNotification extends Pane{
 
         this.setPrefWidth(782);
         this.setPrefHeight(75);
-        this.getChildren().add(title);
-        this.getChildren().add(typeColor);
-        this.getChildren().add(date);
-        
-        this.setStyle("  -fx-background-color: white;" +
-                      "  -fx-background-radius: 100px;" +
-                      "  -fx-border-radius: 100px;");
+    
         
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
@@ -104,6 +98,14 @@ public class RowNotification extends Pane{
         date.setLayoutY(25);
         date.setText(notification.getScheduledDate()+" as "+notification.getScheduledHour());
 
+        this.getChildren().add(title);
+        this.getChildren().add(typeColor);
+        this.getChildren().add(date);
+        
+        this.setStyle("  -fx-background-color: white;" +
+                      "  -fx-background-radius: 100px;" +
+                      "  -fx-border-radius: 100px;");
+        
         this.setVisible(true);
     }
 

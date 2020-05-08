@@ -118,7 +118,7 @@ and open the template in the editor.
     
     -fx-font-family: "Arial";
     -fx-font-size: 14px;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-background-color: transparent;
     -fx-background-radius: 100px;
     -fx-border-width: 2 2 2 2;
