@@ -31,10 +31,9 @@ and open the template in the editor.
 
 .combo-box{
     
-    -fx-text-fill: #8A2BE2;
     -fx-font-family: "Arial";
     -fx-font-size: 14px; 
-    -fx-background-color: #343232;
+    -fx-background-color: #8A2BE2;
     
 }
 

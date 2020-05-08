@@ -123,9 +123,9 @@
             <PieChart layoutX="24.0" layoutY="32.0" prefHeight="150.0" prefWidth="279.0" title="Tipos de eventos mais usados" />
          </children>
       </Pane>
-      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
+      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;" visible="false">
          <children>
-            <SplitPane dividerPositions="0.0038560411311053984" layoutX="1.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
+            <SplitPane dividerPositions="0.718508997429306" layoutX="1.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="308.0" styleClass="simple-background">
                      <children>
@@ -290,7 +290,7 @@
             </SplitPane>
          </children>
       </Pane>
-      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0" visible="false">
+      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0">
          <children>
             <GridPane layoutX="14.0" layoutY="62.0" prefHeight="318.0" prefWidth="235.0">
               <columnConstraints>
@@ -298,43 +298,44 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="154.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Urgente" GridPane.columnIndex="1" />
-                  <Label text="Trabalho" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Exercicio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Atividade" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Evento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Especial" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUEVIOLET" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="1">
+                  <Label text="Trabalho / Escola" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Exercicio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Atividade" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Evento" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="Especial" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUEVIOLET" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GOLD" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="5">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GOLD" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d4ff00" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="4">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d4ff00" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKMAGENTA" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="3">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIME" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="2">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIME" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
@@ -344,18 +345,24 @@
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00f6ff" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="6">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAGENTA" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="7">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="NAVY" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="7">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="NAVY" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="8">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Label text="Lembrete" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label text="Banal" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label text="Post-It" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label text="Banal" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <Label text="Meta" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0700ff" height="20.0" stroke="#ffffff00" strokeType="INSIDE" width="20.0" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
                </children>
             </GridPane>
             <Label layoutX="25.0" styleClass="stylized-title" text="Legenda :" />
@@ -438,7 +445,8 @@
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="130.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -449,32 +457,32 @@
                </rowConstraints>
                <children>
                   <Label text="Urgente" GridPane.columnIndex="1" />
-                  <Label text="Trabalho" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Exercicio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Atividade" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Evento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Especial" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUEVIOLET" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="1">
+                  <Label text="Trabalho" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Exercicio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Atividade" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Evento" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="Especial" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUEVIOLET" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GOLD" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="5">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GOLD" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d4ff00" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="4">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d4ff00" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKMAGENTA" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="3">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKMAGENTA" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIME" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="2">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIME" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
@@ -484,24 +492,19 @@
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00f6ff" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="6">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAGENTA" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="7">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="NAVY" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="7">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="NAVY" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="8">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Rectangle>
-                  <Label text="Lembrete" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label text="Banal" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label text="Post-It" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label text="Banal" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <CheckBox mnemonicParsing="false" text="Visível" textFill="WHITE" GridPane.columnIndex="2">
-                     <font>
-                        <Font name="Arial Bold Italic" size="14.0" />
-                     </font>
-                  </CheckBox>
-                  <CheckBox mnemonicParsing="false" text="Visível" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial Bold Italic" size="14.0" />
                      </font>
@@ -532,6 +535,22 @@
                      </font>
                   </CheckBox>
                   <CheckBox mnemonicParsing="false" text="Visível" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Arial Bold Italic" size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" text="Visível" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                     <font>
+                        <Font name="Arial Bold Italic" size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <Label text="Meta" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0700ff" height="20.0" stroke="#ffffff00" strokeType="INSIDE" width="20.0" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Rectangle>
+                  <CheckBox mnemonicParsing="false" text="Visível" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial Bold Italic" size="14.0" />
                      </font>

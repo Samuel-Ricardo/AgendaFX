@@ -33,16 +33,15 @@ public class ChooserController implements Initializable {
     @FXML
     private ComboBox<String> cbType;
     private ArrayList<String> alTypes = new ArrayList<>();
-    private ObservableList<String> obsTypes ;
+    private ObservableList<String> obsTypes;
     private int index;
-   
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+
         alTypes.add("Notficaçao");
         alTypes.add("PostIt");
         alTypes.add("Atividade");
@@ -51,34 +50,33 @@ public class ChooserController implements Initializable {
 
         cbType.setItems(obsTypes);
 
-               
-    }    
+    }
 
     @FXML
     public void createThis(ActionEvent event) {
-        
-       index = cbType.getSelectionModel().getSelectedIndex();
-       
-       switch (index) {
-           
-           case 0:
-              
-               MainNotificationCreator.getWindow().close();
-               
-               MainNotificationCreator not = new MainNotificationCreator();
-               
-           
-               try {
-                   not.start(new Stage());
-               } catch (Exception ex) {
-                   Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           
-               
-               break;
 
-           
-       }
+        index = cbType.getSelectionModel().getSelectedIndex();
+
+        switch (index) {
+
+            case 0:
+
+                if (MainNotificationCreator.getWindow() != null) {
+
+                    MainNotificationCreator.getWindow().close();
+                }
+
+                MainNotificationCreator not = new MainNotificationCreator();
+
+                try {
+                    not.start(new Stage());
+                } catch (Exception ex) {
+                    Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
+
+        }
         MainChooser.getWindow().close();
     }
 
@@ -114,6 +112,4 @@ public class ChooserController implements Initializable {
         this.obsTypes = obsTypes;
     }
 
-    
-    
 }

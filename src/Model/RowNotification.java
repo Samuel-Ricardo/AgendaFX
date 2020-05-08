@@ -18,7 +18,8 @@ public class RowNotification extends Pane{
     private Rectangle typeColor;
     private Label title;
     private Label date;
-    private final Notification notification;
+    private Notification notification;
+    private PostIt postIt;
  
     ///////Construtores  //  Constructos /////////
     public RowNotification(Rectangle typeColor, Label title, Label date, Notification notification) {
@@ -32,13 +33,26 @@ public class RowNotification extends Pane{
 
     public RowNotification(Notification notification) {
         
+           this.typeColor = new Rectangle();
            this.title = new Label();
            this.date = new Label();
            this.notification = notification;
         
-        loadPane();
+        loadPane(notification);
        
     }
+
+    public RowNotification(PostIt postIt) {
+        
+        this.typeColor = new Rectangle();
+        this.title = new Label();
+        this.date = new Label();
+        this.postIt = postIt;
+        
+        loadPane(postIt);
+    }
+    
+    
 
     ///////metodos  //  method /////////
     private void loadPane(Rectangle typeColor, Label title, Label date,Notification notification) {
@@ -74,7 +88,7 @@ public class RowNotification extends Pane{
         this.setVisible(true);
     }
 
-    private void loadPane() {
+    private void loadPane(Notification notification) {
 
         this.setPrefWidth(782);
         this.setPrefHeight(75);
@@ -109,6 +123,43 @@ public class RowNotification extends Pane{
         this.setVisible(true);
     }
 
+    
+    private void loadPane(PostIt postIt) {
+
+        this.setPrefWidth(782);
+        this.setPrefHeight(75);
+    
+        
+        typeColor.prefWidth(30);
+        typeColor.prefHeight(30);
+        typeColor.setX(21);
+        typeColor.setY(25);
+        typeColor.setStyle("-fx-background-color:"+postIt.getTypeColor()+";");
+
+        title.prefWidth(363);
+        title.prefHeight(30);
+        title.setLayoutX(67);
+        title.setLayoutY(25);
+        title.setText(postIt.getTitle());
+
+        date.prefWidth(363);
+        date.prefHeight(30);
+        date.setLayoutX(67);
+        date.setLayoutY(25);
+        date.setText(postIt.getScheduledDate()+" as "+postIt.getScheduledHour());
+
+        this.getChildren().add(title);
+        this.getChildren().add(typeColor);
+        this.getChildren().add(date);
+        
+        this.setStyle("  -fx-background-color: white;" +
+                      "  -fx-background-radius: 100px;" +
+                      "  -fx-border-radius: 100px;");
+        
+        this.setVisible(true);
+    }
+
+    
     ///////get and set/////////
 
     public Rectangle getTypeColor() {
