@@ -10,3 +10,6 @@ Criar um lembrete é tao simples quanto clicar num botao e escrever sua descriç
 com o nosso calendário voce vai estar ciente de todos seus compromissos durante o ano,
 
 Notificaçoes de eventos importantes podem ser adicionadas a qualquer momento
+
+criar um bloco de notas quando desejar.
+
