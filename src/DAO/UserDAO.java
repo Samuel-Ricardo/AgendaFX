@@ -34,7 +34,7 @@ public class UserDAO {
     public boolean insert(User user) {
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO usuario (nome , sexo , dataNascimento , telefone , email , cpf , senha, image) VALUES (?,?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO usuario (nome , sexo , dataNascimento , telefone , email , cpf , senha, imagePerfil) VALUES (?,?, ?, ?, ?, ?, ?, ?);";
 
         /*
             
@@ -48,7 +48,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
-            image varchar(10000)
+            imagePerfil varchar(10000)
         
          */
         try {
@@ -81,7 +81,7 @@ public class UserDAO {
 
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE usuario set nome = ? , sexo = ?, dataNascimento = ?, telefone = ?, email = ?, cpf = ?, senha = ?, image = ? WHERE id = ?;";
+        String sql = "UPDATE usuario set nome = ? , sexo = ?, dataNascimento = ?, telefone = ?, email = ?, cpf = ?, senha = ?, imagePerfil = ? WHERE id = ?;";
 
         /*
             
@@ -95,7 +95,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
-            image varchar(10000)
+            imagePerfil varchar(10000)
             
          */
         try {
@@ -145,7 +145,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
-            image varchar(10000)
+            imagePerfil varchar(10000)
             
          */
         try {
@@ -186,7 +186,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
-            image varchar(10000)
+            imagePerfil varchar(10000)
             
          */
         try {
@@ -211,7 +211,7 @@ public class UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setCPF(result.getString("cpf"));
                 user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("image"));
+                user.setImage(result.getString("imagePerfil"));
 
                 users.add(user);    // add user created in List users  //  adiciona o usuario criado no List usuarios
             }
@@ -244,7 +244,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
-            image varchar(10000)
+            imagePerfil varchar(10000)
             
          */
         try {
@@ -271,7 +271,7 @@ public class UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setCPF(result.getString("cpf"));
                 user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("image"));
+                user.setImage(result.getString("imagePerfil"));
 
                 users.add(user);    // add user created in List users  //  adiciona o usuario criado no List usuarios
             }
@@ -304,7 +304,7 @@ public class UserDAO {
             email varchar(1000)
             cpf char(11)
             senha varchar(50)
-            image varchar(10000)
+            imagePerfil varchar(10000)
             
          */
         try {
@@ -330,7 +330,7 @@ public class UserDAO {
                 findUser.setEmail(result.getString("email"));
                 findUser.setCPF(result.getString("cpf"));
                 findUser.setSenha(result.getString("senha"));
-                findUser.setImage(result.getString("image"));
+                findUser.setImage(result.getString("imagePerfil"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /

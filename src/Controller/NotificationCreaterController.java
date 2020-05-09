@@ -6,9 +6,12 @@
 package Controller;
 
 import DAO.NotificationDAO;
+import DAO.UserDAO;
 import Main.MainNotificationCreator;
 import Model.Notification;
+import Model.User;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
 import java.io.File;
 import java.net.URL;
@@ -35,6 +38,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -80,7 +84,10 @@ public class NotificationCreaterController implements Initializable {
     private JFXToggleButton tbImage;
 
     @FXML
-    private TextField txtHorary;
+    private JFXTimePicker tpHorary;
+
+    @FXML
+    private Label lblAttachment;
 
     private FileChooser chooser = new FileChooser();
 
@@ -101,8 +108,10 @@ public class NotificationCreaterController implements Initializable {
     private boolean soundVissible = false;
 
     private boolean fileVissible = false;
-    
+
     private NotificationDAO dao = new NotificationDAO();
+
+    private User logUser = UserDAO.getUser();
 
     @FXML
     void cancel() {
@@ -119,6 +128,9 @@ public class NotificationCreaterController implements Initializable {
         if (attachment != null) {
 
             notification.setAttachment(attachment);
+            lblAttachment.setText(attachment.getName());
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum arquivo foi escolhido");
         }
     }
 
@@ -145,7 +157,7 @@ public class NotificationCreaterController implements Initializable {
         String day = dpDate.getValue().getDayOfMonth() + "";
         String month = "" + dpDate.getValue().getMonthValue();
         String year = "" + dpDate.getValue().getYear();
-        String horary = txtHorary.getText();
+        String horary = tpHorary.getValue().getHour() + ":" + tpHorary.getValue().getMinute();
         String date = day + "/" + month + "/" + year + " " + horary.replace(" ", "");
 
         Date scheduledDay = new Date();
@@ -159,13 +171,18 @@ public class NotificationCreaterController implements Initializable {
         }
 
         notification.setDescription(txtDescription.getText());
-        notification.setImage(img.getAbsolutePath());
+        if (img == null) {
+            notification.setImage(img.getAbsolutePath());
+        }
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
         notification.setType(cbType.getSelectionModel().getSelectedItem());
         notification.setTypeColor(typeColor.getStyle());
+        notification.setUser(logUser);
 
-        dao.insert(notification);
+        if(dao.insert(notification)){
+            JOptionPane.showMessageDialog(null, "Criado");
+        }
     }
 
     @FXML
@@ -174,6 +191,13 @@ public class NotificationCreaterController implements Initializable {
         fileVissible = !fileVissible;
 
         btAttachment.setVisible(fileVissible);
+        lblAttachment.setVisible(fileVissible);
+
+        if (fileVissible == false) {
+            attachment = null;
+            lblAttachment.setText("");
+
+        }
     }
 
     @FXML
@@ -183,6 +207,10 @@ public class NotificationCreaterController implements Initializable {
 
         imgNotific.setVisible(imgVissible);
 
+        if (imgVissible == false) {
+            img = null;
+            imgNotific.setImage(new Image("file:///"+getClass().getResource("/View/Images/image_White.png")));
+        }
     }
 
     @FXML
@@ -193,6 +221,10 @@ public class NotificationCreaterController implements Initializable {
         btSound.setVisible(soundVissible);
         lblSound.setVisible(soundVissible);
 
+        if (soundVissible == false) {
+            music = null;
+            lblSound.setText("Se nao escolher será tocada a padrao");
+        }
     }
 
     @FXML
@@ -209,7 +241,7 @@ public class NotificationCreaterController implements Initializable {
 
             img = chooser.showOpenDialog(new Stage());
 
-            imgNotific.setImage(new Image("file:///"+img.getAbsolutePath()));
+            imgNotific.setImage(new Image("file:///" + img.getAbsolutePath()));
 
         });
 
@@ -255,8 +287,7 @@ public class NotificationCreaterController implements Initializable {
                         break;
                 }
             }
-        } );
-    
+        });
 
     }
 

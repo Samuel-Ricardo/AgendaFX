@@ -7,6 +7,7 @@ package DAO;
 
 import JDBC.ConnectionFactory;
 import Model.Notification;
+import Model.User;
 
 import com.mysql.jdbc.Connection;
 import java.io.File;
@@ -14,8 +15,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,7 +32,11 @@ public class NotificationDAO {
 
     private Connection connection;
     private Date sqlDate;
-    java.util.Date notificationDate;
+    private Time sqlTime;
+    private java.util.Date notificationDate;
+    private SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat horary = new SimpleDateFormat("HH:mm");
+    private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yy HH:mm");
 
     public NotificationDAO() {
 
@@ -35,7 +45,7 @@ public class NotificationDAO {
     public boolean insert(Notification notification) {
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo , anexo , musica, corDoTipo) VALUES (?,?,?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo , anexo , musica, corDoTipo, userNotification , marcado) VALUES (?, ?, ?,?,?, ?, ?, ?, ?, ?, ?);";
 
         /*
             
@@ -45,12 +55,14 @@ public class NotificationDAO {
                 titulo varchar(25) 
                 descricao varchar(1500) 
                 image varchar(5000) 
-                horario date 
+                horario time 
                 avisado tinyint(1) 
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(7)
+                corDoTipo varchar(20)
+                userNotification int(11)
+                marcado date
         
          */
         try {
@@ -59,16 +71,40 @@ public class NotificationDAO {
 
             sqlDate = notification.getSQLScheduledDay();  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
 
+            java.util.Date scheduled = null;
+
+            try {
+                scheduled = horary.parse(notification.getScheduledHour());
+            } catch (ParseException ex) {
+                Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            sqlTime = new Time(scheduled.getTime());
+
             statement.setString(1, notification.getTitle());     // Filling in the camp "?"  //  Preenchendo os campos "?"
             statement.setString(2, notification.getDescription());
-            statement.setString(3, notification.getImage());
-            statement.setDate(4, sqlDate);
+            if (notification.getImage() != null) {
+                statement.setString(3, notification.getImage());
+            } else {
+                statement.setString(3, "");
+            }
+            statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
             statement.setString(6, notification.getType());
-            statement.setString(7, notification.getAttachment().getAbsolutePath());
-            statement.setString(8, notification.getMusic().getAbsolutePath());
+            if (notification.getAttachment() != null) {
+                statement.setString(7, notification.getAttachment().getAbsolutePath());
+            } else {
+                statement.setString(7, "");
+            }
+            if (notification.getMusic() != null) {
+                statement.setString(8, notification.getMusic().getAbsolutePath());
+            }else{
+                statement.setString(8, "");
+            }
             statement.setString(9, notification.getTypeColor());
-            
+            statement.setInt(10, notification.getUser().getId().intValue());
+            statement.setDate(11, sqlDate);
+
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
             return true;    //returns true if successful // retorna verdadeiro se for bem sucedido
@@ -84,7 +120,7 @@ public class NotificationDAO {
 
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo = ?, anexo = ?, musica = ?, corDoTipo = ? WHERE idNotific = ?;";
+        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo = ?, anexo = ?, musica = ?, corDoTipo = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
 
         /*
             
@@ -94,12 +130,14 @@ public class NotificationDAO {
                 titulo varchar(25) 
                 descricao varchar(1500) 
                 image varchar(5000) 
-                horario date 
+                horario time 
                 avisado tinyint(1) 
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(7)
+                corDoTipo varchar(20)
+                userNotification int(11)
+                marcado date
             
          */
         try {
@@ -108,16 +146,29 @@ public class NotificationDAO {
 
             sqlDate = notification.getSQLScheduledDay();  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
 
+            String timeString = horary.format(notification.getSQLScheduledDay());
+            java.util.Date scheduled = null;
+
+            try {
+                scheduled = day.parse(timeString);
+            } catch (ParseException ex) {
+                Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            sqlTime = new Time(scheduled.getTime());
+
             statement.setString(1, notification.getTitle());     // Filling in the camp "?"  //  Preenchendo os campos "?"
             statement.setString(2, notification.getDescription());
             statement.setString(3, notification.getImage());
-            statement.setDate(4, sqlDate);
+            statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
             statement.setString(5, notification.getType());
             statement.setString(6, notification.getAttachment().getAbsolutePath());
             statement.setString(7, notification.getMusic().getAbsolutePath());
             statement.setString(9, notification.getTypeColor());
-            
+            statement.setInt(10, notification.getUser().getId().intValue());
+            statement.setDate(11, sqlDate);
+
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
             return true;    //returns true if successful // retorna verdadeiro se for bem sucedido
@@ -144,12 +195,14 @@ public class NotificationDAO {
                 titulo varchar(25) 
                 descricao varchar(1500) 
                 image varchar(5000) 
-                horario date 
+                horario time 
                 avisado tinyint(1) 
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(7)
+                corDoTipo varchar(20)
+                userNotification int(11)
+                marcado date
             
          */
         try {
@@ -176,7 +229,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Notification> notifications = new ArrayList<>();
-        String sql = "SELECT * FROM notificacao ORDER BY horario;";
+        String sql = "SELECT * FROM notificationsview ORDER BY horario;";
 
         /*
             
@@ -186,12 +239,14 @@ public class NotificationDAO {
                 titulo varchar(25) 
                 descricao varchar(1500) 
                 image varchar(5000) 
-                horario date 
+                horario time 
                 avisado tinyint(1) 
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000).
-                corDoTipo varchar(7)
+                corDoTipo varchar(20)
+                userNotification int(11)
+                marcado date
             
          */
         try {
@@ -204,8 +259,18 @@ public class NotificationDAO {
 
                 Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
 
-                if (result.getDate("horario") != null) {
-                    notificationDate = new java.util.Date(result.getDate("horario").getTime());
+                if (result.getDate("horario") != null && result.getDate("marcado") != null) {
+
+                    String time = result.getTime("horario").getTime() + "";
+                    String date = result.getDate("marcado").getTime() + "";
+                    String scheduled = date + " " + time;
+
+                    try {
+                        notificationDate = complet.parse(scheduled);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
 
                 notification.setId(result.getInt("id"));
@@ -218,6 +283,26 @@ public class NotificationDAO {
                 notification.setType(result.getString("tipo"));
                 notification.setWarned(result.getBoolean("avisado"));
                 notification.setTypeColor(result.getString("corDoTipo"));
+
+                User user = new User();
+
+                java.util.Date userDate = null;
+
+                if (result.getDate("dataNascimento") != null) {
+                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                }
+
+                user.setId(result.getLong("id"));
+                user.setNome(result.getString("nome"));
+                user.setSexo(result.getString("sexo"));
+                user.setNascimento(userDate);
+                user.setTelefone(result.getString("telefone"));
+                user.setEmail(result.getString("email"));
+                user.setCPF(result.getString("cpf"));
+                user.setSenha(result.getString("senha"));
+                user.setImage(result.getString("imagePerfil"));
+
+                notification.setUser(user);
 
                 notifications.add(notification);    // add Notification created in List Notifications  //  adiciona o notificacao criado no List notificacaos
             }
@@ -236,7 +321,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Notification> notifications = new ArrayList<>();
-        String sql = "SELECT * FROM notificacao WHERE titutlo LIKE ? OR descricao LIKE ?;";
+        String sql = "SELECT * FROM notificationView WHERE titutlo LIKE ? OR descricao LIKE ?;";
 
         /*
             
@@ -246,13 +331,15 @@ public class NotificationDAO {
                 titulo varchar(25) 
                 descricao varchar(1500) 
                 image varchar(5000) 
-                horario date 
+                horario time 
                 avisado tinyint(1) 
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(7)
-            
+                corDoTipo varchar(20)
+                userNotification int(11)
+                marcado date
+        
          */
         try {
 
@@ -268,7 +355,17 @@ public class NotificationDAO {
                 Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
 
                 if (result.getDate("horario") != null) {
-                    notificationDate = new java.util.Date(result.getDate("horario").getTime());
+
+                    String time = result.getTime("horario") + "";
+                    String date = result.getDate("marcado") + "";
+                    String scheduled = date + " " + time;
+
+                    try {
+                        notificationDate = complet.parse(scheduled);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
 
                 notification.setId(result.getInt("id"));
@@ -281,7 +378,27 @@ public class NotificationDAO {
                 notification.setType(result.getString("tipo"));
                 notification.setWarned(result.getBoolean("avisado"));
                 notification.setTypeColor(result.getString("corDoTipo"));
-                
+
+                User user = new User();
+
+                java.util.Date userDate = null;
+
+                if (result.getDate("dataNascimento") != null) {
+                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                }
+
+                user.setId(result.getLong("id"));
+                user.setNome(result.getString("nome"));
+                user.setSexo(result.getString("sexo"));
+                user.setNascimento(userDate);
+                user.setTelefone(result.getString("telefone"));
+                user.setEmail(result.getString("email"));
+                user.setCPF(result.getString("cpf"));
+                user.setSenha(result.getString("senha"));
+                user.setImage(result.getString("imagePerfil"));
+
+                notification.setUser(user);
+
                 notifications.add(notification);    // add Notification created in List Notifications  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
@@ -299,7 +416,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         Notification findNotification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
-        String sql = "SELECT * FROM notificacao WHERE idNotific = ?;";
+        String sql = "SELECT * FROM notificationView WHERE idNotific = ?;";
 
         /*
             
@@ -314,7 +431,8 @@ public class NotificationDAO {
                 tipo varchar(30) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(7)
+                corDoTipo varchar(20)
+                userNotification int(11)
             
          */
         try {
@@ -328,7 +446,17 @@ public class NotificationDAO {
             if (result.next()) {
 
                 if (result.getDate("horario") != null) {
-                    notificationDate = new java.util.Date(result.getDate("horario").getTime());
+
+                    String time = result.getTime("horario") + "";
+                    String date = result.getDate("marcado") + "";
+                    String scheduled = date + " " + time;
+
+                    try {
+                        notificationDate = complet.parse(scheduled);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
 
                 notification.setId(result.getInt("id"));
@@ -341,6 +469,26 @@ public class NotificationDAO {
                 notification.setType(result.getString("tipo"));
                 notification.setWarned(result.getBoolean("avisado"));
                 notification.setTypeColor(result.getString("corDoTipo"));
+
+                User user = new User();
+
+                java.util.Date userDate = null;
+
+                if (result.getDate("dataNascimento") != null) {
+                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                }
+
+                user.setId(result.getLong("id"));
+                user.setNome(result.getString("nome"));
+                user.setSexo(result.getString("sexo"));
+                user.setNascimento(userDate);
+                user.setTelefone(result.getString("telefone"));
+                user.setEmail(result.getString("email"));
+                user.setCPF(result.getString("cpf"));
+                user.setSenha(result.getString("senha"));
+                user.setImage(result.getString("imagePerfil"));
+
+                notification.setUser(user);
 
                 findNotification = notification;
             }
@@ -364,7 +512,7 @@ public class NotificationDAO {
         connect();
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM notificacao WHERE idNotific = ?;";
+        String sql = "SELECT * FROM notificationView WHERE idNotific = ?;";
 
         try {
 

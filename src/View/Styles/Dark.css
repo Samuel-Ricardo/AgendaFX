@@ -261,6 +261,15 @@ and open the template in the editor.
     
 }
 
+.time-picker{
+   
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #9370DB;
+    -fx-border-color: #343232;
+    -fx-border-width: 0 0 5 0;
+    
+}
+
 .check-box{
     
     -fx-text-fill: white;

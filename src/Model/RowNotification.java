@@ -71,7 +71,7 @@ public class RowNotification extends Pane{
         typeColor.prefHeight(30);
         typeColor.setX(21);
         typeColor.setY(25);
-        typeColor.setStyle("-fx-background-color:"+notification.getTypeColor()+";");
+        typeColor.setStyle(notification.getTypeColor());
 
         title.prefWidth(363);
         title.prefHeight(30);
@@ -98,7 +98,7 @@ public class RowNotification extends Pane{
         typeColor.prefHeight(30);
         typeColor.setX(21);
         typeColor.setY(25);
-        typeColor.setStyle("-fx-background-color:"+notification.getTypeColor()+";");
+        typeColor.setStyle(notification.getTypeColor());
 
         title.prefWidth(363);
         title.prefHeight(30);
@@ -134,7 +134,7 @@ public class RowNotification extends Pane{
         typeColor.prefHeight(30);
         typeColor.setX(21);
         typeColor.setY(25);
-        typeColor.setStyle("-fx-background-color:"+postIt.getTypeColor()+";");
+        typeColor.setStyle(postIt.getTypeColor());
 
         title.prefWidth(363);
         title.prefHeight(30);

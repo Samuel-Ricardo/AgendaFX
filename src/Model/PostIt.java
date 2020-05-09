@@ -21,6 +21,16 @@ public class PostIt {
     private boolean warned;
     private String type;
     private String typeColor;
+    private User user;
+
+    public PostIt(User user) {
+        this.user = user;
+    }
+
+    public PostIt() {
+    }
+    
+    
     
       public int getId() {
         return id;
@@ -97,6 +107,14 @@ public class PostIt {
 
     public void setTypeColor(String typeColor) {
         this.typeColor = typeColor;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     
     
