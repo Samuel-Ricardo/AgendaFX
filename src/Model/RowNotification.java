@@ -19,7 +19,7 @@ public class RowNotification extends Pane {
     private Label title;
     private Label date;
     private Notification notification;
-    private PostIt postIt;
+    private PostIt postIt;//caso tu venha usar esse postIt depois já cria logo os métodos getters and setters para eles.
 
     ///////Construtores  //  Constructos /////////
     public RowNotification(Rectangle typeColor, Label title, Label date, Notification notification) {
@@ -47,9 +47,9 @@ public class RowNotification extends Pane {
         this.typeColor = new Rectangle();
         this.title = new Label();
         this.date = new Label();
-        this.postIt = postIt;
+        this.postIt = postIt;//Acho que tu vai usar porque tipo, nessa parte aqui tu pede pra o postit que vem passado ser settado na classe também.
 
-        loadPane(postIt);
+        loadPane(postIt);//tudo certo.
     }
 
     ///////metodos  //  method /////////
@@ -57,7 +57,7 @@ public class RowNotification extends Pane {
 
         this.setPrefWidth(782);
         this.setPrefHeight(75);
-        this.setStyle("  -fx-background-color: white;"
+        this.setStyle("  -fx-background-color: black;"//deixa essa troca aqui pra ver.
                 + "  -fx-background-radius: 100px;"
                 + "  -fx-border-radius: 30px;");
 
