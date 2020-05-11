@@ -5,15 +5,16 @@
  */
 package Model;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 
 /**
  *
  * @author Samuel
  */
-public class RowNotification extends Pane {
+public class RowNotification extends HBox {
 
     private Rectangle typeColor;
     private Label title;
@@ -33,7 +34,7 @@ public class RowNotification extends Pane {
 
     public RowNotification(Notification notification) {
 
-        this.typeColor = new Rectangle();
+        this.typeColor = new Rectangle(20, 20);
         this.title = new Label();
         this.date = new Label();
         this.notification = notification;
@@ -44,7 +45,7 @@ public class RowNotification extends Pane {
 
     public RowNotification(PostIt postIt) {
 
-        this.typeColor = new Rectangle();
+        this.typeColor = new Rectangle(20, 20);
         this.title = new Label();
         this.date = new Label();
         this.postIt = postIt;
@@ -60,13 +61,9 @@ public class RowNotification extends Pane {
         this.setStyle("  -fx-background-color: white;"
                 + "  -fx-background-radius: 100px;"
                 + "  -fx-border-radius: 30px;");
+        this.setPadding(new Insets(50, 10, 50, 10));
 
-        this.getChildren().add(title);
-        this.getChildren().add(typeColor);
-        this.getChildren().add(date);
 
-        typeColor.prefWidth(30);
-        typeColor.prefHeight(30);
         typeColor.setX(21);
         typeColor.setY(25);
         typeColor.setStyle(notification.getTypeColor());
@@ -76,6 +73,7 @@ public class RowNotification extends Pane {
         title.setLayoutX(67);
         title.setLayoutY(25);
         title.setText(notification.getTitle());
+        
 
         date.prefWidth(363);
         date.prefHeight(30);
@@ -90,11 +88,15 @@ public class RowNotification extends Pane {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
-
+           
+        this.setStyle("  -fx-background-color: black;"
+                + "  -fx-background-radius: 100px;"
+                + "  -fx-border-radius: 100px;");
+        this.setPadding(new Insets(20, 0, 0, 20));
+        this.setSpacing(90);
+         
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setX(21);
-        typeColor.setY(25);
         typeColor.setStyle(notification.getTypeColor());
         typeColor.setVisible(true);
         
@@ -116,12 +118,8 @@ public class RowNotification extends Pane {
         }
         date.setVisible(true);
         
-        this.getChildren().addAll(title,typeColor,date);
-        
-        this.setStyle("  -fx-background-color: white;"
-                + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 100px;");
-
+              this.getChildren().addAll(typeColor,title,date);
+              
         this.setVisible(true);
     }
 
