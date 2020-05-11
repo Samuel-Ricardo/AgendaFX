@@ -252,7 +252,7 @@ public class NotificationDAO {
         try {
 
             statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
-
+            
             result = statement.executeQuery();    //  execute sql statement returning result  //  executa instruçao sql retornando resultado
 
             while (result.next()) {
@@ -264,6 +264,102 @@ public class NotificationDAO {
                     String time = result.getTime("horario").getTime() + "";
                     String date = result.getDate("marcado").getTime() + "";
                     String scheduled = date + " " + time;
+
+                    try {
+                        notificationDate = complet.parse(scheduled);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+
+                notification.setId(result.getInt("id"));
+                notification.setTitle(result.getString("titulo"));
+                notification.setDescription(result.getString("descricao"));
+                notification.setAttachment(new File(result.getString("anexo")));
+                notification.setImage(result.getString("image"));
+                notification.setMusic(new File(result.getString("musica")));
+                notification.setScheduledDay(notificationDate);
+                notification.setType(result.getString("tipo"));
+                notification.setWarned(result.getBoolean("avisado"));
+                notification.setTypeColor(result.getString("corDoTipo"));
+
+                User user = new User();
+
+                java.util.Date userDate = null;
+
+                if (result.getDate("dataNascimento") != null) {
+                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                }
+
+                user.setId(result.getLong("id"));
+                user.setNome(result.getString("nome"));
+                user.setSexo(result.getString("sexo"));
+                user.setNascimento(userDate);
+                user.setTelefone(result.getString("telefone"));
+                user.setEmail(result.getString("email"));
+                user.setCPF(result.getString("cpf"));
+                user.setSenha(result.getString("senha"));
+                user.setImage(result.getString("imagePerfil"));
+
+                notification.setUser(user);
+
+                notifications.add(notification);    // add Notification created in List Notifications  //  adiciona o notificacao criado no List notificacaos
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
+        }
+
+        return notifications;
+    }
+    
+    public List<Notification> selectAll(int id) {
+
+        connect();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        List<Notification> notifications = new ArrayList<>();
+        String sql = "SELECT * FROM notificationsview WHERE id = ? ORDER BY horario;";
+
+        /*
+            
+            // Columns:  //  Colunas: //
+            
+                idNotific int(11) AI PK 
+                titulo varchar(25) 
+                descricao varchar(1500) 
+                image varchar(5000) 
+                horario time 
+                avisado tinyint(1) 
+                tipo varchar(30) 
+                anexo varchar(5000) 
+                musica varchar(5000).
+                corDoTipo varchar(20)
+                userNotification int(11)
+                marcado date
+            
+         */
+        try {
+
+            statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
+            
+            statement.setInt(1, id);
+            
+            result = statement.executeQuery();    //  execute sql statement returning result  //  executa instruçao sql retornando resultado
+
+            while (result.next()) {
+
+                Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
+
+                if (result.getDate("horario") != null && result.getDate("marcado") != null) {
+
+                    Date time = new Date (result.getTime("horario").getTime());
+                    Date date = new Date (result.getDate("marcado").getTime());
+                    String timeS = horary.format(time);
+                    String dateS = day.format(date);
+                    String scheduled = dateS + " " + timeS;
 
                     try {
                         notificationDate = complet.parse(scheduled);

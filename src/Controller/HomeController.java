@@ -20,11 +20,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -102,9 +105,6 @@ public class HomeController implements Initializable {
 
     @FXML
     private TabPane pTabNotficacoes;
-    
-   @FXML
-    private VBox vboxAtividadesHoje;
 
     @FXML
     private Label lbTitulo;
@@ -130,18 +130,20 @@ public class HomeController implements Initializable {
     @FXML
     private ImageView imgPerfilZoom;
 
+    @FXML
+    private ListView<Pane> lvNotifications;
+
     private final UserDAO userDao = new UserDAO();
-    
+
     private final NotificationDAO notDAO = new NotificationDAO();
 
     private User logUser;
-    
-    private ArrayList<Notification> notifications;
-    
-    private ArrayList<PostIt> postIt;
-    
-    private static int index;
 
+    private ArrayList<Notification> notifications;
+
+    private ArrayList<PostIt> postIt;
+
+    private static int index;
 
     @FXML
     void close() {
@@ -180,8 +182,6 @@ public class HomeController implements Initializable {
             panePerfil.setVisible(false);
         }
 
-     
-        
     }
 
     @FXML
@@ -260,15 +260,15 @@ public class HomeController implements Initializable {
 
     @FXML
     void create() {
-        
+
         MainChooser chooser = new MainChooser();
-        
+
         try {
             chooser.start(new Stage());
         } catch (Exception ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     @FXML
@@ -285,7 +285,7 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         loadPerfil();
-        
+
         imgPerfil.setOnMouseClicked((t) -> {
 
             imgPerfilZoom.setImage(new Image("file:///" + logUser.getImage()));
@@ -320,27 +320,31 @@ public class HomeController implements Initializable {
             if (logUser.getImage() != null) {
                 imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
             }
-            
-         //   notificationLoad();
+
+            notificationLoad();
         }
     }
 
     private void notificationLoad() {
-        
-        notifications = (ArrayList<Notification>) notDAO.selectAll();
-        
-        int cont = 0;
-        
-        for (Notification notification : notifications) {
-            
-            RowNotification row = new RowNotification(notifications.get(cont));
-            
-              vboxAtividadesHoje.getChildren().add(row);
-              cont++;
-        }
-      
 
-}
+        notifications = (ArrayList<Notification>) notDAO.selectAll(logUser.getId().intValue());
+        ArrayList<Pane> alPanes = new ArrayList<>();
+
+        int cont = 0;
+
+        for (Notification notification : notifications) {
+
+            RowNotification row = new RowNotification(notifications.get(cont));
+
+            alPanes.add(row);
+
+            cont++;
+        }
+
+        ObservableList<Pane> olPanes = FXCollections.observableArrayList(alPanes);
+        lvNotifications.setItems(olPanes);
+
+    }
 
     public VBox getVbox() {
         return vbox;
@@ -500,14 +504,6 @@ public class HomeController implements Initializable {
 
     public void setpTabNotficacoes(TabPane pTabNotficacoes) {
         this.pTabNotficacoes = pTabNotficacoes;
-    }
-
-    public VBox getVboxAtividadesHoje() {
-        return vboxAtividadesHoje;
-    }
-
-    public void setVboxAtividadesHoje(VBox vboxAtividadesHoje) {
-        this.vboxAtividadesHoje = vboxAtividadesHoje;
     }
 
     public Label getLbTitulo() {

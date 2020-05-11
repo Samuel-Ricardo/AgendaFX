@@ -123,9 +123,9 @@
             <PieChart layoutX="24.0" layoutY="32.0" prefHeight="150.0" prefWidth="279.0" title="Tipos de eventos mais usados" />
          </children>
       </Pane>
-      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;" visible="false">
+      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
          <children>
-            <SplitPane dividerPositions="0.718508997429306" layoutX="1.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
+            <SplitPane dividerPositions="0.800771208226221" layoutX="1.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="308.0" styleClass="simple-background">
                      <children>
@@ -251,7 +251,7 @@
                                              </fill>
                                           </Rectangle>
                                           <Label layoutX="194.0" layoutY="9.0" text="selecione uma para abrí-la" />
-                                          <VBox fx:id="vboxAtividadesHoje" layoutX="-4.0" layoutY="37.0" prefHeight="531.0" prefWidth="782.0" />
+                                          <ListView fx:id="lvNotifications" layoutX="-4.0" layoutY="41.0" prefHeight="533.0" prefWidth="782.0" styleClass="simple-background" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -290,7 +290,7 @@
             </SplitPane>
          </children>
       </Pane>
-      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0">
+      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0" visible="false">
          <children>
             <GridPane layoutX="14.0" layoutY="62.0" prefHeight="318.0" prefWidth="235.0">
               <columnConstraints>
