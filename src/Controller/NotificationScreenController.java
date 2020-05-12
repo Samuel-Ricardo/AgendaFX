@@ -18,13 +18,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author Samuel
  */
-public class NotificationScreeenController implements Initializable {
+public class NotificationScreenController implements Initializable {
+
+    @FXML
+    private AnchorPane anchorPane;
 
     @FXML
     private ImageView imgNotification;
@@ -75,30 +79,42 @@ public class NotificationScreeenController implements Initializable {
 
         lblTitle.setText(notification.getTitle());
         txtaDescription.setText(notification.getDescription());
-        lblScheduled.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
 
+        if (notification.getScheduledDay()!= null) {
+            lblScheduled.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
+        } else {
+            lblScheduled.setText("Sem Hora Marcada");
+        }
         if (notification.isWarned() == true) {
-            
+
             lblWarned.setText("Foi avisado");
-        }else{
+        } else {
             lblWarned.setText("Nao foi avisado");
         }
-        
-        if(notification.getAttachment() != null){
+
+        if (notification.getAttachment() != null) {
             lblAttenchement.setText(notification.getAttachment().getName());
-        }else{
+        } else {
             lblAttenchement.setText("Nenhum arquivo selecionado");
         }
-        
-        if(notification.getMusic() != null){
+
+        if (notification.getMusic() != null) {
             lblSound.setText(notification.getMusic().getName());
-        }else{
-            lblSound.setText("Nenhum Som selecionado");
+        } else {
+            lblSound.setText("Silencioso");
         }
-        
-        if(notification.getImage()!= null || notification.getImage()!= ""){
+
+        if (notification.getImage() != null && notification.getImage() != "") {
             imgNotification.setImage(new Image("file:///"+notification.getImage()));
         }
+
+        String fill = notification.getTypeColor();
+        String color = fill.substring(fill.lastIndexOf("#"));
+        String style = "-fx-border-color: "+color;
+        
+        System.out.println(style);
+        anchorPane.setStyle(style+" -fx-border-width: 5 5 5 5;");
+
     }
 
 }

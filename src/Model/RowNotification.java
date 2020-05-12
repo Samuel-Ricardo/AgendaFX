@@ -56,31 +56,40 @@ public class RowNotification extends HBox {
     ///////metodos  //  method /////////
     private void loadPane(Rectangle typeColor, Label title, Label date, Notification notification) {
 
-        this.setPrefWidth(782);
-        this.setPrefHeight(75);
-        this.setStyle("  -fx-background-color: white;"
+        this.setPrefWidth(772);
+        this.setPrefHeight(65);
+           
+        this.setStyle("  -fx-background-color: black;"
                 + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 30px;");
-        this.setPadding(new Insets(50, 10, 50, 10));
-
-
-        typeColor.setX(21);
-        typeColor.setY(25);
+                + "  -fx-border-radius: 100px;");
+        this.setPadding(new Insets(20, 0, 0, 20));
+        this.setSpacing(90);
+         
+        typeColor.prefWidth(30);
+        typeColor.prefHeight(30);
         typeColor.setStyle(notification.getTypeColor());
-
+        typeColor.setVisible(true);
+        
         title.prefWidth(363);
         title.prefHeight(30);
         title.setLayoutX(67);
         title.setLayoutY(25);
         title.setText(notification.getTitle());
+        title.setVisible(true);
         
-
         date.prefWidth(363);
         date.prefHeight(30);
         date.setLayoutX(67);
         date.setLayoutY(25);
-        date.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
-
+        if (notification.getScheduledDay() != null) {
+            date.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
+        }else{
+            date.setText("sem hora marcada");
+        }
+        date.setVisible(true);
+        
+              this.getChildren().addAll(typeColor,title,date);
+              
         this.setVisible(true);
     }
 
@@ -124,36 +133,41 @@ public class RowNotification extends HBox {
     }
 
     private void loadPane(PostIt postIt) {
-
-        this.setPrefWidth(782);
-        this.setPrefHeight(75);
-
+        
+  this.setPrefWidth(772);
+        this.setPrefHeight(65);
+           
+        this.setStyle("  -fx-background-color: black;"
+                + "  -fx-background-radius: 100px;"
+                + "  -fx-border-radius: 100px;");
+        this.setPadding(new Insets(20, 0, 0, 20));
+        this.setSpacing(90);
+         
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setX(21);
-        typeColor.setY(25);
         typeColor.setStyle(postIt.getTypeColor());
-
+        typeColor.setVisible(true);
+        
         title.prefWidth(363);
         title.prefHeight(30);
         title.setLayoutX(67);
         title.setLayoutY(25);
         title.setText(postIt.getTitle());
-
+        title.setVisible(true);
+        
         date.prefWidth(363);
         date.prefHeight(30);
         date.setLayoutX(67);
         date.setLayoutY(25);
-        date.setText(postIt.getScheduledDate() + " as " + postIt.getScheduledHour());
-
-        this.getChildren().add(title);
-        this.getChildren().add(typeColor);
-        this.getChildren().add(date);
-
-        this.setStyle("  -fx-background-color: white;"
-                + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 100px;");
-
+        if (postIt.getScheduledDay() != null) {
+            date.setText(postIt.getScheduledDate() + " as " + postIt.getScheduledHour());
+        }else{
+            date.setText("sem hora marcada");
+        }
+        date.setVisible(true);
+        
+              this.getChildren().addAll(typeColor,title,date);
+              
         this.setVisible(true);
     }
 
@@ -181,5 +195,23 @@ public class RowNotification extends HBox {
     public void setDate(Label description) {
         this.date = description;
     }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
+    }
+
+    public PostIt getPostIt() {
+        return postIt;
+    }
+
+    public void setPostIt(PostIt postIt) {
+        this.postIt = postIt;
+    }
+    
+    
 
 }

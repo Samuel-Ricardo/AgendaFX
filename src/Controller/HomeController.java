@@ -340,6 +340,16 @@ public class HomeController implements Initializable {
 
             RowNotification row = new RowNotification(notifications.get(cont));
 
+            row.setOnMouseClicked((t) -> {
+        
+                try {
+                    showNotification(row.getNotification());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao "+ex);
+                }
+            
+            });
+            
             alPanes.add(row);
 
             cont++;
@@ -360,20 +370,15 @@ public class HomeController implements Initializable {
         
         for(Notification notification: notifications){
             
-            if(notifications.get(cont).getSQLScheduledDay() == currentTime){
+         if(notifications.get(cont).getScheduledDay() != null){
+            if(notifications.get(cont).getScheduledDay() == currentTime){
                 
                 try {
                     
-                    NotificationDAO.setNotification(notifications.get(index));
-                    if( MainNotificationScreen.getWindow() != null){
-                        MainNotificationScreen.getWindow().close();
-                    }
-                    MainNotificationScreen notificationScreen = new MainNotificationScreen();
-                    
-                    notificationScreen.start(new Stage());
+                    showNotification(notifications.get(index));
                     
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao"+ex);
+                    JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao "+ex);
                     int result = JOptionPane.showConfirmDialog(null, "Notificaçao: "+notifications.get(cont).getTitle()+
                                                                 "\n  deseja marcar como avisado?");
                 
@@ -406,10 +411,25 @@ public class HomeController implements Initializable {
                 }
                         
             }
+         }
+           
             
             cont++;
         }
 
+    }
+
+    public void showNotification(Notification notification) throws Exception {
+        
+            
+               NotificationDAO.setNotification(notification);
+        
+        if( MainNotificationScreen.getWindow() != null){
+            MainNotificationScreen.getWindow().close();
+        }
+        MainNotificationScreen notificationScreen = new MainNotificationScreen();
+        
+        notificationScreen.start(new Stage());
     }
 
     public VBox getVbox() {
