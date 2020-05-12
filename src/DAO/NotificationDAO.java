@@ -634,7 +634,7 @@ public class NotificationDAO {
             ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
         }
 
-    }
+    }    
 
     public Connection getConnection() {
         return connection;

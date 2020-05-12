@@ -112,6 +112,8 @@ public class NotificationCreaterController implements Initializable {
     private NotificationDAO dao = new NotificationDAO();
 
     private User logUser = UserDAO.getUser();
+    
+    private static HomeController home;
 
     @FXML
     void cancel() {
@@ -306,4 +308,222 @@ public class NotificationCreaterController implements Initializable {
         cbType.setItems(obTypes);
     }
 
+    public TextField getTxtTitle() {
+        return txtTitle;
+    }
+
+    public void setTxtTitle(TextField txtTitle) {
+        this.txtTitle = txtTitle;
+    }
+
+    public JFXDatePicker getDpDate() {
+        return dpDate;
+    }
+
+    public void setDpDate(JFXDatePicker dpDate) {
+        this.dpDate = dpDate;
+    }
+
+    public TextArea getTxtDescription() {
+        return txtDescription;
+    }
+
+    public void setTxtDescription(TextArea txtDescription) {
+        this.txtDescription = txtDescription;
+    }
+
+    public ComboBox<String> getCbType() {
+        return cbType;
+    }
+
+    public void setCbType(ComboBox<String> cbType) {
+        this.cbType = cbType;
+    }
+
+    public Rectangle getTypeColor() {
+        return typeColor;
+    }
+
+    public void setTypeColor(Rectangle typeColor) {
+        this.typeColor = typeColor;
+    }
+
+    public ImageView getImgNotific() {
+        return imgNotific;
+    }
+
+    public void setImgNotific(ImageView imgNotific) {
+        this.imgNotific = imgNotific;
+    }
+
+    public JFXToggleButton getTbSound() {
+        return tbSound;
+    }
+
+    public void setTbSound(JFXToggleButton tbSound) {
+        this.tbSound = tbSound;
+    }
+
+    public Button getBtSound() {
+        return btSound;
+    }
+
+    public void setBtSound(Button btSound) {
+        this.btSound = btSound;
+    }
+
+    public Label getLblSound() {
+        return lblSound;
+    }
+
+    public void setLblSound(Label lblSound) {
+        this.lblSound = lblSound;
+    }
+
+    public JFXToggleButton getTbAttachment() {
+        return tbAttachment;
+    }
+
+    public void setTbAttachment(JFXToggleButton tbAttachment) {
+        this.tbAttachment = tbAttachment;
+    }
+
+    public Button getBtAttachment() {
+        return btAttachment;
+    }
+
+    public void setBtAttachment(Button btAttachment) {
+        this.btAttachment = btAttachment;
+    }
+
+    public JFXToggleButton getTbImage() {
+        return tbImage;
+    }
+
+    public void setTbImage(JFXToggleButton tbImage) {
+        this.tbImage = tbImage;
+    }
+
+    public JFXTimePicker getTpHorary() {
+        return tpHorary;
+    }
+
+    public void setTpHorary(JFXTimePicker tpHorary) {
+        this.tpHorary = tpHorary;
+    }
+
+    public Label getLblAttachment() {
+        return lblAttachment;
+    }
+
+    public void setLblAttachment(Label lblAttachment) {
+        this.lblAttachment = lblAttachment;
+    }
+
+    public FileChooser getChooser() {
+        return chooser;
+    }
+
+    public void setChooser(FileChooser chooser) {
+        this.chooser = chooser;
+    }
+
+    public FileChooser.ExtensionFilter getImage() {
+        return image;
+    }
+
+    public void setImage(FileChooser.ExtensionFilter image) {
+        this.image = image;
+    }
+
+    public FileChooser.ExtensionFilter getSound() {
+        return sound;
+    }
+
+    public void setSound(FileChooser.ExtensionFilter sound) {
+        this.sound = sound;
+    }
+
+    public File getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(File attachment) {
+        this.attachment = attachment;
+    }
+
+    public File getMusic() {
+        return music;
+    }
+
+    public void setMusic(File music) {
+        this.music = music;
+    }
+
+    public File getImg() {
+        return img;
+    }
+
+    public void setImg(File img) {
+        this.img = img;
+    }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
+    }
+
+    public boolean isImgVissible() {
+        return imgVissible;
+    }
+
+    public void setImgVissible(boolean imgVissible) {
+        this.imgVissible = imgVissible;
+    }
+
+    public boolean isSoundVissible() {
+        return soundVissible;
+    }
+
+    public void setSoundVissible(boolean soundVissible) {
+        this.soundVissible = soundVissible;
+    }
+
+    public boolean isFileVissible() {
+        return fileVissible;
+    }
+
+    public void setFileVissible(boolean fileVissible) {
+        this.fileVissible = fileVissible;
+    }
+
+    public NotificationDAO getDao() {
+        return dao;
+    }
+
+    public void setDao(NotificationDAO dao) {
+        this.dao = dao;
+    }
+
+    public User getLogUser() {
+        return logUser;
+    }
+
+    public void setLogUser(User logUser) {
+        this.logUser = logUser;
+    }
+
+    public static HomeController getHome() {
+        return home;
+    }
+
+    public static void setHome(HomeController home) {
+        NotificationCreaterController.home = home;
+    }
+
+    
+    
 }

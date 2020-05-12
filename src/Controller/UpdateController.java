@@ -70,12 +70,10 @@ public class UpdateController implements Initializable {
         Date nasc = Date.from(dpNascimento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         updatedUser.setId(user.getId());
-        System.out.println(updatedUser.getId());
         updatedUser.setNome(txtNome.getText());
         updatedUser.setCPF(txtCPF.getText());
         updatedUser.setEmail(txtEmail.getText());
         updatedUser.setNascimento(nasc);
-        System.out.println(updatedUser.getNascimento());
         updatedUser.setSenha(txtSenha.getText());
         updatedUser.setTelefone(txtTelefone.getText());
         updatedUser.setSexo(cbSexo.getSelectionModel().getSelectedItem());

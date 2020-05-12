@@ -250,7 +250,8 @@ public class HomeController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        loadPerfil();
     }
 
     @FXML
@@ -271,6 +272,7 @@ public class HomeController implements Initializable {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        notificationLoad();
     }
 
     @FXML
