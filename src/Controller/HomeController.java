@@ -9,6 +9,7 @@ import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
 import Main.MainLogin;
+import Main.MainNotificationScreen;
 import Main.MainRegister;
 import Main.MainUpdate;
 import Model.Notification;
@@ -361,10 +362,52 @@ public class HomeController implements Initializable {
             
             if(notifications.get(cont).getSQLScheduledDay() == currentTime){
                 
+                try {
+                    
+                    NotificationDAO.setNotification(notifications.get(index));
+                    if( MainNotificationScreen.getWindow() != null){
+                        MainNotificationScreen.getWindow().close();
+                    }
+                    MainNotificationScreen notificationScreen = new MainNotificationScreen();
+                    
+                    notificationScreen.start(new Stage());
+                    
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao"+ex);
+                    int result = JOptionPane.showConfirmDialog(null, "Notificaçao: "+notifications.get(cont).getTitle()+
+                                                                "\n  deseja marcar como avisado?");
                 
-                
+                    switch (result){
+                        
+                        case 0 :
+                            
+                            notifications.get(cont).setWarned(true);
+                            
+                            break;
+                       
+                        case 1 :   
+                            
+                            notifications.get(cont).setWarned(false);
+                            
+                            break;
+                         
+                       case 2 :   
+                            
+                            notifications.get(cont).setWarned(false);
+                            
+                            break;
+                                
+                       case -1 :   
+                            
+                            notifications.get(cont).setWarned(false);
+                            
+                            break;     
+                    }
+                }
+                        
             }
             
+            cont++;
         }
 
     }

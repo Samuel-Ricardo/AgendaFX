@@ -30,6 +30,8 @@ import javax.swing.JOptionPane;
  */
 public class NotificationDAO {
 
+
+
     private Connection connection;
     private Date sqlDate;
     private Time sqlTime;
@@ -37,6 +39,7 @@ public class NotificationDAO {
     private SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat horary = new SimpleDateFormat("HH:mm");
     private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yy HH:mm");
+    private static Notification notification;
 
     public NotificationDAO() {
 
@@ -632,5 +635,71 @@ public class NotificationDAO {
         }
 
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public Date getSqlDate() {
+        return sqlDate;
+    }
+
+    public void setSqlDate(Date sqlDate) {
+        this.sqlDate = sqlDate;
+    }
+
+    public Time getSqlTime() {
+        return sqlTime;
+    }
+
+    public void setSqlTime(Time sqlTime) {
+        this.sqlTime = sqlTime;
+    }
+
+    public java.util.Date getNotificationDate() {
+        return notificationDate;
+    }
+
+    public void setNotificationDate(java.util.Date notificationDate) {
+        this.notificationDate = notificationDate;
+    }
+
+    public SimpleDateFormat getDay() {
+        return day;
+    }
+
+    public void setDay(SimpleDateFormat day) {
+        this.day = day;
+    }
+
+    public SimpleDateFormat getHorary() {
+        return horary;
+    }
+
+    public void setHorary(SimpleDateFormat horary) {
+        this.horary = horary;
+    }
+
+    public SimpleDateFormat getComplet() {
+        return complet;
+    }
+
+    public void setComplet(SimpleDateFormat complet) {
+        this.complet = complet;
+    }
+
+    public static Notification getNotification() {
+        return notification;
+    }
+
+    public static void setNotification(Notification notification) {
+        NotificationDAO.notification = notification;
+    }
+    
+
 
 }
