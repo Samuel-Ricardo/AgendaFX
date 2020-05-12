@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="438.0" style="-fx-border-width: 3 3 3 3; -fx-border-color: red;" styleClass="simple-background" stylesheets="@Styles/Dark.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controller.NotificationScreeenController">
+   <children>
+      <ImageView fx:id="imgNotification" fitHeight="118.0" fitWidth="135.0" layoutX="14.0" layoutY="57.0" pickOnBounds="true">
+         <image>
+            <Image url="@Images/agenda_multi_color.png" />
+         </image>
+      </ImageView>
+      <JFXTextArea fx:id="txtaDescription" editable="false" focusColor="#405aa800" layoutX="14.0" layoutY="191.0" prefHeight="185.0" prefWidth="253.0" style="-fx-text-fill: white; -fx-border-color: #8A2BE2; -fx-border-width: 3 0 3 0;" />
+      <Label fx:id="lblTitle" layoutX="4.0" layoutY="14.0" prefHeight="23.0" prefWidth="428.0" style="-fx-border-width: 0 0 2 0; -fx-border-color: #8A2BE2;" />
+      <Label layoutX="157.0" layoutY="57.0" text="Marcado:" />
+      <Label fx:id="lblScheduled" layoutX="256.0" layoutY="57.0" prefHeight="21.0" prefWidth="176.0" />
+      <Label layoutX="157.0" layoutY="95.0" text="Anexo:" />
+      <Label fx:id="lblAttenchement" layoutX="228.0" layoutY="97.0" prefHeight="21.0" prefWidth="202.0" />
+      <Label layoutX="154.0" layoutY="130.0" text="Som:" />
+      <Label fx:id="lblSound" layoutX="208.0" layoutY="132.0" prefHeight="21.0" prefWidth="218.0" />
+      <Label layoutX="150.0" layoutY="165.0" text="Avisado:" />
+      <Label fx:id="lblWarned" layoutX="242.0" layoutY="167.0" prefHeight="21.0" prefWidth="176.0" />
+      <Button layoutX="280.0" layoutY="343.0" mnemonicParsing="false" onAction="#closeScreen" text="OK" />
+      <Button layoutX="279.0" layoutY="297.0" mnemonicParsing="false" onAction="#Update" text="Atualizar" />
+   </children>
+</AnchorPane>

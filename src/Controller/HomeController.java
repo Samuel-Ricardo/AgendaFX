@@ -17,6 +17,7 @@ import Model.RowNotification;
 import Model.User;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -298,7 +299,9 @@ public class HomeController implements Initializable {
             imgPerfilZoom.setVisible(false);
 
         });
-
+        
+       searchNotification();
+        
     }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
@@ -343,6 +346,26 @@ public class HomeController implements Initializable {
 
         ObservableList<Pane> olPanes = FXCollections.observableArrayList(alPanes);
         lvNotifications.setItems(olPanes);
+
+    }
+    
+    
+    
+    private void searchNotification() {
+    
+        int cont = 0;
+        Date currentTime = new Date();
+        System.out.println(currentTime);
+        
+        for(Notification notification: notifications){
+            
+            if(notifications.get(cont).getSQLScheduledDay() == currentTime){
+                
+                
+                
+            }
+            
+        }
 
     }
 
@@ -601,4 +624,5 @@ public class HomeController implements Initializable {
     public static void setIndex(int index) {
         HomeController.index = index;
     }
+
 }
