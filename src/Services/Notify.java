@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,7 +33,7 @@ public class Notify extends Thread {
     private final User user = UserDAO.getUser();
     private ArrayList<Notification> notifications = (ArrayList<Notification>) dao.selectAll(user.getId().intValue());
     private HomeController controller;
-    private int choice = 1;
+    private int choice = 0;
 
     public Notify(HomeController controller) {
         this.controller = controller;
@@ -40,20 +43,28 @@ public class Notify extends Thread {
     public void run() {
 
         int cont = 0;
-
-        while (online == true) {
-
+        
+        try {
+            sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
             MainHome.getWindow().setOnCloseRequest((t) -> {
 
                 this.choice = JOptionPane.showConfirmDialog(null, "A aplicaçao Precisa rodar em 2° plano para poder notifica-lo \n Voce permite a aplicaçao rodar em segundo plano?");
 
+                if(choice != 0){
+                    System.exit(0);
+                }
             });
 
-            if (choice == 1) {
+
+        while (online == true) {
+
+            if (choice == 0) {
                 
-                JOptionPane.showMessageDialog(null, "A tecla de atalho para reabrir a janela é: F1");
-                
-                
+                Platform.setImplicitExit(false);
                 
                 Date currentTime = new Date();
 
@@ -117,8 +128,10 @@ public class Notify extends Thread {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "A aplicaçao sera fechada completametne e vc nao será mais notificado");
+                
+                JOptionPane.showMessageDialog(null, "A aplicaçao sera fechada completametne e vc nao será mais notificado","Segundo Plano",JOptionPane.QUESTION_MESSAGE);
                 online = false;
+                System.exit(0);
             }
 
         }

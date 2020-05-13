@@ -17,9 +17,9 @@ import Model.PostIt;
 import Model.RowNotification;
 import Model.User;
 import Services.Notify;
+import Services.SecondPlan;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -309,6 +309,9 @@ public class HomeController implements Initializable {
             
         });
         
+        SecondPlan secondPlan = new SecondPlan();
+        
+        secondPlan.start();
     }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
@@ -337,6 +340,9 @@ public class HomeController implements Initializable {
 
     private void notificationLoad() {
 
+        
+        
+        
         notifications = (ArrayList<Notification>) notDAO.selectAll(logUser.getId().intValue());
         ArrayList<Pane> alPanes = new ArrayList<>();
 
