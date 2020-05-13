@@ -16,6 +16,7 @@ import Model.Notification;
 import Model.PostIt;
 import Model.RowNotification;
 import Model.User;
+import Services.Notify;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -146,6 +147,8 @@ public class HomeController implements Initializable {
     private ArrayList<PostIt> postIt;
 
     private static int index;
+    
+    private Notify notify = new Notify(this);
 
     @FXML
     void close() {
@@ -287,9 +290,11 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         loadPerfil();
 
+        notify.start();
+        
         imgPerfil.setOnMouseClicked((t) -> {
 
             imgPerfilZoom.setImage(new Image("file:///" + logUser.getImage()));
@@ -301,9 +306,8 @@ public class HomeController implements Initializable {
 
             imgPerfilZoom.setVisible(false);
 
+            
         });
-        
-       searchNotification();
         
     }
 
@@ -361,68 +365,8 @@ public class HomeController implements Initializable {
         lvNotifications.setItems(olPanes);
 
     }
-    
-    
-    
-    private void searchNotification() {
-    
-        int cont = 0;
-        Date currentTime = new Date();
-        System.out.println(currentTime);
-        
-        for(Notification notification: notifications){
-            
-         if(notifications.get(cont).getScheduledDay() != null){
-            if(notifications.get(cont).getScheduledDay() == currentTime){
-                
-                try {
-                    
-                    showNotification(notifications.get(index));
-                    
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao "+ex);
-                    int result = JOptionPane.showConfirmDialog(null, "Notificaçao: "+notifications.get(cont).getTitle()+
-                                                                "\n  deseja marcar como avisado?");
-                
-                    switch (result){
-                        
-                        case 0 :
-                            
-                            notifications.get(cont).setWarned(true);
-                            
-                            break;
-                       
-                        case 1 :   
-                            
-                            notifications.get(cont).setWarned(false);
-                            
-                            break;
-                         
-                       case 2 :   
-                            
-                            notifications.get(cont).setWarned(false);
-                            
-                            break;
-                                
-                       case -1 :   
-                            
-                            notifications.get(cont).setWarned(false);
-                            
-                            break;     
-                    }
-                }
-                        
-            }
-         }
-           
-            
-            cont++;
-        }
-
-    }
 
     public void showNotification(Notification notification) throws Exception {
-        
             
                NotificationDAO.setNotification(notification);
         
@@ -434,6 +378,10 @@ public class HomeController implements Initializable {
         notificationScreen.start(new Stage());
     }
 
+
+     
+     
+    
     public VBox getVbox() {
         return vbox;
     }
