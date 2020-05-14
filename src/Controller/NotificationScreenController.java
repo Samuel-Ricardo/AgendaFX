@@ -10,11 +10,13 @@ import DAO.UserDAO;
 import Main.MainNotificationScreen;
 import Model.Notification;
 import Model.User;
+import Services.SoundPlayer;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,6 +52,9 @@ public class NotificationScreenController implements Initializable {
 
     @FXML
     private Label lblWarned;
+    
+    @FXML
+    private Button btStopSound;
 
     // private UserDAO dao = new UserDAO();
     private User user = UserDAO.getUser();
@@ -65,6 +70,7 @@ public class NotificationScreenController implements Initializable {
     void closeScreen() {
 
         MainNotificationScreen.getWindow().close();
+        SoundPlayer.stopSound();
 
     }
 
@@ -75,6 +81,13 @@ public class NotificationScreenController implements Initializable {
 
     }
 
+    @FXML
+    void stopSound() {
+        
+        SoundPlayer.stopSound();
+        
+    }
+    
     private void loadScreen() {
 
         lblTitle.setText(notification.getTitle());
@@ -100,8 +113,10 @@ public class NotificationScreenController implements Initializable {
 
         if (notification.getMusic() != null) {
             lblSound.setText(notification.getMusic().getName());
+            btStopSound.setVisible(true);
         } else {
             lblSound.setText("Silencioso");
+            
         }
 
         if (notification.getImage() != null && notification.getImage() != "") {

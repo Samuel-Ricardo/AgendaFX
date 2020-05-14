@@ -5,7 +5,7 @@
  */
 package Services;
 
-import java.io.InputStream;
+import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -15,15 +15,16 @@ import javafx.scene.media.MediaPlayer;
  */
 public class SoundPlayer extends Thread{
    
-    private MediaPlayer player;
+    private static MediaPlayer player;
     private Media media;
     private String file;
     /*    private InputStream input;*/
 
     public SoundPlayer(String file) {
         this.file = file;
-        this.media = new Media(file);
-        this.player = new MediaPlayer(media);
+        this.media = new Media(new File(file).toURI().toString());
+        System.out.println(media.getSource());
+        SoundPlayer.player = new MediaPlayer(media);
         
     }
     
@@ -34,24 +35,26 @@ public class SoundPlayer extends Thread{
         
     }
     
-    public void justPlaySound(){
-            
+    public static void justPlaySound(){
+           
+        System.out.println(player.getVolume()+" V2");
         player.play();
+        System.out.println(player.getVolume()+" V");
         
     }
     
-    public void stopSound(){
+    public static void stopSound(){
         
         player.stop();
         
     }
 
-    public MediaPlayer getPlayer() {
+    public static MediaPlayer getPlayer() {
         return player;
     }
 
-    public void setPlayer(MediaPlayer player) {
-        this.player = player;
+    public static void setPlayer(MediaPlayer player) {
+        SoundPlayer.player = player;
     }
 
     public Media getMedia() {

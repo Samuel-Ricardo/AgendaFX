@@ -293,7 +293,7 @@ public class HomeController implements Initializable {
         
         loadPerfil();
 
-        notify.start();
+       
         
         imgPerfil.setOnMouseClicked((t) -> {
 
@@ -309,6 +309,8 @@ public class HomeController implements Initializable {
             
         });
         
+         notify.start();
+         
         SecondPlan secondPlan = new SecondPlan();
         
         secondPlan.start();
