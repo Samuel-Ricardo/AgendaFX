@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,26 +14,30 @@ import java.util.Date;
  * @author Samuel
  */
 public class PostIt {
-    
-    private int id;
-    private String title;
-    private String description;
-    private Date scheduledDay;
-    private boolean warned;
-    private String type;
-    private String typeColor;
-    private User user;
+
+    protected int id;
+    protected String title;
+    protected String description;
+    protected Date scheduledDay;
+    protected boolean warned;
+    protected String type;
+    protected String typeColor;
+    protected User user;
+    protected Sound sound;
+    protected File music;
 
     public PostIt(User user) {
         this.user = user;
+        
+        if (music != null) {
+            this.sound = new Sound(music);
+        }
     }
 
     public PostIt() {
     }
-    
-    
-    
-      public int getId() {
+
+    public int getId() {
         return id;
     }
 
@@ -55,8 +60,8 @@ public class PostIt {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-      public Date getScheduledDay() {
+
+    public Date getScheduledDay() {
         return scheduledDay;
     }
 
@@ -79,7 +84,7 @@ public class PostIt {
     public void setType(String type) {
         this.type = type;
     }
-    
+
     public java.sql.Date getSQLScheduledDay() {
 
         java.sql.Date sqlDate = new java.sql.Date(scheduledDay.getTime());
@@ -116,7 +121,23 @@ public class PostIt {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Sound getSound() {
+        return sound;
+    }
+
+    public void setSound(Sound sound) {
+        this.sound = sound;
+    }
+
+    public File getMusic() {
+        return music;
+    }
+
+    public void setMusic(File music) {
+        this.music = music;
+    }
     
     
-    
+
 }

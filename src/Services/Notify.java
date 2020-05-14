@@ -9,6 +9,7 @@ import Controller.HomeController;
 import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainHome;
+import Main.MainNotificationScreen;
 import Model.Notification;
 import Model.User;
 import java.text.SimpleDateFormat;
@@ -34,6 +35,7 @@ public class Notify extends Thread {
     private ArrayList<Notification> notifications = (ArrayList<Notification>) dao.selectAll(user.getId().intValue());
     private HomeController controller;
     private int choice = 0;
+    private SoundPlayer player;
 
     public Notify(HomeController controller) {
         this.controller = controller;
@@ -82,7 +84,16 @@ public class Notify extends Thread {
                             try {
 
                                 controller.showNotification(notifications.get(cont));
-
+                                
+                                player = new SoundPlayer(notifications.get(cont).getMusic().getAbsolutePath());
+                                player.start();
+                                
+                                player.justPlaySound();
+                                
+                                MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
+                                    player.stopSound();
+                                });
+                                
                             } catch (Exception ex) {
                                 JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao " + ex);
                                 int result = JOptionPane.showConfirmDialog(null, "Notificaçao: " + notifications.get(cont).getTitle()
@@ -97,18 +108,6 @@ public class Notify extends Thread {
                                         break;
 
                                     case 1:
-
-                                        notifications.get(cont).setWarned(false);
-
-                                        break;
-
-                                    case 2:
-
-                                        notifications.get(cont).setWarned(false);
-
-                                        break;
-
-                                    case -1:
 
                                         notifications.get(cont).setWarned(false);
 

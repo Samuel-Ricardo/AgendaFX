@@ -13,12 +13,21 @@ import java.io.File;
  */
 public class Notification extends PostIt{
    
-    private String image;
-    private File attachment;
-    private File music;
+    protected String image;
+    protected File attachment;
+
 
     public Notification() {
     }
+
+    public Notification(User user) {
+        super(user);
+        
+        if (music != null) {
+            this.sound = new Sound(music);
+        }
+    }
+    
 
   
 

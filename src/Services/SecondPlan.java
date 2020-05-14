@@ -15,7 +15,6 @@ import java.awt.TrayIcon;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.stage.Stage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -83,14 +82,7 @@ public class SecondPlan {
         miClose.setFont(new Font("Arial",0,12));
         miClose.setLabel("Fechar Completamente");
         miClose.addActionListener((e) -> {
-        
-            if(MainHome.getWindow().isShowing()){
-                MainHome.getWindow().close();
-            }
             
-            
-            systemTray.remove(trayIcon);
-             Platform.exit();
              System.exit(0);
             
         });
