@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
     private UserDAO dao = new UserDAO();
 
     @FXML
-    void cadastrar() {
+    void cadastrar() {  // open the register screen // abre a tela de cadastro
         
         MainRegister register = new MainRegister();
         
@@ -88,9 +88,10 @@ public class LoginController implements Initializable {
           
             UserDAO.setUser(user);  // set the user who was logged in to know which user is logged in  //  setar o usuario que foi logado para saber qual usuário está logado
             
-            if(MainHome.getWindow() != null){
+            if(MainHome.getWindow() != null){       // close the Home screen if it is Open // feche a tela inicial se estiver aberta
                 MainHome.getWindow().close();
             }
+            
             MainHome home = new MainHome();  
             MainLogin.getWindow().close();   // Close the login window //  Fecha a janela de login
             
