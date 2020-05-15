@@ -126,7 +126,7 @@ public class NotificationCreaterController implements Initializable {
     }
 
     @FXML
-    void chooseFile() { // choose the attachment
+    void chooseFile() { // choose attachment // escolher o arquivo
 
         MainChooser chooserScreen = new MainChooser();
         ChooserController chooserC = new ChooserController();
@@ -146,7 +146,7 @@ public class NotificationCreaterController implements Initializable {
 
         switch (chooserC.loadChooser(alItems)) { // executa a açao baseado na opçao escolhida
 
-            case 0:
+            case 0:  // choose attachment  // escolhe o anexo
                 
                     attachment = chooser.showOpenDialog(new Stage());
 
@@ -160,15 +160,24 @@ public class NotificationCreaterController implements Initializable {
 
                 break;
                 
-            case 1:
-                    JOptionPane.showMessageDialog(null, "Escolha o nome e local do arquivo");
-                    attachment = chooser.showSaveDialog(new Stage());
+            case 1:  // does the download of internet files // faz download de arquivo da internet
                 
-                    String link = JOptionPane.showInputDialog(null,"Digite o Link do arquivo");
+                    JOptionPane.showMessageDialog(null, "Escolha o nome e local do arquivo");
+                    attachment = chooser.showSaveDialog(new Stage()); // choose place of file // escolhe o local do arquivo
+                
+                    String link = JOptionPane.showInputDialog(null,"Digite o Link do arquivo"); // get the link typed by the user // pega o link digitado pelo usuario 
                     
-                    Downloader downloader = new Downloader(link, attachment.getAbsolutePath());
-                    downloader.start();
-                    downloader.download();
+                    if (attachment != null) {
+                        
+                        Downloader downloader = new Downloader(link, attachment.getAbsolutePath());
+                        downloader.start();
+                        downloader.download();      // start the file download // inicia o download do arquivo
+                    
+                        
+                        notification.setAttachment(attachment);  // set Notification attachment // definir anexo de notificação
+                        lblAttachment.setText(attachment.getName());    // puts the file name on the screen // poe o nome do arquivo na tela
+                    }
+                    
                     JOptionPane.showMessageDialog(null, "O arquivo está sendo baixado em 2° plano");
                     
                 break;
@@ -176,7 +185,7 @@ public class NotificationCreaterController implements Initializable {
     }
 
     @FXML
-    void chooseSound() {
+    void chooseSound() {    // choose sound // escolher o som
 
         chooser.setSelectedExtensionFilter(sound);
 
@@ -191,21 +200,21 @@ public class NotificationCreaterController implements Initializable {
     }
 
     @FXML
-    void create() {
+    void create() {  // creates the notification  // cria a notificaçao
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm"); // creates standard date and time formatting //cria formataçao padrao de data e hora
 
         String day = dpDate.getValue().getDayOfMonth() + "";
         String month = "" + dpDate.getValue().getMonthValue();
         String year = "" + dpDate.getValue().getYear();
         String horary = tpHorary.getValue().getHour() + ":" + tpHorary.getValue().getMinute();
-        String date = day + "/" + month + "/" + year + " " + horary.replace(" ", "");
+        String date = day + "/" + month + "/" + year + " " + horary.replace(" ", "");    // convert LocalDate to string // converte LocalDate em string
 
         Date scheduledDay = new Date();
 
         try {
 
-            scheduledDay = format.parse(date);
+            scheduledDay = format.parse(date);  // convert String to Date  // converter String para Data
 
         } catch (ParseException ex) {
             Logger.getLogger(NotificationCreaterController.class.getName()).log(Level.SEVERE, null, ex);
@@ -221,15 +230,15 @@ public class NotificationCreaterController implements Initializable {
         notification.setTypeColor(typeColor.getStyle());
         notification.setUser(logUser);
 
-        if (dao.insert(notification)) {
-            JOptionPane.showMessageDialog(null, "Criado");
+        if (dao.insert(notification)) {     // creates the notification  // cria a notificaçao
+            JOptionPane.showMessageDialog(null, "Criado com sucesso +,-");
         }
     }
 
     @FXML
-    void showAttachment() {
-
-        fileVissible = !fileVissible;
+    void showAttachment() { // Shows the items needed to create if desired // Mostra os items necessário para criar se desejado
+  
+        fileVissible = !fileVissible; 
 
         btAttachment.setVisible(fileVissible);
         lblAttachment.setVisible(fileVissible);
@@ -242,7 +251,7 @@ public class NotificationCreaterController implements Initializable {
     }
 
     @FXML
-    void showImage() {
+    void showImage() { // Shows the items needed to create if desired // Mostra os items necessário para criar se desejado
 
         imgVissible = !imgVissible;
 
@@ -255,7 +264,7 @@ public class NotificationCreaterController implements Initializable {
     }
 
     @FXML
-    void showSound() {
+    void showSound() { // Shows the items needed to create if desired // Mostra os items necessário para criar se desejado
 
         soundVissible = !soundVissible;
 
@@ -269,30 +278,32 @@ public class NotificationCreaterController implements Initializable {
     }
 
     @FXML
-    void changeTypeColor() {
+    void changeTypeColor() {  // metodo descontinuado // discontinued method
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        imgNotific.setOnMouseClicked((t) -> {
+        imgNotific.setOnMouseClicked((t) -> {  // when clicking on the image // ao clicar na imagem
 
-            chooser.setSelectedExtensionFilter(image);
+            chooser.setSelectedExtensionFilter(image); // set filter // coloca um filtro
 
-            img = chooser.showOpenDialog(new Stage());
+            img = chooser.showOpenDialog(new Stage()); // open chooser screen // abre a tela de escolha
 
-            imgNotific.setImage(new Image("file:///" + img.getAbsolutePath()));
-
+            imgNotific.setImage(new Image("file:///" + img.getAbsolutePath()));    // set choosed image // define a imagem escolhida
+            
+            notification.setImage(img.getAbsolutePath());   // set choosed image in notification// define a imagem escolhida na notificaçao
+            
         });
 
-        loadComboBox();
+        loadComboBox(); // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
-        cbType.valueProperty().addListener(new ChangeListener<String>() {
+        cbType.valueProperty().addListener(new ChangeListener<String>() {    // when exchanging item // ao trocar Item
             @Override
             public void changed(ObservableValue<? extends String> ov, String t, String t1) {
 
-                int index = cbType.getSelectionModel().getSelectedIndex();
+                int index = cbType.getSelectionModel().getSelectedIndex(); // change the color of Rectangle: typeColor when change the notification //alterar a cor do retângulo: typeColor ao alterar o tipo de notificação
                 String style = "";
 
                 switch (index) {
@@ -332,20 +343,23 @@ public class NotificationCreaterController implements Initializable {
 
     }
 
-    private void loadComboBox() {
+    private void loadComboBox() {   // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
         ArrayList<String> arTypes = new ArrayList<>();
 
-        arTypes.add("Urgente");
+        arTypes.add("Urgente"); // Loads the Array List with the options // Carrega o ArrayList com as opçoes;
         arTypes.add("Trabalho / Escola");
         arTypes.add("Evento");
         arTypes.add("Especial");
         arTypes.add("Banal");
 
-        ObservableList<String> obTypes = FXCollections.observableArrayList(arTypes);
+        ObservableList<String> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
-        cbType.setItems(obTypes);
+        cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
     }
+    
+    
+    ///// Getters and Setters/////
 
     public TextField getTxtTitle() {
         return txtTitle;
