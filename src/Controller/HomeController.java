@@ -268,9 +268,14 @@ public class HomeController implements Initializable {
     void create() {
 
         MainChooser chooser = new MainChooser();
-
+        ChooserController chooseController = new ChooserController();
+        
         try {
+            
             chooser.start(new Stage());
+            chooseController.chooseCreater();
+            
+            
         } catch (Exception ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

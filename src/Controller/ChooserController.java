@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -33,9 +34,15 @@ public class ChooserController implements Initializable {
     @FXML
     private ComboBox<String> cbType;
     
+    @FXML
+    private Button btCreate;
+
+    @FXML
+    private Button btChoose;
+    
     private ArrayList<String> alTypes = new ArrayList<>();
     private ObservableList<String> obsTypes;
-    private int index;
+    private int index = 100000;
 
     /**
      * Initializes the controller class.
@@ -44,6 +51,34 @@ public class ChooserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {        // execute when starting // executa ao iniciar
 
+       
+    }
+
+    public int loadChooser(ArrayList alTypes){
+        
+        this.alTypes = alTypes;
+        
+        obsTypes = FXCollections.observableArrayList(alTypes);  // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
+
+        cbType.setItems(obsTypes);                              // Load the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
+        
+        btCreate.setVisible(false);
+        btChoose.setVisible(true);
+        
+        btChoose.setOnMouseClicked((t) -> {
+        
+            index = cbType.getSelectionModel().getSelectedIndex();
+            
+        });
+                
+        while(index == 100000){
+            System.out.println();
+        }
+        return index;
+} 
+    
+    public void chooseCreater(){
+        
         alTypes.add("Notficaçao");  // Load the Array List with the options // Carrega o ArrayList com as opçoes;
         alTypes.add("PostIt");      
         alTypes.add("Atividade");
@@ -80,8 +115,9 @@ public class ChooserController implements Initializable {
 
         }
         MainChooser.getWindow().close();      // closes the current window  // fecha a janela atual
+        
     }
-
+    
         //////Getters and Setters////////
     
     public Pane getChooserPane() {

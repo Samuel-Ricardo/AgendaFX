@@ -116,15 +116,16 @@ public class NotificationCreaterController implements Initializable {
     private static HomeController home;
 
     @FXML
-    void cancel() {
+    void cancel() { //Close the screen // Fecha a tela
 
         MainNotificationCreator.getWindow().close();
 
     }
 
     @FXML
-    void chooseFile() {
+    void chooseFile() { // choose the attachment
 
+        
         attachment = chooser.showOpenDialog(new Stage());
 
         if (attachment != null) {

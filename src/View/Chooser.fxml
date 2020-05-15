@@ -14,6 +14,7 @@
          </font>
       </Label>
       <ComboBox fx:id="cbType" layoutX="28.0" layoutY="70.0" prefHeight="33.0" prefWidth="185.0" promptText="pao" />
-      <Button layoutX="45.0" layoutY="134.0" mnemonicParsing="false" onAction="#createThis" prefHeight="25.0" prefWidth="150.0" text="Criar" />
+      <Button fx:id="btCreate" layoutX="45.0" layoutY="134.0" mnemonicParsing="false" onAction="#createThis" prefHeight="25.0" prefWidth="150.0" text="Criar" />
+      <Button fx:id="btChoose" layoutX="45.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Escolher" visible="false" />
    </children>
 </Pane>
