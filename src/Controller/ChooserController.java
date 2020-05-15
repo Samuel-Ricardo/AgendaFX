@@ -54,38 +54,39 @@ public class ChooserController implements Initializable {
        
     }
 
-    public int loadChooser(ArrayList alTypes){
+    public int loadChooser(ArrayList<String> alItems){      // loads a custom screen // carrega uma tela personalizada
         
-        this.alTypes = alTypes;
+        this.alTypes = alItems;   // Loads the ArrayList of this class with the Arraylist passed as a parameter by the method //  Carrega o ArrayList dessa classe com o Arraylist passado como parametro pelo método
         
         obsTypes = FXCollections.observableArrayList(alTypes);  // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
-        cbType.setItems(obsTypes);                              // Load the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
+        cbType.setItems(obsTypes);                            // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
         
-        btCreate.setVisible(false);
-        btChoose.setVisible(true);
+        btCreate.setVisible(false); // removes the default button from the screen // remove o botao padrao da tela
+        btChoose.setVisible(true); // put a new button // poe um novo botao
         
         btChoose.setOnMouseClicked((t) -> {
         
-            index = cbType.getSelectionModel().getSelectedIndex();
+            index = cbType.getSelectionModel().getSelectedIndex();  // get the selected item at click in the button// pega o item selecionado ao clicar no botao
             
         });
                 
         while(index == 100000){
-            System.out.println();
+            System.out.println();   // wait until you select an item // espera  até selecionar um item
         }
-        return index;
+        
+        return index; //return selected Item // retorna item selecionado
 } 
     
-    public void chooseCreater(){
+    public void chooseCreater(){    // loads Default screen // carrega a tela padrao
         
-        alTypes.add("Notficaçao");  // Load the Array List with the options // Carrega o ArrayList com as opçoes;
+        alTypes.add("Notficaçao");  // Loads the Array List with the options // Carrega o ArrayList com as opçoes;
         alTypes.add("PostIt");      
         alTypes.add("Atividade");
 
         obsTypes = FXCollections.observableArrayList(alTypes);  // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
-        cbType.setItems(obsTypes);                              // Load the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
+        cbType.setItems(obsTypes);                              // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
 
     }
 
@@ -114,7 +115,7 @@ public class ChooserController implements Initializable {
                 break;
 
         }
-        MainChooser.getWindow().close();      // closes the current window  // fecha a janela atual
+        MainChooser.getWindow().close();   // closes the current window  // fecha a janela atual
         
     }
     

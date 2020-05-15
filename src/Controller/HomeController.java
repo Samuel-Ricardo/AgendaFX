@@ -275,7 +275,6 @@ public class HomeController implements Initializable {
             chooser.start(new Stage());
             chooseController.chooseCreater();
             
-            
         } catch (Exception ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

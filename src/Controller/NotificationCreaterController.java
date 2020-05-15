@@ -7,13 +7,16 @@ package Controller;
 
 import DAO.NotificationDAO;
 import DAO.UserDAO;
+import Main.MainChooser;
 import Main.MainNotificationCreator;
 import Model.Notification;
 import Model.User;
+import Services.Downloader;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -112,7 +115,7 @@ public class NotificationCreaterController implements Initializable {
     private NotificationDAO dao = new NotificationDAO();
 
     private User logUser = UserDAO.getUser();
-    
+
     private static HomeController home;
 
     @FXML
@@ -125,15 +128,50 @@ public class NotificationCreaterController implements Initializable {
     @FXML
     void chooseFile() { // choose the attachment
 
+        MainChooser chooserScreen = new MainChooser();
+        ChooserController chooserC = new ChooserController();
         
-        attachment = chooser.showOpenDialog(new Stage());
+            ArrayList<String> alItems = new ArrayList<>();
+            
+            alItems.add("Arquivo local");   // carregando os items do ComboBox  // carregando os items do ComboBox;
+            alItems.add("Link na internet");
 
-        if (attachment != null) {
+        try {
 
-            notification.setAttachment(attachment);
-            lblAttachment.setText(attachment.getName());
-        } else {
-            JOptionPane.showMessageDialog(null, "Nenhum arquivo foi escolhido");
+            chooserScreen.start(new Stage());
+            
+        } catch (Exception ex) {
+            Logger.getLogger(NotificationCreaterController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        switch (chooserC.loadChooser(alItems)) { // executa a açao baseado na opçao escolhida
+
+            case 0:
+                
+                    attachment = chooser.showOpenDialog(new Stage());
+
+                    if (attachment != null) {
+
+                        notification.setAttachment(attachment);
+                        lblAttachment.setText(attachment.getName());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Nenhum arquivo foi escolhido");
+                    }
+
+                break;
+                
+            case 1:
+                    JOptionPane.showMessageDialog(null, "Escolha o nome e local do arquivo");
+                    attachment = chooser.showSaveDialog(new Stage());
+                
+                    String link = JOptionPane.showInputDialog(null,"Digite o Link do arquivo");
+                    
+                    Downloader downloader = new Downloader(link, attachment.getAbsolutePath());
+                    downloader.start();
+                    downloader.download();
+                    JOptionPane.showMessageDialog(null, "O arquivo está sendo baixado em 2° plano");
+                    
+                break;
         }
     }
 
@@ -183,7 +221,7 @@ public class NotificationCreaterController implements Initializable {
         notification.setTypeColor(typeColor.getStyle());
         notification.setUser(logUser);
 
-        if(dao.insert(notification)){
+        if (dao.insert(notification)) {
             JOptionPane.showMessageDialog(null, "Criado");
         }
     }
@@ -212,7 +250,7 @@ public class NotificationCreaterController implements Initializable {
 
         if (imgVissible == false) {
             img = null;
-            imgNotific.setImage(new Image("file:///"+getClass().getResource("/View/Images/image_White.png")));
+            imgNotific.setImage(new Image("file:///" + getClass().getResource("/View/Images/image_White.png")));
         }
     }
 
@@ -525,6 +563,4 @@ public class NotificationCreaterController implements Initializable {
         NotificationCreaterController.home = home;
     }
 
-    
-    
 }
