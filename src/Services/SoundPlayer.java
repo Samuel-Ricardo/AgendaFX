@@ -17,12 +17,20 @@ public class SoundPlayer extends Thread{
    
     private static MediaPlayer player;
     private Media media;
-    private String file;
-    /*    private InputStream input;*/
+    private File file;
 
     public SoundPlayer(String file) {
+        
+        this.file = new File (file);
+        this.media = new Media(this.file.toURI().toString());
+        System.out.println(media.getSource());
+        SoundPlayer.player = new MediaPlayer(media);
+        
+    }
+    public SoundPlayer(File file) {
+        
         this.file = file;
-        this.media = new Media(new File(file).toURI().toString());
+        this.media = new Media(file.toURI().toString());
         System.out.println(media.getSource());
         SoundPlayer.player = new MediaPlayer(media);
         
@@ -65,11 +73,11 @@ public class SoundPlayer extends Thread{
         this.media = media;
     }
 
-    public String getFile() {
+    public File getFile() {
         return file;
     }
 
-    public void setFile(String file) {
+    public void setFile(File file) {
         this.file = file;
     }
     
