@@ -221,7 +221,7 @@ public class NotificationCreaterController implements Initializable {
         }
 
         notification.setDescription(txtDescription.getText());
-        if (img == null) {
+        if (img != null) {
             notification.setImage(img.getAbsolutePath());
         }
         notification.setScheduledDay(scheduledDay);

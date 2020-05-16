@@ -31,6 +31,7 @@ public class ChooserController implements Initializable {
 
     @FXML
     private Pane ChooserPane;
+    
     @FXML
     private ComboBox<String> cbType;
     

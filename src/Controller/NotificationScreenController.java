@@ -52,83 +52,83 @@ public class NotificationScreenController implements Initializable {
 
     @FXML
     private Label lblWarned;
-    
+
     @FXML
     private Button btStopSound;
 
-    // private UserDAO dao = new UserDAO();
     private User user = UserDAO.getUser();
 
     private Notification notification = NotificationDAO.getNotification();
 
     @FXML
-    void Update() {
+    void Update() {     // updates this notification with new data //Atualiza esta notificaçao com os novos dados
 
     }
 
     @FXML
-    void closeScreen() {
+    void closeScreen() {    // close this screen // fecha esta tela
 
         MainNotificationScreen.getWindow().close();
-        SoundPlayer.stopSound();
+        SoundPlayer.stopSound();    // stop the sound  // para o som
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        loadScreen();
+        loadScreen();  // loads the screen  //  carrega a tela
 
     }
 
     @FXML
     void stopSound() {
-        
-        SoundPlayer.stopSound();
-        
+
+        SoundPlayer.stopSound();    // stop the sound // para o som
+
     }
-    
-    private void loadScreen() {
+
+    private void loadScreen() { // loads the screen  //  carrega a tela
 
         lblTitle.setText(notification.getTitle());
         txtaDescription.setText(notification.getDescription());
 
-        if (notification.getScheduledDay()!= null) {
+        if (notification.getScheduledDay() != null) {   // set the scheduled time if it is not null // coloca o horario marcado caso  nao esteja nulo
             lblScheduled.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
         } else {
             lblScheduled.setText("Sem Hora Marcada");
         }
-        if (notification.isWarned() == true) {
+
+        if (notification.isWarned() == true) {   // Says if you've already been notified // Diz se ja foi avisado
 
             lblWarned.setText("Foi avisado");
         } else {
             lblWarned.setText("Nao foi avisado");
         }
 
-        if (notification.getAttachment() != null) {
+        if (notification.getAttachment() != null) {  // show the attachment if you have // mostra o anexo caso tenha
             lblAttenchement.setText(notification.getAttachment().getName());
         } else {
             lblAttenchement.setText("Nenhum arquivo selecionado");
         }
 
-        if (notification.getMusic() != null) {
+        if (notification.getMusic() != null) {  // show the sound if you have // mostra o som caso tenha 
             lblSound.setText(notification.getMusic().getName());
             btStopSound.setVisible(true);
         } else {
             lblSound.setText("Silencioso");
-            
+
         }
 
-        if (notification.getImage() != null && notification.getImage() != "") {
-            imgNotification.setImage(new Image("file:///"+notification.getImage()));
+        if (notification.getImage() != null && notification.getImage() != "") { // show the image if you have // mostra a imagem caso tenha  
+            imgNotification.setImage(new Image("file:///" + notification.getImage()));
         }
 
         String fill = notification.getTypeColor();
         String color = fill.substring(fill.lastIndexOf("#"));
-        String style = "-fx-border-color: "+color;
-        
+        String style = "-fx-border-color: " + color;
+
         System.out.println(style);
-        anchorPane.setStyle(style+" -fx-border-width: 5 5 5 5;");
+        anchorPane.setStyle(style + " -fx-border-width: 5 5 5 5;");
 
     }
 
