@@ -72,7 +72,7 @@ public class RegisterController implements Initializable {
     private String image;
     
     @FXML
-    void cadastrar() {
+    void cadastrar() {      //register User  // Cadastra o usuario
         
         LocalDate d =  dpNascimento.getValue();
         
@@ -80,13 +80,13 @@ public class RegisterController implements Initializable {
        String month = ""+d.getMonthValue();
        System.out.println(month);
        String year = ""+d.getYear();
-       String date = day+"/"+month+"/"+year; 
+       String date = day+"/"+month+"/"+year;        // convert LocalDate to String // converte LocalDate para Sring
        
          Date dateOfBirth = null;
        
         try {
             
-           dateOfBirth = defaultFormat.parse(date);
+           dateOfBirth = defaultFormat.parse(date); // convert String to Date // converte String para Date
             
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Nao foi possivel gravar a data: "+ex);
@@ -98,7 +98,7 @@ public class RegisterController implements Initializable {
         User user = new User();
         
         
-        if(image == null){
+        if(image == null){ // define the default image, if not and the user's if he has // define a imagem padrao, caso nao tenha e a do usuario caso ele possua      
             user.setImage(""+getClass().getResource("/View/Images/user_white_2.png"));
         }else{
         user.setImage(image);
@@ -121,7 +121,7 @@ public class RegisterController implements Initializable {
     
     
     @FXML
-    void cancelar() {
+    void cancelar() {       // close screen // fecha a janela
         
           MainRegister.getWindow().close();
     }
@@ -129,9 +129,10 @@ public class RegisterController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       start();
+        
+       start(); 
        
-       imgPerfil.setOnMouseClicked((t) -> {
+       imgPerfil.setOnMouseClicked((t) -> {  // When click on image // ao clicar na imagem
            FileChooser chooseImage = new FileChooser();
            
            File imageF = new File("");
@@ -149,8 +150,8 @@ public class RegisterController implements Initializable {
        });
     }    
 
-    private void start() {
-        
+    private void start() {      // load ComboBox // carrega o combobox 
+                                        
         String male = "Masculino";
         String female = "Feminino";
         
