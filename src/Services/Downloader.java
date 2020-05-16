@@ -27,8 +27,8 @@ public class Downloader extends Thread {
     private InputStream input;
     private FileOutputStream output;
     private int bytes = 0;
-    private Double kiloBytes = new Double(0);
-    private Double megaBytes = new Double(0);
+    private Double kiloByte = new Double(0);
+    private Double megaByte = new Double(0);
     private boolean downloading = false;
 
     
@@ -57,34 +57,40 @@ public class Downloader extends Thread {
 
     
     public void download() {    // does the download of file // faz o download do arquivo
-
-        
         
         try {
+            
             downloading = true;
             
-            input = link.openStream();
+            input = link.openStream(); 
             output = new FileOutputStream(localFile);
             
-            while ((bytes = input.read()) != -1) {
+            while ((bytes = input.read()) != -1) {  // as long as there are bytes they will be copied to the local machine // enquanto houver bytes eles serao copiados para maquina local
 
                 output.write(bytes);
 
-                kiloBytes = (double) localFile.length() / 1024;
-                megaBytes = kiloBytes / 1024;
-
-                System.out.println("Tamanho: " + megaBytes + " MB");
+                System.out.println("Tamanho: " + sizeInMegaBytes(localFile) + " MB");
 
             }
             
             downloading = false;
-            JOptionPane.showMessageDialog(null, "Download Finalizado");
+            JOptionPane.showMessageDialog(null, "Download do arquivo: "+ localFile.getName() +" Finalizado");
                     
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public double sizeInMegaBytes(File file) {
+        megaByte = sizeInkiloBytes(file) / 1024;
+        return megaByte;
+    }
+
+    public double sizeInkiloBytes(File file) {
+        kiloByte = (double) file.length() / 1024;
+        return kiloByte;
     }
 
     public void download(URL link, File localFile) {  // does the download of file // faz o download do arquivo
@@ -99,14 +105,12 @@ public class Downloader extends Thread {
 
                 output.write(bytes);
 
-                kiloBytes = (double) localFile.length() / 1024;
-                megaBytes = kiloBytes / 1024;
-
-                System.out.println("Tamanho: " + megaBytes + " MB");
+                System.out.println("Tamanho: " + sizeInMegaBytes(localFile) + " MB");
 
             }
             
             downloading = false;
+            JOptionPane.showMessageDialog(null, "Download do arquivo: "+ localFile.getName() +" Finalizado");
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
@@ -174,19 +178,19 @@ public class Downloader extends Thread {
     }
 
     public Double getKiloBytes() {
-        return kiloBytes;
+        return kiloByte;
     }
 
     public void setKiloBytes(Double kiloBytes) {
-        this.kiloBytes = kiloBytes;
+        this.kiloByte = kiloBytes;
     }
 
     public Double getMegaBytes() {
-        return megaBytes;
+        return megaByte;
     }
 
     public void setMegaBytes(Double megaBytes) {
-        this.megaBytes = megaBytes;
+        this.megaByte = megaBytes;
     }
 
 }

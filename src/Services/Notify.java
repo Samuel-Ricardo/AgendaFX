@@ -12,6 +12,7 @@ import Main.MainHome;
 import Main.MainNotificationScreen;
 import Model.Notification;
 import Model.User;
+import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,143 +38,164 @@ public class Notify extends Thread {
     private SoundPlayer player;
 
     public Notify(HomeController controller) {
-        this.notifications = (ArrayList<Notification>) dao.selectAllFromUser(user.getId().intValue());
+        checkDataBase();
         this.controller = controller;
     }
 
     @Override
     public void run() {
 
-        int cont = 0;
-
         try {
-            sleep(2500);
+            sleep(2500);  // waits the start of aplication // espera a aplicaçao iniciar
         } catch (InterruptedException ex) {
             Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (MainHome.getWindow() != null) {
-            MainHome.getWindow().setOnCloseRequest((y) -> {
 
-                this.choice = JOptionPane.showConfirmDialog(null, "A aplicaçao Precisa rodar em 2° plano para poder notifica-lo \n Voce permite a aplicaçao rodar em segundo plano?");
-
-                if (choice == 1) {
-                    System.exit(0);
-                }
-            });
-        }
+        checkPermission();
 
         while (online == true) {
 
             if (choice == 0) {
 
-                Platform.setImplicitExit(false);
+                Platform.setImplicitExit(false); // when closing does not close the application // quando fechar nao encerra a aplicaçao
 
-                Date currentTime = new Date();
-
-                cont = 0;
-                for (Notification notification : notifications) {
-
-                    if (notifications.get(cont).getScheduledDay() != null) {
-
-                        String scheduled = formater.format(notifications.get(cont).getScheduledDay());
-                        String today = formater.format(currentTime);
-
-                        System.out.println(today);
-                        System.out.println(scheduled);
-                        if (scheduled.equals(today)) {
-
-                            try {
-
-                                Platform.runLater(() -> {
-                                    
-                                    if (MainNotificationScreen.getWindow() == null) {
-                                        
-                                        if (notification.isWarned() == false) {
-                                            
-                                            notification.setWarned(true); 
-                                            
-                                            try {
-                                                controller.showNotification(notification);
-                                            } catch (Exception ex) {
-                                                Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-
-                                            player = new SoundPlayer(notification.getMusic().getAbsolutePath());
-                                            player.start();
-                                            SoundPlayer.justPlaySound();
-
-                                            MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
-                                                SoundPlayer.stopSound();
-                                            });
-
-                                        }
-                                    }
-                                });
-
-                                Platform.runLater(() -> {
-
-                                });
-
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao: " + ex);
-                                int result = JOptionPane.showConfirmDialog(null, "Notificaçao: " + notifications.get(cont).getTitle()
-                                        + "\n  deseja marcar como avisado?");
-
-                                switch (result) {
-
-                                    case 0:
-
-                                        notifications.get(cont).setWarned(true);
-
-                                        break;
-
-                                    case 1:
-
-                                        notifications.get(cont).setWarned(false);
-
-                                        break;
-                                }
-                            }
-
-                        }
-                    }
-
-                    cont++;
-                }
+                checkNotifications();
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "A aplicaçao sera fechada completametne e vc nao será mais notificado", "Segundo Plano", JOptionPane.QUESTION_MESSAGE);
-                online = false;
-                System.exit(0);
+                closeApplication();
             }
-            
-            String now = minute.format(new Date());
-            String last = minute.format(new Date());
-            
-            
-            do {
-                try {
 
-                    sleep(900);
+            waitChangeMinute(new Date(), new Date());
 
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("p");
+
+            checkDataBase();
+
+            checkPermission();
+        }
+    }
+
+    public void checkDataBase() {
+        this.notifications = (ArrayList<Notification>) dao.selectAllFromUser(user.getId().intValue());
+    }
+
+    public void waitChangeMinute(Date nowDate, Date lastDate) {
+
+        String last = minute.format(lastDate);
+        String now = minute.format(nowDate);
+
+        do {
+            try {
+
+                sleep(900);
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            now = minute.format(new Date());
+
+        } while (now.equals(last));
+    }
+
+    public void closeApplication() throws HeadlessException {
+        // completely close the application // fecha completamente a aplicaçao
+
+        JOptionPane.showMessageDialog(null, "A aplicaçao sera fechada completametne e vc nao será mais notificado", "Segundo Plano", JOptionPane.QUESTION_MESSAGE);
+        online = false;
+        System.exit(0);
+    }
+
+    public boolean checkHorary(Notification notification) {
+
+        boolean check;
+        Date currentTime = new Date();
+
+        String scheduled = formater.format(notification.getScheduledDay());
+        String today = formater.format(currentTime);
+
+        System.out.println(today);
+        System.out.println(scheduled);
+
+        check = scheduled.equals(today);
+
+        return check;
+    }
+
+    public void checkNotifications() throws HeadlessException {
+
+        int cont = 0;
+
+        cont = 0;
+        for (Notification notification : notifications) { // scans notifications and examines whether to be notified // varre as notificaçoes e analisa se devem ser notificadas
+
+            if (notifications.get(cont).getScheduledDay() != null) {    // check if it's time to notify something // verifica se já chegou a hora de notificar algo
+
+                if (checkHorary(notification)) {
+
+                    try {
+
+                        Platform.runLater(() -> {
+
+                            if (MainNotificationScreen.getWindow() == null && notification.isWarned() == false) {
+
+                                notification.setWarned(true);
+
+                                try {
+                                    controller.showNotification(notification);
+                                } catch (Exception ex) {
+                                    Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                                player = new SoundPlayer(notification.getMusic().getAbsolutePath());
+                                player.start();
+                                SoundPlayer.justPlaySound();
+
+                                MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
+                                    SoundPlayer.stopSound();
+                                });
+                            }
+                        });
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao: " + ex);
+                        int result = JOptionPane.showConfirmDialog(null, "Notificaçao: " + notifications.get(cont).getTitle()
+                                + "\n  deseja marcar como avisado?");
+
+                        switch (result) {
+
+                            case 0:
+
+                                notifications.get(cont).setWarned(true);
+
+                                break;
+
+                            case 1:
+
+                                notifications.get(cont).setWarned(false);
+
+                                break;
+                        }
+                    }
+
                 }
+            }
 
-                now = minute.format(new Date());
-            } while (now.equals(last));
+            cont++;
+        }
+    }
 
-            this.notifications = (ArrayList<Notification>) dao.selectAllFromUser(user.getId().intValue());
+    public void checkPermission() {
 
-            MainHome.getWindow().setOnCloseRequest((t) -> {
+        if (MainHome.getWindow() != null) {
+            MainHome.getWindow().setOnCloseRequest((y) -> {  // send a message when close application // envia menssagem ao fechar a aplicaçao
 
                 this.choice = JOptionPane.showConfirmDialog(null, "A aplicaçao Precisa rodar em 2° plano para poder notifica-lo \n Voce permite a aplicaçao rodar em segundo plano?");
 
                 if (choice == 1) {
                     System.exit(0);
                 }
-
             });
 
         }
