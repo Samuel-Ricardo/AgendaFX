@@ -63,9 +63,9 @@ public class UpdateController implements Initializable {
     private String userImage;
 
     @FXML
-    public void atualizar() {
+    public void atualizar() {       // Update user data // atualiza os dados do usuario
 
-        User updatedUser = new User();
+        User updatedUser = new User();  
 
         Date nasc = Date.from(dpNascimento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
@@ -83,7 +83,7 @@ public class UpdateController implements Initializable {
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
             try {
                 Thread.sleep(500);
-                loadWindow();
+                loadScreen();
             } catch (InterruptedException ex) {
                 Logger.getLogger(UpdateController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -94,7 +94,7 @@ public class UpdateController implements Initializable {
     }
 
     @FXML
-    public void cancelar() {
+    public void cancelar() {    // close screen // fecha a tela
 
         MainUpdate.getWindow().close();
 
@@ -103,17 +103,17 @@ public class UpdateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        loadWindow();
+        loadScreen();   // Load Screen // carrega a tela
 
         imgPerfil.setOnMouseClicked((t) -> {
 
             FileChooser chooseImage = new FileChooser();
 
-            File imageF = new File("");
+            File imageF = new File("");  
 
-            imageF = chooseImage.showOpenDialog(new Stage());
+            imageF = chooseImage.showOpenDialog(new Stage());   // open Chooser Screen // Abre a tela de escolha
 
-            if (imageF.exists()) {
+            if (imageF.exists()) {  // whether the existing or selected image shows an image // se a imagen gexistir ou for selecionado mostra a imagem
 
                 imgPerfil.setImage(new Image("file:///" + imageF.getAbsolutePath()));
 
@@ -124,7 +124,7 @@ public class UpdateController implements Initializable {
 
     }
 
-    private void loadWindow() {
+    private void loadScreen() {     // Load Screen // carrega a tela
 
         txtNome.setText(user.getNome());
         txtEmail.setText(user.getEmail());

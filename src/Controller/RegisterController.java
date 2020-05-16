@@ -133,9 +133,10 @@ public class RegisterController implements Initializable {
        start(); 
        
        imgPerfil.setOnMouseClicked((t) -> {  // When click on image // ao clicar na imagem
+           
            FileChooser chooseImage = new FileChooser();
            
-           File imageF = new File("");
+           File imageF = new File("");      // abre a janela pra escolher a foto
            
            imageF = chooseImage.showOpenDialog(new Stage());
            
