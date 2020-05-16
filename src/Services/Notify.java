@@ -37,7 +37,7 @@ public class Notify extends Thread {
     private SoundPlayer player;
 
     public Notify(HomeController controller) {
-        this.notifications = (ArrayList<Notification>) dao.selectAll(user.getId().intValue());
+        this.notifications = (ArrayList<Notification>) dao.selectAllFromUser(user.getId().intValue());
         this.controller = controller;
     }
 
@@ -164,7 +164,7 @@ public class Notify extends Thread {
                 now = minute.format(new Date());
             } while (now.equals(last));
 
-            this.notifications = (ArrayList<Notification>) dao.selectAll(user.getId().intValue());
+            this.notifications = (ArrayList<Notification>) dao.selectAllFromUser(user.getId().intValue());
 
             MainHome.getWindow().setOnCloseRequest((t) -> {
 

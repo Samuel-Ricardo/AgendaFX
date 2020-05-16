@@ -318,7 +318,7 @@ public class NotificationDAO {
         return notifications;
     }
     
-    public List<Notification> selectAll(int id) {
+    public List<Notification> selectAllFromUser(int id) {
 
         connect();
         PreparedStatement statement = null;

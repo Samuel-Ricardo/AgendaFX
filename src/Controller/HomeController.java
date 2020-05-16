@@ -265,7 +265,7 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    void create() {
+    void create() { // opens a window to choose what to create // abre janela para escolher o que criar
 
         MainChooser chooser = new MainChooser();
         ChooserController chooseController = new ChooserController();
@@ -283,12 +283,12 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    void delet() {
+    void delet() { // delete the chosen item // deleta o item escolhido 
 
     }
 
     @FXML
-    void open() {
+    void open() { // open the chosen item // abre o item escolhido 
 
     }
 
@@ -306,18 +306,18 @@ public class HomeController implements Initializable {
 
         });
 
-        imgPerfilZoom.setOnMouseClicked((t) -> {
+        imgPerfilZoom.setOnMouseClicked((t) -> {        // zoom
 
             imgPerfilZoom.setVisible(false);
 
             
         });
         
-         notify.start();
+         notify.start();    // inicia o serviço de notificaçao
          
-        SecondPlan secondPlan = new SecondPlan();
+        SecondPlan secondPlan = new SecondPlan();   
         
-        secondPlan.start();
+        secondPlan.start(); // starts the program in the background // inicia  o programa em 2° plano
     }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
@@ -344,21 +344,19 @@ public class HomeController implements Initializable {
         }
     }
 
-    private void notificationLoad() {
-
+    private void notificationLoad() { // Load notifiacation // carrega as notificaçoes
         
+        notifications = (ArrayList<Notification>) notDAO.selectAllFromUser(logUser.getId().intValue()); 
         
-        
-        notifications = (ArrayList<Notification>) notDAO.selectAll(logUser.getId().intValue());
         ArrayList<Pane> alPanes = new ArrayList<>();
 
         int cont = 0;
 
-        for (Notification notification : notifications) {
+        for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
 
             RowNotification row = new RowNotification(notifications.get(cont));
 
-            row.setOnMouseClicked((t) -> {
+            row.setOnMouseClicked((t) -> {  // opens the notification when you click // abre a notificaçao ao clicar
         
                 try {
                     showNotification(row.getNotification());
@@ -378,7 +376,7 @@ public class HomeController implements Initializable {
 
     }
 
-    public void showNotification(Notification notification) throws Exception {
+    public void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao
             
                NotificationDAO.setNotification(notification);
         
