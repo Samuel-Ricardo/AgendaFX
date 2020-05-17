@@ -23,6 +23,13 @@ and open the template in the editor.
     -fx-background-color: linear-gradient(#8A2BE2,#4B0082); 
 }
 
+.circle{
+    
+    -fx-fill: black;
+    -fx-stroke: transparent;
+    
+}
+
 .rectangleR{
     
     -fx-fill: linear-gradient(#8A2BE2,#4B0082);
@@ -170,7 +177,7 @@ and open the template in the editor.
 
 .image-view{
     
-    -fx-background-radius: 1000px;
+    -fx-background-radius: 1000;
     -fx-alignment: CENTER;
     -fx-padding: 0 0 30 20;
 }
