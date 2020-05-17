@@ -110,10 +110,11 @@ and open the template in the editor.
 .text-field-empyt{
     
     -fx-font-family: "arial";
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-text-fill: white;
     -fx-background-radius: 100px;
     -fx-background-color: transparent;
+    -fx-font-weight: bold;
     -fx-border-width: 0 0 2 2;
     -fx-border-color: #8A2BE2;
     

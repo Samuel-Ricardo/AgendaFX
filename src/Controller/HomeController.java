@@ -19,7 +19,9 @@ import Model.User;
 import Services.Notify;
 import Services.SecondPlan;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -149,6 +151,9 @@ public class HomeController implements Initializable {
     private static int index;
     
     private Notify notify = new Notify(this);
+    
+    private final SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyy");
+            
 
     @FXML
     void close() {
@@ -273,13 +278,18 @@ public class HomeController implements Initializable {
         try {
             
             chooser.start(new Stage());
+             try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
             chooseController.chooseCreater();
             
         } catch (Exception ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        notificationLoad();
+        loadNotificationsOfToday();
     }
 
     @FXML
@@ -340,11 +350,11 @@ public class HomeController implements Initializable {
                 imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
             }
 
-            notificationLoad();
+            loadNotificationsOfToday();
         }
     }
 
-    private void notificationLoad() { // Load notifiacation // carrega as notificaçoes
+    private void loadNotificationsOfToday() { // Load notifiacation // carrega as notificaçoes
         
         notifications = (ArrayList<Notification>) notDAO.selectAllFromUser(logUser.getId().intValue()); 
         
@@ -366,8 +376,13 @@ public class HomeController implements Initializable {
             
             });
             
+            String today = day.format(new Date()); 
+            String notificationDay = day.format(row.getNotification().getSQLScheduledDay());
+            
+            
+            if(today.equals(notificationDay)){
             alPanes.add(row);
-
+            }
             cont++;
         }
 

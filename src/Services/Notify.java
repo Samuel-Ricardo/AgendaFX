@@ -37,7 +37,7 @@ public class Notify extends Thread {
     private int choice = 0;
     private SoundPlayer player;
 
-    public Notify(HomeController controller) {
+    public Notify( HomeController controller) {
         checkDataBase();
         this.controller = controller;
     }

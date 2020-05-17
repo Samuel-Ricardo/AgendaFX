@@ -51,7 +51,14 @@ public class ChooserController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {        // execute when starting // executa ao iniciar
+    
+        alTypes.add("Notficaçao");  // Loads the Array List with the options // Carrega o ArrayList com as opçoes;
+        alTypes.add("PostIt");      
+        alTypes.add("Atividade");
 
+        obsTypes = FXCollections.observableArrayList(alTypes);  // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
+
+        cbType.setItems(obsTypes);    
        
     }
 
@@ -87,8 +94,8 @@ public class ChooserController implements Initializable {
 
         obsTypes = FXCollections.observableArrayList(alTypes);  // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
-        cbType.setItems(obsTypes);                              // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
-
+        cbType.setItems(obsTypes);                            // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
+ 
     }
 
     @FXML

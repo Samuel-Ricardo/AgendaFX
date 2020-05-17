@@ -12,6 +12,7 @@ import Main.MainNotificationCreator;
 import Model.Notification;
 import Model.User;
 import Services.Downloader;
+import Controller.HomeController;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
