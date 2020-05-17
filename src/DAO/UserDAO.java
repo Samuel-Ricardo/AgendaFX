@@ -224,7 +224,7 @@ public class UserDAO {
         return users;
     }
 
-    public List<User> search(String search) {
+    public List<User> searchByName(String search) {
 
         connect();
         PreparedStatement statement = null;

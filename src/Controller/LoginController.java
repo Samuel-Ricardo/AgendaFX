@@ -8,6 +8,7 @@ package Controller;
 import DAO.UserDAO;
 import Main.MainHome;
 import Main.MainLogin;
+import Main.MainRecoverPassword;
 import Main.MainRegister;
 import Model.User;
 import java.net.URL;
@@ -110,7 +111,25 @@ public class LoginController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        txtEsqueceu.setOnMouseClicked((t) -> {
+        
+            if(MainRecoverPassword.getWindow() != null){
+                
+                MainRecoverPassword.getWindow().close();
+                
+            }
+            
+            MainRecoverPassword recover = new MainRecoverPassword();
+            
+            try {
+                recover.start(new Stage());
+            } catch (Exception ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
+        
     }    
     
 }
