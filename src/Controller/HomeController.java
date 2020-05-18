@@ -137,13 +137,13 @@ public class HomeController implements Initializable {
     private ImageView imgPerfilZoom;
 
     @FXML
-    private ListView<Pane> lvNotifications;
+    private ListView<Pane> lvTodayNotifications;
 
     private final UserDAO userDao = new UserDAO();
 
     private final NotificationDAO notDAO = new NotificationDAO();
 
-    private User logUser;
+    private User logUser = userDao.search(UserDAO.getUser());;
 
     private ArrayList<Notification> notifications;
 
@@ -155,7 +155,8 @@ public class HomeController implements Initializable {
     
     private final SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyy");
     
-    private final Filler filler = new Filler(this);
+    private Filler filler = new Filler(this);
+        
             
 
     @FXML
@@ -291,12 +292,6 @@ public class HomeController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
-        
-            filler.fillOutProfileNotification();
-            
-        });
         
     }
 
@@ -313,9 +308,11 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        notify.start();    // start notification service // inicia o serviço de notificaçao
+
         loadPerfil();
 
-       
+        
         
         imgPerfil.setOnMouseClicked((t) -> {
 
@@ -331,7 +328,7 @@ public class HomeController implements Initializable {
             
         });
         
-         notify.start();    // inicia o serviço de notificaçao
+         
          
         SecondPlan secondPlan = new SecondPlan();   
         
@@ -339,8 +336,6 @@ public class HomeController implements Initializable {
     }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
-
-        logUser = userDao.search(UserDAO.getUser());
 
         if (logUser != null) {
 
@@ -618,12 +613,12 @@ public class HomeController implements Initializable {
         HomeController.index = index;
     }
 
-    public ListView<Pane> getLvNotifications() {
-        return lvNotifications;
+    public ListView<Pane> getLvTodayNotifications() {
+        return lvTodayNotifications;
     }
 
-    public void setLvNotifications(ListView<Pane> lvNotifications) {
-        this.lvNotifications = lvNotifications;
+    public void setLvTodayNotifications(ListView<Pane> lvNotifications) {
+        this.lvTodayNotifications = lvNotifications;
     }
 
     public Notify getNotify() {

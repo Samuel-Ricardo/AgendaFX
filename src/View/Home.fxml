@@ -251,7 +251,7 @@
                                              </fill>
                                           </Rectangle>
                                           <Label layoutX="194.0" layoutY="9.0" text="selecione uma para abrí-la" />
-                                          <ListView fx:id="lvNotifications" layoutX="-4.0" layoutY="41.0" prefHeight="533.0" prefWidth="782.0" styleClass="simple-background" />
+                                          <ListView fx:id="lvTodayNotifications" layoutX="-4.0" layoutY="41.0" prefHeight="533.0" prefWidth="782.0" styleClass="simple-background" />
                                        </children>
                                     </AnchorPane>
                                  </content>

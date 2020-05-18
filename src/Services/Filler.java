@@ -26,9 +26,8 @@ public class Filler {
     private final HomeController controller;
     private Notification notification;
     private RowNotification row;
-    private ArrayList<Notification> notifications = new ArrayList<Notification>();
-    private NotificationDAO dao;
-    private ArrayList<Pane> alPanes;
+    private ArrayList<Notification> notifications;
+    private final NotificationDAO dao;
     private final SimpleDateFormat day;
     private final Notify notify;
 
@@ -36,8 +35,6 @@ public class Filler {
 
         this.controller = controller;
         this.dao = new NotificationDAO();
-        this.notifications = (ArrayList<Notification>) dao.selectAllFromUser(controller.getLogUser().getId().intValue());
-        this.alPanes = new ArrayList<>();
         this.day = new SimpleDateFormat("dd/MM/yyy");
         this.notify = controller.getNotify();
 
@@ -46,9 +43,12 @@ public class Filler {
     public void fillOutProfileNotification() { // Load notifiacation // carrega as notificaçoes
 
         int cont = 0;
-
+        ArrayList<Pane> alPanes = new ArrayList<>();
+        
+        checkNotifications();
+        
         for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
-
+            
             RowNotification row = new RowNotification(notifications.get(cont));
 
             row.setOnMouseClicked((t) -> {  // opens the notification when you click // abre a notificaçao ao clicar
@@ -70,9 +70,17 @@ public class Filler {
             cont++;
         }
 
-        ObservableList<Pane> olPanes = FXCollections.observableArrayList(alPanes);
-        controller.getLvNotifications().setItems(olPanes);
+         ObservableList<Pane> olPanes = FXCollections.observableArrayList(alPanes);
+        
+         System.out.println(olPanes.isEmpty());
+         
+        controller.getLvTodayNotifications().getItems().clear();
+        controller.getLvTodayNotifications().setItems(olPanes);
 
+    }
+
+    public void checkNotifications() {
+        notifications = (ArrayList<Notification>) dao.selectAllFromUser(controller.getLogUser().getId().intValue());
     }
 
 }

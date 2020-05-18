@@ -88,6 +88,7 @@ public class LoginController implements Initializable {
         if(dao.exist(user)){                 // if the user exists he closes the window and opens the main screen  //  se o usuario existir ele fecha a janela e abre a tela principal
           
             UserDAO.setUser(user);  // set the user who was logged in to know which user is logged in  //  setar o usuario que foi logado para saber qual usuário está logado
+            UserDAO.setUser(dao.search(user));
             
             if(MainHome.getWindow() != null){       // close the Home screen if it is Open // feche a tela inicial se estiver aberta
                 MainHome.getWindow().close();
@@ -95,8 +96,7 @@ public class LoginController implements Initializable {
             
             MainHome home = new MainHome();  
             MainLogin.getWindow().close();   // Close the login window //  Fecha a janela de login
-            
-            UserDAO.setUser(dao.search(user));
+
             try {
                 home.start(new Stage());     // Open the Home window //  Abre a janela de Home
             } catch (Exception ex) {
