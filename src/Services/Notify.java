@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
@@ -127,7 +128,6 @@ public class Notify extends Thread {
 
         int cont = 0;
 
-        cont = 0;
         for (Notification notification : notifications) { // scans notifications and examines whether to be notified // varre as notificaçoes e analisa se devem ser notificadas
 
             if (notifications.get(cont).getScheduledDay() != null) {    // check if it's time to notify something // verifica se já chegou a hora de notificar algo
@@ -138,12 +138,12 @@ public class Notify extends Thread {
 
                         Platform.runLater(() -> {
 
-                            if (MainNotificationScreen.getWindow() == null && notification.isWarned() == false) {
+                            if (MainNotificationScreen.getWindow() == null || notification.isWarned() == false) {
 
                                 notification.setWarned(true);
 
                                 try {
-                                    controller.showNotification(notification);
+                                    showNotification(notification);
                                 } catch (Exception ex) {
                                     Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -199,5 +199,17 @@ public class Notify extends Thread {
             });
 
         }
+    }
+    
+    public void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao
+            
+           NotificationDAO.setNotification(notification);
+        
+        if( MainNotificationScreen.getWindow() != null){
+            MainNotificationScreen.getWindow().close();
+        }
+        MainNotificationScreen notificationScreen = new MainNotificationScreen();
+        
+        notificationScreen.start(new Stage());
     }
 }

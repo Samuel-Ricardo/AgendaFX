@@ -16,6 +16,7 @@ import Model.Notification;
 import Model.PostIt;
 import Model.RowNotification;
 import Model.User;
+import Services.Filler;
 import Services.Notify;
 import Services.SecondPlan;
 import java.net.URL;
@@ -153,6 +154,8 @@ public class HomeController implements Initializable {
     private Notify notify = new Notify(this);
     
     private final SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyy");
+    
+    private final Filler filler = new Filler(this);
             
 
     @FXML
@@ -289,7 +292,12 @@ public class HomeController implements Initializable {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        loadNotificationsOfToday();
+        MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
+        
+            filler.fillOutProfileNotification();
+            
+        });
+        
     }
 
     @FXML
@@ -350,62 +358,9 @@ public class HomeController implements Initializable {
                 imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
             }
 
-            loadNotificationsOfToday();
+            filler.fillOutProfileNotification();
         }
     }
-
-    private void loadNotificationsOfToday() { // Load notifiacation // carrega as notificaçoes
-        
-        notifications = (ArrayList<Notification>) notDAO.selectAllFromUser(logUser.getId().intValue()); 
-        
-        ArrayList<Pane> alPanes = new ArrayList<>();
-
-        int cont = 0;
-
-        for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
-
-            RowNotification row = new RowNotification(notifications.get(cont));
-
-            row.setOnMouseClicked((t) -> {  // opens the notification when you click // abre a notificaçao ao clicar
-        
-                try {
-                    showNotification(row.getNotification());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao "+ex);
-                }
-            
-            });
-            
-            String today = day.format(new Date()); 
-            String notificationDay = day.format(row.getNotification().getSQLScheduledDay());
-            
-            
-            if(today.equals(notificationDay)){
-            alPanes.add(row);
-            }
-            cont++;
-        }
-
-        ObservableList<Pane> olPanes = FXCollections.observableArrayList(alPanes);
-        lvNotifications.setItems(olPanes);
-
-    }
-
-    public void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao
-            
-               NotificationDAO.setNotification(notification);
-        
-        if( MainNotificationScreen.getWindow() != null){
-            MainNotificationScreen.getWindow().close();
-        }
-        MainNotificationScreen notificationScreen = new MainNotificationScreen();
-        
-        notificationScreen.start(new Stage());
-    }
-
-
-     
-     
     
     public VBox getVbox() {
         return vbox;
@@ -663,4 +618,22 @@ public class HomeController implements Initializable {
         HomeController.index = index;
     }
 
+    public ListView<Pane> getLvNotifications() {
+        return lvNotifications;
+    }
+
+    public void setLvNotifications(ListView<Pane> lvNotifications) {
+        this.lvNotifications = lvNotifications;
+    }
+
+    public Notify getNotify() {
+        return notify;
+    }
+
+    public void setNotify(Notify notify) {
+        this.notify = notify;
+    }
+
+    
+    
 }
