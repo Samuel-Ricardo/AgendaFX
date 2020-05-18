@@ -123,7 +123,7 @@
             <PieChart layoutX="24.0" layoutY="32.0" prefHeight="150.0" prefWidth="279.0" title="Tipos de eventos mais usados" />
          </children>
       </Pane>
-      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
+      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;" visible="false">
          <children>
             <SplitPane dividerPositions="0.800771208226221" layoutX="1.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
               <items>
@@ -290,7 +290,7 @@
             </SplitPane>
          </children>
       </Pane>
-      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0" visible="false">
+      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0">
          <children>
             <GridPane layoutX="14.0" layoutY="62.0" prefHeight="318.0" prefWidth="235.0">
               <columnConstraints>
@@ -375,13 +375,13 @@
                   <Reflection />
                </effect>
             </ImageView>
-            <TabPane fx:id="pTabNotficacoes" layoutX="253.0" prefHeight="354.0" prefWidth="536.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="pTabNotficacoes" layoutX="253.0" prefHeight="354.0" prefWidth="545.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Planejamentos">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ListView prefHeight="318.0" prefWidth="496.0" />
+                              <ListView fx:id="lvAllEvents" prefHeight="318.0" prefWidth="545.0" />
                            </children>
                         </AnchorPane>
                   </content>

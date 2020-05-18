@@ -139,6 +139,9 @@ public class HomeController implements Initializable {
     @FXML
     private ListView<Pane> lvTodayNotifications;
 
+    @FXML
+    private ListView<Pane> lvAllEvents;
+    
     private final UserDAO userDao = new UserDAO();
 
     private final NotificationDAO notDAO = new NotificationDAO();
@@ -185,7 +188,9 @@ public class HomeController implements Initializable {
     void openEvents() {
 
         paneEvento.setVisible(true);
-
+        
+        loadEvents();
+        
         if (paneCalendario.isVisible() == true) {
             paneCalendario.setVisible(false);
         }
@@ -356,6 +361,13 @@ public class HomeController implements Initializable {
             filler.fillOutProfileNotification();
         }
     }
+    
+        private void loadEvents() {
+      
+        filler.fillOutAllEventNotifications();
+        
+    }
+
     
     public VBox getVbox() {
         return vbox;
@@ -627,8 +639,23 @@ public class HomeController implements Initializable {
 
     public void setNotify(Notify notify) {
         this.notify = notify;
+    }    
+
+    public ListView<Pane> getLvAllEvents() {
+        return lvAllEvents;
     }
 
+    public void setLvAllEvents(ListView<Pane> lvAllEvents) {
+        this.lvAllEvents = lvAllEvents;
+    }
+
+    public Filler getFiller() {
+        return filler;
+    }
+
+    public void setFiller(Filler filler) {
+        this.filler = filler;
+    }
     
     
 }

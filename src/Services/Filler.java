@@ -12,6 +12,8 @@ import Model.RowNotification;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
@@ -81,6 +83,36 @@ public class Filler {
 
     public void checkNotifications() {
         notifications = (ArrayList<Notification>) dao.selectAllFromUser(controller.getLogUser().getId().intValue());
+    }
+
+    public void fillOutAllEventNotifications() {
+    
+        int cont = 0;
+        ArrayList<Pane> alRow = new ArrayList<>();
+        checkNotifications();
+        
+        for(Notification notification: notifications){
+            
+            RowNotification row = new RowNotification(notification);
+            
+            row.setOnMouseClicked((t) -> {
+            
+                try {
+                    Notify.showNotification(row.getNotification());
+                } catch (Exception ex) {
+                    Logger.getLogger(Filler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            });
+            
+            alRow.add(row);
+            
+            cont++;
+        }
+        
+        ObservableList<Pane> oblRow = FXCollections.observableArrayList(alRow);
+        
+        controller.getLvAllEvents().setItems(oblRow);
     }
 
 }

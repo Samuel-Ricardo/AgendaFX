@@ -201,7 +201,7 @@ public class Notify extends Thread {
         }
     }
     
-    public void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao
+    public static void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao
             
            NotificationDAO.setNotification(notification);
         
