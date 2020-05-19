@@ -8,12 +8,15 @@ package Controller;
 import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainNotificationScreen;
+import Main.MainNotificationUpdater;
 import Model.Notification;
 import Model.User;
 import Services.SoundPlayer;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -63,6 +67,19 @@ public class NotificationScreenController implements Initializable {
     @FXML
     void Update() {     // updates this notification with new data //Atualiza esta notificaçao com os novos dados
 
+        if(MainNotificationUpdater.getWindow() != null){
+            MainNotificationUpdater.getWindow().close();
+        }
+        
+        MainNotificationUpdater updater = new MainNotificationUpdater();
+        
+        
+        try {
+            updater.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(NotificationScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @FXML

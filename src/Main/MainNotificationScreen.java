@@ -33,6 +33,8 @@ public class MainNotificationScreen extends Application{
         stage.setTitle("Notificaçao");
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.setX(700);
+        stage.setY(500);
         stage.show();
         
         setWindow(stage);

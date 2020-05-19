@@ -155,6 +155,8 @@ public class Notify extends Thread {
                                 MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
                                     SoundPlayer.stopSound();
                                 });
+                                
+                                dao.update(notification);
                             }
                         });
 
@@ -202,7 +204,8 @@ public class Notify extends Thread {
     }
     
     public static void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao
-            
+            System.out.println(notification.getId()+"   id notfy");    
+        
            NotificationDAO.setNotification(notification);
         
         if( MainNotificationScreen.getWindow() != null){

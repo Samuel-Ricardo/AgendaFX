@@ -6,8 +6,14 @@
 package Model;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -104,6 +110,26 @@ public class PostIt {
         SimpleDateFormat date = new SimpleDateFormat("HH:mm");
 
         return date.format(scheduledDay);
+    }
+    
+    public LocalDate getScheduledLocalDate(){
+        
+       // scheduledDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+       
+        return getSQLScheduledDay().toLocalDate();
+    }
+    public LocalTime getScheduledLocalTime(){
+        
+        SimpleDateFormat horary = new SimpleDateFormat("HH:mm");
+        
+      Date scheduledHour = null;
+        try {
+            scheduledHour = horary.parse(getScheduledHour());
+        } catch (ParseException ex) {
+            Logger.getLogger(PostIt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return scheduledHour.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
     }
 
     public String getTypeColor() {

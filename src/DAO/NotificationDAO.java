@@ -153,7 +153,7 @@ public class NotificationDAO {
             java.util.Date scheduled = null;
 
             try {
-                scheduled = day.parse(timeString);
+                scheduled = horary.parse(timeString);
             } catch (ParseException ex) {
                 Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -165,13 +165,16 @@ public class NotificationDAO {
             statement.setString(3, notification.getImage());
             statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
-            statement.setString(5, notification.getType());
-            statement.setString(6, notification.getAttachment().getAbsolutePath());
-            statement.setString(7, notification.getMusic().getAbsolutePath());
+            statement.setString(6, notification.getType());
+            statement.setString(7, notification.getAttachment().getAbsolutePath());
+            statement.setString(8, notification.getMusic().getAbsolutePath());
             statement.setString(9, notification.getTypeColor());
             statement.setInt(10, notification.getUser().getId().intValue());
             statement.setDate(11, sqlDate);
+            statement.setInt(12, notification.getId());
 
+            System.out.println(notification.getId()+"   id dao");
+            
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
             return true;    //returns true if successful // retorna verdadeiro se for bem sucedido
@@ -276,7 +279,7 @@ public class NotificationDAO {
 
                 }
 
-                notification.setId(result.getInt("id"));
+                notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
                 notification.setDescription(result.getString("descricao"));
                 notification.setAttachment(new File(result.getString("anexo")));
@@ -372,7 +375,7 @@ public class NotificationDAO {
 
                 }
 
-                notification.setId(result.getInt("id"));
+                notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
                 notification.setDescription(result.getString("descricao"));
                 notification.setAttachment(new File(result.getString("anexo")));
@@ -467,7 +470,7 @@ public class NotificationDAO {
 
                 }
 
-                notification.setId(result.getInt("id"));
+                notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
                 notification.setDescription(result.getString("descricao"));
                 notification.setAttachment(new File(result.getString("anexo")));
@@ -558,7 +561,7 @@ public class NotificationDAO {
 
                 }
 
-                notification.setId(result.getInt("id"));
+                notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
                 notification.setDescription(result.getString("descricao"));
                 notification.setAttachment(new File(result.getString("anexo")));
