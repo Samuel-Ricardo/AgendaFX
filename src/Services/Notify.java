@@ -6,9 +6,11 @@
 package Services;
 
 import Controller.HomeController;
+import Controller.NotificationListController;
 import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainHome;
+import Main.MainNotificationList;
 import Main.MainNotificationScreen;
 import Model.Notification;
 import Model.User;
@@ -37,8 +39,9 @@ public class Notify extends Thread {
     private HomeController controller;
     private int choice = 0;
     private SoundPlayer player;
+    private NotificationListController list = new NotificationListController();
 
-    public Notify( HomeController controller) {
+    public Notify(HomeController controller) {
         checkDataBase();
         this.controller = controller;
     }
@@ -68,8 +71,6 @@ public class Notify extends Thread {
             }
 
             waitChangeMinute(new Date(), new Date());
-
-            System.out.println("p");
 
             checkDataBase();
 
@@ -128,6 +129,8 @@ public class Notify extends Thread {
 
         int cont = 0;
 
+        ArrayList<Notification> notificationWarned = new ArrayList<>();
+
         for (Notification notification : notifications) { // scans notifications and examines whether to be notified // varre as notificaçoes e analisa se devem ser notificadas
 
             if (notifications.get(cont).getScheduledDay() != null) {    // check if it's time to notify something // verifica se já chegou a hora de notificar algo
@@ -142,20 +145,10 @@ public class Notify extends Thread {
 
                                 notification.setWarned(true);
 
-                                try {
-                                    showNotification(notification);
-                                } catch (Exception ex) {
-                                    Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                notificationWarned.add(notification);
 
-                                player = new SoundPlayer(notification.getMusic().getAbsolutePath());
-                                player.start();
-                                SoundPlayer.justPlaySound();
+                                playNotificationSound(notification);
 
-                                MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
-                                    SoundPlayer.stopSound();
-                                });
-                                
                                 dao.update(notification);
                             }
                         });
@@ -186,6 +179,26 @@ public class Notify extends Thread {
 
             cont++;
         }
+
+        listNotification(notifications);
+
+    }
+
+    public void playNotificationSound(Notification notification) {
+
+        if (player.isPlaying()) {
+            System.out.println("já está tocando");
+        } else {
+
+            player = new SoundPlayer(notification.getMusic().getAbsolutePath());
+            player.start();
+            SoundPlayer.justPlaySound();
+
+            MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
+                SoundPlayer.stopSound();
+            });
+
+        }
     }
 
     public void checkPermission() {
@@ -202,17 +215,34 @@ public class Notify extends Thread {
 
         }
     }
-    
-    public static void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao
-            System.out.println(notification.getId()+"   id notfy");    
-        
-           NotificationDAO.setNotification(notification);
-        
-        if( MainNotificationScreen.getWindow() != null){
+
+    public static void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao 
+
+        NotificationDAO.setNotification(notification);
+
+        if (MainNotificationScreen.getWindow() != null) {
             MainNotificationScreen.getWindow().close();
         }
         MainNotificationScreen notificationScreen = new MainNotificationScreen();
-        
+
         notificationScreen.start(new Stage());
     }
+
+    private void listNotification(ArrayList<Notification> notifications) {
+
+        if (MainNotificationList.getWindow() != null) {
+            MainNotificationList.getWindow().close();
+        }
+        MainNotificationList notificationlist = new MainNotificationList();
+
+        try {
+            notificationlist.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        list.loadNotications(notifications);
+
+    }
+
 }

@@ -5,7 +5,9 @@
  */
 package Controller;
 
+import Main.MainNotificationScreen;
 import Model.Notification;
+import Services.Notify;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -40,7 +43,7 @@ public class NotificationListController implements Initializable {
 
     }
 
-    private void loadNotications(ArrayList<Notification> notifications) {
+    public void loadNotications(ArrayList<Notification> notifications) {
 
         for (Notification notification : notifications) {
 
@@ -53,6 +56,16 @@ public class NotificationListController implements Initializable {
                 notificationController.load(notification);
                 
                 ArrayList<Pane> alNotifications = new ArrayList<>();
+                
+                pane.setOnMouseClicked((t) -> {
+                    
+                    try {
+                        Notify.showNotification(notification);
+                    } catch (Exception ex) {
+                        Logger.getLogger(NotificationListController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                });
                 
                 alNotifications.add(pane);
                 
