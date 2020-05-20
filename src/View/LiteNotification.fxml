@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="pane" prefHeight="118.0" prefWidth="411.0" style="-fx-background-color: black; -fx-border-width: 2 2 2 2; -fx-border-color: blue;" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LiteNotificationController">
+   <children>
+      <ImageView fx:id="image" fitHeight="88.0" fitWidth="88.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lblTitle" layoutX="113.0" layoutY="14.0" prefHeight="21.0" prefWidth="287.0" textFill="WHITE" />
+      <JFXTextArea fx:id="txtDescription" focusColor="#405aa800" layoutX="113.0" layoutY="42.0" prefHeight="65.0" prefWidth="287.0" styleClass="text-area-empyt" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</Pane>
