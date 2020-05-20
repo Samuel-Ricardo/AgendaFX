@@ -231,7 +231,8 @@ public class NotificationUpdaterController implements Initializable {
         notification.setType(cbType.getSelectionModel().getSelectedItem());
         notification.setTypeColor(typeColor.getStyle());
         notification.setUser(logUser);
-        
+        notification.setWarned(false);
+                
         System.out.println(notification.getScheduledDay().getTime());
 
             System.out.println(notification.getId()+"   id controle");

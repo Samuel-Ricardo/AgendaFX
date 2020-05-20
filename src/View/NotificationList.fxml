@@ -2,10 +2,14 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-
-<ListView fx:id="listNotification" prefHeight="152.0" prefWidth="434.0" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <padding>
-      <Insets right="8.0" top="8.0" />
-   </padding>
-</ListView>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="152.0" prefWidth="434.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NotificationListController">
+   <children>
+      <ListView fx:id="listNotification" prefHeight="152.0" prefWidth="434.0" stylesheets="@Styles/Dark.css">
+         <padding>
+            <Insets right="8.0" top="8.0" />
+         </padding>
+      </ListView>
+   </children>
+</AnchorPane>

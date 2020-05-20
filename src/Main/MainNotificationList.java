@@ -5,6 +5,10 @@
  */
 package Main;
 
+import Controller.NotificationListController;
+import DAO.NotificationDAO;
+import Model.Notification;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -41,6 +45,34 @@ public class MainNotificationList extends Application {
         stage.show();
 
         setWindow(stage);
+    }
+    
+    public static void main(String[] args) {
+        
+        Platform.runLater(() -> {
+            
+        MainNotificationList list = new MainNotificationList();
+        
+            try {
+                list.start(new Stage());
+            } catch (Exception ex) {
+                Logger.getLogger(MainNotificationList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            NotificationListController lists = new NotificationListController();
+        
+            NotificationDAO dao = new NotificationDAO();
+            
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MainNotificationList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            lists.loadNotications((ArrayList<Notification>) dao.selectAll());
+            
+        });
+        
     }
 
     public static Stage getWindow() {

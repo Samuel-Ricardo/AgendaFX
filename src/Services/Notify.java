@@ -49,6 +49,8 @@ public class Notify extends Thread {
     @Override
     public void run() {
 
+        
+        
         try {
             sleep(2500);  // waits the start of aplication // espera a aplicaçao iniciar
         } catch (InterruptedException ex) {
@@ -71,9 +73,7 @@ public class Notify extends Thread {
             }
 
             waitChangeMinute(new Date(), new Date());
-
-            checkDataBase();
-
+            
             checkPermission();
         }
     }
@@ -126,7 +126,9 @@ public class Notify extends Thread {
     }
 
     public void checkNotifications() throws HeadlessException {
-
+        
+        checkDataBase();
+        
         int cont = 0;
 
         ArrayList<Notification> notificationWarned = new ArrayList<>();
@@ -142,12 +144,12 @@ public class Notify extends Thread {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                if (MainNotificationScreen.getWindow() == null || notification.isWarned() == false) {
+                                if (notification.isWarned() == false) {
                                     
                                     notification.setWarned(true);
                                     
                                     notificationWarned.add(notification);
-                                    System.out.println("p");
+                                    System.out.println("passou");
                                     
                                     dao.update(notification);
                                 }

@@ -25,7 +25,7 @@ import javafx.scene.layout.Pane;
 public class LiteNotificationController implements Initializable {
 
     @FXML
-    private Pane pane;
+    private Pane pane = new Pane();
       
     @FXML
     private ImageView image;
@@ -42,7 +42,7 @@ public class LiteNotificationController implements Initializable {
     }    
     
     public void load(Notification notification){
-        
+        System.out.println(notification.getImage());
         txtDescription.setText(notification.getDescription());
         lblTitle.setText(notification.getTitle());
         

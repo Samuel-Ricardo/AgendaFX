@@ -86,8 +86,9 @@ public class NotificationScreenController implements Initializable {
     void closeScreen() {    // close this screen // fecha esta tela
 
         MainNotificationScreen.getWindow().close();
+        if(SoundPlayer.isPlaying()){
         SoundPlayer.stopSound();    // stop the sound  // para o som
-
+        }
     }
 
     @Override
