@@ -146,8 +146,7 @@ public class Notify extends Thread {
                                 notification.setWarned(true);
 
                                 notificationWarned.add(notification);
-
-                                playNotificationSound(notification);
+                                System.out.println("p");
 
                                 dao.update(notification);
                             }
@@ -180,13 +179,15 @@ public class Notify extends Thread {
             cont++;
         }
 
-        listNotification(notifications);
+        if (notificationWarned.isEmpty() == false) {
+            listNotification(notificationWarned);
+        }
 
     }
 
     public void playNotificationSound(Notification notification) {
 
-        if (player.isPlaying()) {
+        if (SoundPlayer.isPlaying()) {
             System.out.println("já está tocando");
         } else {
 
@@ -194,10 +195,11 @@ public class Notify extends Thread {
             player.start();
             SoundPlayer.justPlaySound();
 
-            MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
-                SoundPlayer.stopSound();
-            });
-
+            if (MainNotificationScreen.getWindow() != null) {
+                MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
+                    SoundPlayer.stopSound();
+                });
+            }
         }
     }
 
@@ -230,18 +232,26 @@ public class Notify extends Thread {
 
     private void listNotification(ArrayList<Notification> notifications) {
 
-        if (MainNotificationList.getWindow() != null) {
-            MainNotificationList.getWindow().close();
-        }
-        MainNotificationList notificationlist = new MainNotificationList();
+        Platform.runLater(() -> {
+            System.out.println("lista          t");
 
-        try {
-            notificationlist.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            if (MainNotificationList.getWindow() != null) {
+                MainNotificationList.getWindow().close();
+            }
+            MainNotificationList notificationlist = new MainNotificationList();
+
+            try {
+                notificationlist.start(new Stage());
+            } catch (Exception ex) {
+                Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            System.out.println("lista");
+            list.loadNotications(notifications);
+            playNotificationSound(notifications.get(0));
+        });
+
         
-        list.loadNotications(notifications);
 
     }
 

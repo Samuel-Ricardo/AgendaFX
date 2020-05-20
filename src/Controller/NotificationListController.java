@@ -48,7 +48,7 @@ public class NotificationListController implements Initializable {
         for (Notification notification : notifications) {
 
             try {
-                
+                System.out.println("começei");
                 Pane fxmlPane = FXMLLoader.load(getClass().getResource("/View/LiteNotification.fxml"));
                 Pane pane = new Pane();
                 pane.getChildren().setAll(fxmlPane);
@@ -73,6 +73,7 @@ public class NotificationListController implements Initializable {
                 
                 listNotification.getItems().clear();
                 listNotification.setItems(obsNotifications);
+                System.out.println("prenchida");
                        
             } catch (IOException ex) {
                 Logger.getLogger(NotificationListController.class.getName()).log(Level.SEVERE, null, ex);

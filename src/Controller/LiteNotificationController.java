@@ -54,6 +54,8 @@ public class LiteNotificationController implements Initializable {
                     + "-fx-border-width: 2 2 2 2;"
                     + "-fx-border-color: "+notification.getTypeColor()+";");
         
+        System.out.println("load");
     }
+    
     
 }

@@ -18,7 +18,7 @@ public class SoundPlayer extends Thread{
     private static MediaPlayer player;
     private Media media;
     private File file;
-    private boolean playing = false;
+    private static boolean playing = false;
 
     public SoundPlayer(String file) {
         
@@ -95,12 +95,12 @@ public class SoundPlayer extends Thread{
         this.file = file;
     }  
 
-    public boolean isPlaying() {
+    public static boolean isPlaying() {
         return playing;
     }
 
-    public void setPlaying(boolean playing) {
-        this.playing = playing;
+    public static void setPlaying(boolean playing) {
+        SoundPlayer.playing = playing;
     }
     
     
