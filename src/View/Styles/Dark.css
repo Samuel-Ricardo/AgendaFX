@@ -124,11 +124,12 @@ and open the template in the editor.
 .text-area-empyt{
     
     -fx-font-family: "Arial";
-    -fx-font-size: 14px;
-    -fx-text-fill: black;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
     -fx-background-color: transparent;
     -fx-background-radius: 100px;
-    -fx-border-width: 2 2 2 2;
+    -fx-border-width: 2 0 2 0;
     -fx-border-color: #8A2BE2;
     
 }

@@ -5,6 +5,7 @@
  */
 package Model;
 
+import com.jfoenix.controls.JFXTextArea;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -16,19 +17,22 @@ import javafx.scene.shape.Rectangle;
  */
 public class RowNotification extends HBox {
 
-    private Rectangle typeColor;
-    private Label title;
-    private Label date;
-    private Notification notification;
-    private PostIt postIt;
+    protected Rectangle typeColor;
+    protected Label title;
+    protected Label date;
+    protected Notification notification;
+    protected PostIt postIt;
+    protected String style ;
+    protected JFXTextArea description; 
 
     ///////Construtores  //  Constructos /////////
-    public RowNotification(Rectangle typeColor, Label title, Label date, Notification notification) {
+    public RowNotification(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
         this.typeColor = typeColor;
         this.title = title;
         this.date = date;
         this.notification = notification;
-        loadPane(typeColor, title, date, notification);
+        this.style = style;
+        loadPane(typeColor, title, date, notification,style);
 
     }
 
@@ -38,7 +42,10 @@ public class RowNotification extends HBox {
         this.title = new Label();
         this.date = new Label();
         this.notification = notification;
-
+        this.style = "-fx-background-color: #343232;"
+                           + "-fx-background-radius: 100px;"
+                           + "-fx-border-radius: 100px;";
+        
         loadPane(notification);
 
     }
@@ -49,19 +56,20 @@ public class RowNotification extends HBox {
         this.title = new Label();
         this.date = new Label();
         this.postIt = postIt;
-
+        this.style = "-fx-background-color: #343232;"
+                           + "-fx-background-radius: 100px;"
+                           + "-fx-border-radius: 100px;";
+        
         loadPane(postIt);
     }
 
     ///////metodos  //  method /////////
-    private void loadPane(Rectangle typeColor, Label title, Label date, Notification notification) {
+    private void loadPane(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
            
-        this.setStyle("  -fx-background-color: black;"
-                + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 100px;");
+        this.setStyle(style);
         this.setPadding(new Insets(20, 0, 0, 20));
         this.setSpacing(90);
          
@@ -93,14 +101,12 @@ public class RowNotification extends HBox {
         this.setVisible(true);
     }
 
-    private void loadPane(Notification notification) {
+    public void loadPane(Notification notification) {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
            
-        this.setStyle("  -fx-background-color: black;"
-                + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 100px;");
+        this.setStyle(style);
         this.setPadding(new Insets(20, 0, 0, 20));
         this.setSpacing(90);
          
@@ -132,17 +138,15 @@ public class RowNotification extends HBox {
         this.setVisible(true);
     }
 
-    private void loadPane(PostIt postIt) {
+    public void loadPane(PostIt postIt) {
         
   this.setPrefWidth(772);
         this.setPrefHeight(65);
            
-        this.setStyle("  -fx-background-color: black;"
-                + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 100px;");
+        this.setStyle(style);
         this.setPadding(new Insets(20, 0, 0, 20));
         this.setSpacing(90);
-         
+
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
         typeColor.setStyle(postIt.getTypeColor());
@@ -152,6 +156,89 @@ public class RowNotification extends HBox {
         title.prefHeight(30);
         title.setLayoutX(67);
         title.setLayoutY(25);
+        title.setText(postIt.getTitle());
+        title.setVisible(true);
+        
+        date.prefWidth(287);
+        date.prefHeight(69);
+        date.setLayoutX(113);
+        date.setLayoutY(42);
+        if (notification.getScheduledDay() != null) {
+            date.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
+        }else{
+            date.setText("sem hora marcada");
+        }
+        date.setVisible(true);
+        
+              this.getChildren().addAll(typeColor,title,date);
+              
+        this.setVisible(true);
+    }
+    public void loadLitePane(Notification notification) {
+
+        this.setPrefWidth(411);
+        this.setPrefHeight(118);
+           
+        this.setStyle(style);
+        this.setPadding(new Insets(20, 0, 0, 20));
+        this.setSpacing(90);
+         
+        typeColor.prefWidth(30);
+        typeColor.prefHeight(30);
+        typeColor.setStyle(notification.getTypeColor());
+        typeColor.setVisible(true);
+        
+        title.prefWidth(287);
+        title.prefHeight(21);
+        title.setLayoutX(113);
+        title.setLayoutY(14);
+        title.setText(notification.getTitle());
+        title.setVisible(true);
+        
+        
+                description.setStyle("    -fx-font-family: \"Arial\";" +
+                            "    -fx-font-size: 13px;" +
+                            "    -fx-font-weight: bold;" +
+                            "    -fx-text-fill: white;" +
+                            "    -fx-background-color: transparent;" +
+                            "    -fx-border-width: 2 0 2 0;" +
+                            "    -fx-border-color: #8A2BE2;" +
+                            "    ");
+        
+        description.prefWidth(363);
+        description.prefHeight(30);
+        description.setLayoutX(67);
+        description.setLayoutY(25);
+        description.setText(notification.getDescription());
+        
+
+        date.setVisible(true);
+        
+              this.getChildren().addAll(typeColor,title,date);
+              
+        this.setVisible(true);
+    }
+
+    public void loadLitePane(PostIt postIt) {
+        
+        this.setPrefWidth(411);
+        this.setPrefHeight(118);
+           
+        this.setStyle("-fx-background-color: #343232;"
+                           + "-fx-background-radius: 100px;"
+                           + "-fx-border-radius: 100px;";);
+        this.setPadding(new Insets(20, 0, 0, 20));
+        this.setSpacing(90);
+         
+        typeColor.prefWidth(30);
+        typeColor.prefHeight(30);
+        typeColor.setStyle(postIt.getTypeColor());
+        typeColor.setVisible(true);
+        
+        title.prefWidth(287);
+        title.prefHeight(21);
+        title.setLayoutX(113);
+        title.setLayoutY(14);
         title.setText(postIt.getTitle());
         title.setVisible(true);
         
