@@ -139,16 +139,18 @@ public class Notify extends Thread {
 
                     try {
 
-                        Platform.runLater(() -> {
-
-                            if (MainNotificationScreen.getWindow() == null || notification.isWarned() == false) {
-
-                                notification.setWarned(true);
-
-                                notificationWarned.add(notification);
-                                System.out.println("p");
-
-                                dao.update(notification);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (MainNotificationScreen.getWindow() == null || notification.isWarned() == false) {
+                                    
+                                    notification.setWarned(true);
+                                    
+                                    notificationWarned.add(notification);
+                                    System.out.println("p");
+                                    
+                                    dao.update(notification);
+                                }
                             }
                         });
 
@@ -232,23 +234,26 @@ public class Notify extends Thread {
 
     private void listNotification(ArrayList<Notification> notifications) {
 
-        Platform.runLater(() -> {
-            System.out.println("lista          t");
-
-            if (MainNotificationList.getWindow() != null) {
-                MainNotificationList.getWindow().close();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("lista          t");
+                
+                if (MainNotificationList.getWindow() != null) {
+                    MainNotificationList.getWindow().close();
+                }
+                MainNotificationList notificationlist = new MainNotificationList();
+                
+                try {
+                    notificationlist.start(new Stage());
+                } catch (Exception ex) {
+                    Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                System.out.println("lista");
+                list.loadNotications(notifications);
+                playNotificationSound(notifications.get(0));
             }
-            MainNotificationList notificationlist = new MainNotificationList();
-
-            try {
-                notificationlist.start(new Stage());
-            } catch (Exception ex) {
-                Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            System.out.println("lista");
-            list.loadNotications(notifications);
-            playNotificationSound(notifications.get(0));
         });
 
         

@@ -35,7 +35,7 @@ public class NotificationListController implements Initializable {
      */
     @FXML
     private ListView<Pane> listNotification;
-    
+
     private LiteNotificationController notificationController = new LiteNotificationController();
 
     @Override
@@ -50,31 +50,31 @@ public class NotificationListController implements Initializable {
             try {
                 System.out.println("começei");
                 Pane fxmlPane = FXMLLoader.load(getClass().getResource("/View/LiteNotification.fxml"));
-                Pane pane = new Pane();
-                pane.getChildren().setAll(fxmlPane);
-                
+//                Pane pane = new Pane();
+//                pane.getChildren().setAll(fxmlPane);
+
                 notificationController.load(notification);
-                
+
                 ArrayList<Pane> alNotifications = new ArrayList<>();
-                
-                pane.setOnMouseClicked((t) -> {
-                    
+
+                fxmlPane.setOnMouseClicked((t) -> {
+
                     try {
                         Notify.showNotification(notification);
                     } catch (Exception ex) {
                         Logger.getLogger(NotificationListController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                 });
-                
-                alNotifications.add(pane);
-                
+
+                alNotifications.add(fxmlPane);
+
                 ObservableList<Pane> obsNotifications = FXCollections.observableArrayList(alNotifications);
-                
+
                 listNotification.getItems().clear();
                 listNotification.setItems(obsNotifications);
                 System.out.println("prenchida");
-                       
+
             } catch (IOException ex) {
                 Logger.getLogger(NotificationListController.class.getName()).log(Level.SEVERE, null, ex);
             }
