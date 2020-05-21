@@ -6,11 +6,11 @@
 package Services;
 
 import Controller.HomeController;
-import Controller.NotificationListController;
+
 import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainHome;
-import Main.MainNotificationList;
+
 import Main.MainNotificationScreen;
 import Model.Notification;
 import Model.User;
@@ -39,7 +39,7 @@ public class Notify extends Thread {
     private HomeController controller;
     private int choice = 0;
     private SoundPlayer player;
-    private NotificationListController list = new NotificationListController();
+    //private NotificationListController list = new NotificationListController();
 
     public Notify(HomeController controller) {
         checkDataBase();
@@ -240,20 +240,20 @@ public class Notify extends Thread {
             @Override
             public void run() {
                 System.out.println("lista          t");
-                
-                if (MainNotificationList.getWindow() != null) {
-                    MainNotificationList.getWindow().close();
-                }
-                MainNotificationList notificationlist = new MainNotificationList();
-                
-                try {
-                    notificationlist.start(new Stage());
-                } catch (Exception ex) {
-                    Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
+//                
+//                if (MainNotificationList.getWindow() != null) {
+//                    MainNotificationList.getWindow().close();
+//                }
+//                MainNotificationList notificationlist = new MainNotificationList();
+//                
+//                try {
+//                    notificationlist.start(new Stage());
+//                } catch (Exception ex) {
+//                    Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                
                 System.out.println("lista");
-                list.loadNotications(notifications);
+                //list.loadNotications(notifications);
                 playNotificationSound(notifications.get(0));
             }
         });

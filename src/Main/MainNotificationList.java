@@ -23,53 +23,47 @@ import javafx.stage.Stage;
  *
  * @author Samuel
  */
-public class MainNotificationList extends Application {
+public class MainNotificationList extends Application{
 
     private static Stage window;
-
+    
     @Override
     public void start(Stage stage) throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource("/View/NotificationList.fxml"));
-
-        Scene scene = new Scene(root);
-
-        Image icon = new Image(getClass().getResourceAsStream("/View/Images/manLoad.png"));
-
-        stage.getIcons().add(icon);
-        stage.setTitle("Notificaçoes");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setX(565);
-        stage.setY(530);
-        stage.show();
-
-        setWindow(stage);
+   
+    Parent root = FXMLLoader.load(getClass().getResource("/View/NotificationList.fxml"));  // Loading a Parent with the JavaFX window fxml  //  Carregando um Parent com o fxml da janela JavaFX
+    
+        Scene scene = new Scene(root); // Loading Scene with Parent  //  Carregando Scene com o Parent 
+        
+        Image WindowIcon = new Image(getClass().getResourceAsStream("/View/Images/manLoad.png")); // Take an image  // Pega uma imagen
+        
+        stage.getIcons().add(WindowIcon); // put the icon in the window   //  poe o ícone na janela
+        stage.setTitle("Notificaçoes");          // put the icon in the window  //  poe o titulo na janela
+        stage.setResizable(false);        // prevents the window from being resized  //  impede que a janela seja redimensionada
+        stage.setScene(scene);            // loads the Stage (window)  //  carrega o Stage (janela)
+        stage.setY(535);
+        stage.setX(582);
+        stage.show();                     // show the Stage (window)  //  Mostra o stage(janela) 
+        
+        setWindow(stage);                 // Load the Stage in a 'window' statistical attribute  //  Carrega o Stage num atributo estatico 'janela' 
+    
     }
     
     public static void main(String[] args) {
         
         Platform.runLater(() -> {
-            
-        MainNotificationList list = new MainNotificationList();
-        
-            try {
+             try {
+            MainNotificationList list = new MainNotificationList();
+               NotificationDAO dao = new NotificationDAO();
+                
+               NotificationListController.setNotifications((ArrayList<Notification>) dao.selectAll());
+                
                 list.start(new Stage());
+                 System.out.println(NotificationListController.getNotifications().get(0).getTitle());
+             
+                 
             } catch (Exception ex) {
                 Logger.getLogger(MainNotificationList.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            NotificationListController lists = new NotificationListController();
-        
-            NotificationDAO dao = new NotificationDAO();
-            
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MainNotificationList.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            lists.loadNotications((ArrayList<Notification>) dao.selectAll());
             
         });
         
@@ -79,8 +73,10 @@ public class MainNotificationList extends Application {
         return window;
     }
 
-    public static void setWindow(Stage window) {
-        MainNotificationList.window = window;
+    public static void setWindow(Stage janela) {
+        MainNotificationList.window = janela;
     }
-
+    
+    
+    
 }
