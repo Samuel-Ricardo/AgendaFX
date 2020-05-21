@@ -6,9 +6,13 @@
 package Services;
 
 import Controller.HomeController;
+import Controller.NotificationListController;
+
 import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainHome;
+import Main.MainNotificationList;
+
 import Main.MainNotificationScreen;
 import Model.Notification;
 import Model.User;
@@ -37,8 +41,9 @@ public class Notify extends Thread {
     private HomeController controller;
     private int choice = 0;
     private SoundPlayer player;
+    //private NotificationListController list = new NotificationListController();
 
-    public Notify( HomeController controller) {
+    public Notify(HomeController controller) {
         checkDataBase();
         this.controller = controller;
     }
@@ -46,6 +51,8 @@ public class Notify extends Thread {
     @Override
     public void run() {
 
+        
+        
         try {
             sleep(2500);  // waits the start of aplication // espera a aplicaçao iniciar
         } catch (InterruptedException ex) {
@@ -68,11 +75,7 @@ public class Notify extends Thread {
             }
 
             waitChangeMinute(new Date(), new Date());
-
-            System.out.println("p");
-
-            checkDataBase();
-
+            
             checkPermission();
         }
     }
@@ -125,8 +128,12 @@ public class Notify extends Thread {
     }
 
     public void checkNotifications() throws HeadlessException {
-
+        
+        checkDataBase();
+        
         int cont = 0;
+
+        ArrayList<Notification> notificationWarned = new ArrayList<>();
 
         for (Notification notification : notifications) { // scans notifications and examines whether to be notified // varre as notificaçoes e analisa se devem ser notificadas
 
@@ -136,27 +143,18 @@ public class Notify extends Thread {
 
                     try {
 
-                        Platform.runLater(() -> {
-
-                            if (MainNotificationScreen.getWindow() == null || notification.isWarned() == false) {
-
-                                notification.setWarned(true);
-
-                                try {
-                                    showNotification(notification);
-                                } catch (Exception ex) {
-                                    Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (notification.isWarned() == false) {
+                                    
+                                    notification.setWarned(true);
+                                    
+                                    notificationWarned.add(notification);
+                                    System.out.println("passou");
+                                    
+                                    dao.update(notification);
                                 }
-
-                                player = new SoundPlayer(notification.getMusic().getAbsolutePath());
-                                player.start();
-                                SoundPlayer.justPlaySound();
-
-                                MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
-                                    SoundPlayer.stopSound();
-                                });
-                                
-                                dao.update(notification);
                             }
                         });
 
@@ -186,6 +184,29 @@ public class Notify extends Thread {
 
             cont++;
         }
+
+        if (notificationWarned.isEmpty() == false) {
+            listNotification(notificationWarned);
+        }
+
+    }
+
+    public void playNotificationSound(Notification notification) {
+
+        if (SoundPlayer.isPlaying()) {
+            System.out.println("já está tocando");
+        } else {
+
+            player = new SoundPlayer(notification.getMusic().getAbsolutePath());
+            player.start();
+            SoundPlayer.justPlaySound();
+
+            if (MainNotificationScreen.getWindow() != null) {
+                MainNotificationScreen.getWindow().setOnCloseRequest((t) -> {
+                    SoundPlayer.stopSound();
+                });
+            }
+        }
     }
 
     public void checkPermission() {
@@ -202,17 +223,48 @@ public class Notify extends Thread {
 
         }
     }
-    
-    public static void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao
-            System.out.println(notification.getId()+"   id notfy");    
-        
-           NotificationDAO.setNotification(notification);
-        
-        if( MainNotificationScreen.getWindow() != null){
+
+    public static void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao 
+
+        NotificationDAO.setNotification(notification);
+
+        if (MainNotificationScreen.getWindow() != null) {
             MainNotificationScreen.getWindow().close();
         }
         MainNotificationScreen notificationScreen = new MainNotificationScreen();
-        
+
         notificationScreen.start(new Stage());
     }
+
+    private void listNotification(ArrayList<Notification> notifications) {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("lista          t");
+                
+                if (MainNotificationList.getWindow() != null) {
+                    MainNotificationList.getWindow().close();
+                }
+                    
+                NotificationListController.setNotifications(notifications);
+                
+                MainNotificationList notificationlist = new MainNotificationList();
+            
+                
+                try {
+                    notificationlist.start(new Stage());
+                } catch (Exception ex) {
+                    Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                System.out.println("lista");
+                playNotificationSound(notifications.get(0));
+            }
+        });
+
+        
+
+    }
+
 }

@@ -18,6 +18,7 @@ public class SoundPlayer extends Thread{
     private static MediaPlayer player;
     private Media media;
     private File file;
+    private static boolean playing = false;
 
     public SoundPlayer(String file) {
         
@@ -39,15 +40,28 @@ public class SoundPlayer extends Thread{
     @Override
     public void run (){
         
+        player.setOnPlaying(() -> {
+            playing = true;
+        });
         
+        player.setOnStopped(() -> {
+            playing = false;
+        });
         
+        player.setOnPaused(() -> {
+            playing = false;
+        });
+        
+        player.setOnEndOfMedia(() -> {
+            playing = false;
+        });
     }
     
     public static void justPlaySound(){
-           
-        System.out.println(player.getVolume()+" V2");
+
         player.play();
-        System.out.println(player.getVolume()+" V");
+
+        
         
     }
     
@@ -56,7 +70,7 @@ public class SoundPlayer extends Thread{
         player.stop();
         
     }
-
+    
     public static MediaPlayer getPlayer() {
         return player;
     }
@@ -79,6 +93,14 @@ public class SoundPlayer extends Thread{
 
     public void setFile(File file) {
         this.file = file;
+    }  
+
+    public static boolean isPlaying() {
+        return playing;
+    }
+
+    public static void setPlaying(boolean playing) {
+        SoundPlayer.playing = playing;
     }
     
     

@@ -5,6 +5,7 @@
  */
 package Model;
 
+import com.jfoenix.controls.JFXTextArea;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -14,54 +15,61 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Samuel
  */
-public class RowNotification extends HBox {
+public class Row extends HBox {
 
-    private Rectangle typeColor;
-    private Label title;
-    private Label date;
-    private Notification notification;
-    private PostIt postIt;
+    protected Rectangle typeColor;
+    protected Label title;
+    protected Label date;
+    protected Notification notification;
+    protected PostIt postIt;
+    protected String style ;
+    protected JFXTextArea description; 
 
     ///////Construtores  //  Constructos /////////
-    public RowNotification(Rectangle typeColor, Label title, Label date, Notification notification) {
+    public Row(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
         this.typeColor = typeColor;
         this.title = title;
         this.date = date;
         this.notification = notification;
-        loadPane(typeColor, title, date, notification);
+        this.style = style;
+        loadPane(typeColor, title, date, notification,style);
 
     }
 
-    public RowNotification(Notification notification) {
+    public Row(Notification notification) {
 
         this.typeColor = new Rectangle(20, 20);
         this.title = new Label();
         this.date = new Label();
         this.notification = notification;
-
+        this.style = "-fx-background-color: #343232;"
+                           + "-fx-background-radius: 100px;"
+                           + "-fx-border-radius: 100px;";
+        
         loadPane(notification);
 
     }
 
-    public RowNotification(PostIt postIt) {
+    public Row(PostIt postIt) {
 
         this.typeColor = new Rectangle(20, 20);
         this.title = new Label();
         this.date = new Label();
         this.postIt = postIt;
-
+        this.style = "-fx-background-color: #343232;"
+                           + "-fx-background-radius: 100px;"
+                           + "-fx-border-radius: 100px;";
+        
         loadPane(postIt);
     }
 
     ///////metodos  //  method /////////
-    private void loadPane(Rectangle typeColor, Label title, Label date, Notification notification) {
+    private void loadPane(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
            
-        this.setStyle("  -fx-background-color: black;"
-                + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 100px;");
+        this.setStyle(style);
         this.setPadding(new Insets(20, 0, 0, 20));
         this.setSpacing(90);
          
@@ -93,14 +101,12 @@ public class RowNotification extends HBox {
         this.setVisible(true);
     }
 
-    private void loadPane(Notification notification) {
+    public void loadPane(Notification notification) {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
            
-        this.setStyle("  -fx-background-color: black;"
-                + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 100px;");
+        this.setStyle(style);
         this.setPadding(new Insets(20, 0, 0, 20));
         this.setSpacing(90);
          
@@ -132,17 +138,15 @@ public class RowNotification extends HBox {
         this.setVisible(true);
     }
 
-    private void loadPane(PostIt postIt) {
+    public void loadPane(PostIt postIt) {
         
   this.setPrefWidth(772);
         this.setPrefHeight(65);
            
-        this.setStyle("  -fx-background-color: black;"
-                + "  -fx-background-radius: 100px;"
-                + "  -fx-border-radius: 100px;");
+        this.setStyle(style);
         this.setPadding(new Insets(20, 0, 0, 20));
         this.setSpacing(90);
-         
+
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
         typeColor.setStyle(postIt.getTypeColor());
@@ -155,12 +159,12 @@ public class RowNotification extends HBox {
         title.setText(postIt.getTitle());
         title.setVisible(true);
         
-        date.prefWidth(363);
-        date.prefHeight(30);
-        date.setLayoutX(67);
-        date.setLayoutY(25);
-        if (postIt.getScheduledDay() != null) {
-            date.setText(postIt.getScheduledDate() + " as " + postIt.getScheduledHour());
+        date.prefWidth(287);
+        date.prefHeight(69);
+        date.setLayoutX(113);
+        date.setLayoutY(42);
+        if (notification.getScheduledDay() != null) {
+            date.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
         }else{
             date.setText("sem hora marcada");
         }

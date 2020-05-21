@@ -267,9 +267,12 @@ public class NotificationDAO {
 
                 if (result.getDate("horario") != null && result.getDate("marcado") != null) {
 
-                    String time = result.getTime("horario").getTime() + "";
-                    String date = result.getDate("marcado").getTime() + "";
-                    String scheduled = date + " " + time;
+                    Date time = new Date (result.getTime("horario").getTime());
+                    Date date = new Date (result.getDate("marcado").getTime());
+                    String timeS = horary.format(time);
+                    String dateS = day.format(date);
+                    String scheduled = dateS + " " + timeS;
+                    
 
                     try {
                         notificationDate = complet.parse(scheduled);
