@@ -6,7 +6,7 @@
 package Controller;
 
 import Model.Notification;
-import Model.testeRow;
+import Model.NotificationRow;
 import Services.Notify;
 import java.net.URL;
 import java.util.ArrayList;
@@ -45,13 +45,13 @@ public class NotificationListController implements Initializable {
         for (Notification notification : notifications) {
 
             
-            testeRow row = new testeRow(notification);
+            NotificationRow row = new NotificationRow(notification);
             
        
             row.setOnMouseClicked((t) -> {
                 
                 try {
-                    //Notify.showNotification(notification);
+                    Notify.showNotification(notification);
              } catch (Exception ex) {
                    Logger.getLogger(NotificationListController.class.getName()).log(Level.SEVERE, null, ex);
                }
@@ -61,10 +61,10 @@ public class NotificationListController implements Initializable {
   
             alNotifications.add(row);
             
-            System.out.println("1");
         }
         ObservableList<BorderPane> obsNotifications = FXCollections.observableArrayList(alNotifications);
         
+        list.setPadding(new Insets(0,0,5,0));
         list.setItems(obsNotifications);
             System.out.println("prenchida");
     

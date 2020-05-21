@@ -297,8 +297,10 @@ public class NotificationUpdaterController implements Initializable {
             chooser.setSelectedExtensionFilter(image); // set filter // coloca um filtro
 
             img = chooser.showOpenDialog(new Stage()); // open chooser screen // abre a tela de escolha
-
+            
+            if(img != null){
             imgNotific.setImage(new Image("file:///" + img.getAbsolutePath()));    // set choosed image // define a imagem escolhida
+            }
             
             notification.setImage(img.getAbsolutePath());   // set choosed image in notification// define a imagem escolhida na notificaçao
             

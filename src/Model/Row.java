@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Samuel
  */
-public class RowNotification extends HBox {
+public class Row extends HBox {
 
     protected Rectangle typeColor;
     protected Label title;
@@ -26,7 +26,7 @@ public class RowNotification extends HBox {
     protected JFXTextArea description; 
 
     ///////Construtores  //  Constructos /////////
-    public RowNotification(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
+    public Row(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
         this.typeColor = typeColor;
         this.title = title;
         this.date = date;
@@ -36,7 +36,7 @@ public class RowNotification extends HBox {
 
     }
 
-    public RowNotification(Notification notification) {
+    public Row(Notification notification) {
 
         this.typeColor = new Rectangle(20, 20);
         this.title = new Label();
@@ -50,7 +50,7 @@ public class RowNotification extends HBox {
 
     }
 
-    public RowNotification(PostIt postIt) {
+    public Row(PostIt postIt) {
 
         this.typeColor = new Rectangle(20, 20);
         this.title = new Label();

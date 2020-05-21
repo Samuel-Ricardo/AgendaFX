@@ -17,7 +17,7 @@ import javafx.scene.layout.BorderPane;
  *
  * @author Samuel
  */
-public class testeRow extends BorderPane {
+public class NotificationRow extends BorderPane {
 
     protected ImageView image;
     protected Label title;
@@ -27,7 +27,7 @@ public class testeRow extends BorderPane {
     protected JFXTextArea description;
 
     ///////Construtores  //  Constructos /////////
-    public testeRow(ImageView image, Label title, JFXTextArea description, Notification notification, String style) {
+    public NotificationRow(ImageView image, Label title, JFXTextArea description, Notification notification, String style) {
         this.image = image;
         this.title = title;
         this.description = description;
@@ -37,7 +37,7 @@ public class testeRow extends BorderPane {
 
     }
 
-    public testeRow(Notification notification) {
+    public NotificationRow(Notification notification) {
 
         this.image = new ImageView();
         this.title = new Label();
@@ -51,7 +51,7 @@ public class testeRow extends BorderPane {
 
     }
 
-    public testeRow(PostIt postIt) {
+    public NotificationRow(PostIt postIt) {
 
         this.image = new ImageView();
         this.title = new Label();

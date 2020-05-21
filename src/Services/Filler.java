@@ -8,7 +8,7 @@ package Services;
 import Controller.HomeController;
 import DAO.NotificationDAO;
 import Model.Notification;
-import Model.RowNotification;
+import Model.Row;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +27,7 @@ public class Filler {
 
     private final HomeController controller;
     private Notification notification;
-    private RowNotification row;
+    private Row row;
     private ArrayList<Notification> notifications;
     private final NotificationDAO dao;
     private final SimpleDateFormat day;
@@ -51,7 +51,7 @@ public class Filler {
         
         for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
             
-            RowNotification row = new RowNotification(notifications.get(cont));
+            Row row = new Row(notifications.get(cont));
 
             row.setOnMouseClicked((t) -> {  // opens the notification when you click // abre a notificaçao ao clicar
 
@@ -93,7 +93,7 @@ public class Filler {
         
         for(Notification notification: notifications){
             
-            RowNotification row = new RowNotification(notification);
+            Row row = new Row(notification);
             
             row.setOnMouseClicked((t) -> {
             
