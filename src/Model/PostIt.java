@@ -133,12 +133,14 @@ public class PostIt {
     }
 
     public String getTypeColor() {
-        return typeColor;
+        return typeColor.replace(";", "");
     }
 
     public void setTypeColor(String typeColor) {
-        this.typeColor = typeColor;
+        String hexadecimal = typeColor.substring(typeColor.lastIndexOf("#"));
+        this.typeColor = hexadecimal.replace(";", "");
     }
+    
 
     public User getUser() {
         return user;

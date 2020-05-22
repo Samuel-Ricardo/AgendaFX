@@ -65,8 +65,9 @@ public class NotificationListController implements Initializable {
         ObservableList<BorderPane> obsNotifications = FXCollections.observableArrayList(alNotifications);
         
         list.setPadding(new Insets(0,0,5,0));
+        list.setFixedCellSize(140);
         list.setItems(obsNotifications);
-            System.out.println("prenchida");
+        System.out.println("prenchida");
     
      }
 

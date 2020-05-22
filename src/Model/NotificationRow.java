@@ -153,6 +153,7 @@ public class NotificationRow extends BorderPane {
         this.setStyle("-fx-background-color: black;"
                 + "-fx-border-width: 2 2 2 2;"
                 + "-fx-border-color: " + notification.getTypeColor() + ";");
+        
         this.setVisible(true);
     }
 

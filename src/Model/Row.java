@@ -75,7 +75,7 @@ public class Row extends HBox {
          
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle(notification.getTypeColor());
+        typeColor.setStyle("-fx-fill: "+notification.getTypeColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);
@@ -112,7 +112,7 @@ public class Row extends HBox {
          
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle(notification.getTypeColor());
+        typeColor.setStyle("-fx-fill: "+notification.getTypeColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);

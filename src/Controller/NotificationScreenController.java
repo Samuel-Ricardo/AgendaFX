@@ -142,9 +142,9 @@ public class NotificationScreenController implements Initializable {
             imgNotification.setImage(new Image("file:///" + notification.getImage()));
         }
 
-        String fill = notification.getTypeColor();
-        String color = fill.substring(fill.lastIndexOf("#"));
-        String style = "-fx-border-color: " + color;
+//        String fill = notification.getTypeColor();
+//        String color = fill.substring(fill.lastIndexOf("#"));
+        String style = "-fx-border-color: " + notification.getTypeColor()+";";
 
         System.out.println(style);
         anchorPane.setStyle(style + " -fx-border-width: 5 5 5 5;");

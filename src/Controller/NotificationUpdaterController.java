@@ -225,9 +225,10 @@ public class NotificationUpdaterController implements Initializable {
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
         notification.setType(cbType.getSelectionModel().getSelectedItem());
-        notification.setTypeColor(typeColor.getStyle());
+        notification.setTypeColor(typeColor.getStyle().substring(typeColor.getStyle().lastIndexOf("#")));
         notification.setUser(logUser);
         notification.setWarned(false);
+        
         if (fileVissible) {
             notification.setAttachment(attachment);
         }
@@ -257,7 +258,7 @@ public class NotificationUpdaterController implements Initializable {
 
         if (fileVissible == false) {
             attachment = null;
-            lblAttachment.setText(attachment.getName());
+            lblAttachment.setText("");
 
         }
     }
@@ -373,7 +374,9 @@ public class NotificationUpdaterController implements Initializable {
 
         cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
         cbType.getSelectionModel().select(notification.getType());
+        notification.setTypeColor(notification.getTypeColor().substring(notification.getTypeColor().lastIndexOf("#")));
         typeColor.setStyle("-fx-fill: " + notification.getTypeColor() + ";");
+        System.out.println(typeColor.getStyle()+"   stilo ;-;");
     }
 
     private void loadScreen() {

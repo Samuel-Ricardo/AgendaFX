@@ -151,7 +151,7 @@ public class Notify extends Thread {
                                     notification.setWarned(true);
                                     
                                     notificationWarned.add(notification);
-                                    System.out.println("passou");
+                                    System.out.println(notificationWarned.get(0).getImage());
                                     
                                     dao.update(notification);
                                 }
@@ -185,8 +185,8 @@ public class Notify extends Thread {
             cont++;
         }
 
+        System.out.println(notificationWarned.isEmpty()+" fazio ;-;");
         if (notificationWarned.isEmpty() == false) {
-            System.out.println(notificationWarned.get(0).getDescription());
             listNotification(notificationWarned);
         }
 
