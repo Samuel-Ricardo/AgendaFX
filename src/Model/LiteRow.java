@@ -159,7 +159,7 @@ public class LiteRow extends BorderPane {
 
     public void loadPane(PostIt postIt) {
 
-        this.setPrefWidth(772);
+        this.setPrefWidth(410);
         this.setPrefHeight(65);
 
         this.setStyle("-fx-background-color: black;"
