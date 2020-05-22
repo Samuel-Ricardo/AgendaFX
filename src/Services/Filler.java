@@ -88,7 +88,7 @@ public class Filler {
     public void fillOutAllEventNotifications() {
     
         int cont = 0;
-        ArrayList<Pane> alRow = new ArrayList<>();
+        ArrayList<Row> alRow = new ArrayList<>();
         checkNotifications();
         
         for(Notification notification: notifications){
@@ -110,7 +110,7 @@ public class Filler {
             cont++;
         }
         
-        ObservableList<Pane> oblRow = FXCollections.observableArrayList(alRow);
+        ObservableList<Row> oblRow = FXCollections.observableArrayList(alRow);
         
         controller.getLvAllEvents().setItems(oblRow);
     }

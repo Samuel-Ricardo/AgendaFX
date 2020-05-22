@@ -13,6 +13,7 @@ import Main.MainRegister;
 import Main.MainUpdate;
 import Model.Notification;
 import Model.PostIt;
+import Model.Row;
 import Model.User;
 import Services.Filler;
 import Services.Notify;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
@@ -135,7 +138,7 @@ public class HomeController implements Initializable {
     private ListView<Pane> lvTodayNotifications;
 
     @FXML
-    private ListView<Pane> lvAllEvents;
+    private ListView<Row> lvAllEvents;
     
     private final UserDAO userDao = new UserDAO();
 
@@ -298,10 +301,19 @@ public class HomeController implements Initializable {
     @FXML
     void delet() { // delete the chosen item // deleta o item escolhido 
 
+        ObservableList<Row> rows= lvAllEvents.getSelectionModel().getSelectedItems();
+        
+        int cont = 0;
+        for (Pane row : rows) {
+            
+            notDAO.delete(rows.get(cont).getNotification());
+            
+        }
+        filler.fillOutAllEventNotifications();
     }
 
     @FXML
-    void open() { // open the chosen item // abre o item escolhido 
+    void open() { // discontinued method // discontinued method
 
     }
 
@@ -636,11 +648,11 @@ public class HomeController implements Initializable {
         this.notify = notify;
     }    
 
-    public ListView<Pane> getLvAllEvents() {
+    public ListView<Row> getLvAllEvents() {
         return lvAllEvents;
     }
 
-    public void setLvAllEvents(ListView<Pane> lvAllEvents) {
+    public void setLvAllEvents(ListView<Row> lvAllEvents) {
         this.lvAllEvents = lvAllEvents;
     }
 
