@@ -12,6 +12,7 @@ import Main.MainNotificationUpdater;
 import Model.Notification;
 import Model.User;
 import Services.Downloader;
+import Services.Filler;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
@@ -246,6 +247,9 @@ public class NotificationUpdaterController implements Initializable {
         if (dao.update(notification)) {     // Updates the notification  // atualiza a notificaçao
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso +,-");
         }
+    
+        Filler.fillOutNotificationsOfToday(Filler.getController().getLvTodayNotifications());
+        
     }
 
     @FXML

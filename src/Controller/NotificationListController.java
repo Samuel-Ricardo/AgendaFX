@@ -64,8 +64,8 @@ public class NotificationListController implements Initializable {
         }
         ObservableList<LiteRow> obsNotifications = FXCollections.observableArrayList(alNotifications);
         
-        list.setPadding(new Insets(0,0,5,0));
-        list.setFixedCellSize(140);
+      //list.setPadding(new Insets(5,5,5,5));
+        list.setFixedCellSize(138);
         list.setItems(obsNotifications);
         System.out.println("prenchida");
     

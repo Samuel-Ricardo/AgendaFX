@@ -99,7 +99,7 @@ public class LiteRow extends BorderPane {
     public void loadPane(Notification notification) {
 
         this.setPrefWidth(411);
-        this.setPrefHeight(138);
+        this.setPrefHeight(100);
         this.setPadding(new Insets(20, 10, 10, 20));
 
         if (notification.getImage() != null || notification.getImage().equals("") == false) {
@@ -151,7 +151,7 @@ public class LiteRow extends BorderPane {
         BorderPane.setMargin(description, new Insets(0, 5, 10, 0));
         
         this.setStyle("-fx-background-color: black;"
-                + "-fx-border-width: 2 2 2 2;"
+                + "-fx-border-width: 5 5 5 5;"
                 + "-fx-border-color: " + notification.getTypeColor() + ";");
         
         this.setVisible(true);
@@ -163,7 +163,7 @@ public class LiteRow extends BorderPane {
         this.setPrefHeight(65);
 
         this.setStyle("-fx-background-color: black;"
-                + "-fx-border-width: 2 2 2 2"
+                + "-fx-border-width: 5 5 5 5"
                 + "-fx-border-color: " + notification.getTypeColor() + ";");
         this.setPadding(new Insets(20, 10, 10, 20));
 
@@ -181,7 +181,7 @@ public class LiteRow extends BorderPane {
 
         description.prefWidth(287);
         description.prefHeight(69);
-        description.setLayoutX(113);
+        description.setLayoutX(103);
         description.setLayoutY(42);
         description.setStyle("  -fx-font-family: \"Arial\";"
                 + "    -fx-font-size: 13px;"

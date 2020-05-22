@@ -92,7 +92,7 @@ public class Notify extends Thread {
         do {
             try {
 
-                sleep(900);
+                sleep(100);
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Notify.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,7 +151,7 @@ public class Notify extends Thread {
                                     notification.setWarned(true);
                                     
                                     notificationWarned.add(notification);
-                                    System.out.println(notificationWarned.get(0).getImage());
+                                    System.out.println(notificationWarned.get(0).getScheduledHour()+ "Acorda");
                                     
                                     dao.update(notification);
                                 }
