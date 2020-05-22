@@ -137,18 +137,18 @@ public class NotificationRow extends BorderPane {
                 + "    -fx-background-radius: 100px;"
                 + "    -fx-border-width: 2 0 2 0;"
                 + "    -fx-border-color: #8A2BE2;");
-     //   description.setPadding(new Insets(5, -115, 5, 0));
+        description.setPadding(new Insets(0, 0, 5, 0));
         description.setVisible(true);
 
         this.setTop(title);
         this.setCenter(description);
         this.setLeft(image);
         
-//        BorderPane.setMargin(image, new Insets(0, 20, 30, 10));
-//        
-//        BorderPane.setMargin(title, new Insets(5, -115, 5, 0));
-//        
-//        BorderPane.setMargin(description, new Insets(0, 5, 10, 0));
+        BorderPane.setMargin(image, new Insets(0, 0, 15, 2));
+        
+        BorderPane.setMargin(title, new Insets(2, 0, 2, 0));
+        
+        BorderPane.setMargin(description, new Insets(0, 5, 10, 0));
         
         this.setStyle("-fx-background-color: black;"
                 + "-fx-border-width: 2 2 2 2;"

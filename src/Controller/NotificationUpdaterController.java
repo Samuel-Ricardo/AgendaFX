@@ -129,16 +129,16 @@ public class NotificationUpdaterController implements Initializable {
 
         MainChooser chooserScreen = new MainChooser();
         ChooserController chooserC = new ChooserController();
-        
-            ArrayList<String> alItems = new ArrayList<>();
-            
-            alItems.add("Arquivo local");   // carregando os items do ComboBox  // carregando os items do ComboBox;
-            alItems.add("Link na internet");
+
+        ArrayList<String> alItems = new ArrayList<>();
+
+        alItems.add("Arquivo local");   // carregando os items do ComboBox  // carregando os items do ComboBox;
+        alItems.add("Link na internet");
 
         try {
 
             chooserScreen.start(new Stage());
-            
+
         } catch (Exception ex) {
             Logger.getLogger(NotificationUpdaterController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -146,39 +146,38 @@ public class NotificationUpdaterController implements Initializable {
         switch (chooserC.loadChooser(alItems)) { // executa a açao baseado na opçao escolhida
 
             case 0:  // choose attachment  // escolhe o anexo
-                
-                    attachment = chooser.showOpenDialog(new Stage());
 
-                    if (attachment != null) {
+                attachment = chooser.showOpenDialog(new Stage());
 
-                        notification.setAttachment(attachment);
-                        lblAttachment.setText(attachment.getName());
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Nenhum arquivo foi escolhido");
-                    }
+                if (attachment != null) {
+
+                    notification.setAttachment(attachment);
+                    lblAttachment.setText(attachment.getName());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nenhum arquivo foi escolhido");
+                }
 
                 break;
-                
+
             case 1:  // does the download of internet files // faz download de arquivo da internet
-                
-                    JOptionPane.showMessageDialog(null, "Escolha o nome e local do arquivo");
-                    attachment = chooser.showSaveDialog(new Stage()); // choose place of file // escolhe o local do arquivo
-                
-                    String link = JOptionPane.showInputDialog(null,"Digite o Link do arquivo"); // get the link typed by the user // pega o link digitado pelo usuario 
-                    
-                    if (attachment != null) {
-                        
-                        Downloader downloader = new Downloader(link, attachment.getAbsolutePath());
-                        downloader.start();
-                        downloader.download();      // start the file download // inicia o download do arquivo
-                    
-                        
-                        notification.setAttachment(attachment);  // set Notification attachment // definir anexo de notificação
-                        lblAttachment.setText(attachment.getName());    // puts the file name on the screen // poe o nome do arquivo na tela
-                    }
-                    
-                    JOptionPane.showMessageDialog(null, "O arquivo está sendo baixado em 2° plano");
-                    
+
+                JOptionPane.showMessageDialog(null, "Escolha o nome e local do arquivo");
+                attachment = chooser.showSaveDialog(new Stage()); // choose place of file // escolhe o local do arquivo
+
+                String link = JOptionPane.showInputDialog(null, "Digite o Link do arquivo"); // get the link typed by the user // pega o link digitado pelo usuario 
+
+                if (attachment != null) {
+
+                    Downloader downloader = new Downloader(link, attachment.getAbsolutePath());
+                    downloader.start();
+                    downloader.download();      // start the file download // inicia o download do arquivo
+
+                    notification.setAttachment(attachment);  // set Notification attachment // definir anexo de notificação
+                    lblAttachment.setText(attachment.getName());    // puts the file name on the screen // poe o nome do arquivo na tela
+                }
+
+                JOptionPane.showMessageDialog(null, "O arquivo está sendo baixado em 2° plano");
+
                 break;
         }
     }
@@ -229,14 +228,20 @@ public class NotificationUpdaterController implements Initializable {
         notification.setTypeColor(typeColor.getStyle());
         notification.setUser(logUser);
         notification.setWarned(false);
-        notification.setAttachment(attachment);
-        notification.setImage(img.getAbsolutePath());
-        notification.setMusic(music);
-                
+        if (fileVissible) {
+            notification.setAttachment(attachment);
+        }
+        if (imgVissible) {
+            notification.setImage(img.getAbsolutePath());
+        }
+        if (soundVissible) {
+            notification.setMusic(music);
+        }
+
         System.out.println(notification.getScheduledDay().getTime());
 
-            System.out.println(notification.getId()+"   id controle");
-        
+        System.out.println(notification.getId() + "   id controle");
+
         if (dao.update(notification)) {     // Updates the notification  // atualiza a notificaçao
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso +,-");
         }
@@ -244,8 +249,8 @@ public class NotificationUpdaterController implements Initializable {
 
     @FXML
     void showAttachment() { // Shows the items needed to create if desired // Mostra os items necessário para criar se desejado
-  
-        fileVissible = !fileVissible; 
+
+        fileVissible = !fileVissible;
 
         btAttachment.setVisible(fileVissible);
         lblAttachment.setVisible(fileVissible);
@@ -297,13 +302,13 @@ public class NotificationUpdaterController implements Initializable {
             chooser.setSelectedExtensionFilter(image); // set filter // coloca um filtro
 
             img = chooser.showOpenDialog(new Stage()); // open chooser screen // abre a tela de escolha
-            
-            if(img != null){
-            imgNotific.setImage(new Image("file:///" + img.getAbsolutePath()));    // set choosed image // define a imagem escolhida
+
+            if (img != null) {
+                imgNotific.setImage(new Image("file:///" + img.getAbsolutePath()));    // set choosed image // define a imagem escolhida
             }
-            
+
             notification.setImage(img.getAbsolutePath());   // set choosed image in notification// define a imagem escolhida na notificaçao
-            
+
         });
 
         loadComboBox(); // loads the ComboBox with the types // carrega o ComboBox com os tipos
@@ -349,7 +354,7 @@ public class NotificationUpdaterController implements Initializable {
                 }
             }
         });
-        
+
         loadScreen();
 
     }
@@ -367,51 +372,52 @@ public class NotificationUpdaterController implements Initializable {
         ObservableList<String> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
         cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
-         cbType.getSelectionModel().select(notification.getType());
-         typeColor.setStyle("-fx-fill: "+notification.getTypeColor()+";");
+        cbType.getSelectionModel().select(notification.getType());
+        typeColor.setStyle("-fx-fill: " + notification.getTypeColor() + ";");
     }
-    
-    
+
     private void loadScreen() {
-        
+
         dpDate.setValue(notification.getScheduledLocalDate());
         tpHorary.setValue(notification.getScheduledLocalTime());
-        
+
         txtDescription.setText(notification.getDescription());
         txtTitle.setText(notification.getTitle());
-        
-        if(notification.getAttachment()!= null){
-            
+
+        if (notification.getAttachment() != null) {
+
             tbAttachment.selectedProperty().set(true);
             fileVissible = true;
             btAttachment.setVisible(true);
+            lblAttachment.setVisible(true);
             lblAttachment.setText(notification.getAttachment().getName());
             attachment = notification.getAttachment();
-            
+
         }
-        
-        if(notification.getImage() != null){
-            
+
+        if(notification.getImage()!= null || notification.getImage().equals("") == false){
+
             tbImage.selectedProperty().set(true);
             imgVissible = true;
-            imgNotific.setImage(new Image("file:///"+notification.getImage()));
+            imgNotific.setVisible(true);
+            imgNotific.setImage(new Image("file:///" + notification.getImage()));
             img = new File(notification.getImage());
-            
+
         }
-        
-        if(notification.getMusic()!= null){
-            
+
+        if (notification.getMusic() != null) {
+
             tbSound.selectedProperty().set(true);
             soundVissible = true;
             btSound.setVisible(true);
+            lblSound.setVisible(true);
             lblSound.setText(notification.getMusic().getName());
             music = notification.getMusic();
         }
-       
-    }
-    
-    ///// Getters and Setters/////
 
+    }
+
+    ///// Getters and Setters/////
     public TextField getTxtTitle() {
         return txtTitle;
     }
@@ -627,6 +633,5 @@ public class NotificationUpdaterController implements Initializable {
     public static void setHome(HomeController home) {
         NotificationUpdaterController.home = home;
     }
-
 
 }

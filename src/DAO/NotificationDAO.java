@@ -166,7 +166,13 @@ public class NotificationDAO {
             statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
             statement.setString(6, notification.getType());
-            statement.setString(7, notification.getAttachment().getAbsolutePath());
+            
+            if(notification.getAttachment() != null){
+                statement.setString(7, notification.getAttachment().getAbsolutePath());
+            }else{
+                statement.setString(7, "");
+            }
+                
             statement.setString(8, notification.getMusic().getAbsolutePath());
             statement.setString(9, notification.getTypeColor());
             statement.setInt(10, notification.getUser().getId().intValue());
