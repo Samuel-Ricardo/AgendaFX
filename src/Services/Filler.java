@@ -25,24 +25,24 @@ import javax.swing.JOptionPane;
  */
 public class Filler {
 
-    private final HomeController controller;
-    private Notification notification;
-    private Row row;
-    private ArrayList<Notification> notifications;
-    private final NotificationDAO dao;
-    private final SimpleDateFormat day;
-    private final Notify notify;
+    private static HomeController controller;
+    private static Notification notification;
+    private static Row row;
+    private static ArrayList<Notification> notifications;
+    private static NotificationDAO dao;
+    private static SimpleDateFormat day;
+    private static Notify notify;
 
     public Filler(HomeController controller) {
 
-        this.controller = controller;
-        this.dao = new NotificationDAO();
-        this.day = new SimpleDateFormat("dd/MM/yyy");
-        this.notify = controller.getNotify();
+        Filler.controller = controller;
+        Filler.dao = new NotificationDAO();
+        Filler.day = new SimpleDateFormat("dd/MM/yyy");
+        Filler.notify = controller.getNotify();
 
     }
 
-    public void fillOutProfileNotification() { // Load notifiacation // carrega as notificaçoes
+    public static void fillOutProfileNotification() { // Load notifiacation // carrega as notificaçoes
 
         int cont = 0;
         ArrayList<Pane> alPanes = new ArrayList<>();
@@ -81,11 +81,11 @@ public class Filler {
 
     }
 
-    public void checkNotifications() {
+    public static void checkNotifications() {
         notifications = (ArrayList<Notification>) dao.selectAllFromUser(controller.getLogUser().getId().intValue());
     }
 
-    public void fillOutAllEventNotifications() {
+    public static void fillOutAllEventNotifications() {
     
         int cont = 0;
         ArrayList<Row> alRow = new ArrayList<>();
