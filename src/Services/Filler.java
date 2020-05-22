@@ -6,8 +6,10 @@
 package Services;
 
 import Controller.HomeController;
+import Controller.NotificationListController;
 import DAO.NotificationDAO;
 import Model.Notification;
+import Model.LiteRow;
 import Model.Row;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
 
@@ -32,6 +36,7 @@ public class Filler {
     private static NotificationDAO dao;
     private static SimpleDateFormat day;
     private static Notify notify;
+    private static ListView<?> list;
 
     public Filler(HomeController controller) {
 
@@ -42,10 +47,10 @@ public class Filler {
 
     }
 
-    public static void fillOutProfileNotification() { // Load notifiacation // carrega as notificaçoes
+    public static void fillOutNotificationsOfToday(ListView list) { // Load notifiacation // carrega as notificaçoes
 
         int cont = 0;
-        ArrayList<Pane> alPanes = new ArrayList<>();
+        ArrayList<Row> alPanes = new ArrayList<>();
         
         checkNotifications();
         
@@ -72,12 +77,10 @@ public class Filler {
             cont++;
         }
 
-         ObservableList<Pane> olPanes = FXCollections.observableArrayList(alPanes);
-        
-         System.out.println(olPanes.isEmpty());
-         
-        controller.getLvTodayNotifications().getItems().clear();
-        controller.getLvTodayNotifications().setItems(olPanes);
+         ObservableList<Row> olPanes = FXCollections.observableArrayList(alPanes);
+
+         list.getItems().clear();
+         list.setItems(olPanes);
 
     }
 
@@ -85,7 +88,7 @@ public class Filler {
         notifications = (ArrayList<Notification>) dao.selectAllFromUser(controller.getLogUser().getId().intValue());
     }
 
-    public static void fillOutAllEventNotifications() {
+    public static void fillOutAllEventNotifications(ListView list) {
     
         int cont = 0;
         ArrayList<Row> alRow = new ArrayList<>();
@@ -112,7 +115,108 @@ public class Filler {
         
         ObservableList<Row> oblRow = FXCollections.observableArrayList(alRow);
         
-        controller.getLvAllEvents().setItems(oblRow);
+         list.getItems().clear();
+         list.setItems(oblRow);
+
     }
 
+    public static void fillOutCurrentLiteNotifications(ListView list){
+        
+        ArrayList<LiteRow> alNotifications = new ArrayList<>();
+                  
+        for (Notification notification : notifications) {
+
+            
+            LiteRow row = new LiteRow(notification);
+            
+       
+            row.setOnMouseClicked((t) -> {
+                
+                try {
+                    Notify.showNotification(notification);
+             } catch (Exception ex) {
+                   Logger.getLogger(NotificationListController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+               
+            });
+
+  
+            alNotifications.add(row);
+            
+        }
+        ObservableList<LiteRow> obsNotifications = FXCollections.observableArrayList(alNotifications);
+        
+        list.setPadding(new Insets(0,0,5,0));
+        list.setFixedCellSize(140);
+        list.setItems(obsNotifications);
+        System.out.println("prenchida");
+        
+    }
+    
+    public static HomeController getController() {
+        return controller;
+    }
+
+    public static void setController(HomeController controller) {
+        Filler.controller = controller;
+    }
+
+    public static Notification getNotification() {
+        return notification;
+    }
+
+    public static void setNotification(Notification notification) {
+        Filler.notification = notification;
+    }
+
+    public static Row getRow() {
+        return row;
+    }
+
+    public static void setRow(Row row) {
+        Filler.row = row;
+    }
+
+    public static ArrayList<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public static void setNotifications(ArrayList<Notification> notifications) {
+        Filler.notifications = notifications;
+    }
+
+    public static NotificationDAO getDao() {
+        return dao;
+    }
+
+    public static void setDao(NotificationDAO dao) {
+        Filler.dao = dao;
+    }
+
+    public static SimpleDateFormat getDay() {
+        return day;
+    }
+
+    public static void setDay(SimpleDateFormat day) {
+        Filler.day = day;
+    }
+
+    public static Notify getNotify() {
+        return notify;
+    }
+
+    public static void setNotify(Notify notify) {
+        Filler.notify = notify;
+    }
+
+    public static ListView<?> getList() {
+        return list;
+    }
+
+    public static void setList(ListView<?> list) {
+        Filler.list = list;
+    }
+
+    
+    
 }

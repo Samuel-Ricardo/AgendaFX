@@ -6,7 +6,7 @@
 package Controller;
 
 import Model.Notification;
-import Model.NotificationRow;
+import Model.LiteRow;
 import Services.Notify;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class NotificationListController implements Initializable {
    
     
     @FXML
-    private ListView<BorderPane> list;
+    private ListView<LiteRow> list;
     
     private static ArrayList<Notification> notifications = new ArrayList<>();
     
@@ -40,12 +40,12 @@ public class NotificationListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
 
-          ArrayList<BorderPane> alNotifications = new ArrayList<>();
+          ArrayList<LiteRow> alNotifications = new ArrayList<>();
                   
         for (Notification notification : notifications) {
 
             
-            NotificationRow row = new NotificationRow(notification);
+            LiteRow row = new LiteRow(notification);
             
        
             row.setOnMouseClicked((t) -> {
@@ -62,7 +62,7 @@ public class NotificationListController implements Initializable {
             alNotifications.add(row);
             
         }
-        ObservableList<BorderPane> obsNotifications = FXCollections.observableArrayList(alNotifications);
+        ObservableList<LiteRow> obsNotifications = FXCollections.observableArrayList(alNotifications);
         
         list.setPadding(new Insets(0,0,5,0));
         list.setFixedCellSize(140);
@@ -71,11 +71,11 @@ public class NotificationListController implements Initializable {
     
      }
 
-    public ListView<BorderPane> getList() {
+    public ListView<LiteRow> getList() {
         return list;
     }
 
-    public void setList(ListView<BorderPane> list) {
+    public void setList(ListView<LiteRow> list) {
         this.list = list;
     }
 

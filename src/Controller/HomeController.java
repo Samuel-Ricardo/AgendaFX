@@ -135,7 +135,7 @@ public class HomeController implements Initializable {
     private ImageView imgPerfilZoom;
 
     @FXML
-    private ListView<Pane> lvTodayNotifications;
+    private ListView<Row> lvTodayNotifications;
 
     @FXML
     private ListView<Row> lvAllEvents;
@@ -309,7 +309,8 @@ public class HomeController implements Initializable {
             notDAO.delete(rows.get(cont).getNotification());
             
         }
-        filler.fillOutAllEventNotifications();
+        Filler.setList(lvAllEvents);
+        filler.fillOutAllEventNotifications(lvAllEvents);
     }
 
     @FXML
@@ -364,14 +365,16 @@ public class HomeController implements Initializable {
             if (logUser.getImage() != null) {
                 imgPerfil.setImage(new Image("file:///" + logUser.getImage()));
             }
-
-            filler.fillOutProfileNotification();
+            
+            Filler.setList(lvTodayNotifications);
+            filler.fillOutNotificationsOfToday(lvTodayNotifications);
         }
     }
     
         private void loadEvents() {
       
-        filler.fillOutAllEventNotifications();
+        filler.setList(lvAllEvents);
+        filler.fillOutAllEventNotifications(lvAllEvents);
         
     }
 
@@ -632,11 +635,11 @@ public class HomeController implements Initializable {
         HomeController.index = index;
     }
 
-    public ListView<Pane> getLvTodayNotifications() {
+    public ListView<Row> getLvTodayNotifications() {
         return lvTodayNotifications;
     }
 
-    public void setLvTodayNotifications(ListView<Pane> lvNotifications) {
+    public void setLvTodayNotifications(ListView<Row> lvNotifications) {
         this.lvTodayNotifications = lvNotifications;
     }
 
