@@ -186,6 +186,7 @@ public class Notify extends Thread {
         }
 
         if (notificationWarned.isEmpty() == false) {
+            System.out.println(notificationWarned.get(0).getDescription());
             listNotification(notificationWarned);
         }
 

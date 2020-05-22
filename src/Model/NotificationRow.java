@@ -99,11 +99,7 @@ public class NotificationRow extends BorderPane {
     public void loadPane(Notification notification) {
 
         this.setPrefWidth(411);
-        this.setPrefHeight(118);
-
-        this.setStyle("-fx-background-color: black;"
-                + "-fx-border-width: 2 2 2 2;"
-                + "-fx-border-color: " + notification.getTypeColor() + ";");
+        this.setPrefHeight(138);
         this.setPadding(new Insets(20, 10, 10, 20));
 
         if (notification.getImage() != null || notification.getImage().equals("") == false) {
@@ -154,6 +150,9 @@ public class NotificationRow extends BorderPane {
 //        
 //        BorderPane.setMargin(description, new Insets(0, 5, 10, 0));
         
+        this.setStyle("-fx-background-color: black;"
+                + "-fx-border-width: 2 2 2 2;"
+                + "-fx-border-color: " + notification.getTypeColor() + ";");
         this.setVisible(true);
     }
 

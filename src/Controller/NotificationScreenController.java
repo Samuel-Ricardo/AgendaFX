@@ -76,6 +76,7 @@ public class NotificationScreenController implements Initializable {
         
         try {
             updater.start(new Stage());
+            MainNotificationScreen.getWindow().close();
         } catch (Exception ex) {
             Logger.getLogger(NotificationScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }

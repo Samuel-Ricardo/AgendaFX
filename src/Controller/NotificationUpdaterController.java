@@ -8,7 +8,6 @@ package Controller;
 import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
-import Main.MainNotificationCreator;
 import Main.MainNotificationUpdater;
 import Model.Notification;
 import Model.User;
@@ -20,7 +19,6 @@ import java.io.File;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -42,7 +40,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.converter.LocalDateStringConverter;
 import javax.swing.JOptionPane;
 
 /**
@@ -232,6 +229,9 @@ public class NotificationUpdaterController implements Initializable {
         notification.setTypeColor(typeColor.getStyle());
         notification.setUser(logUser);
         notification.setWarned(false);
+        notification.setAttachment(attachment);
+        notification.setImage(img.getAbsolutePath());
+        notification.setMusic(music);
                 
         System.out.println(notification.getScheduledDay().getTime());
 
@@ -367,6 +367,8 @@ public class NotificationUpdaterController implements Initializable {
         ObservableList<String> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
         cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
+         cbType.getSelectionModel().select(notification.getType());
+         typeColor.setStyle("-fx-fill: "+notification.getTypeColor()+";");
     }
     
     
@@ -378,6 +380,33 @@ public class NotificationUpdaterController implements Initializable {
         txtDescription.setText(notification.getDescription());
         txtTitle.setText(notification.getTitle());
         
+        if(notification.getAttachment()!= null){
+            
+            tbAttachment.selectedProperty().set(true);
+            fileVissible = true;
+            btAttachment.setVisible(true);
+            lblAttachment.setText(notification.getAttachment().getName());
+            attachment = notification.getAttachment();
+            
+        }
+        
+        if(notification.getImage() != null){
+            
+            tbImage.selectedProperty().set(true);
+            imgVissible = true;
+            imgNotific.setImage(new Image("file:///"+notification.getImage()));
+            img = new File(notification.getImage());
+            
+        }
+        
+        if(notification.getMusic()!= null){
+            
+            tbSound.selectedProperty().set(true);
+            soundVissible = true;
+            btSound.setVisible(true);
+            lblSound.setText(notification.getMusic().getName());
+            music = notification.getMusic();
+        }
        
     }
     
