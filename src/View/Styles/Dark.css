@@ -302,3 +302,111 @@ and open the template in the editor.
     
 }
 
+.chart{
+    
+    -fx-background-color: transparent;
+    
+}
+
+.chart-title{
+    
+    -fx-text-fill: white
+    
+}
+
+.axis-label{
+    
+    -fx-text-fill: white;
+    
+}
+
+.chart-legend{
+    
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+    
+}
+
+.chart-legend-item-symbol{
+    
+    -fx-background-radius: 10px;
+    
+}
+
+.chart-legend-item{
+    
+    -fx-text-fill: white;
+    
+}
+
+.chart-plot-background{
+    
+    -fx-background-color: transparent;
+    
+}
+
+.chart-vertical-grid-lines{
+    
+     -fx-stroke: blue;
+    
+}
+
+.chart-horizontal-grid-lines{
+    
+     -fx-stroke: blue;
+    
+}
+
+.chart-Alternative-row-fill{
+    
+    -fx-fill: blueviolet;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0; 
+}
+
+.axis{
+    
+    -fx-tick-label-fill: white;
+    
+    
+}
+
+.default-color0.chart-area-symbol{
+    -fx-background-color: blueviolet, white;
+}
+
+.default-color1.chart-area-symbol{
+    -fx-background-color: #00ff00, white;
+}
+
+.default-color2.chart-area-symbol{
+    -fx-background-color: #ffff33, white;
+}
+
+.default-color0.chart-series-area-line{
+      -fx-stroke: blueviolet;
+}
+
+.default-color1.chart-series-area-line{
+       -fx-stroke: #00ff00;
+}
+
+.default-color2.chart-series-area-line{
+    -fx-stroke: #ffff33;
+}
+
+/*.default-color0.chart-series-area-fill{
+    -fx-fill:blueviolet aa;
+}
+
+.default-color1.chart-series-area-fill{
+    -fx-fill:#00ff00 77;
+}
+
+.default-color2.chart-series-area-fill{
+    -fx-fill:#ffff33 33;
+}*/
+
+.chart-series-line{
+    -fx-stroke-width: 5px;
+}

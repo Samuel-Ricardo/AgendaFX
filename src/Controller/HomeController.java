@@ -28,7 +28,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -140,6 +146,14 @@ public class HomeController implements Initializable {
     @FXML
     private ListView<Row> lvAllEvents;
     
+    @FXML
+    private AreaChart<String, Double> acOcuppiedDaysGraph;
+
+    @FXML
+    private CategoryAxis acX;
+
+    @FXML
+    private NumberAxis acY;
     private final UserDAO userDao = new UserDAO();
 
     private final NotificationDAO notDAO = new NotificationDAO();
@@ -158,6 +172,7 @@ public class HomeController implements Initializable {
     
     private Filler filler = new Filler(this);
         
+    
             
 
     @FXML
@@ -215,7 +230,44 @@ public class HomeController implements Initializable {
         if (panePerfil.isVisible() == true) {
             panePerfil.setVisible(false);
         }
-
+        
+        XYChart.Series janLine = new XYChart.Series();
+        
+        janLine.setName("Janeiro");
+        janLine.getData().add(new XYChart.Data("Segunda", 10));
+        janLine.getData().add(new XYChart.Data("Terça", 20));
+        janLine.getData().add(new XYChart.Data("Quarta", 35));
+        janLine.getData().add(new XYChart.Data("Quinta", 28));
+        janLine.getData().add(new XYChart.Data("Sexta", 15));
+        janLine.getData().add(new XYChart.Data("Sábado", 8));
+        janLine.getData().add(new XYChart.Data("Domino", 5));
+        
+         XYChart.Series fevLine = new XYChart.Series();
+        
+        fevLine.setName("Fevereiro");
+        fevLine.getData().add(new XYChart.Data("Segunda", 30));
+        fevLine.getData().add(new XYChart.Data("Terça", 10));
+        fevLine.getData().add(new XYChart.Data("Quarta", 55));
+        fevLine.getData().add(new XYChart.Data("Quinta", 28));
+        fevLine.getData().add(new XYChart.Data("Sexta", 8));
+        fevLine.getData().add(new XYChart.Data("Sábado", 80));
+        fevLine.getData().add(new XYChart.Data("Domino", 20));
+        
+        XYChart.Series marLine = new XYChart.Series();
+        
+        marLine.setName("Março");
+        marLine.getData().add(new XYChart.Data("Segunda", 10));
+        marLine.getData().add(new XYChart.Data("Terça", 40));
+        marLine.getData().add(new XYChart.Data("Quarta", 35));
+        marLine.getData().add(new XYChart.Data("Quinta", 18));
+        marLine.getData().add(new XYChart.Data("Sexta", 25));
+        marLine.getData().add(new XYChart.Data("Sábado", 28));
+        marLine.getData().add(new XYChart.Data("Domino", 15));
+        
+        acOcuppiedDaysGraph.getData().clear();
+        acOcuppiedDaysGraph.getData().addAll(janLine,fevLine,marLine);
+        
+        
     }
 
     @FXML
