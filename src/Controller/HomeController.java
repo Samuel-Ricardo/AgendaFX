@@ -45,6 +45,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -162,7 +164,13 @@ public class HomeController implements Initializable {
     private ComboBox<String> cbTimeInterval;
     
     @FXML
-    private WebView wbvEmail;
+    private WebView wbvGmail;
+
+    @FXML
+    private WebView wbvOutlook;
+
+    @FXML
+    private WebView wbvGitHub;
 
     
     private final UserDAO userDao = new UserDAO();
@@ -292,6 +300,10 @@ public class HomeController implements Initializable {
         pcMostUsedEvents.setLabelsVisible(true);
         pcMostUsedEvents.setLegendVisible(true);
         //pcMostUsedEvents.setLegendSide(Side.RIGHT);
+        
+        wbvGmail.getEngine().load("https://www.google.com/gmail/about/");
+        wbvOutlook.getEngine().load("https://outlook.live.com/mail/0/inbox");
+        wbvGitHub.getEngine().load("https://github.com/Samuel-Ricardo");
         
     }
 

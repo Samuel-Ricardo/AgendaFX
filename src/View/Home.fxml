@@ -130,7 +130,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <WebView fx:id="wbvEmail" prefHeight="257.0" prefWidth="432.0">
+                              <WebView fx:id="wbvGmail" prefHeight="257.0" prefWidth="432.0">
                                  <effect>
                                     <InnerShadow choke="0.1" height="31.0" radius="15.0" width="31.0" />
                                  </effect>
@@ -143,7 +143,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <WebView fx:id="wbvEmail1" prefHeight="257.0" prefWidth="432.0">
+                              <WebView fx:id="wbvOutlook" prefHeight="257.0" prefWidth="432.0">
                                  <effect>
                                     <InnerShadow choke="0.1" height="31.0" radius="15.0" width="31.0" />
                                  </effect>
@@ -156,7 +156,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <WebView fx:id="wbvEmail2" prefHeight="257.0" prefWidth="432.0">
+                              <WebView fx:id="wbvGitHub" prefHeight="257.0" prefWidth="432.0">
                                  <effect>
                                     <InnerShadow choke="0.1" height="31.0" radius="15.0" width="31.0" />
                                  </effect>
