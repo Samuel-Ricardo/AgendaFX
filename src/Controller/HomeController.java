@@ -28,6 +28,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -36,6 +37,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
@@ -43,6 +45,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
@@ -105,9 +108,6 @@ public class HomeController implements Initializable {
     private Label lblID;
 
     @FXML
-    private PieChart pcActivityDone;
-
-    @FXML
     private Pane paneEvento;
 
     @FXML
@@ -154,6 +154,17 @@ public class HomeController implements Initializable {
 
     @FXML
     private NumberAxis acY;
+    
+    @FXML
+    private PieChart pcMostUsedEvents;
+    
+    @FXML
+    private ComboBox<String> cbTimeInterval;
+    
+    @FXML
+    private WebView wbvEmail;
+
+    
     private final UserDAO userDao = new UserDAO();
 
     private final NotificationDAO notDAO = new NotificationDAO();
@@ -267,6 +278,20 @@ public class HomeController implements Initializable {
         acOcuppiedDaysGraph.getData().clear();
         acOcuppiedDaysGraph.getData().addAll(janLine,fevLine,marLine);
         
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList(
+                
+                new PieChart.Data("Notificaçao", 38),
+                new PieChart.Data("PostIt", 30),
+                new PieChart.Data("Atividades", 40)
+                
+        );
+        
+        pcMostUsedEvents.getData().clear();
+        pcMostUsedEvents.setData(data);
+        //pcMostUsedEvents.setLabelLineLength(100);
+        pcMostUsedEvents.setLabelsVisible(true);
+        pcMostUsedEvents.setLegendVisible(true);
+        //pcMostUsedEvents.setLegendSide(Side.RIGHT);
         
     }
 
@@ -557,14 +582,6 @@ public class HomeController implements Initializable {
 
     public void setLblID(Label lblID) {
         this.lblID = lblID;
-    }
-
-    public PieChart getPcActivityDone() {
-        return pcActivityDone;
-    }
-
-    public void setPcActivityDone(PieChart pcActivityDone) {
-        this.pcActivityDone = pcActivityDone;
     }
 
     public Pane getPaneEvento() {

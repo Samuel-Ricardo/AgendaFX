@@ -305,7 +305,9 @@ and open the template in the editor.
 .chart{
     
     -fx-background-color: transparent;
-    
+    -fx-pie-label-visible: true;
+    -fx-label-line-length: 10;
+    -fx-legend-side: right;
 }
 
 .chart-title{
@@ -323,6 +325,7 @@ and open the template in the editor.
 .chart-legend{
     
     -fx-background-color: transparent;
+    -fx-background-radius: 20px;
     -fx-padding: 10px;
     
 }
@@ -408,5 +411,27 @@ and open the template in the editor.
 }*/
 
 .chart-series-line{
-    -fx-stroke-width: 5px;
+    -fx-stroke-width: 10px;
+}
+
+.data0.chart-pie{ -fx-pie-color: blue; }
+
+.data1.chart-pie { -fx-pie-color: #00ff00; }
+
+.data2.chart-pie { -fx-pie-color: #8A2BE2; }
+
+.chart-pie-label{    
+    -fx-font-size: 15px;
+    -fx-font-wheight: bold;
+    -fx-fill: white;
+}
+
+.chart-pie-label-line{
+    -fx-stroke: blueviolet;
+    /*-fx-fill: white;*/
+    
+}
+
+.chart-contente{
+    -fx-padding: 100;
 }

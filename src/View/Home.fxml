@@ -9,6 +9,7 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
@@ -17,6 +18,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -31,6 +33,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="858.0" styleClass="simple-background" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
    <opaqueInsets>
@@ -111,7 +114,6 @@
       </VBox>
       <Pane fx:id="paneHome" layoutX="178.0" prefHeight="609.0" prefWidth="789.0">
          <children>
-            <PieChart layoutX="24.0" layoutY="32.0" prefHeight="150.0" prefWidth="279.0" title="Tipos de eventos mais usados" />
             <AreaChart fx:id="acOcuppiedDaysGraph" layoutX="6.0" layoutY="315.0" prefHeight="294.0" prefWidth="782.0" title="Taxa de Ocupaçao">
               <xAxis>
                 <CategoryAxis fx:id="acX" side="BOTTOM" />
@@ -120,6 +122,51 @@
                 <NumberAxis fx:id="acY" side="LEFT" />
               </yAxis>
             </AreaChart>
+            <ComboBox fx:id="cbTimeInterval" layoutX="593.0" layoutY="302.0" prefWidth="150.0" promptText="Intervalo " visibleRowCount="5" />
+            <PieChart fx:id="pcMostUsedEvents" layoutX="6.0" prefHeight="318.0" prefWidth="359.0" title="Eventos mais usados" />
+            <TabPane layoutX="355.0" layoutY="3.0" prefHeight="294.0" prefWidth="432.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Gmail">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <WebView fx:id="wbvEmail" prefHeight="257.0" prefWidth="432.0">
+                                 <effect>
+                                    <InnerShadow choke="0.1" height="31.0" radius="15.0" width="31.0" />
+                                 </effect>
+                              </WebView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Outlook">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <WebView fx:id="wbvEmail1" prefHeight="257.0" prefWidth="432.0">
+                                 <effect>
+                                    <InnerShadow choke="0.1" height="31.0" radius="15.0" width="31.0" />
+                                 </effect>
+                              </WebView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Criador">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <WebView fx:id="wbvEmail2" prefHeight="257.0" prefWidth="432.0">
+                                 <effect>
+                                    <InnerShadow choke="0.1" height="31.0" radius="15.0" width="31.0" />
+                                 </effect>
+                              </WebView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </Pane>
       <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;" visible="false">
