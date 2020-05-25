@@ -119,6 +119,36 @@ LOCK TABLES `postit` WRITE;
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `postit_views`
+--
+
+DROP TABLE IF EXISTS `postit_views`;
+/*!50001 DROP VIEW IF EXISTS `postit_views`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `postit_views` AS SELECT 
+ 1 AS `idPostIt`,
+ 1 AS `title`,
+ 1 AS `body`,
+ 1 AS `scheduled`,
+ 1 AS `horary`,
+ 1 AS `warned`,
+ 1 AS `typeP`,
+ 1 AS `typeColor`,
+ 1 AS `postItUser`,
+ 1 AS `sound`,
+ 1 AS `id`,
+ 1 AS `nome`,
+ 1 AS `sexo`,
+ 1 AS `dataNascimento`,
+ 1 AS `telefone`,
+ 1 AS `email`,
+ 1 AS `cpf`,
+ 1 AS `senha`,
+ 1 AS `imagePerfil`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -178,6 +208,24 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `postit_views`
+--
+
+/*!50001 DROP VIEW IF EXISTS `postit_views`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `postit_views` AS select `postit`.`idPostIt` AS `idPostIt`,`postit`.`title` AS `title`,`postit`.`body` AS `body`,`postit`.`scheduled` AS `scheduled`,`postit`.`horary` AS `horary`,`postit`.`warned` AS `warned`,`postit`.`typeP` AS `typeP`,`postit`.`typeColor` AS `typeColor`,`postit`.`postItUser` AS `postItUser`,`postit`.`sound` AS `sound`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil` from (`postit` join `usuario` on((`usuario`.`id` = `postit`.`postItUser`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -188,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 15:50:25
+-- Dump completed on 2020-05-25 16:09:23
