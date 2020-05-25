@@ -61,6 +61,8 @@ public class PostItCreatorController implements Initializable {
     
     private File sound;
     
+   // private PostItDAO;
+    
     @FXML
     public void close() {
 
