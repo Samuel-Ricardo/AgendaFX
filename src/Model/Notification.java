@@ -23,9 +23,6 @@ public class Notification extends PostIt{
     public Notification(User user) {
         super(user);
         
-        if (music != null) {
-            this.sound = new Sound(music);
-        }
     }
     
 

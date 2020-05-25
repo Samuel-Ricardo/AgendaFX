@@ -140,7 +140,7 @@ public class Row extends HBox {
 
     public void loadPane(PostIt postIt) {
         
-  this.setPrefWidth(772);
+        this.setPrefWidth(772);
         this.setPrefHeight(65);
            
         this.setStyle(style);
@@ -149,7 +149,7 @@ public class Row extends HBox {
 
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle(postIt.getTypeColor());
+        typeColor.setStyle("-fx-fill: "+postIt.getTypeColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);
@@ -170,7 +170,7 @@ public class Row extends HBox {
         }
         date.setVisible(true);
         
-              this.getChildren().addAll(typeColor,title,date);
+        this.getChildren().addAll(typeColor,title,date);
               
         this.setVisible(true);
     }

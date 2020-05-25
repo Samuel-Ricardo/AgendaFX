@@ -99,6 +99,20 @@ and open the template in the editor.
     
 }
 
+.jfx-toggle-button{
+    -jfx-toggle-color: blueviolet;
+    -jfx-toggle-line-color: mediumpurple;
+}
+
+.toggle-text{
+    
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-fill: white;
+    
+}
+
 .text-field{
     
     -fx-font-family: "arial";
@@ -116,6 +130,7 @@ and open the template in the editor.
     -fx-background-color: transparent;
     -fx-font-weight: bold;
     -fx-border-width: 0 0 2 2;
+    -fx-border-radius: 2px;
     -fx-border-color: #8A2BE2;
     
     
@@ -263,20 +278,34 @@ and open the template in the editor.
 
 .date-picker{
     
+    -jfx-text-fill: #ffffff;
+    -fx-background-color: blueviolet;
+    -fx-border-color: #343232;
+    -fx-border-width: 0 0 5 0;
+    -jfx-default-color: blue;
+    
+}
+
+.jfx-date-picker>jfx-text-field,
+.jfx-time-picker>jfx-text-field{
     -fx-text-fill: #ffffff;
-    -fx-background-color: #9370DB;
+    -jfx-focus-color: red;
+}
+
+.jfx-time-picker{
+   
+    -fx-text-fill: #ffffff;
+    -fx-background-color: blueviolet;
     -fx-border-color: #343232;
     -fx-border-width: 0 0 5 0;
     
 }
 
-.time-picker{
-   
-    -fx-text-fill: #ffffff;
-    -fx-background-color: #9370DB;
-    -fx-border-color: #343232;
-    -fx-border-width: 0 0 5 0;
-    
+.jfx-date-picker .date-picker-popup .calendar-grid .day-cell:hover,
+.jfx-date-picker .data-picker-list-cell:hover {
+    /*-fx-background-color: #A020F0;*/
+    -fx-text-fill: #A020F0;
+    /*-fx-cursor: hand;*/
 }
 
 .check-box{

@@ -29,15 +29,10 @@ public class PostIt {
     protected String type;
     protected String typeColor;
     protected User user;
-    protected Sound sound;
     protected File music;
 
     public PostIt(User user) {
         this.user = user;
-        
-        if (music != null) {
-            this.sound = new Sound(music);
-        }
     }
 
     public PostIt() {
@@ -148,14 +143,6 @@ public class PostIt {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Sound getSound() {
-        return sound;
-    }
-
-    public void setSound(Sound sound) {
-        this.sound = sound;
     }
 
     public File getMusic() {
