@@ -28,8 +28,8 @@
                         <Font name="Arial Bold" size="12.0" />
                      </font>
                   </JFXToggleButton>
-                  <Button layoutX="25.0" layoutY="217.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="169.0" text="Escolher" visible="false" />
-                  <Label layoutX="34.0" layoutY="267.0" styleClass="coment" text="Se nao escolher será selecionado o padrao" visible="false" />
+                  <Button fx:id="btSound" layoutX="25.0" layoutY="217.0" mnemonicParsing="false" onAction="#soundChoose" prefHeight="33.0" prefWidth="169.0" text="Escolher" visible="false" />
+                  <Label fx:id="lblSound" layoutX="34.0" layoutY="267.0" styleClass="coment" text="Se nao escolher será selecionado o padrao" visible="false" />
                   <ComboBox fx:id="cbTypes" layoutX="233.0" layoutY="115.0" prefWidth="150.0" />
                   <Label layoutX="212.0" layoutY="21.0" text="Tipo:" />
                   <Rectangle fx:id="recType" arcHeight="5.0" arcWidth="5.0" height="13.0" layoutX="222.0" layoutY="78.0" stroke="TRANSPARENT" strokeType="INSIDE" width="161.0" />
