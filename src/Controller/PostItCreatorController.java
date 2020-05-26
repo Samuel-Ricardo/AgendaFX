@@ -85,7 +85,7 @@ public class PostItCreatorController implements Initializable {
 
     @FXML
     private void create() {
-        
+       
         PostIt postIt = new PostIt();
                 
 
@@ -107,6 +107,7 @@ public class PostItCreatorController implements Initializable {
             JOptionPane.showMessageDialog(null, "Criado");
             
         }
+         
     }
 
     @FXML
@@ -117,6 +118,8 @@ public class PostItCreatorController implements Initializable {
     @FXML
     void changeSoundVisibility() {
 
+        tgSound.fontProperty().get();
+        
         soundIsVisible = !soundIsVisible;
             
             btSound.setVisible(soundIsVisible);
@@ -130,12 +133,18 @@ public class PostItCreatorController implements Initializable {
         }        
     }
     
+    
+    @FXML
+    void soundChoose() {
+
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         fillComboBox();
         
-        cbTypes.selectionModelProperty().addListener((o) -> {
+        cbTypes.valueProperty().addListener((o) -> {
         
             int index = cbTypes.getSelectionModel().getSelectedIndex(); // change the color of Rectangle: recType when change the notification //alterar a cor do retângulo: recType ao alterar o tipo de notificação
                 String style = "";
