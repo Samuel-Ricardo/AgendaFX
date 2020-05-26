@@ -7,6 +7,7 @@ package Controller;
 
 import Main.MainChooser;
 import Main.MainNotificationCreator;
+import Main.MainPostItCreator;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -40,10 +41,18 @@ public class ChooserController implements Initializable {
 
     @FXML
     private Button btChoose;
+  
+    private static ComboBox<String> staticCbType;
     
-    private ArrayList<String> alTypes = new ArrayList<>();
-    private ObservableList<String> obsTypes;
-    private int index = 100000;
+    private static Button staticbtCreate;
+
+    private static Button staticbtChoose;
+    
+    private static ArrayList<String> alTypes = new ArrayList<>();
+    
+    private static ObservableList<String> obsTypes;
+    
+    private static int index = 100000;
 
     /**
      * Initializes the controller class.
@@ -52,13 +61,18 @@ public class ChooserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {        // execute when starting // executa ao iniciar
     
+        staticCbType = cbType;
+        staticbtChoose = btChoose;
+        staticbtCreate = btCreate;
+        
         alTypes.add("Notficaçao");  // Loads the Array List with the options // Carrega o ArrayList com as opçoes;
         alTypes.add("PostIt");      
         alTypes.add("Atividade");
 
         obsTypes = FXCollections.observableArrayList(alTypes);  // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
-        cbType.setItems(obsTypes);    
+        staticCbType.getItems().clear();
+        staticCbType.setItems(obsTypes);    
        
     }
 
@@ -121,6 +135,21 @@ public class ChooserController implements Initializable {
                 }
 
                 break;
+                
+            case 1:
+                
+                if (MainPostItCreator.getWindow() != null) {  // Close the window if it is open // Fecha a janela se estiver aberta
+
+                    MainPostItCreator.getWindow().close();
+                }
+
+                MainPostItCreator postIt = new MainPostItCreator();
+
+                try {
+                    postIt.start(new Stage());         // Open the window // abre a janela
+                } catch (Exception ex) {
+                    Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
         }
         MainChooser.getWindow().close();   // closes the current window  // fecha a janela atual

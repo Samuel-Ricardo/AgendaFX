@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -151,6 +153,22 @@ public class PostIt {
 
     public void setMusic(File music) {
         this.music = music;
+    }
+
+    public void setScheduledDay(LocalDate date, LocalTime time) {
+     
+        SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+                
+        String stringDate = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        String stringTime = time.format(dtf);
+        
+        try {
+            scheduledDay = complet.parse(stringDate+" "+stringTime);
+        } catch (ParseException ex) {
+            Logger.getLogger(PostIt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     
