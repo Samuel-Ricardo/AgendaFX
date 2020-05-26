@@ -40,7 +40,7 @@ public class PostItDAO {
          connect();
         }
         PreparedStatement statement = null;
-        String sql = "INSERT INTO postit (idPostIt, postItUser, title, body, schedule, horary, warned, typeP, typeColor, sound) VALUES (?,?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO postit (idPostIt, postItUser, title, body, scheduled, horary, warned, typeP, typeColor, sound) VALUES (?,?,?,?,?,?,?,?,?,?);";
         
         /*
         
@@ -89,7 +89,7 @@ public class PostItDAO {
          connect();
         }
         PreparedStatement statement = null;
-        String sql = "UPDATE postit SET postItUser = ?, title = ?, body = ?, schedule = ?, horary = ?, warned = ?, typeP = ?, typeColor = ?, sound = ? WHERE idPostIt = ?;";
+        String sql = "UPDATE postit SET postItUser = ?, title = ?, body = ?, scheduled = ?, horary = ?, warned = ?, typeP = ?, typeColor = ?, sound = ? WHERE idPostIt = ?;";
         
         try {
             
@@ -425,5 +425,31 @@ public class PostItDAO {
     private void connect() {
      connection = ConnectionFactory.getConnection();
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public static PostIt getPostIt() {
+        return postIt;
+    }
+
+    public static void setPostIt(PostIt postIt) {
+        PostItDAO.postIt = postIt;
+    }
+
+    public SimpleDateFormat getComplet() {
+        return complet;
+    }
+
+    public void setComplet(SimpleDateFormat complet) {
+        this.complet = complet;
+    }
+    
+    
     
 }

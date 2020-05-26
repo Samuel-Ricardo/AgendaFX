@@ -95,7 +95,7 @@ public class NotificationCreaterController implements Initializable {
 
     private FileChooser chooser = new FileChooser();
 
-    private FileChooser.ExtensionFilter image = new FileChooser.ExtensionFilter("Image", "*.jpg", "*.jpeg", "*gif", "*.png", "*.svg");
+    private FileChooser.ExtensionFilter image = new FileChooser.ExtensionFilter("Image", "*.jpg", "*.jpeg", "*.gif", "*.png", "*.svg");
 
     private FileChooser.ExtensionFilter sound = new FileChooser.ExtensionFilter("sound", "*.wav", "*.mp3");
 
@@ -189,6 +189,8 @@ public class NotificationCreaterController implements Initializable {
     void chooseSound() {    // choose sound // escolher o som
 
         chooser.setSelectedExtensionFilter(sound);
+        
+        chooser.getExtensionFilters().add(sound);
 
         music = chooser.showOpenDialog(new Stage());
 

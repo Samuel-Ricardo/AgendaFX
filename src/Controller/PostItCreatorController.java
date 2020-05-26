@@ -28,6 +28,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
@@ -107,6 +110,8 @@ public class PostItCreatorController implements Initializable {
             JOptionPane.showMessageDialog(null, "Criado");
             
         }
+        
+        PostItDAO.setPostIt(postIt);
          
     }
 
@@ -137,6 +142,17 @@ public class PostItCreatorController implements Initializable {
     @FXML
     void soundChoose() {
 
+        ExtensionFilter soundFilter = new ExtensionFilter("Sounds", "*.wav", "*.mp3");
+        FileChooser SoundChooser = new FileChooser();
+        SoundChooser.getExtensionFilters().add(soundFilter);
+        
+        sound = SoundChooser.showOpenDialog(new Stage());
+        
+        if (sound != null) {
+
+            lblSound.setText(sound.getName());
+        }
+        
     }
     
     @Override
