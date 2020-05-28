@@ -93,7 +93,7 @@ public class NotificationDAO {
             }
             statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
-            statement.setString(6, notification.getType());
+            statement.setInt(6, notification.getType().getId());
             if (notification.getAttachment() != null) {
                 statement.setString(7, notification.getAttachment().getAbsolutePath());
             } else {
@@ -104,9 +104,8 @@ public class NotificationDAO {
             }else{
                 statement.setString(8, "");
             }
-            statement.setString(9, notification.getTypeColor());
-            statement.setInt(10, notification.getUser().getId().intValue());
-            statement.setDate(11, sqlDate);
+            statement.setInt(9, notification.getUser().getId().intValue());
+            statement.setDate(10, sqlDate);
 
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
@@ -123,7 +122,7 @@ public class NotificationDAO {
 
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo_notificacao = ?, anexo = ?, musica = ?, = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
+        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo_notificacao = ?, anexo = ?, musica = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
 
         /*
             
@@ -165,7 +164,7 @@ public class NotificationDAO {
             statement.setString(3, notification.getImage());
             statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
-            statement.setString(6, notification.getType());
+            statement.setString(6, notification.getType().getId());
             
             if(notification.getAttachment() != null){
                 statement.setString(7, notification.getAttachment().getAbsolutePath());
@@ -241,7 +240,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Notification> notifications = new ArrayList<>();
-        String sql = "SELECT * FROM notificationsview ORDER BY horario;";
+        String sql = "SELECT * FROM notification_from_user ORDER BY marcado DESC;";
 
         /*
             

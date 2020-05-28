@@ -84,7 +84,8 @@ SET character_set_client = utf8;
  1 AS `imagePerfil`,
  1 AS `id_tipo`,
  1 AS `tipo`,
- 1 AS `cor`*/;
+ 1 AS `cor`,
+ 1 AS `detalhes_de_cores`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -150,7 +151,8 @@ SET character_set_client = utf8;
  1 AS `imagePerfil`,
  1 AS `id_tipo`,
  1 AS `tipo`,
- 1 AS `cor`*/;
+ 1 AS `cor`,
+ 1 AS `detalhes_de_cores`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -164,6 +166,7 @@ CREATE TABLE `tipo` (
   `id_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(30) DEFAULT NULL,
   `cor` varchar(20) DEFAULT NULL,
+  `detalhes_de_cores` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_tipo`),
   UNIQUE KEY `id` (`id_tipo`),
   UNIQUE KEY `id_tipo` (`id_tipo`)
@@ -235,7 +238,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `notification_from_user` AS select `notificacao`.`idNotific` AS `idNotific`,`notificacao`.`titulo` AS `titulo`,`notificacao`.`descricao` AS `descricao`,`notificacao`.`image` AS `image`,`notificacao`.`horario` AS `horario`,`notificacao`.`avisado` AS `avisado`,`notificacao`.`anexo` AS `anexo`,`notificacao`.`musica` AS `musica`,`notificacao`.`userNotification` AS `userNotification`,`notificacao`.`marcado` AS `marcado`,`notificacao`.`tipo_notificacao` AS `tipo_notificacao`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor` from ((`notificacao` join `usuario` on((`notificacao`.`userNotification` = `usuario`.`id`))) join `tipo` on((`notificacao`.`tipo_notificacao` = `tipo`.`id_tipo`))) */;
+/*!50001 VIEW `notification_from_user` AS select `notificacao`.`idNotific` AS `idNotific`,`notificacao`.`titulo` AS `titulo`,`notificacao`.`descricao` AS `descricao`,`notificacao`.`image` AS `image`,`notificacao`.`horario` AS `horario`,`notificacao`.`avisado` AS `avisado`,`notificacao`.`anexo` AS `anexo`,`notificacao`.`musica` AS `musica`,`notificacao`.`userNotification` AS `userNotification`,`notificacao`.`marcado` AS `marcado`,`notificacao`.`tipo_notificacao` AS `tipo_notificacao`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores` from ((`notificacao` left join `usuario` on((`notificacao`.`userNotification` = `usuario`.`id`))) left join `tipo` on((`notificacao`.`tipo_notificacao` = `tipo`.`id_tipo`))) union select `notificacao`.`idNotific` AS `idNotific`,`notificacao`.`titulo` AS `titulo`,`notificacao`.`descricao` AS `descricao`,`notificacao`.`image` AS `image`,`notificacao`.`horario` AS `horario`,`notificacao`.`avisado` AS `avisado`,`notificacao`.`anexo` AS `anexo`,`notificacao`.`musica` AS `musica`,`notificacao`.`userNotification` AS `userNotification`,`notificacao`.`marcado` AS `marcado`,`notificacao`.`tipo_notificacao` AS `tipo_notificacao`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores` from (`tipo` left join (`usuario` left join `notificacao` on((`notificacao`.`userNotification` = `usuario`.`id`))) on((`notificacao`.`tipo_notificacao` = `tipo`.`id_tipo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -253,7 +256,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `postit_from_user` AS select `postit`.`idPostIt` AS `idPostIt`,`postit`.`title` AS `title`,`postit`.`body` AS `body`,`postit`.`scheduled` AS `scheduled`,`postit`.`horary` AS `horary`,`postit`.`warned` AS `warned`,`postit`.`user_postit` AS `user_postit`,`postit`.`sound` AS `sound`,`postit`.`type_postit` AS `type_postit`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor` from ((`postit` join `usuario` on((`postit`.`user_postit` = `usuario`.`id`))) join `tipo` on((`postit`.`type_postit` = `tipo`.`id_tipo`))) */;
+/*!50001 VIEW `postit_from_user` AS select `postit`.`idPostIt` AS `idPostIt`,`postit`.`title` AS `title`,`postit`.`body` AS `body`,`postit`.`scheduled` AS `scheduled`,`postit`.`horary` AS `horary`,`postit`.`warned` AS `warned`,`postit`.`user_postit` AS `user_postit`,`postit`.`sound` AS `sound`,`postit`.`type_postit` AS `type_postit`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores` from ((`postit` left join `usuario` on((`postit`.`user_postit` = `usuario`.`id`))) left join `tipo` on((`postit`.`type_postit` = `tipo`.`id_tipo`))) union select `postit`.`idPostIt` AS `idPostIt`,`postit`.`title` AS `title`,`postit`.`body` AS `body`,`postit`.`scheduled` AS `scheduled`,`postit`.`horary` AS `horary`,`postit`.`warned` AS `warned`,`postit`.`user_postit` AS `user_postit`,`postit`.`sound` AS `sound`,`postit`.`type_postit` AS `type_postit`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores` from (`tipo` left join (`usuario` left join `postit` on((`postit`.`user_postit` = `usuario`.`id`))) on((`postit`.`type_postit` = `tipo`.`id_tipo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -267,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-28 10:14:50
+-- Dump completed on 2020-05-28 11:40:19
