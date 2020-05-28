@@ -11,4 +11,43 @@ package Model;
  */
 public class Type {
     
+    private int id;
+    private String name;
+    private String color;
+    private String colorDetails;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColorDetails() {
+        return colorDetails;
+    }
+
+    public void setColorDetails(String colorDetails) {
+        this.colorDetails = colorDetails;
+    }
+    
+    
+    
 }

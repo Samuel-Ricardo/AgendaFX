@@ -28,10 +28,9 @@ public class PostIt {
     protected String description;
     protected Date scheduledDay;
     protected boolean warned;
-    protected String type;
-    protected String typeColor;
     protected User user;
     protected File music;
+    protected Type type;
 
     public PostIt(User user) {
         this.user = user;
@@ -40,6 +39,17 @@ public class PostIt {
     public PostIt() {
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    
+    
+    
     public int getId() {
         return id;
     }
@@ -79,15 +89,7 @@ public class PostIt {
     public void setWarned(boolean warned) {
         this.warned = warned;
     }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
+    
     public java.sql.Date getSQLScheduledDay() {
 
         java.sql.Date sqlDate = new java.sql.Date(scheduledDay.getTime());
@@ -128,17 +130,7 @@ public class PostIt {
        
         return scheduledHour.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
     }
-
-    public String getTypeColor() {
-        return typeColor.replace(";", "");
-    }
-
-    public void setTypeColor(String typeColor) {
-        String hexadecimal = typeColor.substring(typeColor.lastIndexOf("#"));
-        this.typeColor = hexadecimal.replace(";", "");
-    }
     
-
     public User getUser() {
         return user;
     }

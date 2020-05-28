@@ -75,7 +75,7 @@ public class Row extends HBox {
          
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle("-fx-fill: "+notification.getTypeColor()+";");
+        typeColor.setStyle("-fx-fill: "+notification.getType().getColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);
@@ -112,7 +112,7 @@ public class Row extends HBox {
          
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle("-fx-fill: "+notification.getTypeColor()+";");
+        typeColor.setStyle("-fx-fill: "+notification.getType().getColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);
@@ -149,7 +149,7 @@ public class Row extends HBox {
 
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle("-fx-fill: "+postIt.getTypeColor()+";");
+        typeColor.setStyle("-fx-fill: "+postIt.getType().getColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);

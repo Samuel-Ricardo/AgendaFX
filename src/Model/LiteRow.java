@@ -75,7 +75,6 @@ public class LiteRow extends BorderPane {
 
         image.prefWidth(88);
         image.prefHeight(88);
-        image.setStyle(notification.getTypeColor());
         image.setVisible(true);
 
         title.prefWidth(363);
@@ -152,7 +151,7 @@ public class LiteRow extends BorderPane {
         
         this.setStyle("-fx-background-color: black;"
                 + "-fx-border-width: 5 5 5 5;"
-                + "-fx-border-color: " + notification.getTypeColor() + ";");
+                + "-fx-border-color: " + notification.getType().getColor() + ";");
         
         this.setVisible(true);
     }
@@ -164,12 +163,12 @@ public class LiteRow extends BorderPane {
 
         this.setStyle("-fx-background-color: black;"
                 + "-fx-border-width: 5 5 5 5"
-                + "-fx-border-color: " + notification.getTypeColor() + ";");
+                + "-fx-border-color: " + notification.getType().getColor() + ";");
         this.setPadding(new Insets(20, 10, 10, 20));
 
         image.prefWidth(30);
         image.prefHeight(30);
-        image.setStyle(postIt.getTypeColor());
+        image.setStyle(postIt.getType().getColor());
         image.setVisible(true);
 
         title.prefWidth(363);
