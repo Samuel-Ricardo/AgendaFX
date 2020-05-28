@@ -13,6 +13,7 @@ import Model.Notification;
 import Model.User;
 import Services.Downloader;
 import Controller.HomeController;
+import Model.Type;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
@@ -61,7 +62,7 @@ public class NotificationCreaterController implements Initializable {
     private TextArea txtDescription;
 
     @FXML
-    private ComboBox<String> cbType;
+    private ComboBox<Type> cbType;
 
     @FXML
     private Rectangle typeColor;
@@ -230,7 +231,7 @@ public class NotificationCreaterController implements Initializable {
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
         notification.setType(cbType.getSelectionModel().getSelectedItem());
-        notification.setTypeColor(typeColor.getStyle());
+        notification.getType().setColor(typeColor.getStyle());
         notification.setUser(logUser);
 
         if (dao.insert(notification)) {     // creates the notification  // cria a notificaçao
@@ -302,9 +303,9 @@ public class NotificationCreaterController implements Initializable {
 
         loadComboBox(); // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
-        cbType.valueProperty().addListener(new ChangeListener<String>() {    // when exchanging item // ao trocar Item
+        cbType.valueProperty().addListener(new ChangeListener<Type>() {    // when exchanging item // ao trocar Item
             @Override
-            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+            public void changed(ObservableValue<? extends Type> ov, Type t, Type t1) {
 
                 int index = cbType.getSelectionModel().getSelectedIndex(); // change the color of Rectangle: typeColor when change the notification //alterar a cor do retângulo: typeColor ao alterar o tipo de notificação
                 String style = "";
@@ -348,7 +349,7 @@ public class NotificationCreaterController implements Initializable {
 
     private void loadComboBox() {   // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
-        ArrayList<String> arTypes = new ArrayList<>();
+        ArrayList<Types> arTypes = new ArrayList<>();
 
         arTypes.add("Urgente"); // Loads the Array List with the options // Carrega o ArrayList com as opçoes;
         arTypes.add("Trabalho / Escola");
@@ -356,7 +357,7 @@ public class NotificationCreaterController implements Initializable {
         arTypes.add("Especial");
         arTypes.add("Banal");
 
-        ObservableList<String> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
+        ObservableList<Type> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
         cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
     }

@@ -11,17 +11,34 @@ package Model;
  */
 public class Type {
     
-    private int id;
+    private Long id;
     private String name;
     private String color;
     private String colorDetails;
-
-    public int getId() {
+    private Long importance;
+    
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+       public Long getImportancia() {
+        return importance;
+    }
+
+    public void setImportancia(Long importance) {
+        this.importance = importance;
+    }
+    
+    public void setImportancia(int importance) {
+        this.importance = new Long(importance);
+    }
+    
+    public void setId(int id) {
+        this.id = new Long(id);
     }
 
     public String getName() {
@@ -37,7 +54,10 @@ public class Type {
     }
 
     public void setColor(String color) {
-        this.color = color;
+        
+        String hexadecimal = color.substring(color.lastIndexOf("#"));
+        
+        this.color = hexadecimal.replace(";", "");
     }
 
     public String getColorDetails() {
@@ -45,7 +65,10 @@ public class Type {
     }
 
     public void setColorDetails(String colorDetails) {
-        this.colorDetails = colorDetails;
+        
+         String hexadecimal = colorDetails.substring(colorDetails.lastIndexOf("#"));
+        
+        this.colorDetails = hexadecimal.replace(";", "");
     }
     
     

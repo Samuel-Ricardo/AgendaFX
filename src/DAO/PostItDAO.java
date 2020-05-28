@@ -66,7 +66,7 @@ public class PostItDAO {
             statement.setString(5, postIt.getScheduledDate());
             statement.setString(6, postIt.getScheduledHour());
             statement.setBoolean(7, postIt.isWarned());
-            statement.setInt(8, postIt.getType().getId());
+            statement.setInt(8, postIt.getType().getId().intValue());
             statement.setString(9, postIt.getMusic().getAbsolutePath());
             
             statement.execute();
@@ -98,7 +98,7 @@ public class PostItDAO {
             statement.setString(4, postIt.getScheduledDate());
             statement.setString(5, postIt.getScheduledHour());
             statement.setBoolean(6, postIt.isWarned());
-            statement.setInt(7, postIt.getType().getId());
+            statement.setInt(7, postIt.getType().getId().intValue());
             statement.setString(8, postIt.getMusic().getAbsolutePath());
             
             statement.execute();
@@ -194,6 +194,7 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
+                type.setImportancia(result.getInt("importancia"));
 
                 postIt.setType(type);
                 
@@ -263,6 +264,7 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
+                type.setImportancia(result.getInt("importancia"));
 
                 postIt.setType(type);
 
@@ -332,6 +334,7 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
+                type.setImportancia(result.getInt("importancia"));
 
                 postIt.setType(type);
 
@@ -400,6 +403,7 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
+                type.setImportancia(result.getInt("importancia"));
 
                 findPostIt.setType(type);
                 

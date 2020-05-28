@@ -94,7 +94,7 @@ public class NotificationDAO {
             }
             statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
-            statement.setInt(6, notification.getType().getId());
+            statement.setInt(6, notification.getType().getId().intValue());
             if (notification.getAttachment() != null) {
                 statement.setString(7, notification.getAttachment().getAbsolutePath());
             } else {
@@ -165,7 +165,7 @@ public class NotificationDAO {
             statement.setString(3, notification.getImage());
             statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
-            statement.setInt(6, notification.getType().getId());
+            statement.setInt(6, notification.getType().getId().intValue());
             
             if(notification.getAttachment() != null){
                 statement.setString(7, notification.getAttachment().getAbsolutePath());
@@ -322,6 +322,7 @@ public class NotificationDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
+                type.setImportancia(result.getInt("importancia"));
 
                 notification.setType(type);
                 
@@ -426,6 +427,7 @@ public class NotificationDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
+                type.setImportancia(result.getInt("importancia"));
 
                 notification.setType(type);
                 
@@ -531,6 +533,7 @@ public class NotificationDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
+                type.setImportancia(result.getInt("importancia"));
 
                 notification.setType(type);
                 
@@ -632,6 +635,7 @@ public class NotificationDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
+                type.setImportancia(result.getInt("importancia"));
 
                 notification.setType(type);
                 
