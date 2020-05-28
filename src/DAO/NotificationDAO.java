@@ -48,7 +48,7 @@ public class NotificationDAO {
     public boolean insert(Notification notification) {
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo , anexo , musica, corDoTipo, userNotification , marcado) VALUES (?, ?, ?,?,?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo_notificacao , anexo , musica, , userNotification , marcado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         /*
             
@@ -60,10 +60,10 @@ public class NotificationDAO {
                 image varchar(5000) 
                 horario time 
                 avisado tinyint(1) 
-                tipo varchar(30) 
+                tipo_notificacao int(11) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(20)
+                varchar(20)
                 userNotification int(11)
                 marcado date
         
@@ -123,7 +123,7 @@ public class NotificationDAO {
 
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo = ?, anexo = ?, musica = ?, corDoTipo = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
+        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo_notificacao = ?, anexo = ?, musica = ?, = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
 
         /*
             
@@ -135,10 +135,10 @@ public class NotificationDAO {
                 image varchar(5000) 
                 horario time 
                 avisado tinyint(1) 
-                tipo varchar(30) 
+                tipo_notificacao int(11) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(20)
+                varchar(20)
                 userNotification int(11)
                 marcado date
             
@@ -209,10 +209,10 @@ public class NotificationDAO {
                 image varchar(5000) 
                 horario time 
                 avisado tinyint(1) 
-                tipo varchar(30) 
+                tipo_notificacao int(11) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(20)
+                varchar(20)
                 userNotification int(11)
                 marcado date
             
@@ -253,10 +253,10 @@ public class NotificationDAO {
                 image varchar(5000) 
                 horario time 
                 avisado tinyint(1) 
-                tipo varchar(30) 
+                tipo_notificacao int(11) 
                 anexo varchar(5000) 
                 musica varchar(5000).
-                corDoTipo varchar(20)
+                varchar(20)
                 userNotification int(11)
                 marcado date
             
@@ -295,9 +295,9 @@ public class NotificationDAO {
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
                 notification.setScheduledDay(notificationDate);
-                notification.setType(result.getString("tipo"));
+                notification.setType(result.getString("tipo_notificacao"));
                 notification.setWarned(result.getBoolean("avisado"));
-                notification.setTypeColor(result.getString("corDoTipo"));
+                notification.setTypeColor(result.getString(""));
 
                 User user = new User();
 
@@ -348,10 +348,10 @@ public class NotificationDAO {
                 image varchar(5000) 
                 horario time 
                 avisado tinyint(1) 
-                tipo varchar(30) 
+                tipo_notificacao int(11) 
                 anexo varchar(5000) 
                 musica varchar(5000).
-                corDoTipo varchar(20)
+                varchar(20)
                 userNotification int(11)
                 marcado date
             
@@ -391,9 +391,9 @@ public class NotificationDAO {
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
                 notification.setScheduledDay(notificationDate);
-                notification.setType(result.getString("tipo"));
+                notification.setType(result.getString("tipo_notificacao"));
                 notification.setWarned(result.getBoolean("avisado"));
-                notification.setTypeColor(result.getString("corDoTipo"));
+                notification.setTypeColor(result.getString(""));
 
                 User user = new User();
 
@@ -444,10 +444,10 @@ public class NotificationDAO {
                 image varchar(5000) 
                 horario time 
                 avisado tinyint(1) 
-                tipo varchar(30) 
+                tipo_notificacao int(11) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(20)
+                varchar(20)
                 userNotification int(11)
                 marcado date
         
@@ -486,9 +486,9 @@ public class NotificationDAO {
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
                 notification.setScheduledDay(notificationDate);
-                notification.setType(result.getString("tipo"));
+                notification.setType(result.getString("tipo_notificacao"));
                 notification.setWarned(result.getBoolean("avisado"));
-                notification.setTypeColor(result.getString("corDoTipo"));
+                notification.setTypeColor(result.getString(""));
 
                 User user = new User();
 
@@ -539,10 +539,10 @@ public class NotificationDAO {
                 image varchar(5000) 
                 horario date 
                 avisado tinyint(1) 
-                tipo varchar(30) 
+                tipo_notificacao int(11) 
                 anexo varchar(5000) 
                 musica varchar(5000)
-                corDoTipo varchar(20)
+                varchar(20)
                 userNotification int(11)
             
          */
@@ -577,9 +577,9 @@ public class NotificationDAO {
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
                 notification.setScheduledDay(notificationDate);
-                notification.setType(result.getString("tipo"));
+                notification.setType(result.getString("tipo_notificacao"));
                 notification.setWarned(result.getBoolean("avisado"));
-                notification.setTypeColor(result.getString("corDoTipo"));
+                notification.setTypeColor(result.getString(""));
 
                 User user = new User();
 
