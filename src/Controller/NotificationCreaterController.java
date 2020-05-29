@@ -234,7 +234,6 @@ public class NotificationCreaterController implements Initializable {
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
         notification.setType(cbType.getSelectionModel().getSelectedItem());
-        notification.getType().setColor(typeColor.getStyle());
         notification.setUser(logUser);
 
         if (dao.insert(notification)) {     // creates the notification  // cria a notificaçao
