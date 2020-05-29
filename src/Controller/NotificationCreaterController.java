@@ -13,6 +13,7 @@ import Model.Notification;
 import Model.User;
 import Services.Downloader;
 import Controller.HomeController;
+import DAO.TypeDAO;
 import Model.Type;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
@@ -115,6 +116,8 @@ public class NotificationCreaterController implements Initializable {
     private boolean fileVissible = false;
 
     private NotificationDAO dao = new NotificationDAO();
+    
+    private TypeDAO typeDao = new TypeDAO();
 
     private User logUser = UserDAO.getUser();
 
@@ -304,59 +307,36 @@ public class NotificationCreaterController implements Initializable {
         loadComboBox(); // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
         cbType.valueProperty().addListener(new ChangeListener<Type>() {    // when exchanging item // ao trocar Item
+           
             @Override
             public void changed(ObservableValue<? extends Type> ov, Type t, Type t1) {
 
                 int index = cbType.getSelectionModel().getSelectedIndex(); // change the color of Rectangle: typeColor when change the notification //alterar a cor do retângulo: typeColor ao alterar o tipo de notificação
-                String style = "";
-
-                switch (index) {
-
-                    case 0:
-
-                        style = "-fx-fill: #ff0000;";
-                        typeColor.setStyle(style);
-                        break;
-
-                    case 1:
-
-                        style = "-fx-fill: #8a2be2;";
-                        typeColor.setStyle(style);
-                        break;
-
-                    case 2:
-
-                        style = "-fx-fill: #d4ff00;";
-                        typeColor.setStyle(style);
-                        break;
-
-                    case 3:
-
-                        style = "-fx-fill: #ffd700;";
-                        typeColor.setStyle(style);
-                        break;
-
-                    case 4:
-
-                        style = "-fx-fill: #000080;";
-                        typeColor.setStyle(style);
-                        break;
-                }
+                String colorDetails = cbType.getSelectionModel().getSelectedItem().getColorDetails();
+                
+                typeColor.setStyle("-fx-fill: "+colorDetails+";");
             }
+            
         });
 
     }
 
     private void loadComboBox() {   // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
-        ArrayList<Types> arTypes = new ArrayList<>();
+        ArrayList<Type> arTypes = new ArrayList<>();
 
-        arTypes.add("Urgente"); // Loads the Array List with the options // Carrega o ArrayList com as opçoes;
-        arTypes.add("Trabalho / Escola");
-        arTypes.add("Evento");
-        arTypes.add("Especial");
-        arTypes.add("Banal");
-
+        for (Type type : Type.getDefaultTypes()) {
+            
+            arTypes.add(type);
+            
+        }
+        
+        for (Type type : typeDao.selectAllFromUser(logUser.getId().intValue())) {
+            
+            arTypes.add(type);
+            
+        }
+        
         ObservableList<Type> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
         cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
@@ -389,11 +369,11 @@ public class NotificationCreaterController implements Initializable {
         this.txtDescription = txtDescription;
     }
 
-    public ComboBox<String> getCbType() {
+    public ComboBox<Type> getCbType() {
         return cbType;
     }
 
-    public void setCbType(ComboBox<String> cbType) {
+    public void setCbType(ComboBox<Type> cbType) {
         this.cbType = cbType;
     }
 
