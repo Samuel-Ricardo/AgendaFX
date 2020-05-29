@@ -322,7 +322,8 @@ public class NotificationDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
-                type.setImportancia(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
 
                 notification.setType(type);
                 
@@ -427,7 +428,8 @@ public class NotificationDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
-                type.setImportancia(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
 
                 notification.setType(type);
                 
@@ -533,7 +535,8 @@ public class NotificationDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
-                type.setImportancia(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
 
                 notification.setType(type);
                 
@@ -635,7 +638,8 @@ public class NotificationDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
-                type.setImportancia(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
 
                 notification.setType(type);
                 
