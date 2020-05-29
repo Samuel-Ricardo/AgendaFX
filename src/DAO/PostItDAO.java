@@ -131,7 +131,7 @@ public class PostItDAO {
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
-           JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+           JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;  
         }finally{
             ConnectionFactory.closeConnection(connection, statement);
@@ -194,7 +194,9 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
-                type.setImportancia(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
 
                 postIt.setType(type);
                 
@@ -215,7 +217,7 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<PostIt> postits = new ArrayList<>();
-        String sql = "SELECT * FROM postit_views WHERE id = ? ORDER BY horario;";
+        String sql = "SELECT * FROM postit_from_user WHERE id = ? ORDER BY horario;";
         
         try {
 
@@ -264,7 +266,9 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
-                type.setImportancia(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
 
                 postIt.setType(type);
 
@@ -285,7 +289,7 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<PostIt> postits = new ArrayList<>();
-        String sql = "SELECT * FROM PostItView WHERE titutlo LIKE ? OR descricao LIKE ?;";
+        String sql = "SELECT * FROM postit_from_user WHERE titutlo LIKE ? OR descricao LIKE ?;";
         
         try {
 
@@ -334,7 +338,9 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
-                type.setImportancia(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
 
                 postIt.setType(type);
 
@@ -356,7 +362,7 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         PostIt findPostIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
-        String sql = "SELECT * FROM PostItView WHERE idNotific = ?;";
+        String sql = "SELECT * FROM postit_from_user WHERE idNotific = ?;";
         
         try {
 
@@ -403,8 +409,10 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setColor(result.getString("cor"));
                 type.setColorDetails(result.getString("detalhes_de_cores"));
-                type.setImportancia(result.getInt("importancia"));
-
+                type.setImportance(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
+                
                 findPostIt.setType(type);
                 
                 findPostIt = findPostIt;
@@ -423,7 +431,7 @@ public class PostItDAO {
         connect();
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM postit_views WHERE idPostIt = ?;";
+        String sql = "SELECT * FROM postit_from_user WHERE idPostIt = ?;";
 
         try {
 
