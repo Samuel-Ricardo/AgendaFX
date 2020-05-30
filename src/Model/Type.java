@@ -117,6 +117,10 @@ public class Type {
         this.colorDetails = hexadecimal.replace(";", "");
     }
     
-    
+    @Override
+    public String toString(){
+        
+        return name;
+    } 
     
 }
