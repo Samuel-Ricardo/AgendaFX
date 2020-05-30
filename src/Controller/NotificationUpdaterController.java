@@ -6,10 +6,12 @@
 package Controller;
 
 import DAO.NotificationDAO;
+import DAO.TypeDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
 import Main.MainNotificationUpdater;
 import Model.Notification;
+import Model.Type;
 import Model.User;
 import Services.Downloader;
 import Services.Filler;
@@ -60,7 +62,7 @@ public class NotificationUpdaterController implements Initializable {
     private TextArea txtDescription;
 
     @FXML
-    private ComboBox<String> cbType;
+    private ComboBox<Type> cbType;
 
     @FXML
     private Rectangle typeColor;
@@ -115,6 +117,8 @@ public class NotificationUpdaterController implements Initializable {
     private NotificationDAO dao = new NotificationDAO();
 
     private User logUser = UserDAO.getUser();
+    
+    private TypeDAO typeDao = new TypeDAO();
 
     private static HomeController home;
 
@@ -226,7 +230,6 @@ public class NotificationUpdaterController implements Initializable {
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
         notification.setType(cbType.getSelectionModel().getSelectedItem());
-        notification.setTypeColor(typeColor.getStyle().substring(typeColor.getStyle().lastIndexOf("#")));
         notification.setUser(logUser);
         notification.setWarned(false);
         
@@ -318,45 +321,15 @@ public class NotificationUpdaterController implements Initializable {
 
         loadComboBox(); // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
-        cbType.valueProperty().addListener(new ChangeListener<String>() {    // when exchanging item // ao trocar Item
+        cbType.valueProperty().addListener(new ChangeListener<Type>() {    // when exchanging item // ao trocar Item
             @Override
-            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+            public void changed(ObservableValue<? extends Type> ov, Type t, Type t1) {
 
-                int index = cbType.getSelectionModel().getSelectedIndex(); // change the color of Rectangle: typeColor when change the notification //alterar a cor do retângulo: typeColor ao alterar o tipo de notificação
-                String style = "";
+                String color = cbType.getSelectionModel().getSelectedItem().getColorDetails(); // change the color of Rectangle: typeColor when change the notification //alterar a cor do retângulo: typeColor ao alterar o tipo de notificação
+                String style = "-fx-fill: "+color+";";
+                
+                typeColor.setStyle(style);
 
-                switch (index) {
-
-                    case 0:
-
-                        style = "-fx-fill: #ff0000;";
-                        typeColor.setStyle(style);
-                        break;
-
-                    case 1:
-
-                        style = "-fx-fill: #8a2be2;";
-                        typeColor.setStyle(style);
-                        break;
-
-                    case 2:
-
-                        style = "-fx-fill: #d4ff00;";
-                        typeColor.setStyle(style);
-                        break;
-
-                    case 3:
-
-                        style = "-fx-fill: #ffd700;";
-                        typeColor.setStyle(style);
-                        break;
-
-                    case 4:
-
-                        style = "-fx-fill: #000080;";
-                        typeColor.setStyle(style);
-                        break;
-                }
             }
         });
 
@@ -366,20 +339,24 @@ public class NotificationUpdaterController implements Initializable {
 
     private void loadComboBox() {   // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
-        ArrayList<String> arTypes = new ArrayList<>();
+        ArrayList<Type> arTypes = new ArrayList<>();
 
-        arTypes.add("Urgente"); // Loads the Array List with the options // Carrega o ArrayList com as opçoes;
-        arTypes.add("Trabalho / Escola");
-        arTypes.add("Evento");
-        arTypes.add("Especial");
-        arTypes.add("Banal");
+        for (Type defaultType : Type.getDefaultTypes()) {
+            arTypes.add(defaultType);
+        }
+        
+        for (Type type : typeDao.selectAllFromUser(logUser.getId().intValue())) {
+            
+            arTypes.add(type);
+            
+        }
 
-        ObservableList<String> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
+        ObservableList<Type> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
         cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
+      
         cbType.getSelectionModel().select(notification.getType());
-        notification.setTypeColor(notification.getTypeColor().substring(notification.getTypeColor().lastIndexOf("#")));
-        typeColor.setStyle("-fx-fill: " + notification.getTypeColor() + ";");
+        typeColor.setStyle("-fx-fill: " + notification.getType().getColorDetails() + ";");
         System.out.println(typeColor.getStyle()+"   stilo ;-;");
     }
 
@@ -449,11 +426,11 @@ public class NotificationUpdaterController implements Initializable {
         this.txtDescription = txtDescription;
     }
 
-    public ComboBox<String> getCbType() {
+    public ComboBox<Type> getCbType() {
         return cbType;
     }
 
-    public void setCbType(ComboBox<String> cbType) {
+    public void setCbType(ComboBox<Type> cbType) {
         this.cbType = cbType;
     }
 
