@@ -311,7 +311,7 @@ public class NotificationCreaterController implements Initializable {
             public void changed(ObservableValue<? extends Type> ov, Type t, Type t1) {
 
                 int index = cbType.getSelectionModel().getSelectedIndex(); // change the color of Rectangle: typeColor when change the notification //alterar a cor do retângulo: typeColor ao alterar o tipo de notificação
-                String colorDetails = cbType.getSelectionModel().getSelectedItem().getColorDetails();
+                String colorDetails = cbType.getSelectionModel().getSelectedItem().getPrimaryColor();
                 
                 typeColor.setStyle("-fx-fill: "+colorDetails+";");
             }

@@ -34,8 +34,8 @@ public class TypeDAO {
         Type urgente = new Type();
         
         urgente.setName("Urgente");
-        urgente.setColor("#ff7373");
-        urgente.setColorDetails("#ff0000");
+        urgente.setSecondaryColor("#ff7373");
+        urgente.setPrimaryColor("#ff0000");
         urgente.setImportance(Type.MAX_PRIORITY);
         urgente.setUser(UserDAO.getUser());
         
@@ -44,8 +44,8 @@ public class TypeDAO {
         Type meta = new Type();
         
         urgente.setName("Meta");
-        urgente.setColor("#ff7373");
-        urgente.setColorDetails("#7f7df1");
+        urgente.setSecondaryColor("#ff7373");
+        urgente.setPrimaryColor("#7f7df1");
         urgente.setImportance(Type.HIGH_PRIORITY);
         urgente.setUser(UserDAO.getUser());
         
@@ -54,8 +54,8 @@ public class TypeDAO {
         Type trabalho = new Type();
         
         urgente.setName("Trabalho");
-        urgente.setColor("#9370db");
-        urgente.setColorDetails("#8a2be2");
+        urgente.setSecondaryColor("#9370db");
+        urgente.setPrimaryColor("#8a2be2");
         urgente.setImportance(Type.MAX_PRIORITY);
         urgente.setUser(UserDAO.getUser());
         
@@ -64,8 +64,8 @@ public class TypeDAO {
         Type atividade = new Type();
         
         urgente.setName("Atividade");
-        urgente.setColor("#a457a4");
-        urgente.setColorDetails("#8b008b");
+        urgente.setSecondaryColor("#a457a4");
+        urgente.setPrimaryColor("#8b008b");
         urgente.setImportance(4);
         urgente.setUser(UserDAO.getUser());
         
@@ -74,8 +74,8 @@ public class TypeDAO {
         Type exercicio = new Type();
         
         urgente.setName("Exercicio");
-        urgente.setColor("#7fff7f");
-        urgente.setColorDetails("#00ff00");
+        urgente.setSecondaryColor("#7fff7f");
+        urgente.setPrimaryColor("#00ff00");
         urgente.setImportance(Type.MEDIUN_PRIORITY);
         urgente.setUser(UserDAO.getUser());
         
@@ -84,8 +84,8 @@ public class TypeDAO {
         Type evento = new Type();
         
         urgente.setName("Evento");
-        urgente.setColor("#e1f481");
-        urgente.setColorDetails("#d4ff00");
+        urgente.setSecondaryColor("#e1f481");
+        urgente.setPrimaryColor("#d4ff00");
         urgente.setImportance(Type.MEDIUN_PRIORITY);
         urgente.setUser(UserDAO.getUser());
         
@@ -94,8 +94,8 @@ public class TypeDAO {
         Type especial = new Type();
         
         urgente.setName("Especial");
-        urgente.setColor("#ffe97e");
-        urgente.setColorDetails("#ffd700");
+        urgente.setSecondaryColor("#ffe97e");
+        urgente.setPrimaryColor("#ffd700");
         urgente.setImportance(6);
         urgente.setUser(UserDAO.getUser());
         
@@ -104,8 +104,8 @@ public class TypeDAO {
         Type postIt = new Type();
         
         urgente.setName("Post-It");
-        urgente.setColor("#ee71ee");
-        urgente.setColorDetails("#ff00ff");
+        urgente.setSecondaryColor("#ee71ee");
+        urgente.setPrimaryColor("#ff00ff");
         urgente.setImportance(Type.MEDIUN_PRIORITY);
         urgente.setUser(UserDAO.getUser());
         
@@ -114,8 +114,8 @@ public class TypeDAO {
         Type banal = new Type();
         
         urgente.setName("Banal");
-        urgente.setColor("#5b5ba4");
-        urgente.setColorDetails("#000080");
+        urgente.setSecondaryColor("#5b5ba4");
+        urgente.setPrimaryColor("#000080");
         urgente.setImportance(Type.MIN_PRIORITY);
         urgente.setUser(UserDAO.getUser());
         
@@ -124,8 +124,8 @@ public class TypeDAO {
         Type escola = new Type();
         
         urgente.setName("Urgente");
-        urgente.setColor("#aef3f4");
-        urgente.setColorDetails("#00faff");
+        urgente.setSecondaryColor("#aef3f4");
+        urgente.setPrimaryColor("#00faff");
         urgente.setImportance(Type.HIGH_PRIORITY);
         urgente.setUser(UserDAO.getUser());
     
@@ -150,8 +150,8 @@ public class TypeDAO {
             statement = connection.prepareStatement(sql);
 
             statement.setString(0, type.getName());
-            statement.setString(1, type.getColor());
-            statement.setString(2, type.getColorDetails());
+            statement.setString(1, type.getSecondaryColor());
+            statement.setString(2, type.getPrimaryColor());
             statement.setInt(3, type.getImportance().intValue());
             statement.setInt(4, type.getUser().getId().intValue());
 
@@ -179,8 +179,8 @@ public class TypeDAO {
             statement = connection.prepareStatement(sql);
 
             statement.setString(0, type.getName());
-            statement.setString(1, type.getColor());
-            statement.setString(2, type.getColorDetails());
+            statement.setString(1, type.getSecondaryColor());
+            statement.setString(2, type.getPrimaryColor());
             statement.setInt(3, type.getImportance().intValue());
             statement.setInt(4, type.getUser().getId().intValue());
             statement.setInt(5, type.getId().intValue());
@@ -245,8 +245,8 @@ public class TypeDAO {
                 
                 type.setId(result.getInt("id_tipo"));
                 type.setName(result.getString("tipo"));
-                type.setColor(result.getString("cor"));
-                type.setColorDetails("detalhes_de_cores");
+                type.setSecondaryColor(result.getString("cor"));
+                type.setPrimaryColor("detalhes_de_cores");
                 type.setImportance(result.getInt("importancia"));
                 
                 User user = new User();     // create user with database data  // criando usuario com dados do banco de dados

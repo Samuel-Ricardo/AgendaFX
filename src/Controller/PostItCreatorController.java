@@ -165,7 +165,7 @@ public class PostItCreatorController implements Initializable {
         
         cbTypes.valueProperty().addListener((ov, t, t1) -> {
         
-             String color = cbTypes.getSelectionModel().getSelectedItem().getColorDetails(); // change the color of Rectangle: recType when change the notification //alterar a cor do retângulo: recType ao alterar o tipo de notificação
+             String color = cbTypes.getSelectionModel().getSelectedItem().getPrimaryColor(); // change the color of Rectangle: recType when change the notification //alterar a cor do retângulo: recType ao alterar o tipo de notificação
                 
              recType.setStyle("-fx-fill: "+color+";");
             

@@ -325,7 +325,7 @@ public class NotificationUpdaterController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Type> ov, Type t, Type t1) {
 
-                String color = cbType.getSelectionModel().getSelectedItem().getColorDetails(); // change the color of Rectangle: typeColor when change the notification //alterar a cor do retângulo: typeColor ao alterar o tipo de notificação
+                String color = cbType.getSelectionModel().getSelectedItem().getPrimaryColor(); // change the color of Rectangle: typeColor when change the notification //alterar a cor do retângulo: typeColor ao alterar o tipo de notificação
                 String style = "-fx-fill: "+color+";";
                 
                 typeColor.setStyle(style);
@@ -356,7 +356,7 @@ public class NotificationUpdaterController implements Initializable {
         cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
       
         cbType.getSelectionModel().select(notification.getType());
-        typeColor.setStyle("-fx-fill: " + notification.getType().getColorDetails() + ";");
+        typeColor.setStyle("-fx-fill: " + notification.getType().getPrimaryColor() + ";");
         System.out.println(typeColor.getStyle()+"   stilo ;-;");
     }
 

@@ -17,8 +17,8 @@ public class Type {
     
     private Long id;
     private String name;
-    private String color;
-    private String colorDetails;
+    private String secondaryColor;
+    private String primaryColor;
     private Long importance;
     private static ArrayList<Type> defaultTypes = TypeDAO.getDefaultTypes();
     private User user;
@@ -95,26 +95,26 @@ public class Type {
         this.name = name;
     }
 
-    public String getColor() {
-        return color;
+    public String getSecondaryColor() {
+        return secondaryColor;
     }
 
-    public void setColor(String color) {
+    public void setSecondaryColor(String secondaryColor) {
         
-        String hexadecimal = color.substring(color.lastIndexOf("#"));
+        String hexadecimal = secondaryColor.substring(secondaryColor.lastIndexOf("#"));
         
-        this.color = hexadecimal.replace(";", "");
+        this.secondaryColor = hexadecimal.replace(";", "");
     }
 
-    public String getColorDetails() {
-        return colorDetails;
+    public String getPrimaryColor() {
+        return primaryColor;
     }
 
-    public void setColorDetails(String colorDetails) {
+    public void setPrimaryColor(String primaryColor) {
         
-         String hexadecimal = colorDetails.substring(colorDetails.lastIndexOf("#"));
+         String hexadecimal = primaryColor.substring(primaryColor.lastIndexOf("#"));
         
-        this.colorDetails = hexadecimal.replace(";", "");
+        this.primaryColor = hexadecimal.replace(";", "");
     }
     
     @Override
