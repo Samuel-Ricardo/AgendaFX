@@ -193,8 +193,6 @@ public class NotificationCreaterController implements Initializable {
     void chooseSound() {    // choose sound // escolher o som
 
         chooser.setSelectedExtensionFilter(sound);
-        
-        chooser.getExtensionFilters().add(sound);
 
         music = chooser.showOpenDialog(new Stage());
 
@@ -318,17 +316,18 @@ public class NotificationCreaterController implements Initializable {
             
         });
 
+        
+        chooser.getExtensionFilters().add(sound);
+        chooser.getExtensionFilters().add(image);
     }
 
     private void loadComboBox() {   // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
         ArrayList<Type> arTypes = new ArrayList<>();
 
-        for (Type type : Type.getDefaultTypes()) {
-            
+        Type.getDefaultTypes().forEach((type) -> {
             arTypes.add(type);
-            
-        }
+        });
         
         for (Type type : typeDao.selectAllFromUser(logUser.getId().intValue())) {
             
@@ -337,7 +336,7 @@ public class NotificationCreaterController implements Initializable {
         }
         
         ObservableList<Type> obTypes = FXCollections.observableArrayList(arTypes);    // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
-
+        
         cbType.setItems(obTypes);    // Loads the ComboBox with the ObservableList // Carrega o ComboBox com o ObservableList
     }
     

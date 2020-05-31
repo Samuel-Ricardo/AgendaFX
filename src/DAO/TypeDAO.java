@@ -26,118 +26,10 @@ import javax.swing.JOptionPane;
 public class TypeDAO {
 
     private static Type type;
-
-    public static ArrayList<Type> getDefaultTypes() {
-        
-        ArrayList<Type> defaultTypes = new ArrayList<>();
-        
-        Type urgente = new Type();
-        
-        urgente.setName("Urgente");
-        urgente.setSecondaryColor("#ff7373");
-        urgente.setPrimaryColor("#ff0000");
-        urgente.setImportance(Type.MAX_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(urgente);
-        
-        Type meta = new Type();
-        
-        urgente.setName("Meta");
-        urgente.setSecondaryColor("#ff7373");
-        urgente.setPrimaryColor("#7f7df1");
-        urgente.setImportance(Type.HIGH_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(meta);
-        
-        Type trabalho = new Type();
-        
-        urgente.setName("Trabalho");
-        urgente.setSecondaryColor("#9370db");
-        urgente.setPrimaryColor("#8a2be2");
-        urgente.setImportance(Type.MAX_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(trabalho);
-        
-        Type atividade = new Type();
-        
-        urgente.setName("Atividade");
-        urgente.setSecondaryColor("#a457a4");
-        urgente.setPrimaryColor("#8b008b");
-        urgente.setImportance(4);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(atividade);
-        
-        Type exercicio = new Type();
-        
-        urgente.setName("Exercicio");
-        urgente.setSecondaryColor("#7fff7f");
-        urgente.setPrimaryColor("#00ff00");
-        urgente.setImportance(Type.MEDIUN_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(exercicio);
-        
-        Type evento = new Type();
-        
-        urgente.setName("Evento");
-        urgente.setSecondaryColor("#e1f481");
-        urgente.setPrimaryColor("#d4ff00");
-        urgente.setImportance(Type.MEDIUN_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(evento);
-        
-        Type especial = new Type();
-        
-        urgente.setName("Especial");
-        urgente.setSecondaryColor("#ffe97e");
-        urgente.setPrimaryColor("#ffd700");
-        urgente.setImportance(6);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(especial);
-        
-        Type postIt = new Type();
-        
-        urgente.setName("Post-It");
-        urgente.setSecondaryColor("#ee71ee");
-        urgente.setPrimaryColor("#ff00ff");
-        urgente.setImportance(Type.MEDIUN_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(postIt);
-        
-        Type banal = new Type();
-        
-        urgente.setName("Banal");
-        urgente.setSecondaryColor("#5b5ba4");
-        urgente.setPrimaryColor("#000080");
-        urgente.setImportance(Type.MIN_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(banal);
-        
-        Type escola = new Type();
-        
-        urgente.setName("Urgente");
-        urgente.setSecondaryColor("#aef3f4");
-        urgente.setPrimaryColor("#00faff");
-        urgente.setImportance(Type.HIGH_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-    
-        defaultTypes.add(escola);
-        
-        return defaultTypes;   
-    }
-    
     
     private Connection connection;
 
-    public boolean Insert(Type type) {
+    public boolean insert(Type type) {
 
         if (connection == null) {
             connect();
@@ -164,6 +56,41 @@ public class TypeDAO {
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
         }
+    }
+    public boolean insertAll(ArrayList<Type> types) {
+
+        if (connection == null) {
+            connect();
+        }
+        PreparedStatement statement = null;
+        String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
+
+       
+            
+        try {
+
+             for (Type type : types) {
+            
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, type.getName());
+            statement.setString(2, type.getPrimaryColor());
+            statement.setString(3, type.getSecondaryColor());
+            statement.setInt(4, type.getImportance().intValue());
+            statement.setInt(5, type.getUser().getId().intValue());
+
+            statement.execute();
+            
+             }
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Inserir: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            return false;
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement);
+        }
+        
+        
     }
 
     public boolean update(Type type) {
@@ -309,6 +236,53 @@ public class TypeDAO {
 
         return exist;
         
+    }
+    
+    public ArrayList<Boolean> exist(ArrayList<Type> types) {  
+        
+        ArrayList<Boolean> exist = new ArrayList<>();
+        
+        for(Type type: types){
+            
+         if(type.getId() == null){
+            exist.clear();
+            exist.add(false);
+            return exist;
+         }
+         
+        }
+      
+        connect();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        String sql = "SELECT * FROM type_from_user WHERE id_tipo = ?;";
+        
+
+       
+        
+        try {
+
+         for (Type type : types) {
+                
+            statement = connection.prepareStatement(sql);    
+            
+            statement.setInt(1, type.getId().intValue());    
+            
+            result = statement.executeQuery();           
+            
+            exist.add(result.next());
+        }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            exist.clear();
+            exist.add(false);
+            return exist;
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement); 
+        }
+
+        return exist;
     }
 
     private void connect() {

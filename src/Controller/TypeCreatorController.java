@@ -95,7 +95,7 @@ public class TypeCreatorController implements Initializable {
         type.setSecondaryColor(secondaryColor);
         type.setUser(UserDAO.getUser());
         type.setImportance(((int) Math.floor(sldPriority.getValue())));
-        if(dao.Insert(type)){
+        if(dao.insert(type)){
             JOptionPane.showMessageDialog(null, "Criado");
      }
     }

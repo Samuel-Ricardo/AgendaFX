@@ -14,6 +14,7 @@ import Main.MainUpdate;
 import Model.Notification;
 import Model.PostIt;
 import Model.Row;
+import Model.Type;
 import Model.User;
 import Services.Filler;
 import Services.Notify;
@@ -147,6 +148,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private ListView<Row> lvAllEvents;
+
+    @FXML
+    private ListView<Type> lvTypesEvent;
     
     @FXML
     private AreaChart<String, Double> acOcuppiedDaysGraph;

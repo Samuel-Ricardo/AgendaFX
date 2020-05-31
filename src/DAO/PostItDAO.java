@@ -195,7 +195,6 @@ public class PostItDAO {
                 type.setSecondaryColor(result.getString("cor"));
                 type.setPrimaryColor(result.getString("detalhes_de_cores"));
                 type.setImportance(result.getInt("importancia"));
-                type.setImportance(result.getInt("importancia"));
                 type.setUser(user);
 
                 postIt.setType(type);
@@ -338,7 +337,6 @@ public class PostItDAO {
                 type.setName(result.getString("tipo"));
                 type.setSecondaryColor(result.getString("cor"));
                 type.setPrimaryColor(result.getString("detalhes_de_cores"));
-                type.setImportance(result.getInt("importancia"));
                 type.setImportance(result.getInt("importancia"));
                 type.setUser(user);
 
