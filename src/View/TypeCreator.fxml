@@ -22,7 +22,7 @@
                         <Label layoutX="22.0" layoutY="14.0" text="Nome:" />
                         <Label layoutX="15.0" layoutY="103.0" text="Prioridade:" />
                         <Label fx:id="lblPriority" layoutX="127.0" layoutY="82.0" prefHeight="21.0" prefWidth="210.0" />
-                        <JFXSlider fx:id="sldPriority" blockIncrement="0.0" layoutX="117.0" layoutY="109.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#define" prefHeight="14.0" prefWidth="210.0" showTickLabels="true" value="1.0" />
+                        <JFXSlider fx:id="sldPriority" blockIncrement="0.0" layoutX="117.0" layoutY="109.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#define" prefHeight="14.0" prefWidth="210.0" showTickLabels="true" value="1.0" />
                      </children>
                   </AnchorPane>
             </content>

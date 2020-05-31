@@ -55,7 +55,7 @@ public class TypeCreatorController implements Initializable {
     @FXML
      void define() {
          
-         priority = (int) sldPriority.getValue();
+         priority = ((int) Math.floor(sldPriority.getValue()));
         
         lblPriority.setVisible(true);
         
@@ -94,9 +94,8 @@ public class TypeCreatorController implements Initializable {
         type.setPrimaryColor(primaryColor);
         type.setSecondaryColor(secondaryColor);
         type.setUser(UserDAO.getUser());
-        type.setImportance((int) sldPriority.getValue());
-        
-        if(dao.Insert(type) == false){
+        type.setImportance(((int) Math.floor(sldPriority.getValue())));
+        if(dao.Insert(type)){
             JOptionPane.showMessageDialog(null, "Criado");
      }
     }

@@ -149,11 +149,11 @@ public class TypeDAO {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(0, type.getName());
-            statement.setString(1, type.getSecondaryColor());
+            statement.setString(1, type.getName());
             statement.setString(2, type.getPrimaryColor());
-            statement.setInt(3, type.getImportance().intValue());
-            statement.setInt(4, type.getUser().getId().intValue());
+            statement.setString(3, type.getSecondaryColor());
+            statement.setInt(4, type.getImportance().intValue());
+            statement.setInt(5, type.getUser().getId().intValue());
 
             statement.execute();
 
