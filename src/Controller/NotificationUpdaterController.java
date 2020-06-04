@@ -341,10 +341,6 @@ public class NotificationUpdaterController implements Initializable {
 
         ArrayList<Type> arTypes = new ArrayList<>();
 
-        for (Type defaultType : Type.getDefaultTypes()) {
-            arTypes.add(defaultType);
-        }
-        
         for (Type type : typeDao.selectAllFromUser(logUser.getId().intValue())) {
             
             arTypes.add(type);

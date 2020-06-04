@@ -31,9 +31,15 @@ public class TypeDAO {
 
     public boolean insert(Type type) {
 
-        if (connection == null) {
-            connect();
+         try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
         PreparedStatement statement = null;
         String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
 
@@ -59,9 +65,15 @@ public class TypeDAO {
     }
     public boolean insertAll(ArrayList<Type> types) {
 
-        if (connection == null) {
-            connect();
+        try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         PreparedStatement statement = null;
         String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
 
@@ -95,9 +107,15 @@ public class TypeDAO {
 
     public boolean update(Type type) {
 
-        if (connection == null) {
-            connect();
+         try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
         PreparedStatement statement = null;
         String sql = "UPDATE tipo SET tipo = ?, cor = ?, detalhes_de_cores = ?, importancia = ?, id_usuario_tipo = ? WHERE id_tipo = ?;";
 
@@ -125,9 +143,15 @@ public class TypeDAO {
 
     public boolean delet(Type type) {
 
-        if (connection == null) {
-            connect();
+         try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
         PreparedStatement statement = null;
         String sql = "DELETE FROM type WHERE id_type = ?;";
 
@@ -151,7 +175,15 @@ public class TypeDAO {
 
     public List<Type> selectAllFromUser(int id) {
 
-        connect();
+         try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Type> types = new ArrayList<>();
@@ -173,7 +205,7 @@ public class TypeDAO {
                 type.setId(result.getInt("id_tipo"));
                 type.setName(result.getString("tipo"));
                 type.setSecondaryColor(result.getString("cor"));
-                type.setPrimaryColor("detalhes_de_cores");
+                type.setPrimaryColor(result.getString("detalhes_de_cores"));
                 type.setImportance(result.getInt("importancia"));
                 
                 User user = new User();     // create user with database data  // criando usuario com dados do banco de dados
@@ -211,10 +243,19 @@ public class TypeDAO {
     public boolean exist(Type type) {  
         
      
-        connect();
+         try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM type_from_user WHERE id_tipo = ?;";
+        String sql = "SELECT * FROM types_from_user WHERE id_tipo = ?;";
         boolean exist = false;
 
         try {
@@ -252,10 +293,19 @@ public class TypeDAO {
          
         }
       
-        connect();
+        
+         try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM type_from_user WHERE id_tipo = ?;";
+        String sql = "SELECT * FROM types_from_user WHERE id_tipo = ?;";
         
 
        
@@ -267,6 +317,99 @@ public class TypeDAO {
             statement = connection.prepareStatement(sql);    
             
             statement.setInt(1, type.getId().intValue());    
+            
+            result = statement.executeQuery();           
+            
+            exist.add(result.next());
+        }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            exist.clear();
+            exist.add(false);
+            return exist;
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement); 
+        }
+
+        return exist;
+    }
+
+    public boolean existByName(Type type) {
+     
+         try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        String sql = "SELECT * FROM types_from_user WHERE tipo = ?;";
+        boolean exist = false;
+
+        try {
+
+            statement = connection.prepareStatement(sql);    
+            
+            statement.setString(1, type.getName());     
+            
+            result = statement.executeQuery();           
+            
+            exist = result.next();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex); 
+            return false;
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement); 
+        }
+
+        return exist;
+        
+    }
+    
+    public ArrayList<Boolean> existByName(ArrayList<Type> types) {  
+        
+        ArrayList<Boolean> exist = new ArrayList<>();
+        
+        for(Type type: types){
+            
+         if(type.getId() == null){
+            exist.clear();
+            exist.add(false);
+            return exist;
+         }
+         
+        }
+      
+        
+         try {
+            
+            if (connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        String sql = "SELECT * FROM types_from_user WHERE tipo = ?;";
+        
+
+       
+        
+        try {
+
+         for (Type type : types) {
+                
+            statement = connection.prepareStatement(sql);    
+            
+            statement.setString(1, type.getName());    
             
             result = statement.executeQuery();           
             

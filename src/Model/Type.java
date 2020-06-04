@@ -35,21 +35,11 @@ public class Type {
     }
 
     
-  public static ArrayList<Type> getDefaultTypes() {
+  public static ArrayList<Type> loadDefaultTypes() {
       
   
     ArrayList<Type> defaultTypes = new ArrayList<>();
-        
-        Type urgente = new Type();
-        
-        urgente.setName("Urgente");
-        urgente.setSecondaryColor("#ff7373");
-        urgente.setPrimaryColor("#ff0000");
-        urgente.setImportance(Type.MAX_PRIORITY);
-        urgente.setUser(UserDAO.getUser());
-        
-        defaultTypes.add(urgente);
-        
+
         Type meta = new Type();
         
         meta.setName("Meta");
@@ -139,12 +129,22 @@ public class Type {
         escola.setUser(UserDAO.getUser());
     
         defaultTypes.add(escola);
+                
+        Type urgente = new Type();
+        
+        urgente.setName("Urgente");
+        urgente.setSecondaryColor("#ff7373");
+        urgente.setPrimaryColor("#ff0000");
+        urgente.setImportance(Type.MAX_PRIORITY);
+        urgente.setUser(UserDAO.getUser());
+        
+        defaultTypes.add(urgente);
         
         System.out.println(defaultTypes.get(2)+" nome");
         
         TypeDAO dao = new TypeDAO();
       
-        if(dao.exist(defaultTypes).get(0) == false){
+        if(dao.existByName(urgente)== false){
              dao.insertAll(defaultTypes);
         }
         return defaultTypes;   

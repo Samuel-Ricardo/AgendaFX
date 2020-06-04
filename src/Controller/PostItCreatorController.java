@@ -176,12 +176,6 @@ public class PostItCreatorController implements Initializable {
     private void fillComboBox() {
         
          ArrayList<Type> arTypes = new ArrayList<>();
-
-         for (Type type : Type.getDefaultTypes()) {
-            
-             arTypes.add(type);
-             
-        }
          
          for(Type type:  typeDao.selectAllFromUser(UserDAO.getUser().getId().intValue())){
              

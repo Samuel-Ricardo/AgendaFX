@@ -378,11 +378,7 @@ public class HomeController implements Initializable {
         try {
             
             chooser.start(new Stage());
-             try {
-            Thread.sleep(100);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
             chooseController.chooseCreater();
             
         } catch (Exception ex) {
@@ -439,6 +435,8 @@ public class HomeController implements Initializable {
         SecondPlan secondPlan = new SecondPlan();   
         
         secondPlan.start(); // starts the program in the background // inicia  o programa em 2° plano
+        
+        Type.loadDefaultTypes();
     }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil

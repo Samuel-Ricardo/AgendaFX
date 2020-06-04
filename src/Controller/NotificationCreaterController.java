@@ -312,6 +312,7 @@ public class NotificationCreaterController implements Initializable {
                 String colorDetails = cbType.getSelectionModel().getSelectedItem().getPrimaryColor();
                 
                 typeColor.setStyle("-fx-fill: "+colorDetails+";");
+                System.out.println(colorDetails);
             }
             
         });
@@ -324,10 +325,6 @@ public class NotificationCreaterController implements Initializable {
     private void loadComboBox() {   // loads the ComboBox with the types // carrega o ComboBox com os tipos
 
         ArrayList<Type> arTypes = new ArrayList<>();
-
-        Type.getDefaultTypes().forEach((type) -> {
-            arTypes.add(type);
-        });
         
         for (Type type : typeDao.selectAllFromUser(logUser.getId().intValue())) {
             
