@@ -49,7 +49,7 @@ public class NotificationDAO {
     public boolean insert(Notification notification) {
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo_notificacao , anexo , musica, , userNotification , marcado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo_notificacao , anexo , musica, userNotification , marcado ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         /*
             

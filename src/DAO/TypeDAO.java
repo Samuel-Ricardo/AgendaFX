@@ -30,15 +30,8 @@ public class TypeDAO {
     private Connection connection;
 
     public boolean insert(Type type) {
-
-         try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        connect();
          
         PreparedStatement statement = null;
         String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
@@ -64,16 +57,9 @@ public class TypeDAO {
         }
     }
     public boolean insertAll(ArrayList<Type> types) {
+  
+        connect();
 
-        try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         PreparedStatement statement = null;
         String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
 
@@ -107,14 +93,7 @@ public class TypeDAO {
 
     public boolean update(Type type) {
 
-         try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        connect();
          
         PreparedStatement statement = null;
         String sql = "UPDATE tipo SET tipo = ?, cor = ?, detalhes_de_cores = ?, importancia = ?, id_usuario_tipo = ? WHERE id_tipo = ?;";
@@ -143,15 +122,8 @@ public class TypeDAO {
 
     public boolean delet(Type type) {
 
-         try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
+        connect();
+
         PreparedStatement statement = null;
         String sql = "DELETE FROM type WHERE id_type = ?;";
 
@@ -175,15 +147,8 @@ public class TypeDAO {
 
     public List<Type> selectAllFromUser(int id) {
 
-         try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
+        connect();
+     
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Type> types = new ArrayList<>();
@@ -242,16 +207,7 @@ public class TypeDAO {
 
     public boolean exist(Type type) {  
         
-     
-         try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;
@@ -292,16 +248,8 @@ public class TypeDAO {
          }
          
         }
-      
-        
-         try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;
@@ -336,15 +284,8 @@ public class TypeDAO {
     }
 
     public boolean existByName(Type type) {
-     
-         try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;
@@ -385,16 +326,8 @@ public class TypeDAO {
          }
          
         }
-      
-        
-         try {
-            
-            if (connection.isClosed()) {
-                connect();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TypeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;

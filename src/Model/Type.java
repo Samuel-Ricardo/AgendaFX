@@ -43,8 +43,8 @@ public class Type {
         Type meta = new Type();
         
         meta.setName("Meta");
-        meta.setSecondaryColor("#ff7373");
-        meta.setPrimaryColor("#7f7df1");
+        meta.setSecondaryColor("#7f7df1");
+        meta.setPrimaryColor("#0400f7");
         meta.setImportance(Type.HIGH_PRIORITY);
         meta.setUser(UserDAO.getUser());
         
