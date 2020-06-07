@@ -10,6 +10,7 @@ import DAO.UserDAO;
 import Main.MainChooser;
 import Main.MainLogin;
 import Main.MainRegister;
+import Main.MainTypeCreator;
 import Main.MainUpdate;
 import Model.Notification;
 import Model.PostIt;
@@ -175,6 +176,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private WebView wbvGitHub;
+    
+    @FXML
+    private ImageView imgAddType;
 
     
     private final UserDAO userDao = new UserDAO();
@@ -466,6 +470,26 @@ public class HomeController implements Initializable {
       
         filler.setList(lvAllEvents);
         filler.fillOutAllEventNotifications(lvAllEvents);
+        
+        imgAddType.setOnMouseClicked((t) -> {
+        
+            if(MainTypeCreator.getWindow() != null){
+                    
+                    
+                    MainTypeCreator.getWindow().close();
+                }
+                
+                MainTypeCreator typeCreator = new MainTypeCreator();
+                
+            {
+                try {
+                    typeCreator.start(new Stage());
+                } catch (Exception ex) {
+                    Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        });
         
     }
 

@@ -8,6 +8,7 @@ package Controller;
 import Main.MainChooser;
 import Main.MainNotificationCreator;
 import Main.MainPostItCreator;
+import Main.MainTypeCreator;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -68,6 +69,7 @@ public class ChooserController implements Initializable {
         alTypes.add("Notficaçao");  // Loads the Array List with the options // Carrega o ArrayList com as opçoes;
         alTypes.add("PostIt");      
         alTypes.add("Atividade");
+        alTypes.add("Tipo Novo");
 
         obsTypes = FXCollections.observableArrayList(alTypes);  // Convert the ArrayList to ObservableList // Converte o ArrayList para ObservableList
 
@@ -150,6 +152,27 @@ public class ChooserController implements Initializable {
                 } catch (Exception ex) {
                     Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
+             
+            case 3:
+                
+                if(MainTypeCreator.getWindow() != null){
+                    
+                    
+                    MainTypeCreator.getWindow().close();
+                }
+                
+                MainTypeCreator typeCreator = new MainTypeCreator();
+                
+            {
+                try {
+                    typeCreator.start(new Stage());
+                } catch (Exception ex) {
+                    Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                
+                break;
 
         }
         MainChooser.getWindow().close();   // closes the current window  // fecha a janela atual

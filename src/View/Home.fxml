@@ -381,7 +381,7 @@
             <Button layoutX="25.0" layoutY="534.0" mnemonicParsing="false" onAction="#delet" prefHeight="33.0" prefWidth="153.0" text="Excluir" />
             <Button layoutX="25.0" layoutY="472.0" mnemonicParsing="false" onAction="#create" prefHeight="33.0" prefWidth="153.0" text="Criar" />
             <ListView fx:id="lvTypesEvent" layoutX="25.0" layoutY="66.0" prefHeight="331.0" prefWidth="216.0" />
-            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="253.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgAddType" fitHeight="66.0" fitWidth="69.0" layoutX="241.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/icons8-add-50px.png" />
                </image>
