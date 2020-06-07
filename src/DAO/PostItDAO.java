@@ -192,8 +192,8 @@ public class PostItDAO {
                 
                 type.setId(result.getInt("id_tipo"));
                 type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("cor"));
-                type.setPrimaryColor(result.getString("detalhes_de_cores"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
                 type.setImportance(result.getInt("importancia"));
                 type.setUser(user);
 
@@ -263,8 +263,8 @@ public class PostItDAO {
                 
                 type.setId(result.getInt("id_tipo"));
                 type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("cor"));
-                type.setPrimaryColor(result.getString("detalhes_de_cores"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
                 type.setImportance(result.getInt("importancia"));
                 type.setImportance(result.getInt("importancia"));
                 type.setUser(user);
@@ -335,8 +335,8 @@ public class PostItDAO {
                 
                 type.setId(result.getInt("id_tipo"));
                 type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("cor"));
-                type.setPrimaryColor(result.getString("detalhes_de_cores"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
                 type.setImportance(result.getInt("importancia"));
                 type.setUser(user);
 
@@ -405,9 +405,8 @@ public class PostItDAO {
                 
                 type.setId(result.getInt("id_tipo"));
                 type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("cor"));
-                type.setPrimaryColor(result.getString("detalhes_de_cores"));
-                type.setImportance(result.getInt("importancia"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
                 type.setImportance(result.getInt("importancia"));
                 type.setUser(user);
                 

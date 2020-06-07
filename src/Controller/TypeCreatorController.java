@@ -17,10 +17,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.paint.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -88,7 +85,7 @@ public class TypeCreatorController implements Initializable {
         Type type = new Type();
         
         String primaryColor = Formater.getHexString(cpPrimaryColor.getValue());
-        String secondaryColor = Formater.getHexString(cpPrimaryColor.getValue());
+        String secondaryColor = Formater.getHexString(cpSecondaryColor.getValue());
         
         type.setName(txtName.getText());
         type.setPrimaryColor(primaryColor);
@@ -97,7 +94,7 @@ public class TypeCreatorController implements Initializable {
         type.setImportance(((int) Math.floor(sldPriority.getValue())));
         if(dao.insert(type)){
             JOptionPane.showMessageDialog(null, "Criado");
-     }
+      }
     }
     
     @Override

@@ -169,8 +169,8 @@ public class TypeDAO {
                 
                 type.setId(result.getInt("id_tipo"));
                 type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("cor"));
-                type.setPrimaryColor(result.getString("detalhes_de_cores"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
                 type.setImportance(result.getInt("importancia"));
                 
                 User user = new User();     // create user with database data  // criando usuario com dados do banco de dados
