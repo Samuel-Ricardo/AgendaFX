@@ -16,8 +16,9 @@ import Model.Notification;
 import Model.PostIt;
 import Model.Row;
 import Model.Type;
+import Model.TypeRow;
 import Model.User;
-import Services.Filler;
+import Helper.Filler;
 import Services.Notify;
 import Services.SecondPlan;
 import java.net.URL;
@@ -151,7 +152,7 @@ public class HomeController implements Initializable {
     private ListView<Row> lvAllEvents;
 
     @FXML
-    private ListView<Type> lvTypesEvent;
+    private ListView<TypeRow> lvTypesEvent;
     
     @FXML
     private AreaChart<String, Double> acOcuppiedDaysGraph;
@@ -240,6 +241,8 @@ public class HomeController implements Initializable {
         if (panePerfil.isVisible() == true) {
             panePerfil.setVisible(false);
         }
+        
+        Filler.fillOutAllTypes(lvTypesEvent);
 
     }
 

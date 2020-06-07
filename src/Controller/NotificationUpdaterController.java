@@ -14,7 +14,7 @@ import Model.Notification;
 import Model.Type;
 import Model.User;
 import Services.Downloader;
-import Services.Filler;
+import Helper.Filler;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;

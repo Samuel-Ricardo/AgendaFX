@@ -155,7 +155,7 @@ public class LiteRow extends BorderPane {
       //  title.setPadding( new Insets(0, 5, 10, 0));
         title.setVisible(true);
 
-        description.prefWidth(313);
+        description.prefWidth(303);
         description.prefHeight(41);
 
         description.setText(notification.getDescription());
@@ -174,11 +174,11 @@ public class LiteRow extends BorderPane {
         this.setCenter(description);
         this.setLeft(image);
         
-        BorderPane.setMargin(image, new Insets(0, 0, 15, 2));
+        BorderPane.setMargin(image, new Insets(0, 5, 15, 0));
         
         BorderPane.setMargin(title, new Insets(2, 0, 2, 0));
         
-        BorderPane.setMargin(description, new Insets(0, 5, 10, 0));
+        BorderPane.setMargin(description, new Insets(0, 5, 12, 0));
         
         this.setStyle("-fx-background-color: black;"
                 + "-fx-border-width: 5 5 5 5;"

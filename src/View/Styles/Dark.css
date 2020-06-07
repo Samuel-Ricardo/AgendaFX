@@ -465,8 +465,9 @@ and open the template in the editor.
     -fx-padding: 100;
 }
 
-list-cell{
+.list-cell{
     
+     -fx-cell-hover-color: #0093ff;
     -fx-background-color: transparent;
     
 }

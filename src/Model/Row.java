@@ -42,7 +42,7 @@ public class Row extends HBox {
         this.title = new Label();
         this.date = new Label();
         this.notification = notification;
-        this.style = "-fx-background-color: #343232;"
+        this.style = "-fx-background-color: black;"
                            + "-fx-background-radius: 100px;"
                            + "-fx-border-radius: 100px;";
         
