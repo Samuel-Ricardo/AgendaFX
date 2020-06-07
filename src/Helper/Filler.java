@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package Helper;
 
 import Controller.HomeController;
 import Controller.NotificationListController;
 import DAO.NotificationDAO;
+import DAO.TypeDAO;
+import DAO.UserDAO;
 import Model.Notification;
 import Model.LiteRow;
 import Model.Row;
+import Model.Type;
+import Model.TypeRow;
+import Services.Notify;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +38,9 @@ public class Filler {
     private static Notification notification;
     private static Row row;
     private static ArrayList<Notification> notifications;
-    private static NotificationDAO dao;
+    private static ArrayList<Type> types ;
+    private static NotificationDAO dao = new NotificationDAO();
+    private static TypeDAO typeDao = new TypeDAO();
     private static SimpleDateFormat day;
     private static Notify notify;
     private static ListView<?> list;
@@ -85,7 +92,11 @@ public class Filler {
     }
 
     public static void checkNotifications() {
-        notifications = (ArrayList<Notification>) dao.selectAllFromUser(controller.getLogUser().getId().intValue());
+        notifications = (ArrayList<Notification>) dao.selectAllFromUser(UserDAO.getUser().getId().intValue());
+    }
+    
+    public static void checkTypes() {
+        types = (ArrayList<Type>) typeDao.selectAllFromUser(UserDAO.getUser().getId().intValue());
     }
 
     public static void fillOutAllEventNotifications(ListView list) {
@@ -119,6 +130,7 @@ public class Filler {
          list.setItems(oblRow);
 
     }
+    
 
     public static void fillOutCurrentLiteNotifications(ListView list){
         
@@ -151,6 +163,25 @@ public class Filler {
         list.setItems(obsNotifications);
         System.out.println("prenchida");
         
+    }
+    
+    public static void fillOutAllTypes(ListView list) {
+        
+        ArrayList<TypeRow> alRow = new ArrayList<>();
+        checkTypes();
+        
+        for(Type type: types){
+            
+            TypeRow row = new TypeRow(type);
+            
+            alRow.add(row);
+        }
+        
+        ObservableList<TypeRow> oblRow = FXCollections.observableArrayList(alRow);
+        
+         list.getItems().clear();
+         list.setItems(oblRow);
+
     }
     
     public static HomeController getController() {

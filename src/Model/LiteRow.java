@@ -67,38 +67,7 @@ public class LiteRow extends BorderPane {
     ///////metodos  //  method /////////
     private void loadPane(ImageView image, Label title, JFXTextArea description, Notification notification, String style) {
 
-        this.setPrefWidth(772);
-        this.setPrefHeight(65);
-
-        this.setStyle(style);
-        this.setPadding(new Insets(20, 0, 0, 20));
-
-        image.prefWidth(88);
-        image.prefHeight(88);
-        image.setStyle(notification.getTypeColor());
-        image.setVisible(true);
-
-        title.prefWidth(363);
-        title.prefHeight(30);
-        title.setLayoutX(67);
-        title.setLayoutY(25);
-        title.setText(notification.getTitle());
-        title.setVisible(true);
-
-        description.prefWidth(363);
-        description.prefHeight(30);
-        description.setLayoutX(67);
-        description.setLayoutY(25);
-        description.setVisible(true);
-
-        this.getChildren().addAll(image, title, description);
-
-        this.setVisible(true);
-    }
-
-    public void loadPane(Notification notification) {
-
-        this.setPrefWidth(411);
+       this.setPrefWidth(411);
         this.setPrefHeight(100);
         this.setPadding(new Insets(20, 10, 10, 20));
 
@@ -152,37 +121,44 @@ public class LiteRow extends BorderPane {
         
         this.setStyle("-fx-background-color: black;"
                 + "-fx-border-width: 5 5 5 5;"
-                + "-fx-border-color: " + notification.getTypeColor() + ";");
+                + "-fx-border-color: " + notification.getType().getPrimaryColor() + ";");
         
         this.setVisible(true);
     }
 
-    public void loadPane(PostIt postIt) {
+    public void loadPane(Notification notification) {
 
-        this.setPrefWidth(410);
-        this.setPrefHeight(65);
-
-        this.setStyle("-fx-background-color: black;"
-                + "-fx-border-width: 5 5 5 5"
-                + "-fx-border-color: " + notification.getTypeColor() + ";");
+        this.setPrefWidth(411);
+        this.setPrefHeight(100);
         this.setPadding(new Insets(20, 10, 10, 20));
 
-        image.prefWidth(30);
-        image.prefHeight(30);
-        image.setStyle(postIt.getTypeColor());
+        if (notification.getImage() != null || notification.getImage().equals("") == false) {
+            image.setImage(new Image("file:///" + notification.getImage()));
+        }
+
+        image.setFitWidth(88);
+        image.setFitHeight(88);
+        image.setPreserveRatio(false);
+        image.prefWidth(88);
+        image.prefHeight(88);
+
         image.setVisible(true);
 
-        title.prefWidth(363);
-        title.prefHeight(30);
-        title.setLayoutX(67);
-        title.setLayoutY(25);
-        title.setText(postIt.getTitle());
+        title.prefWidth(304);
+        title.prefHeight(21);
+        title.setText(notification.getTitle());
+        title.setStyle("-fx-text-fill: white;"
+                + "    -fx-font-family: \"Arial\";"
+                + "    -fx-font-size: 18px;"
+                + "    -fx-font-style: italic;"
+                + "    -fx-font-weight: bold;");
+      //  title.setPadding( new Insets(0, 5, 10, 0));
         title.setVisible(true);
 
-        description.prefWidth(287);
-        description.prefHeight(69);
-        description.setLayoutX(103);
-        description.setLayoutY(42);
+        description.prefWidth(303);
+        description.prefHeight(41);
+
+        description.setText(notification.getDescription());
         description.setStyle("  -fx-font-family: \"Arial\";"
                 + "    -fx-font-size: 13px;"
                 + "    -fx-font-weight: bold;"
@@ -191,10 +167,74 @@ public class LiteRow extends BorderPane {
                 + "    -fx-background-radius: 100px;"
                 + "    -fx-border-width: 2 0 2 0;"
                 + "    -fx-border-color: #8A2BE2;");
+        description.setPadding(new Insets(0, 0, 5, 0));
         description.setVisible(true);
 
-        this.getChildren().addAll(image, title, description);
+        this.setTop(title);
+        this.setCenter(description);
+        this.setLeft(image);
+        
+        BorderPane.setMargin(image, new Insets(0, 5, 15, 0));
+        
+        BorderPane.setMargin(title, new Insets(2, 0, 2, 0));
+        
+        BorderPane.setMargin(description, new Insets(0, 5, 12, 0));
+        
+        this.setStyle("-fx-background-color: black;"
+                + "-fx-border-width: 5 5 5 5;"
+                + "-fx-border-color: " + notification.getType().getPrimaryColor() + ";");
+        
+        this.setVisible(true);
+    }
 
+    public void loadPane(PostIt postIt) {
+
+        this.setPrefWidth(411);
+        this.setPrefHeight(100);
+        this.setPadding(new Insets(20, 10, 10, 20));
+
+        image.setVisible(true);
+
+        title.prefWidth(304);
+        title.prefHeight(21);
+        title.setText(postIt.getTitle());
+        title.setStyle("-fx-text-fill: white;"
+                + "    -fx-font-family: \"Arial\";"
+                + "    -fx-font-size: 18px;"
+                + "    -fx-font-style: italic;"
+                + "    -fx-font-weight: bold;");
+      //  title.setPadding( new Insets(0, 5, 10, 0));
+        title.setVisible(true);
+
+        description.prefWidth(313);
+        description.prefHeight(41);
+
+        description.setText(postIt.getDescription());
+        description.setStyle("  -fx-font-family: \"Arial\";"
+                + "    -fx-font-size: 13px;"
+                + "    -fx-font-weight: bold;"
+                + "    -fx-text-fill: white;"
+                + "    -fx-background-color: transparent;"
+                + "    -fx-background-radius: 100px;"
+                + "    -fx-border-width: 2 0 2 0;"
+                + "    -fx-border-color: #8A2BE2;");
+        description.setPadding(new Insets(0, 0, 5, 0));
+        description.setVisible(true);
+
+        this.setTop(title);
+        this.setCenter(description);
+        this.setLeft(image);
+        
+        BorderPane.setMargin(image, new Insets(0, 0, 15, 2));
+        
+        BorderPane.setMargin(title, new Insets(2, 0, 2, 0));
+        
+        BorderPane.setMargin(description, new Insets(0, 5, 10, 0));
+        
+        this.setStyle("-fx-background-color: black;"
+                + "-fx-border-width: 5 5 5 5;"
+                + "-fx-border-color: " + postIt.getType().getPrimaryColor() + ";");
+        
         this.setVisible(true);
     }
 
