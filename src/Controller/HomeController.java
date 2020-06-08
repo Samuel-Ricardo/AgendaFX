@@ -10,12 +10,15 @@ import DAO.UserDAO;
 import Main.MainChooser;
 import Main.MainLogin;
 import Main.MainRegister;
+import Main.MainTypeCreator;
 import Main.MainUpdate;
 import Model.Notification;
 import Model.PostIt;
 import Model.Row;
+import Model.Type;
+import Model.TypeRow;
 import Model.User;
-import Services.Filler;
+import Helper.Filler;
 import Services.Notify;
 import Services.SecondPlan;
 import java.net.URL;
@@ -147,6 +150,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private ListView<Row> lvAllEvents;
+
+    @FXML
+    private ListView<TypeRow> lvTypesEvent;
     
     @FXML
     private AreaChart<String, Double> acOcuppiedDaysGraph;
@@ -171,6 +177,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private WebView wbvGitHub;
+    
+    @FXML
+    private ImageView imgAddType;
 
     
     private final UserDAO userDao = new UserDAO();
@@ -232,6 +241,8 @@ public class HomeController implements Initializable {
         if (panePerfil.isVisible() == true) {
             panePerfil.setVisible(false);
         }
+        
+        Filler.fillOutAllTypes(lvTypesEvent);
 
     }
 
@@ -374,11 +385,7 @@ public class HomeController implements Initializable {
         try {
             
             chooser.start(new Stage());
-             try {
-            Thread.sleep(100);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
             chooseController.chooseCreater();
             
         } catch (Exception ex) {
@@ -435,6 +442,8 @@ public class HomeController implements Initializable {
         SecondPlan secondPlan = new SecondPlan();   
         
         secondPlan.start(); // starts the program in the background // inicia  o programa em 2° plano
+        
+        Type.loadDefaultTypes();
     }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
@@ -464,6 +473,26 @@ public class HomeController implements Initializable {
       
         filler.setList(lvAllEvents);
         filler.fillOutAllEventNotifications(lvAllEvents);
+        
+        imgAddType.setOnMouseClicked((t) -> {
+        
+            if(MainTypeCreator.getWindow() != null){
+                    
+                    
+                    MainTypeCreator.getWindow().close();
+                }
+                
+                MainTypeCreator typeCreator = new MainTypeCreator();
+                
+            {
+                try {
+                    typeCreator.start(new Stage());
+                } catch (Exception ex) {
+                    Logger.getLogger(ChooserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        });
         
     }
 

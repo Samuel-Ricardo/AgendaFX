@@ -7,11 +7,10 @@ package DAO;
 
 import JDBC.ConnectionFactory;
 import Model.PostIt;
-import Model.PostIt;
+import Model.Type;
 import Model.User;
 import com.mysql.jdbc.Connection;
 import java.io.File;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +39,7 @@ public class PostItDAO {
          connect();
         }
         PreparedStatement statement = null;
-        String sql = "INSERT INTO postit (idPostIt, postItUser, title, body, scheduled, horary, warned, typeP, typeColor, sound) VALUES (?,?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO postit (idPostIt, postItUser, title, body, scheduled, horary, warned, type_postit, sound) VALUES (?,?,?,?,?,?,?,?,?);";
         
         /*
         
@@ -51,8 +50,7 @@ public class PostItDAO {
                 scheduled varchar(25) 
                 horary varchar(10) 
                 warned tinyint(1) 
-                typeP varchar(50) 
-                typeColor varchar(10) 
+                type_postit varchar(50)  
                 postItUser int(11) 
                 sound text
 
@@ -68,9 +66,8 @@ public class PostItDAO {
             statement.setString(5, postIt.getScheduledDate());
             statement.setString(6, postIt.getScheduledHour());
             statement.setBoolean(7, postIt.isWarned());
-            statement.setString(8, postIt.getType());
-            statement.setString(9, postIt.getTypeColor());
-            statement.setString(10, postIt.getMusic().getAbsolutePath());
+            statement.setInt(8, postIt.getType().getId().intValue());
+            statement.setString(9, postIt.getMusic().getAbsolutePath());
             
             statement.execute();
             
@@ -89,7 +86,7 @@ public class PostItDAO {
          connect();
         }
         PreparedStatement statement = null;
-        String sql = "UPDATE postit SET postItUser = ?, title = ?, body = ?, scheduled = ?, horary = ?, warned = ?, typeP = ?, typeColor = ?, sound = ? WHERE idPostIt = ?;";
+        String sql = "UPDATE postit SET postItUser = ?, title = ?, body = ?, scheduled = ?, horary = ?, warned = ?, type_postit = ?,  = ?, sound = ? WHERE idPostIt = ?;";
         
         try {
             
@@ -101,9 +98,8 @@ public class PostItDAO {
             statement.setString(4, postIt.getScheduledDate());
             statement.setString(5, postIt.getScheduledHour());
             statement.setBoolean(6, postIt.isWarned());
-            statement.setString(7, postIt.getType());
-            statement.setString(8, postIt.getTypeColor());
-            statement.setString(9, postIt.getMusic().getAbsolutePath());
+            statement.setInt(7, postIt.getType().getId().intValue());
+            statement.setString(8, postIt.getMusic().getAbsolutePath());
             
             statement.execute();
             
@@ -135,7 +131,7 @@ public class PostItDAO {
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
-           JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+           JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;  
         }finally{
             ConnectionFactory.closeConnection(connection, statement);
@@ -149,7 +145,7 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<PostIt> postits = new ArrayList<>();
-        String sql = "SELECT * FROM postit_views ORDER BY horario;";
+        String sql = "SELECT * FROM postit_from_user ORDER BY scheduled;";
 
         try {
 
@@ -159,20 +155,18 @@ public class PostItDAO {
 
             while (result.next()) {
 
-                PostIt PostIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
+                PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
 
-                PostIt.setId(result.getInt("idNotific"));
-                PostIt.setTitle(result.getString("title"));
-                PostIt.setDescription(result.getString("body"));
-                PostIt.setMusic(new File(result.getString("sound")));
+                postIt.setId(result.getInt("idNotific"));
+                postIt.setTitle(result.getString("title"));
+                postIt.setDescription(result.getString("body"));
+                postIt.setMusic(new File(result.getString("sound")));
                 try {
-                    PostIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
+                    postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
                 } catch (ParseException ex) {
                     Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                PostIt.setType(result.getString("tipo"));
-                PostIt.setWarned(result.getBoolean("avisado"));
-                PostIt.setTypeColor(result.getString("corDoTipo"));
+                postIt.setWarned(result.getBoolean("avisado"));
 
                 User user = new User();
 
@@ -192,9 +186,20 @@ public class PostItDAO {
                 user.setSenha(result.getString("senha"));
                 user.setImage(result.getString("imagePerfil"));
 
-                PostIt.setUser(user);
+                postIt.setUser(user);
 
-                postits.add(PostIt);    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
+                Type type = new Type();
+                
+                type.setId(result.getInt("id_tipo"));
+                type.setName(result.getString("tipo"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
+
+                postIt.setType(type);
+                
+                postits.add(postIt);    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -211,7 +216,7 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<PostIt> postits = new ArrayList<>();
-        String sql = "SELECT * FROM postit_views WHERE id = ? ORDER BY horario;";
+        String sql = "SELECT * FROM postit_from_user WHERE id = ? ORDER BY horario;";
         
         try {
 
@@ -221,20 +226,18 @@ public class PostItDAO {
 
             while (result.next()) {
 
-                PostIt PostIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
+                PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
 
-                PostIt.setId(result.getInt("idNotific"));
-                PostIt.setTitle(result.getString("title"));
-                PostIt.setDescription(result.getString("body"));
-                PostIt.setMusic(new File(result.getString("sound")));
+                postIt.setId(result.getInt("idNotific"));
+                postIt.setTitle(result.getString("title"));
+                postIt.setDescription(result.getString("body"));
+                postIt.setMusic(new File(result.getString("sound")));
                 try {
-                    PostIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
+                    postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
                 } catch (ParseException ex) {
                     Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                PostIt.setType(result.getString("tipo"));
-                PostIt.setWarned(result.getBoolean("avisado"));
-                PostIt.setTypeColor(result.getString("corDoTipo"));
+                postIt.setWarned(result.getBoolean("avisado"));
 
                 User user = new User();
 
@@ -254,9 +257,21 @@ public class PostItDAO {
                 user.setSenha(result.getString("senha"));
                 user.setImage(result.getString("imagePerfil"));
 
-                PostIt.setUser(user);
+                postIt.setUser(user);
 
-                postits.add(PostIt);    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
+                Type type = new Type();
+                
+                type.setId(result.getInt("id_tipo"));
+                type.setName(result.getString("tipo"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
+                type.setImportance(result.getInt("importancia"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
+
+                postIt.setType(type);
+
+                postits.add(postIt);    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -273,7 +288,7 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<PostIt> postits = new ArrayList<>();
-        String sql = "SELECT * FROM PostItView WHERE titutlo LIKE ? OR descricao LIKE ?;";
+        String sql = "SELECT * FROM postit_from_user WHERE titutlo LIKE ? OR descricao LIKE ?;";
         
         try {
 
@@ -283,20 +298,18 @@ public class PostItDAO {
 
             while (result.next()) {
 
-                PostIt PostIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
+                PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
 
-                PostIt.setId(result.getInt("idNotific"));
-                PostIt.setTitle(result.getString("title"));
-                PostIt.setDescription(result.getString("body"));
-                PostIt.setMusic(new File(result.getString("sound")));
+                postIt.setId(result.getInt("idNotific"));
+                postIt.setTitle(result.getString("title"));
+                postIt.setDescription(result.getString("body"));
+                postIt.setMusic(new File(result.getString("sound")));
                 try {
-                    PostIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
+                    postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
                 } catch (ParseException ex) {
                     Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                PostIt.setType(result.getString("tipo"));
-                PostIt.setWarned(result.getBoolean("avisado"));
-                PostIt.setTypeColor(result.getString("corDoTipo"));
+                postIt.setWarned(result.getBoolean("avisado"));
 
                 User user = new User();
 
@@ -316,9 +329,20 @@ public class PostItDAO {
                 user.setSenha(result.getString("senha"));
                 user.setImage(result.getString("imagePerfil"));
 
-                PostIt.setUser(user);
+                postIt.setUser(user);
 
-                postits.add(PostIt);    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
+                Type type = new Type();
+                
+                type.setId(result.getInt("id_tipo"));
+                type.setName(result.getString("tipo"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
+
+                postIt.setType(type);
+
+                postits.add(postIt);    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -336,7 +360,7 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         PostIt findPostIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
-        String sql = "SELECT * FROM PostItView WHERE idNotific = ?;";
+        String sql = "SELECT * FROM postit_from_user WHERE idNotific = ?;";
         
         try {
 
@@ -345,21 +369,17 @@ public class PostItDAO {
             result = statement.executeQuery();    //  execute sql statement returning result  //  executa instruçao sql retornando resultado
 
             while (result.next()) {
-
-                PostIt postIt2 = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
-
-                postIt2.setId(result.getInt("idNotific"));
-                postIt2.setTitle(result.getString("title"));
-                postIt2.setDescription(result.getString("body"));
-                postIt2.setMusic(new File(result.getString("sound")));
+                
+                findPostIt.setId(result.getInt("idNotific"));
+                findPostIt.setTitle(result.getString("title"));
+                findPostIt.setDescription(result.getString("body"));
+                findPostIt.setMusic(new File(result.getString("sound")));
                 try {
-                    postIt2.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
+                    findPostIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
                 } catch (ParseException ex) {
                     Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                postIt2.setType(result.getString("tipo"));
-                postIt2.setWarned(result.getBoolean("avisado"));
-                postIt2.setTypeColor(result.getString("corDoTipo"));
+                findPostIt.setWarned(result.getBoolean("avisado"));
 
                 User user = new User();
 
@@ -379,9 +399,20 @@ public class PostItDAO {
                 user.setSenha(result.getString("senha"));
                 user.setImage(result.getString("imagePerfil"));
 
-                postIt2.setUser(user);
+                findPostIt.setUser(user);
+
+                Type type = new Type();
                 
-                findPostIt = postIt2;
+                type.setId(result.getInt("id_tipo"));
+                type.setName(result.getString("tipo"));
+                type.setSecondaryColor(result.getString("detalhes_de_cores"));
+                type.setPrimaryColor(result.getString("cor"));
+                type.setImportance(result.getInt("importancia"));
+                type.setUser(user);
+                
+                findPostIt.setType(type);
+                
+                findPostIt = findPostIt;
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -397,7 +428,7 @@ public class PostItDAO {
         connect();
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM postit_views WHERE idPostIt = ?;";
+        String sql = "SELECT * FROM postit_from_user WHERE idPostIt = ?;";
 
         try {
 

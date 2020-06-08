@@ -42,7 +42,7 @@ public class Row extends HBox {
         this.title = new Label();
         this.date = new Label();
         this.notification = notification;
-        this.style = "-fx-background-color: #343232;"
+        this.style = "-fx-background-color: black;"
                            + "-fx-background-radius: 100px;"
                            + "-fx-border-radius: 100px;";
         
@@ -75,7 +75,7 @@ public class Row extends HBox {
          
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle("-fx-fill: "+notification.getTypeColor()+";");
+        typeColor.setStyle("-fx-fill: "+notification.getType().getPrimaryColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);
@@ -112,7 +112,7 @@ public class Row extends HBox {
          
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle("-fx-fill: "+notification.getTypeColor()+";");
+        typeColor.setStyle("-fx-fill: "+notification.getType().getPrimaryColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);
@@ -149,7 +149,7 @@ public class Row extends HBox {
 
         typeColor.prefWidth(30);
         typeColor.prefHeight(30);
-        typeColor.setStyle("-fx-fill: "+postIt.getTypeColor()+";");
+        typeColor.setStyle("-fx-fill: "+postIt.getType().getPrimaryColor()+";");
         typeColor.setVisible(true);
         
         title.prefWidth(363);

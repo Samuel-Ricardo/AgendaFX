@@ -6,9 +6,11 @@
 package Controller;
 
 import DAO.PostItDAO;
+import DAO.TypeDAO;
 import DAO.UserDAO;
 import Main.MainPostItCreator;
 import Model.PostIt;
+import Model.Type;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTimePicker;
@@ -52,7 +54,7 @@ public class PostItCreatorController implements Initializable {
     private JFXToggleButton tgSound;
 
     @FXML
-    private ComboBox<String> cbTypes;
+    private ComboBox<Type> cbTypes;
 
     @FXML
     private Rectangle recType;
@@ -79,6 +81,8 @@ public class PostItCreatorController implements Initializable {
     
     private PostItDAO dao = new PostItDAO();
     
+    private TypeDAO typeDao = new  TypeDAO();
+    
     @FXML
     public void close() {
 
@@ -96,7 +100,6 @@ public class PostItCreatorController implements Initializable {
         postIt.setDescription(txtBody.getText());
         postIt.setMusic(sound);
         postIt.setType(cbTypes.getSelectionModel().getSelectedItem());
-        postIt.setTypeColor(recType.getStyle());
         postIt.setUser(UserDAO.getUser());
         postIt.setWarned(false);
         
@@ -160,66 +163,27 @@ public class PostItCreatorController implements Initializable {
         
         fillComboBox();
         
-        cbTypes.valueProperty().addListener((o) -> {
+        cbTypes.valueProperty().addListener((ov, t, t1) -> {
         
-            int index = cbTypes.getSelectionModel().getSelectedIndex(); // change the color of Rectangle: recType when change the notification //alterar a cor do retângulo: recType ao alterar o tipo de notificação
-                String style = "";
-
-                switch (index) {
-
-                    case 0:
-
-                        style = "-fx-fill: #ff0000;";
-                        recType.setStyle(style);
-                        break;
-
-                    case 1:
-
-                        style = "-fx-fill: #8a2be2;";
-                        recType.setStyle(style);
-                        break;
-
-                    case 2:
-
-                        style = "-fx-fill: #d4ff00;";
-                        recType.setStyle(style);
-                        break;
-
-                    case 3:
-
-                        style = "-fx-fill: #ffd700;";
-                        recType.setStyle(style);
-                        break;
-
-                    case 4:
-
-                        style = "-fx-fill: #000080;";
-                        recType.setStyle(style);
-                        break;
-                        
-                    case 5:
-                        
-                        style = "-fx-fill: #0700ff;";
-                        recType.setStyle(style);
-                        break;
-                }
+             String color = cbTypes.getSelectionModel().getSelectedItem().getPrimaryColor(); // change the color of Rectangle: recType when change the notification //alterar a cor do retângulo: recType ao alterar o tipo de notificação
+                
+             recType.setStyle("-fx-fill: "+color+";");
             
         });
         
     }    
 
     private void fillComboBox() {
-     
-         ArrayList<String> arTypes = new ArrayList<>();
+        
+         ArrayList<Type> arTypes = new ArrayList<>();
+         
+         for(Type type:  typeDao.selectAllFromUser(UserDAO.getUser().getId().intValue())){
+             
+             arTypes.add(type);
+             
+         }
 
-        arTypes.add("Urgente"); 
-        arTypes.add("Trabalho / Escola");
-        arTypes.add("Evento");
-        arTypes.add("Especial");
-        arTypes.add("Banal");
-        arTypes.add("Meta");
-
-        ObservableList<String> obTypes = FXCollections.observableArrayList(arTypes);    
+        ObservableList<Type> obTypes = FXCollections.observableArrayList(arTypes);    
 
         cbTypes.setItems(obTypes);  
     

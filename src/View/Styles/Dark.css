@@ -464,3 +464,10 @@ and open the template in the editor.
 .chart-contente{
     -fx-padding: 100;
 }
+
+.list-cell{
+    
+     -fx-cell-hover-color: #0093ff;
+    -fx-background-color: transparent;
+    
+}

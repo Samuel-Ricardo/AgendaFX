@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="237.0" prefWidth="309.0" styleClass="simple-background" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TypeCreatorController">
+   <children>
+      <TabPane prefHeight="179.0" prefWidth="435.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Tipo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="txtName" layoutX="14.0" layoutY="38.0" prefHeight="33.0" prefWidth="313.0" styleClass="text-field-empyt" />
+                        <Label layoutX="22.0" layoutY="14.0" text="Nome:" />
+                        <Label layoutX="15.0" layoutY="103.0" text="Prioridade:" />
+                        <Label fx:id="lblPriority" layoutX="127.0" layoutY="82.0" prefHeight="21.0" prefWidth="210.0" />
+                        <JFXSlider fx:id="sldPriority" blockIncrement="0.0" layoutX="117.0" layoutY="109.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#define" prefHeight="14.0" prefWidth="210.0" showTickLabels="true" value="1.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Cor Primária">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXColorPicker fx:id="cpPrimaryColor" layoutX="41.0" layoutY="63.0" minHeight="23.0" prefHeight="40.0" prefWidth="350.0" promptText="Cor Primária">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </JFXColorPicker>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Cor Secundária">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXColorPicker fx:id="cpSecondaryColor" layoutX="38.0" layoutY="59.0" minHeight="23.0" prefHeight="33.0" prefWidth="350.0" promptText="Cor Primária">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </JFXColorPicker>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="14.0" layoutY="190.0" mnemonicParsing="false" onAction="#close" text="Fechar" />
+      <Button layoutX="345.0" layoutY="190.0" mnemonicParsing="false" onAction="#create" text="Criar" />
+   </children>
+</AnchorPane>
