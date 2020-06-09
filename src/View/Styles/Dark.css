@@ -471,3 +471,7 @@ and open the template in the editor.
     -fx-background-color: transparent;
     
 }
+
+.body {
+    -fx-backgroun-colo: black;
+}
