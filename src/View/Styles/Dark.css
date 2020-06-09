@@ -99,6 +99,17 @@ and open the template in the editor.
     
 }
 
+.button.menu{
+    
+    -fx-background-color:  #A020F0;
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    
+}
+
 .jfx-toggle-button{
     -jfx-toggle-color: blueviolet;
     -jfx-toggle-line-color: mediumpurple;
@@ -177,7 +188,35 @@ and open the template in the editor.
     -fx-padding: 10 0 10 20;
 
 }
+.button.litle-list{
+    
+    -fx-background-color:  transparent;
+    -fx-background-radius: 0.0;
+    -fx-text-fill: white;
 
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-border-fill: white;
+    -fx-text-alignment: left;
+    -fx-alignment: bottom-left;
+    -fx-padding: 10 0 10 5;
+
+}
+
+.button.litle-list:pressed{
+    
+    -fx-border-width: 0 0 0 10;
+    -fx-border-color: white;
+    -fx-effect: innershadow;
+}
+
+.button.litle-list:hover{
+    
+    -fx-border-width: 0 0 0 10;
+    -fx-border-color: white;
+
+}
 .button.list:pressed{
     
     -fx-border-width: 0 0 0 10;
@@ -474,4 +513,9 @@ and open the template in the editor.
 
 .body {
     -fx-backgroun-colo: black;
+}
+
+.rectangle-menu-bar{
+    -fx-fill: black;
+    -fx-stroke: transparent;
 }

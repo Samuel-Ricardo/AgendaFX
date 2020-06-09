@@ -1,15 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.web.HTMLEditor?>
-<?import javafx.scene.web.WebView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.TextFlow?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="simple-background" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PostItScreenController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="310.0" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HTMLEditor fx:id="j" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="200.0" prefWidth="506.0" />
-      <Button layoutX="227.0" layoutY="200.0" mnemonicParsing="false" onAction="#test" text="Button" />
-      <WebView fx:id="view" layoutX="-5.0" layoutY="237.0" prefHeight="149.0" prefWidth="516.0" />
+      <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="310.0">
+         <content>
+            <TextFlow prefHeight="367.0" prefWidth="311.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+            </TextFlow>
+         </content>
+      </ScrollPane>
+      <TextFlow fx:id="txfBody" layoutY="39.0" prefHeight="364.0" prefWidth="310.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </TextFlow>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="-10.0" layoutY="-9.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle-menu-bar" width="332.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Rectangle>
+      <ImageView fx:id="imgMenu" fitHeight="38.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/icons8-menu-gradiente.png" />
+         </image>
+      </ImageView>
+      <VBox fx:id="vbMenu" layoutY="39.0" prefHeight="160.0" prefWidth="107.0" style="-fx-background-color: blueviolet;" styleClass="back" visible="false">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Button fx:id="btAttachment" mnemonicParsing="false" onAction="#showAttachment" prefHeight="54.0" prefWidth="107.0" styleClass="litle-list" text="Anexo">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="33.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@Images/icons8-attachment_white.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btSchedule" mnemonicParsing="false" onAction="#schedule" styleClass="litle-list" text="Agendar">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@Images/calendar_add_White.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btInfo" mnemonicParsing="false" onAction="#showData" prefHeight="49.0" prefWidth="110.0" styleClass="litle-list" text="Dados">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@Images/postits_white.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
    </children>
 </AnchorPane>
