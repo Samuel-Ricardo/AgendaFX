@@ -39,7 +39,7 @@ public class PostItDAO {
          connect();
         }
         PreparedStatement statement = null;
-        String sql = "INSERT INTO postit (idPostIt, postItUser, title, body, scheduled, horary, warned, type_postit, sound) VALUES (?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO postit (idPostIt, user_postit, title, body, scheduled, horary, warned, type_postit, sound) VALUES (?,?,?,?,?,?,?,?,?);";
         
         /*
         
@@ -51,7 +51,7 @@ public class PostItDAO {
                 horary varchar(10) 
                 warned tinyint(1) 
                 type_postit varchar(50)  
-                postItUser int(11) 
+                user_postit int(11) 
                 sound text
 
         */
@@ -86,7 +86,7 @@ public class PostItDAO {
          connect();
         }
         PreparedStatement statement = null;
-        String sql = "UPDATE postit SET postItUser = ?, title = ?, body = ?, scheduled = ?, horary = ?, warned = ?, type_postit = ?,  = ?, sound = ? WHERE idPostIt = ?;";
+        String sql = "UPDATE postit SET user_postit = ?, title = ?, body = ?, scheduled = ?, horary = ?, warned = ?, type_postit = ?, sound = ? WHERE idPostIt = ?;";
         
         try {
             

@@ -16,8 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import javafx.scene.web.HTMLEditor;
-import javafx.scene.web.WebView;
 
 /**
  * FXML Controller class
@@ -44,10 +42,24 @@ public class PostItScreenController implements Initializable {
 
     @FXML
     private Button btInfo;
+    
+    public static ImageView staticImgMenu;
+    
+    public static VBox staticVbMenu;
+
+    public static Button staticBtAttachment;
+    
+    public static Button staticBtSchedule;
+    
+    public static Button staticBtInfo;
+    
+    public static TextFlow staticTxfBody;
 
     private PostItDAO dao = new PostItDAO();
     
     private PostIt postIt  = PostItDAO.getPostIt();
+    
+    private boolean menuVissible = false;
     
     @FXML
     void schedule() {
@@ -62,13 +74,31 @@ public class PostItScreenController implements Initializable {
     @FXML
     void showData() {
 
+        menuVissible = !menuVissible;
+        
+        vbMenu.setVisible(menuVissible);
+        
+    }
+    
+    public static void loadPostIt(PostIt postIt){
+        
+        staticTxfBody.setStyle("-fx-background-color: "+postIt.getType().getSecondaryColor()+" ;");
+        
+        Text text = new Text(postIt.getBody());
+        
+        staticTxfBody.getChildren().add(text);
+        
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
-        txfBody.setStyle("-fx-background-color: "+postIt.getType().getSecondaryColor()+" ;");
+        staticBtAttachment = btAttachment;
+        staticBtInfo = btInfo;
+        staticBtSchedule = btSchedule;
+        staticImgMenu = imgMenu;
+        staticTxfBody = txfBody;
+        staticVbMenu = vbMenu;
         
     }    
     

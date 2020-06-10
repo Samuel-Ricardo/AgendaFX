@@ -9,6 +9,7 @@ import DAO.PostItDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;
 import Main.MainPostItCreator;
+import Main.MainPostItScreen;
 import Model.PostIt;
 import Model.Type;
 import com.jfoenix.controls.JFXDatePicker;
@@ -21,6 +22,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -91,7 +94,7 @@ public class PostItCreatorController implements Initializable {
     }
 
     @FXML
-    private void create() {
+    public void create() {
        
         PostIt postIt = new PostIt();
                 
@@ -121,6 +124,41 @@ public class PostItCreatorController implements Initializable {
     @FXML
     public void look() {
 
+        try {
+            
+            if(MainPostItScreen.getWindow() != null){
+                MainPostItScreen.getWindow().close();
+            }
+            
+            MainPostItScreen postItScreen = new MainPostItScreen();
+            
+            postItScreen.start(new Stage());
+            
+            PostIt postIt = new PostIt();
+
+                postIt.setTitle(txtTitle.getText());
+                postIt.setBody(txtBody.getText());
+                postIt.setMusic(sound);
+                postIt.setType(cbTypes.getSelectionModel().getSelectedItem());
+                postIt.setUser(UserDAO.getUser());
+                postIt.setWarned(false);
+
+                if(dpDate != null && tmTime != null){
+                    
+                    date = dpDate.getValue();
+                    time = tmTime.getValue();
+
+                    postIt.setScheduledDay(date,time);
+                }
+
+                PostItDAO.setPostIt(postIt);
+            
+            PostItScreenController.loadPostIt(postIt);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(PostItCreatorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     @FXML
