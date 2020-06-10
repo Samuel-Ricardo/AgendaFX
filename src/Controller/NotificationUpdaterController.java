@@ -223,7 +223,7 @@ public class NotificationUpdaterController implements Initializable {
             Logger.getLogger(NotificationUpdaterController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        notification.setDescription(txtDescription.getText());
+        notification.setBody(txtDescription.getText());
         if (img != null) {
             notification.setImage(img.getAbsolutePath());
         }
@@ -361,7 +361,7 @@ public class NotificationUpdaterController implements Initializable {
         dpDate.setValue(notification.getScheduledLocalDate());
         tpHorary.setValue(notification.getScheduledLocalTime());
 
-        txtDescription.setText(notification.getDescription());
+        txtDescription.setText(notification.getBody());
         txtTitle.setText(notification.getTitle());
 
         if (notification.getAttachment() != null) {

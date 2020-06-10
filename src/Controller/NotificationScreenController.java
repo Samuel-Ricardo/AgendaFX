@@ -109,7 +109,7 @@ public class NotificationScreenController implements Initializable {
     private void loadScreen() { // loads the screen  //  carrega a tela
 
         lblTitle.setText(notification.getTitle());
-        txtaDescription.setText(notification.getDescription());
+        txtaDescription.setText(notification.getBody());
 
         if (notification.getScheduledDay() != null) {   // set the scheduled time if it is not null // coloca o horario marcado caso  nao esteja nulo
             lblScheduled.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());

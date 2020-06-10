@@ -97,7 +97,7 @@ public class LiteRow extends BorderPane {
         description.prefWidth(313);
         description.prefHeight(41);
 
-        description.setText(notification.getDescription());
+        description.setText(notification.getBody());
         description.setStyle("  -fx-font-family: \"Arial\";"
                 + "    -fx-font-size: 13px;"
                 + "    -fx-font-weight: bold;"
@@ -158,7 +158,7 @@ public class LiteRow extends BorderPane {
         description.prefWidth(303);
         description.prefHeight(41);
 
-        description.setText(notification.getDescription());
+        description.setText(notification.getBody());
         description.setStyle("  -fx-font-family: \"Arial\";"
                 + "    -fx-font-size: 13px;"
                 + "    -fx-font-weight: bold;"
@@ -209,7 +209,7 @@ public class LiteRow extends BorderPane {
         description.prefWidth(313);
         description.prefHeight(41);
 
-        description.setText(postIt.getDescription());
+        description.setText(postIt.getBody());
         description.setStyle("  -fx-font-family: \"Arial\";"
                 + "    -fx-font-size: 13px;"
                 + "    -fx-font-weight: bold;"

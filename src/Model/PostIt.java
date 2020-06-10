@@ -25,7 +25,7 @@ public class PostIt {
 
     protected int id;
     protected String title;
-    protected String description;
+    protected String body;
     protected Date scheduledDay;
     protected boolean warned;
     protected User user;
@@ -66,12 +66,12 @@ public class PostIt {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBody() {
+        return body;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBody(String description) {
+        this.body = description;
     }
 
     public Date getScheduledDay() {

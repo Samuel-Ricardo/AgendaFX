@@ -225,7 +225,7 @@ public class NotificationCreaterController implements Initializable {
             Logger.getLogger(NotificationCreaterController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        notification.setDescription(txtDescription.getText());
+        notification.setBody(txtDescription.getText());
         if (img != null) {
             notification.setImage(img.getAbsolutePath());
         }

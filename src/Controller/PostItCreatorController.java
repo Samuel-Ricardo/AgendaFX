@@ -97,7 +97,7 @@ public class PostItCreatorController implements Initializable {
                 
 
         postIt.setTitle(txtTitle.getText());
-        postIt.setDescription(txtBody.getText());
+        postIt.setBody(txtBody.getText());
         postIt.setMusic(sound);
         postIt.setType(cbTypes.getSelectionModel().getSelectedItem());
         postIt.setUser(UserDAO.getUser());

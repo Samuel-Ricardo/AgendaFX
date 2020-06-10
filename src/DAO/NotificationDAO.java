@@ -86,7 +86,7 @@ public class NotificationDAO {
             sqlTime = new Time(scheduled.getTime());
 
             statement.setString(1, notification.getTitle());     // Filling in the camp "?"  //  Preenchendo os campos "?"
-            statement.setString(2, notification.getDescription());
+            statement.setString(2, notification.getBody());
             if (notification.getImage() != null) {
                 statement.setString(3, notification.getImage());
             } else {
@@ -161,7 +161,7 @@ public class NotificationDAO {
             sqlTime = new Time(scheduled.getTime());
 
             statement.setString(1, notification.getTitle());     // Filling in the camp "?"  //  Preenchendo os campos "?"
-            statement.setString(2, notification.getDescription());
+            statement.setString(2, notification.getBody());
             statement.setString(3, notification.getImage());
             statement.setTime(4, sqlTime);
             statement.setBoolean(5, notification.isWarned());
@@ -289,7 +289,7 @@ public class NotificationDAO {
 
                 notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
-                notification.setDescription(result.getString("descricao"));
+                notification.setBody(result.getString("descricao"));
                 notification.setAttachment(new File(result.getString("anexo")));
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
@@ -395,7 +395,7 @@ public class NotificationDAO {
 
                 notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
-                notification.setDescription(result.getString("descricao"));
+                notification.setBody(result.getString("descricao"));
                 notification.setAttachment(new File(result.getString("anexo")));
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
@@ -502,7 +502,7 @@ public class NotificationDAO {
 
                 notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
-                notification.setDescription(result.getString("descricao"));
+                notification.setBody(result.getString("descricao"));
                 notification.setAttachment(new File(result.getString("anexo")));
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
@@ -605,7 +605,7 @@ public class NotificationDAO {
 
                 notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
-                notification.setDescription(result.getString("descricao"));
+                notification.setBody(result.getString("descricao"));
                 notification.setAttachment(new File(result.getString("anexo")));
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));

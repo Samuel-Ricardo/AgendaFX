@@ -62,7 +62,7 @@ public class PostItDAO {
             statement.setInt(1, postIt.getId());
             statement.setInt(2, postIt.getUser().getId().intValue());
             statement.setString(3, postIt.getTitle());
-            statement.setString(4, postIt.getDescription());
+            statement.setString(4, postIt.getBody());
             statement.setString(5, postIt.getScheduledDate());
             statement.setString(6, postIt.getScheduledHour());
             statement.setBoolean(7, postIt.isWarned());
@@ -94,7 +94,7 @@ public class PostItDAO {
             
             statement.setInt(1, postIt.getUser().getId().intValue());
             statement.setString(2, postIt.getTitle());
-            statement.setString(3, postIt.getDescription());
+            statement.setString(3, postIt.getBody());
             statement.setString(4, postIt.getScheduledDate());
             statement.setString(5, postIt.getScheduledHour());
             statement.setBoolean(6, postIt.isWarned());
@@ -159,7 +159,7 @@ public class PostItDAO {
 
                 postIt.setId(result.getInt("idNotific"));
                 postIt.setTitle(result.getString("title"));
-                postIt.setDescription(result.getString("body"));
+                postIt.setBody(result.getString("body"));
                 postIt.setMusic(new File(result.getString("sound")));
                 try {
                     postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
@@ -230,7 +230,7 @@ public class PostItDAO {
 
                 postIt.setId(result.getInt("idNotific"));
                 postIt.setTitle(result.getString("title"));
-                postIt.setDescription(result.getString("body"));
+                postIt.setBody(result.getString("body"));
                 postIt.setMusic(new File(result.getString("sound")));
                 try {
                     postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
@@ -302,7 +302,7 @@ public class PostItDAO {
 
                 postIt.setId(result.getInt("idNotific"));
                 postIt.setTitle(result.getString("title"));
-                postIt.setDescription(result.getString("body"));
+                postIt.setBody(result.getString("body"));
                 postIt.setMusic(new File(result.getString("sound")));
                 try {
                     postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
@@ -372,7 +372,7 @@ public class PostItDAO {
                 
                 findPostIt.setId(result.getInt("idNotific"));
                 findPostIt.setTitle(result.getString("title"));
-                findPostIt.setDescription(result.getString("body"));
+                findPostIt.setBody(result.getString("body"));
                 findPostIt.setMusic(new File(result.getString("sound")));
                 try {
                     findPostIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
