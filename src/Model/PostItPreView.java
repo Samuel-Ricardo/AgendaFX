@@ -5,11 +5,15 @@
  */
 package Model;
 
+import Main.MainPostItScreen;
 import com.jfoenix.controls.JFXTextArea;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 /**
  *
@@ -42,7 +46,7 @@ public class PostItPreView extends GridPane{
     }
 
     public void load(Rectangle typeColor, Label title, JFXTextArea body, PostIt postIt) {
-     
+        
     this.setPrefHeight(140);
     this.setPrefWidth(140);
     this.setStyle("-fx-background-color: "+postIt.getType().getSecondaryColor()+";");
@@ -51,19 +55,71 @@ public class PostItPreView extends GridPane{
     typeColor.setWidth(11);
     typeColor.setHeight(249);
     typeColor.setStyle("-fx-fill:"+postIt.getType().getPrimaryColor()+";");
+    typeColor.setOnMouseClicked((t) -> {
+            
+        if(MainPostItScreen.getWindow() != null){
+                MainPostItScreen.getWindow().close();
+            }
+            
+            try {
+                  
+            MainPostItScreen PostItScreen = new MainPostItScreen();
+            
+      
+            PostItScreen.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    });
     
     this.add(typeColor, 0, 0);
     
     title.setText(postIt.getTitle());
+    title.setOnMouseClicked((t) -> {
+        
+        if(MainPostItScreen.getWindow() != null){
+                MainPostItScreen.getWindow().close();
+            }
+            
+            try {
+                  
+            MainPostItScreen PostItScreen = new MainPostItScreen();
+            
+      
+            PostItScreen.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    });
     
     this.add(title, 1, 0);
     
    body.setText(postIt.getBody());
    body.setPrefHeight(105);
    body.prefWidth(130);
+   
+   body.setOnMouseClicked((t) -> {
+   
+       if(MainPostItScreen.getWindow() != null){
+                MainPostItScreen.getWindow().close();
+            }
+            
+            try {
+                  
+            MainPostItScreen PostItScreen = new MainPostItScreen();
+            
+      
+            PostItScreen.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+   });
     
    this.add(body, 1, 1);
-    
+   
     }
 
     public void load(PostIt postIt) {
@@ -76,16 +132,68 @@ public class PostItPreView extends GridPane{
     typeColor.setWidth(11);
     typeColor.setHeight(249);
     typeColor.setStyle("-fx-fill:"+postIt.getType().getPrimaryColor()+";");
+    typeColor.setOnMouseClicked((t) -> {
+            
+        if(MainPostItScreen.getWindow() != null){
+                MainPostItScreen.getWindow().close();
+            }
+            
+            try {
+                  
+            MainPostItScreen PostItScreen = new MainPostItScreen();
+            
+      
+            PostItScreen.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    });
     
     this.add(typeColor, 0, 0);
     
     title.setText(postIt.getTitle());
+    title.setOnMouseClicked((t) -> {
+        
+        if(MainPostItScreen.getWindow() != null){
+                MainPostItScreen.getWindow().close();
+            }
+            
+            try {
+                  
+            MainPostItScreen PostItScreen = new MainPostItScreen();
+            
+      
+            PostItScreen.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    });
     
     this.add(title, 1, 0);
     
    body.setText(postIt.getBody());
    body.setPrefHeight(105);
    body.prefWidth(130);
+   
+   body.setOnMouseClicked((t) -> {
+   
+       if(MainPostItScreen.getWindow() != null){
+                MainPostItScreen.getWindow().close();
+            }
+            
+            try {
+                  
+            MainPostItScreen PostItScreen = new MainPostItScreen();
+            
+      
+            PostItScreen.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+   });
     
    this.add(body, 1, 1);
    

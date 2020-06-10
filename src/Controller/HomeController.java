@@ -19,6 +19,7 @@ import Model.Type;
 import Model.TypeRow;
 import Model.User;
 import Helper.Filler;
+import Main.MainMural;
 import Services.Notify;
 import Services.SecondPlan;
 import java.net.URL;
@@ -410,8 +411,22 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    void open() { // discontinued method // discontinued method
+    void openMural() { 
 
+        try {
+            
+            if(MainMural.getWindow() != null){
+                MainMural.getWindow().close();
+            }
+            
+            MainMural mural = new MainMural();
+            
+            mural.start(new Stage());
+            
+        } catch (Exception ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override

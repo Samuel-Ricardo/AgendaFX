@@ -377,7 +377,7 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Button layoutX="25.0" layoutY="410.0" mnemonicParsing="false" onAction="#open" prefHeight="33.0" prefWidth="153.0" text="Mural" />
+            <Button layoutX="25.0" layoutY="410.0" mnemonicParsing="false" onAction="#openMural" prefHeight="33.0" prefWidth="153.0" text="Mural" />
             <Button layoutX="25.0" layoutY="534.0" mnemonicParsing="false" onAction="#delet" prefHeight="33.0" prefWidth="153.0" text="Excluir" />
             <Button layoutX="25.0" layoutY="472.0" mnemonicParsing="false" onAction="#create" prefHeight="33.0" prefWidth="153.0" text="Criar" />
             <ListView fx:id="lvTypesEvent" layoutX="25.0" layoutY="66.0" prefHeight="331.0" prefWidth="216.0" />
