@@ -157,7 +157,7 @@ public class PostItDAO {
 
                 PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
 
-                postIt.setId(result.getInt("idNotific"));
+                postIt.setId(result.getInt("idPostIt"));
                 postIt.setTitle(result.getString("title"));
                 postIt.setBody(result.getString("body"));
                 postIt.setMusic(new File(result.getString("sound")));
@@ -166,7 +166,7 @@ public class PostItDAO {
                 } catch (ParseException ex) {
                     Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                postIt.setWarned(result.getBoolean("avisado"));
+                postIt.setWarned(result.getBoolean("warned"));
 
                 User user = new User();
 
@@ -216,11 +216,13 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<PostIt> postits = new ArrayList<>();
-        String sql = "SELECT * FROM postit_from_user WHERE id = ? ORDER BY horario;";
+        String sql = "SELECT * FROM postit_from_user WHERE id = ? ORDER BY horary;";
         
         try {
 
             statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
+            
+            statement.setInt(1, id);
             
             result = statement.executeQuery();    //  execute sql statement returning result  //  executa instruçao sql retornando resultado
 
@@ -228,7 +230,7 @@ public class PostItDAO {
 
                 PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
 
-                postIt.setId(result.getInt("idNotific"));
+                postIt.setId(result.getInt("idPostIt"));
                 postIt.setTitle(result.getString("title"));
                 postIt.setBody(result.getString("body"));
                 postIt.setMusic(new File(result.getString("sound")));
@@ -237,7 +239,7 @@ public class PostItDAO {
                 } catch (ParseException ex) {
                     Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                postIt.setWarned(result.getBoolean("avisado"));
+                postIt.setWarned(result.getBoolean("warned"));
 
                 User user = new User();
 
@@ -300,7 +302,7 @@ public class PostItDAO {
 
                 PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
 
-                postIt.setId(result.getInt("idNotific"));
+                postIt.setId(result.getInt("idPostIt"));
                 postIt.setTitle(result.getString("title"));
                 postIt.setBody(result.getString("body"));
                 postIt.setMusic(new File(result.getString("sound")));
@@ -309,7 +311,7 @@ public class PostItDAO {
                 } catch (ParseException ex) {
                     Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                postIt.setWarned(result.getBoolean("avisado"));
+                postIt.setWarned(result.getBoolean("warned"));
 
                 User user = new User();
 
@@ -360,7 +362,7 @@ public class PostItDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         PostIt findPostIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
-        String sql = "SELECT * FROM postit_from_user WHERE idNotific = ?;";
+        String sql = "SELECT * FROM postit_from_user WHERE idPostIt = ?;";
         
         try {
 
@@ -370,7 +372,7 @@ public class PostItDAO {
 
             while (result.next()) {
                 
-                findPostIt.setId(result.getInt("idNotific"));
+                findPostIt.setId(result.getInt("idPostIt"));
                 findPostIt.setTitle(result.getString("title"));
                 findPostIt.setBody(result.getString("body"));
                 findPostIt.setMusic(new File(result.getString("sound")));
@@ -379,7 +381,7 @@ public class PostItDAO {
                 } catch (ParseException ex) {
                     Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                findPostIt.setWarned(result.getBoolean("avisado"));
+                findPostIt.setWarned(result.getBoolean("warned"));
 
                 User user = new User();
 

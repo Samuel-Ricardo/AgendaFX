@@ -39,6 +39,8 @@ public class MuralController implements Initializable {
             
             PostItPreView preView = new PostItPreView(postIt);
             
+            System.out.println(preView.getPostIt().getBody());
+            
             tlMural.getChildren().add(preView);
             
         }
