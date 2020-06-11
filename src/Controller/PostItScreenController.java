@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -42,6 +43,9 @@ public class PostItScreenController implements Initializable {
 
     @FXML
     private Button btInfo;
+    
+    @FXML
+    private Pane pnMenuBackground;
     
     public static ImageView staticImgMenu;
     
@@ -74,9 +78,7 @@ public class PostItScreenController implements Initializable {
     @FXML
     void showData() {
 
-        menuVissible = !menuVissible;
         
-        vbMenu.setVisible(menuVissible);
         
     }
     
@@ -93,13 +95,37 @@ public class PostItScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        
+        startStaticsComponents();
+        
+        imgMenu.setOnMouseClicked((t) -> {
+        
+            menuVissible = !menuVissible;
+        
+            vbMenu.setVisible(menuVissible);
+            pnMenuBackground.setVisible(menuVissible);
+            
+        });
+        
+        pnMenuBackground.setOnMouseClicked((t) -> {
+        
+           menuVissible = false;
+        
+           vbMenu.setVisible(false);
+           pnMenuBackground.setVisible(false);
+           
+        });
+        
+    }    
+
+    private void startStaticsComponents() {
+        
         staticBtAttachment = btAttachment;
         staticBtInfo = btInfo;
         staticBtSchedule = btSchedule;
         staticImgMenu = imgMenu;
         staticTxfBody = txfBody;
         staticVbMenu = vbMenu;
-        
     }    
     
 }
