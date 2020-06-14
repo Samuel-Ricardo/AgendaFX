@@ -3,34 +3,15 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="140.0" style="-fx-background-color: black;" stylesheets="@Styles/Dark.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="4.0" prefWidth="11.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="130.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+<VBox prefHeight="140.0" prefWidth="124.0" style="-fx-border-width: 0 0 0 15; -fx-border-color: red;" styleClass="absolut-background" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="249.0" stroke="BLACK" strokeType="INSIDE" width="11.0">
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-      </Rectangle>
-      <Label text="Titulo" GridPane.columnIndex="1">
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
+      <Label text="Title">
+         <VBox.margin>
+            <Insets left="4.0" top="4.0" />
+         </VBox.margin>
       </Label>
-      <JFXTextArea prefHeight="103.0" prefWidth="130.0" styleClass="text-area-empyt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <JFXTextArea styleClass="text-area-empyt" />
    </children>
-   <padding>
-      <Insets left="-1.0" />
-   </padding>
-</GridPane>
+</VBox>
