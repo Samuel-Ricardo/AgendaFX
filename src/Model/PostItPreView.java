@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Controller.PostItCreatorController;
+import Controller.PostItScreenController;
 import Main.MainPostItScreen;
 import com.jfoenix.controls.JFXTextArea;
 import java.util.logging.Level;
@@ -20,23 +22,19 @@ import javafx.stage.Stage;
  *
  * @author Samuel
  */
-public class PostItPreView extends HBox {
+public class PostItPreView extends VBox {
 
-    private Rectangle typeColor;
     private Label title;
     private JFXTextArea body;
     private PostIt postIt;
-    private VBox vbox;
 
-    public PostItPreView(Rectangle typeColor, Label title, JFXTextArea body, PostIt postIt, VBox vbox) {
+    public PostItPreView(Label title, JFXTextArea body, PostIt postIt) {
 
-        this.typeColor = typeColor;
         this.title = title;
         this.body = body;
         this.postIt = postIt;
-        this.vbox = vbox;
 
-        load(typeColor, title, body, postIt, vbox);
+        load(title, body, postIt);
     }
 
     public PostItPreView(PostIt postIt) {
@@ -44,16 +42,17 @@ public class PostItPreView extends HBox {
         this.body = new JFXTextArea();
         this.postIt = postIt;
         this.title = new Label();
-        this.typeColor = new Rectangle();
 
         load(postIt);
     }
 
-    public void load(Rectangle typeColor, Label title, JFXTextArea body, PostIt postIt, VBox vbox) {
+    public void load(Label title, JFXTextArea body, PostIt postIt) {
 
         this.setPrefHeight(140);
         this.setPrefWidth(140);
-        this.setStyle("-fx-background-color: " + postIt.getType().getSecondaryColor() + ";");
+        this.setStyle("-fx-background-color: " + postIt.getType().getSecondaryColor() + ";"
+                    + "-fx-border-width: 0 0 0 15;"
+                    + "-fx-border-color: " + postIt.getType().getPrimaryColor() + ";");
         this.setOnMouseClicked((t) -> {
 
             if (MainPostItScreen.getWindow() != null) {
@@ -65,39 +64,34 @@ public class PostItPreView extends HBox {
                 MainPostItScreen PostItScreen = new MainPostItScreen();
 
                 PostItScreen.start(new Stage());
+                PostItScreenController.loadPostIt(postIt);
             } catch (Exception ex) {
                 Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         });
-
-        typeColor.setWidth(15);
-        typeColor.setHeight(this.getHeight());
-        typeColor.setStyle("-fx-fill:" + postIt.getType().getPrimaryColor() + "; "
-                + "-fx-stroke: traspparent;");
-
-        this.getChildren().add(typeColor);
-
-        vbox.setPrefHeight(140);
-        vbox.setPrefWidth(124);
+        
+        this.setPrefHeight(140);
+        this.setPrefWidth(140);
 
         title.setText(postIt.getTitle());
         title.setPadding(new Insets(4, 0, 0, 4));
 
-        vbox.getChildren().add(title);
+        this.getChildren().add(title);
 
         body.setText(postIt.getBody());
+        body.getStyleClass().add("text-area-empyt");
 
-        vbox.getChildren().add(body);
-
-        this.getChildren().add(vbox);
+        this.getChildren().add(body);
     }
 
     public void load(PostIt postIt) {
 
         this.setPrefHeight(140);
         this.setPrefWidth(140);
-        this.setStyle("-fx-background-color: " + postIt.getType().getSecondaryColor() + ";");
+        this.setStyle("-fx-background-color: " + postIt.getType().getSecondaryColor() + ";"
+                    + "-fx-border-width: 0 0 0 15;"
+                    + "-fx-border-color: " + postIt.getType().getPrimaryColor() + ";");
         this.setOnMouseClicked((t) -> {
 
             if (MainPostItScreen.getWindow() != null) {
@@ -114,36 +108,19 @@ public class PostItPreView extends HBox {
             }
 
         });
-
-        typeColor.setWidth(15);
-        typeColor.setHeight(this.getHeight());
-        typeColor.setStyle("-fx-fill:" + postIt.getType().getPrimaryColor() + "; "
-                + "-fx-stroke: traspparent;");
-
-        this.getChildren().add(typeColor);
-
-        vbox.setPrefHeight(140);
-        vbox.setPrefWidth(124);
+        
+        this.setPrefHeight(140);
+        this.setPrefWidth(140);
 
         title.setText(postIt.getTitle());
         title.setPadding(new Insets(4, 0, 0, 4));
 
-        vbox.getChildren().add(title);
+        this.getChildren().add(title);
 
         body.setText(postIt.getBody());
+        body.getStyleClass().add("text-area-empyt");
 
-        vbox.getChildren().add(body);
-
-        this.getChildren().add(vbox);
-
-    }
-
-    public Rectangle getTypeColor() {
-        return typeColor;
-    }
-
-    public void setTypeColor(Rectangle typeColor) {
-        this.typeColor = typeColor;
+        this.getChildren().add(body);
     }
 
     public Label getTitle() {
