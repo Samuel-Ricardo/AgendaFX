@@ -15,6 +15,10 @@ and open the template in the editor.
     -fx-background-color: linear-gradient(to bottom right, #000000,#757575);
 }
 
+.absolut-background{
+    -fx-background-color: black;
+}
+
 .simple-background{
     -fx-background-color: #343232;
 }
