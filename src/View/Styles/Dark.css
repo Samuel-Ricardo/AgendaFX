@@ -26,8 +26,14 @@ and open the template in the editor.
 
 .transparent-background{
     
-    -fx-background-color: transparentbut
+    -fx-background-color: transparentbut;
     
+}
+
+.semi-transparent-background{
+    
+    -fx-background-color: rgba(0,0,0,0.20);
+
 }
 
 .sub-background{

@@ -13,14 +13,14 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="310.0" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PostItScreenController">
    <children>
-      <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="310.0">
+      <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="325.0">
          <content>
-            <TextFlow fx:id="txfBody" prefHeight="388.0" prefWidth="311.0">
+            <TextFlow fx:id="txfBody" prefHeight="415.0" prefWidth="323.0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                </padding>
                <children>
-                  <ImageView fx:id="imgMenu" fitHeight="38.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgMenu" fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
                         <Image url="@Images/icons8-menu-gradiente.png" />
                      </image>
@@ -31,7 +31,7 @@
          </content>
       </ScrollPane>
       <Pane fx:id="pnMenuBackground" opacity="0.25" prefHeight="403.0" prefWidth="310.0" style="-fx-background-color: white;" visible="false" />
-      <VBox fx:id="vbMenu" layoutX="14.0" layoutY="46.0" prefHeight="146.0" prefWidth="114.0" styleClass="transparent-background" visible="false">
+      <VBox fx:id="vbMenu" layoutX="10.0" layoutY="40.0" prefHeight="168.0" prefWidth="118.0" styleClass="semi-transparent-background" visible="false">
          <children>
             <Button fx:id="btAttachment" mnemonicParsing="false" onAction="#showAttachment" prefHeight="54.0" prefWidth="107.0" styleClass="litle-list" text="Anexo">
                <graphic>
