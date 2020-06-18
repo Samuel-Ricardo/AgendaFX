@@ -92,7 +92,7 @@ public class PostItUpdaterController implements Initializable {
     }
 
     @FXML
-    public void create() {
+    public void update() {
        
         PostIt postIt = new PostIt();
                 
@@ -207,6 +207,7 @@ public class PostItUpdaterController implements Initializable {
             
         });
         
+        startElemnts();
     }    
 
     private void fillComboBox() {
@@ -223,5 +224,33 @@ public class PostItUpdaterController implements Initializable {
 
         cbTypes.setItems(obTypes);  
     
+    }
+
+    private void startElemnts() {
+      
+        PostIt postIt = PostItDAO.getPostIt();
+
+        if(postIt.getMusic() != null){
+            
+            soundIsVisible = true;
+            
+            btSound.setVisible(soundIsVisible);
+            lblSound.setVisible(soundIsVisible);
+        
+            tgSound.selectedProperty().set(soundIsVisible);
+            
+            sound = postIt.getMusic();
+            lblSound.setText(sound.getName());
+    }
+        
+       cbTypes.getSelectionModel().select(postIt.getType());
+       recType.setStyle("-fx-fill:"+postIt.getType().getPrimaryColor()+";");
+       
+        if (postIt.getScheduledDay() != null) {
+            
+            dpDate.setValue(postIt.getScheduledLocalDate());
+            tmTime.setValue(postIt.getScheduledLocalTime());
+            
+        }
     }
 }
