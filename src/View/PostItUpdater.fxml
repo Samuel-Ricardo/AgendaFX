@@ -33,9 +33,9 @@
                   <ComboBox fx:id="cbTypes" layoutX="233.0" layoutY="115.0" prefWidth="150.0" />
                   <Label layoutX="212.0" layoutY="21.0" text="Tipo:" />
                   <Rectangle fx:id="recType" arcHeight="5.0" arcWidth="5.0" height="13.0" layoutX="222.0" layoutY="78.0" stroke="TRANSPARENT" strokeType="INSIDE" width="161.0" />
-                  <Button layoutX="308.0" layoutY="316.0" mnemonicParsing="false" onAction="#create" text="Criar" />
-                  <Button layoutX="29.0" layoutY="316.0" mnemonicParsing="false" onAction="#close" text="Fechar" />
-                  <Button layoutX="135.0" layoutY="316.0" mnemonicParsing="false" onAction="#look" text="Ver como está" />
+                  <Button layoutX="282.0" layoutY="316.0" mnemonicParsing="false" onAction="#update" text="Atualizar" />
+                  <Button layoutX="14.0" layoutY="316.0" mnemonicParsing="false" onAction="#close" text="Fechar" />
+                  <Button layoutX="112.0" layoutY="316.0" mnemonicParsing="false" onAction="#look" prefHeight="33.0" prefWidth="157.0" text="Ver como está" />
                </children></AnchorPane>
       </content>
     </Tab>

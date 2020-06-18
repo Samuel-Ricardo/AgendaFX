@@ -30,7 +30,7 @@
             </TextFlow>
          </content>
       </ScrollPane>
-      <Pane fx:id="pnMenuBackground" opacity="0.25" prefHeight="403.0" prefWidth="310.0" style="-fx-background-color: white;" visible="false" />
+      <Pane fx:id="pnMenuBackground" opacity="0.33" prefHeight="418.0" prefWidth="325.0" style="-fx-background-color: white;" visible="false" />
       <VBox fx:id="vbMenu" layoutX="10.0" layoutY="40.0" prefHeight="168.0" prefWidth="118.0" styleClass="semi-transparent-background" visible="false">
          <children>
             <Button fx:id="btAttachment" mnemonicParsing="false" onAction="#showAttachment" prefHeight="54.0" prefWidth="107.0" styleClass="litle-list" text="Anexo">
