@@ -13,6 +13,7 @@ and open the template in the editor.
 
 .background{
     -fx-background-color: linear-gradient(to bottom right, #000000,#757575);
+   /* -fx-effect: innershadow(three-pass-box,rgba(0,0,0,0.8), 10,0,0,0);*/
 }
 
 .absolut-background{

@@ -5,7 +5,6 @@
  */
 package Model;
 
-import Controller.PostItCreatorController;
 import Controller.PostItScreenController;
 import Main.MainPostItScreen;
 import com.jfoenix.controls.JFXTextArea;
@@ -13,9 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -48,10 +45,10 @@ public class PostItPreView extends VBox {
 
     public void load(Label title, JFXTextArea body, PostIt postIt) {
 
-        this.setPrefHeight(140);
-        this.setPrefWidth(140);
-        this.setStyle("-fx-background-color: " + postIt.getType().getSecondaryColor() + ";"
-                    + "-fx-border-width: 0 0 0 15;"
+        this.setPrefHeight(150);
+        this.setPrefWidth(150);
+        this.setStyle("-fx-background-color: black;"
+                    + "-fx-border-width: 0 0 0 10;"
                     + "-fx-border-color: " + postIt.getType().getPrimaryColor() + ";");
         this.setOnMouseClicked((t) -> {
 
@@ -87,11 +84,12 @@ public class PostItPreView extends VBox {
 
     public void load(PostIt postIt) {
 
-        this.setPrefHeight(140);
-        this.setPrefWidth(140);
-        this.setStyle("-fx-background-color: " + postIt.getType().getSecondaryColor() + ";"
-                    + "-fx-border-width: 0 0 0 15;"
-                    + "-fx-border-color: " + postIt.getType().getPrimaryColor() + ";");
+        this.setPrefHeight(155);
+        this.setPrefWidth(150);
+        this.setStyle("-fx-background-color: transparent;"
+                    + "-fx-border-width: 0 0 0 10;"
+                    + "-fx-border-color: " + postIt.getType().getPrimaryColor() + ";"
+                    + "-fx-effect: innershadow");
         this.setOnMouseClicked((t) -> {
 
             if (MainPostItScreen.getWindow() != null) {
@@ -103,6 +101,7 @@ public class PostItPreView extends VBox {
                 MainPostItScreen PostItScreen = new MainPostItScreen();
 
                 PostItScreen.start(new Stage());
+                PostItScreenController.loadPostIt(postIt);
             } catch (Exception ex) {
                 Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
             }
