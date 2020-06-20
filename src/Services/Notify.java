@@ -143,9 +143,6 @@ public class Notify extends Thread {
 
                     try {
 
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
                                 if (notification.isWarned() == false) {
                                    
                                     notification.setWarned(true);
@@ -155,9 +152,7 @@ public class Notify extends Thread {
                                     
                                     dao.update(notification);
                                 }
-                            }
-                        });
-
+                                
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao: " + ex);
                         int result = JOptionPane.showConfirmDialog(null, "Notificaçao: " + notifications.get(cont).getTitle()
