@@ -90,6 +90,78 @@ public class Filler {
          list.setItems(olPanes);
 
     }
+    public static void fillOutActivitiesDoneToday(ListView list) { // Load notifiacation // carrega as notificaçoes
+
+        int cont = 0;
+        ArrayList<Row> alPanes = new ArrayList<>();
+        
+        checkNotifications();
+        
+        for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
+            
+            Row row = new Row(notifications.get(cont));
+
+            row.setOnMouseClicked((t) -> {  // opens the notification when you click // abre a notificaçao ao clicar
+
+                try {
+                    notify.showNotification(row.getNotification());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao " + ex);
+                }
+
+            });
+
+            String today = day.format(new Date());
+            String notificationDay = day.format(row.getNotification().getSQLScheduledDay());
+
+            if (today.equals(notificationDay) && row.getNotification().isWarned() == true) {
+                alPanes.add(row);
+            }
+            cont++;
+        }
+
+         ObservableList<Row> olPanes = FXCollections.observableArrayList(alPanes);
+
+         list.getItems().clear();
+         list.setItems(olPanes);
+
+    }
+    public static void fillTodaysScheduledActivities(ListView list) { // Load notifiacation // carrega as notificaçoes
+
+        int cont = 0;
+        ArrayList<Row> alPanes = new ArrayList<>();
+        
+        checkNotifications();
+        
+        for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
+            
+            Row row = new Row(notifications.get(cont));
+
+            row.setOnMouseClicked((t) -> {  // opens the notification when you click // abre a notificaçao ao clicar
+
+                try {
+                    notify.showNotification(row.getNotification());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao " + ex);
+                }
+
+            });
+
+            String today = day.format(new Date());
+            String notificationDay = day.format(row.getNotification().getSQLScheduledDay());
+
+            if (today.equals(notificationDay) && row.getNotification().isWarned() == false) {
+                alPanes.add(row);
+            }
+            cont++;
+        }
+
+         ObservableList<Row> olPanes = FXCollections.observableArrayList(alPanes);
+
+         list.getItems().clear();
+         list.setItems(olPanes);
+
+    }
 
     public static void checkNotifications() {
         notifications = (ArrayList<Notification>) dao.selectAllFromUser(UserDAO.getUser().getId().intValue());

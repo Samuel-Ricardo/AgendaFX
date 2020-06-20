@@ -147,11 +147,11 @@ public class Notify extends Thread {
                             @Override
                             public void run() {
                                 if (notification.isWarned() == false) {
-                                    
+                                   
                                     notification.setWarned(true);
                                     
                                     notificationWarned.add(notification);
-                                    System.out.println(notificationWarned.get(0).getScheduledHour()+ "Acorda");
+                                    System.out.println(notificationWarned.get(0).getScheduledHour()+ " array Acorda");
                                     
                                     dao.update(notification);
                                 }

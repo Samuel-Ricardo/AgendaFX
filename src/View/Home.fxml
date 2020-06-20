@@ -15,8 +15,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Reflection?>
@@ -169,9 +167,9 @@
             </TabPane>
          </children>
       </Pane>
-      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;" visible="false">
+      <Pane fx:id="panePerfil" layoutX="181.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
          <children>
-            <SplitPane dividerPositions="0.800771208226221" layoutX="1.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
+            <SplitPane dividerPositions="0.4254498714652956" layoutX="1.0" prefHeight="609.0" prefWidth="782.0" style="-fx-border-color: transparent;">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="308.0" styleClass="simple-background">
                      <children>
@@ -303,10 +301,10 @@
                                  </content>
                             </Tab>
                             <Tab text="Atividades feitas">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;" styleClass="scroll-pane">
                                        <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" height="43.0" layoutX="-15.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="791.0">
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" height="43.0" layoutX="-4.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="782.0">
                                              <fill>
                                                 <LinearGradient endX="1.0" endY="1.0">
                                                    <stops>
@@ -316,17 +314,11 @@
                                                 </LinearGradient>
                                              </fill>
                                           </Rectangle>
-                                          <TableView layoutY="35.0" prefHeight="537.0" prefWidth="782.0">
-                                             <columns>
-                                                <TableColumn prefWidth="57.0" text="Id" />
-                                                <TableColumn prefWidth="529.0000152587891" text="Descriçao" />
-                                                <TableColumn prefWidth="181.0" text="Horario" />
-                                             </columns>
-                                          </TableView>
                                           <Label layoutX="194.0" layoutY="9.0" text="selecione uma para abrí-la" />
+                                          <ListView fx:id="lvActivitiesDone" layoutX="-4.0" layoutY="41.0" prefHeight="533.0" prefWidth="782.0" styleClass="simple-background" />
                                        </children>
                                     </AnchorPane>
-                              </content>
+                                 </content>
                             </Tab>
                           </tabs>
                         </TabPane>
@@ -336,7 +328,7 @@
             </SplitPane>
          </children>
       </Pane>
-      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0">
+      <Pane fx:id="paneEvento" layoutX="170.0" prefHeight="599.0" prefWidth="796.0" visible="false">
          <children>
             <Label layoutX="25.0" styleClass="stylized-title" text="Legenda :" />
             <JFXNodesList layoutX="469.0" layoutY="192.0" />
@@ -371,7 +363,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ListView prefHeight="318.0" prefWidth="496.0" />
+                              <ListView fx:id="lvMyDay" prefHeight="318.0" prefWidth="496.0" />
                            </children></AnchorPane>
                     </content>
                   </Tab>

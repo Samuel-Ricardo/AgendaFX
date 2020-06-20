@@ -148,9 +148,15 @@ public class HomeController implements Initializable {
 
     @FXML
     private ListView<Row> lvTodayNotifications;
+    
+    @FXML
+    private ListView<Row> lvMyDay;
 
     @FXML
     private ListView<Row> lvAllEvents;
+    
+    @FXML
+    private ListView<Row> lvActivitiesDone;
 
     @FXML
     private ListView<TypeRow> lvTypesEvent;
@@ -244,6 +250,7 @@ public class HomeController implements Initializable {
         }
         
         Filler.fillOutAllTypes(lvTypesEvent);
+        Filler.fillOutNotificationsOfToday(lvMyDay);
 
     }
 
@@ -480,7 +487,8 @@ public class HomeController implements Initializable {
             }
             
             Filler.setList(lvTodayNotifications);
-            filler.fillOutNotificationsOfToday(lvTodayNotifications);
+            filler.fillTodaysScheduledActivities(lvTodayNotifications);
+            filler.fillOutActivitiesDoneToday(lvActivitiesDone);
         }
     }
     

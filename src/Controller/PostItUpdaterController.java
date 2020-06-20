@@ -109,13 +109,15 @@ public class PostItUpdaterController implements Initializable {
         
         postIt.setScheduledDay(date,time);
         
+        PostItDAO.setPostIt(postIt);
+        
         if(dao.Insert(postIt)){
             
             JOptionPane.showMessageDialog(null, "Criado");
-            
+            close();
         }
         
-        PostItDAO.setPostIt(postIt);
+        
          
     }
 
