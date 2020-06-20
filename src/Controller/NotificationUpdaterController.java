@@ -251,7 +251,8 @@ public class NotificationUpdaterController implements Initializable {
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso +,-");
         }
     
-        Filler.fillOutNotificationsOfToday(Filler.getController().getLvTodayNotifications());
+        Filler.fillTodaysScheduledActivities(Filler.getController().getLvTodayNotifications());
+        Filler.fillOutActivitiesDoneToday(Filler.getController().getLvActivitiesDone());
         
     }
 

@@ -58,17 +58,20 @@ public class TypeRow extends BorderPane{
     
     public void load(Type type){
         
-        this.setPrefWidth(190);
+        this.setPrefWidth(180);
         this.setPrefHeight(31);
-        this.setStyle("-fx-background-color: transparent;");
-        
+        this.setStyle("-fx-background-color: transparent;"
+                    + "-fx-border-width: 0 5 0 5;"
+                    + "-fx-border-color: " +type.getPrimaryColor()+ ";");
         name.setText(type.getName());
         
         primaryColor.prefHeight(23);
         primaryColor.prefWidth(54);
         primaryColor.setStyle("-fx-fill: "+type.getPrimaryColor()+";");
+        System.out.println(primaryColor.getStyle());
+
         
-        this.setLeft(name);
+        this.setCenter(name);
         this.setRight(primaryColor);
         
         this.setVisible(true);

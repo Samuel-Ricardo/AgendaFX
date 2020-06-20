@@ -799,6 +799,101 @@ public class HomeController implements Initializable {
     public void setFiller(Filler filler) {
         this.filler = filler;
     }
-    
+
+    public ListView<Row> getLvMyDay() {
+        return lvMyDay;
+    }
+
+    public void setLvMyDay(ListView<Row> lvMyDay) {
+        this.lvMyDay = lvMyDay;
+    }
+
+    public ListView<Row> getLvActivitiesDone() {
+        return lvActivitiesDone;
+    }
+
+    public void setLvActivitiesDone(ListView<Row> lvActivitiesDone) {
+        this.lvActivitiesDone = lvActivitiesDone;
+    }
+
+    public ListView<TypeRow> getLvTypesEvent() {
+        return lvTypesEvent;
+    }
+
+    public void setLvTypesEvent(ListView<TypeRow> lvTypesEvent) {
+        this.lvTypesEvent = lvTypesEvent;
+    }
+
+    public AreaChart<String, Double> getAcOcuppiedDaysGraph() {
+        return acOcuppiedDaysGraph;
+    }
+
+    public void setAcOcuppiedDaysGraph(AreaChart<String, Double> acOcuppiedDaysGraph) {
+        this.acOcuppiedDaysGraph = acOcuppiedDaysGraph;
+    }
+
+    public CategoryAxis getAcX() {
+        return acX;
+    }
+
+    public void setAcX(CategoryAxis acX) {
+        this.acX = acX;
+    }
+
+    public NumberAxis getAcY() {
+        return acY;
+    }
+
+    public void setAcY(NumberAxis acY) {
+        this.acY = acY;
+    }
+
+    public PieChart getPcMostUsedEvents() {
+        return pcMostUsedEvents;
+    }
+
+    public void setPcMostUsedEvents(PieChart pcMostUsedEvents) {
+        this.pcMostUsedEvents = pcMostUsedEvents;
+    }
+
+    public ComboBox<String> getCbTimeInterval() {
+        return cbTimeInterval;
+    }
+
+    public void setCbTimeInterval(ComboBox<String> cbTimeInterval) {
+        this.cbTimeInterval = cbTimeInterval;
+    }
+
+    public WebView getWbvGmail() {
+        return wbvGmail;
+    }
+
+    public void setWbvGmail(WebView wbvGmail) {
+        this.wbvGmail = wbvGmail;
+    }
+
+    public WebView getWbvOutlook() {
+        return wbvOutlook;
+    }
+
+    public void setWbvOutlook(WebView wbvOutlook) {
+        this.wbvOutlook = wbvOutlook;
+    }
+
+    public WebView getWbvGitHub() {
+        return wbvGitHub;
+    }
+
+    public void setWbvGitHub(WebView wbvGitHub) {
+        this.wbvGitHub = wbvGitHub;
+    }
+
+    public ImageView getImgAddType() {
+        return imgAddType;
+    }
+
+    public void setImgAddType(ImageView imgAddType) {
+        this.imgAddType = imgAddType;
+    }
     
 }
