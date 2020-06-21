@@ -27,14 +27,16 @@ public class ImageFile {
     private byte[] bytes;
     private File file;
     private int length ;
-    private int lengthKB = length / 1024;
-    private int lengthMB = lengthKB / 1024;
+    private int lengthKB;
+    private int lengthMB;
     private FileInputStream input;
     private FileOutputStream output;
     private ImageIcon imageSwing;
     private Image ImageFX;
+    private static final String PCuser = System.getProperty("user.name");
 
     public ImageFile(String absolutePath) {
+        
        
         this.file = new File(absolutePath);
 
@@ -42,35 +44,40 @@ public class ImageFile {
     }
 
     public ImageFile(String string, String string1) {
+        
         this.file = new File(string, string1);
 
         start();
     }
 
     public ImageFile(File file, String string) {
+        
         this.file = new File(file,string);
 
         start();
     }
 
     public ImageFile(URI uri) {
+        
         this.file = new File(uri);
 
         start();
     }    
 
     public ImageFile(File file) {
+        
         this.file = file;
     }
     
    public ImageFile(InputStream inputS, String name) {
+       
         
         try {
             this.bytes = new byte[1024];
             
             String PCuser = System.getProperty("user.name");
             
-            file = new File("\"C:\\Users\\"+PCuser+"\\Documents\\SAGAL\\images\\"+name+".png");
+            file = new File("\"C:\\Users\\"+PCuser+"\\Documents\\AgendaFX\\images\\"+name);
             
             input = new FileInputStream(file);
             output = new FileOutputStream(file);
@@ -99,15 +106,18 @@ public class ImageFile {
     
 
     private void start() {
+        
         try {
             
             this.length = (int) file.length();
-
+            this.lengthKB = length / 1024;
+            this.lengthMB = lengthKB / 1024;
+            
             this.bytes = new byte[length];
             this.input = new FileInputStream(file);
             this.output = new FileOutputStream(file);
 
-            input.read(bytes, 0, length);
+          //  input.read(bytes, 0, length);
 
             this.imageSwing = new ImageIcon(file.getAbsolutePath());
             this.ImageFX = new Image(file.getAbsolutePath());
@@ -122,9 +132,9 @@ public class ImageFile {
     
     public static boolean exist(String imageName) {
         
-       String PCuser = System.getProperty("user.name");
+      
        
-       File search = new File("C:\\Users\\"+PCuser+"\\Documents\\SAGAL\\images\\"+imageName);
+       File search = new File("C:\\Users\\"+PCuser+"\\Documents\\AgendaFX\\images\\"+imageName);
        
        return search.exists();
     }
