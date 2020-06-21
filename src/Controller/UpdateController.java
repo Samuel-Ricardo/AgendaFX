@@ -53,6 +53,7 @@ public class UpdateController implements Initializable {
 
     @FXML
     private TextField txtNome;
+    
     @FXML
     private DatePicker dpNascimento;
 

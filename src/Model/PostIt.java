@@ -8,6 +8,7 @@ package Model;
 import Model.Utilities.ImageFile;
 import Model.Interfaces.Reminder;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,13 +16,35 @@ import java.io.File;
  */
 public class PostIt extends Reminder{
 
-    protected ImageFile image;
-    
+    private ArrayList<ImageFile> images;
+    private ArrayList<File> Attachments;
 
     public PostIt() {
+        
+        this.images = new ArrayList<>();
+        this.Attachments = new ArrayList<>();
     }
 
     public PostIt(User user) {
         super(user);
+        
+        this.images = new ArrayList<>();
+        this.Attachments = new ArrayList<>();
+    }
+
+    public ArrayList<ImageFile> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<ImageFile> images) {
+        this.images = images;
+    }
+
+    public ArrayList<File> getAttachments() {
+        return Attachments;
+    }
+
+    public void setAttachments(ArrayList<File> Attachments) {
+        this.Attachments = Attachments;
     }
 }

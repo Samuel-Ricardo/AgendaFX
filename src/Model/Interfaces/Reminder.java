@@ -6,7 +6,6 @@
 package Model.Interfaces;
 
 import Model.*;
-import java.io.File;
 
 /**
  *
@@ -19,15 +18,6 @@ public class Reminder {
     protected String body;
     protected User user;
     protected Type type;
-    protected File attachment;
-    
-    public File getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(File attachment) {
-        this.attachment = attachment;
-    }
 
     public Reminder(User user) {
         this.user = user;
