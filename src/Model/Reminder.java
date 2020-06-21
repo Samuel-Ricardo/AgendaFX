@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Samuel
  */
-public class Notification{
+public class Reminder{
     
      protected int id;
     protected String title;
@@ -61,11 +61,11 @@ public class Notification{
 
 
 
-    public Notification(User user) {
+    public Reminder(User user) {
         this.user = user;
     }
 
-    public Notification() {
+    public Reminder() {
     }
 
     public Type getType() {

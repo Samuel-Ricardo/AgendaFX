@@ -10,7 +10,7 @@ import DAO.TypeDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
 import Main.MainNotificationUpdater;
-import Model.Notification;
+import Model.Reminder;
 import Model.Type;
 import Model.User;
 import Services.Downloader;
@@ -106,7 +106,7 @@ public class NotificationUpdaterController implements Initializable {
 
     private File img = new File("");
 
-    private Notification notification = NotificationDAO.getNotification();
+    private Reminder notification = NotificationDAO.getNotification();
 
     private boolean imgVissible = false;
 
@@ -559,11 +559,11 @@ public class NotificationUpdaterController implements Initializable {
         this.img = img;
     }
 
-    public Notification getNotification() {
+    public Reminder getNotification() {
         return notification;
     }
 
-    public void setNotification(Notification notification) {
+    public void setNotification(Reminder notification) {
         this.notification = notification;
     }
 

@@ -20,13 +20,13 @@ public class Row extends HBox {
     protected Rectangle typeColor;
     protected Label title;
     protected Label date;
-    protected Notification notification;
+    protected Reminder notification;
     protected PostIt postIt;
     protected String style ;
     protected JFXTextArea description; 
 
     ///////Construtores  //  Constructos /////////
-    public Row(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
+    public Row(Rectangle typeColor, Label title, Label date, Reminder notification, String style) {
         this.typeColor = typeColor;
         this.title = title;
         this.date = date;
@@ -36,7 +36,7 @@ public class Row extends HBox {
 
     }
 
-    public Row(Notification notification) {
+    public Row(Reminder notification) {
 
         this.typeColor = new Rectangle(20, 20);
         this.title = new Label();
@@ -64,7 +64,7 @@ public class Row extends HBox {
     }
 
     ///////metodos  //  method /////////
-    private void loadPane(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
+    private void loadPane(Rectangle typeColor, Label title, Label date, Reminder notification, String style) {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
@@ -101,7 +101,7 @@ public class Row extends HBox {
         this.setVisible(true);
     }
 
-    public void loadPane(Notification notification) {
+    public void loadPane(Reminder notification) {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
@@ -200,11 +200,11 @@ public class Row extends HBox {
         this.date = description;
     }
 
-    public Notification getNotification() {
+    public Reminder getNotification() {
         return notification;
     }
 
-    public void setNotification(Notification notification) {
+    public void setNotification(Reminder notification) {
         this.notification = notification;
     }
 

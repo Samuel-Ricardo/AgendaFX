@@ -12,7 +12,7 @@ import Main.MainLogin;
 import Main.MainRegister;
 import Main.MainTypeCreator;
 import Main.MainUpdate;
-import Model.Notification;
+import Model.Reminder;
 import Model.PostIt;
 import Model.Row;
 import Model.Type;
@@ -195,7 +195,7 @@ public class HomeController implements Initializable {
 
     private User logUser = userDao.search(UserDAO.getUser());;
 
-    private ArrayList<Notification> notifications;
+    private ArrayList<Reminder> notifications;
 
     private ArrayList<PostIt> postIt;
 
@@ -744,11 +744,11 @@ public class HomeController implements Initializable {
         this.logUser = logUser;
     }
 
-    public ArrayList<Notification> getNotifications() {
+    public ArrayList<Reminder> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(ArrayList<Notification> notifications) {
+    public void setNotifications(ArrayList<Reminder> notifications) {
         this.notifications = notifications;
     }
 

@@ -14,7 +14,7 @@ import Main.MainHome;
 import Main.MainNotificationList;
 
 import Main.MainNotificationScreen;
-import Model.Notification;
+import Model.Reminder;
 import Model.User;
 import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
@@ -37,7 +37,7 @@ public class Notify extends Thread {
     private final SimpleDateFormat minute = new SimpleDateFormat("mm");
     private final NotificationDAO dao = new NotificationDAO();
     private final User user = UserDAO.getUser();
-    private ArrayList<Notification> notifications;
+    private ArrayList<Reminder> notifications;
     private HomeController controller;
     private int choice = 0;
     private SoundPlayer player;
@@ -81,7 +81,7 @@ public class Notify extends Thread {
     }
 
     public void checkDataBase() {
-        this.notifications = (ArrayList<Notification>) dao.selectAllFromUser(user.getId().intValue());
+        this.notifications = (ArrayList<Reminder>) dao.selectAllFromUser(user.getId().intValue());
     }
 
     public void waitChangeMinute(Date nowDate, Date lastDate) {
@@ -111,7 +111,7 @@ public class Notify extends Thread {
         System.exit(0);
     }
 
-    public boolean checkHorary(Notification notification) {
+    public boolean checkHorary(Reminder notification) {
 
         boolean check;
         Date currentTime = new Date();
@@ -133,9 +133,9 @@ public class Notify extends Thread {
         
         int cont = 0;
 
-        ArrayList<Notification> notificationWarned = new ArrayList<>();
+        ArrayList<Reminder> notificationWarned = new ArrayList<>();
 
-        for (Notification notification : notifications) { // scans notifications and examines whether to be notified // varre as notificaçoes e analisa se devem ser notificadas
+        for (Reminder notification : notifications) { // scans notifications and examines whether to be notified // varre as notificaçoes e analisa se devem ser notificadas
 
             if (notifications.get(cont).getScheduledDay() != null) {    // check if it's time to notify something // verifica se já chegou a hora de notificar algo
 
@@ -187,7 +187,7 @@ public class Notify extends Thread {
 
     }
 
-    public void playNotificationSound(Notification notification) {
+    public void playNotificationSound(Reminder notification) {
 
         if (SoundPlayer.isPlaying()) {
             System.out.println("já está tocando");
@@ -220,7 +220,7 @@ public class Notify extends Thread {
         }
     }
 
-    public static void showNotification(Notification notification) throws Exception { // opens the notification screen // abre a tela de notificaçao 
+    public static void showNotification(Reminder notification) throws Exception { // opens the notification screen // abre a tela de notificaçao 
 
         NotificationDAO.setNotification(notification);
 
@@ -232,7 +232,7 @@ public class Notify extends Thread {
         notificationScreen.start(new Stage());
     }
 
-    private void listNotification(ArrayList<Notification> notifications) {
+    private void listNotification(ArrayList<Reminder> notifications) {
 
         Platform.runLater(new Runnable() {
             @Override

@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Model.Notification;
+import Model.Reminder;
 import Model.LiteRow;
 import Services.Notify;
 import java.net.URL;
@@ -33,7 +33,7 @@ public class NotificationListController implements Initializable {
     @FXML
     private ListView<LiteRow> list;
     
-    private static ArrayList<Notification> notifications = new ArrayList<>();
+    private static ArrayList<Reminder> notifications = new ArrayList<>();
     
 
       @Override
@@ -42,7 +42,7 @@ public class NotificationListController implements Initializable {
 
           ArrayList<LiteRow> alNotifications = new ArrayList<>();
                   
-        for (Notification notification : notifications) {
+        for (Reminder notification : notifications) {
 
             
             LiteRow row = new LiteRow(notification);
@@ -79,11 +79,11 @@ public class NotificationListController implements Initializable {
         this.list = list;
     }
 
-    public static ArrayList<Notification> getNotifications() {
+    public static ArrayList<Reminder> getNotifications() {
         return notifications;
     }
 
-    public static void setNotifications(ArrayList<Notification> notifications) {
+    public static void setNotifications(ArrayList<Reminder> notifications) {
         NotificationListController.notifications = notifications;
     }
 

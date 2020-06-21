@@ -11,7 +11,7 @@ import java.io.File;
  *
  * @author Samuel
  */
-public class PostIt extends Notification{
+public class PostIt extends Reminder{
 
 
 

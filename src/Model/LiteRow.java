@@ -21,13 +21,13 @@ public class LiteRow extends BorderPane {
 
     protected ImageView image;
     protected Label title;
-    protected Notification notification;
+    protected Reminder notification;
     protected PostIt postIt;
     protected String style;
     protected JFXTextArea description;
 
     ///////Construtores  //  Constructos /////////
-    public LiteRow(ImageView image, Label title, JFXTextArea description, Notification notification, String style) {
+    public LiteRow(ImageView image, Label title, JFXTextArea description, Reminder notification, String style) {
         this.image = image;
         this.title = title;
         this.description = description;
@@ -37,7 +37,7 @@ public class LiteRow extends BorderPane {
 
     }
 
-    public LiteRow(Notification notification) {
+    public LiteRow(Reminder notification) {
 
         this.image = new ImageView();
         this.title = new Label();
@@ -65,7 +65,7 @@ public class LiteRow extends BorderPane {
     }
 
     ///////metodos  //  method /////////
-    private void loadPane(ImageView image, Label title, JFXTextArea description, Notification notification, String style) {
+    private void loadPane(ImageView image, Label title, JFXTextArea description, Reminder notification, String style) {
 
        this.setPrefWidth(411);
         this.setPrefHeight(100);
@@ -126,7 +126,7 @@ public class LiteRow extends BorderPane {
         this.setVisible(true);
     }
 
-    public void loadPane(Notification notification) {
+    public void loadPane(Reminder notification) {
 
         this.setPrefWidth(411);
         this.setPrefHeight(100);
@@ -255,11 +255,11 @@ public class LiteRow extends BorderPane {
         this.title = title;
     }
 
-    public Notification getNotification() {
+    public Reminder getNotification() {
         return notification;
     }
 
-    public void setNotification(Notification notification) {
+    public void setNotification(Reminder notification) {
         this.notification = notification;
     }
 

@@ -10,7 +10,7 @@ import Controller.NotificationListController;
 import DAO.NotificationDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;
-import Model.Notification;
+import Model.Reminder;
 import Model.LiteRow;
 import Model.Row;
 import Model.Type;
@@ -35,9 +35,9 @@ import javax.swing.JOptionPane;
 public class Filler {
 
     private static HomeController controller;
-    private static Notification notification;
+    private static Reminder notification;
     private static Row row;
-    private static ArrayList<Notification> notifications;
+    private static ArrayList<Reminder> notifications;
     private static ArrayList<Type> types ;
     private static NotificationDAO dao = new NotificationDAO();
     private static TypeDAO typeDao = new TypeDAO();
@@ -61,7 +61,7 @@ public class Filler {
         
         checkNotifications();
         
-        for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
+        for (Reminder notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
             
             Row row = new Row(notifications.get(cont));
 
@@ -97,7 +97,7 @@ public class Filler {
         
         checkNotifications();
         
-        for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
+        for (Reminder notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
             
             Row row = new Row(notifications.get(cont));
 
@@ -133,7 +133,7 @@ public class Filler {
         
         checkNotifications();
         
-        for (Notification notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
+        for (Reminder notification : notifications) {  // Create panels with notification data // Cria paineis com os dados das notificaçoes
             
             Row row = new Row(notifications.get(cont));
 
@@ -164,7 +164,7 @@ public class Filler {
     }
 
     public static void checkNotifications() {
-        notifications = (ArrayList<Notification>) dao.selectAllFromUser(UserDAO.getUser().getId().intValue());
+        notifications = (ArrayList<Reminder>) dao.selectAllFromUser(UserDAO.getUser().getId().intValue());
     }
     
     public static void checkTypes() {
@@ -177,7 +177,7 @@ public class Filler {
         ArrayList<Row> alRow = new ArrayList<>();
         checkNotifications();
         
-        for(Notification notification: notifications){
+        for(Reminder notification: notifications){
             
             Row row = new Row(notification);
             
@@ -208,7 +208,7 @@ public class Filler {
         
         ArrayList<LiteRow> alNotifications = new ArrayList<>();
                   
-        for (Notification notification : notifications) {
+        for (Reminder notification : notifications) {
 
             
             LiteRow row = new LiteRow(notification);
@@ -264,11 +264,11 @@ public class Filler {
         Filler.controller = controller;
     }
 
-    public static Notification getNotification() {
+    public static Reminder getNotification() {
         return notification;
     }
 
-    public static void setNotification(Notification notification) {
+    public static void setNotification(Reminder notification) {
         Filler.notification = notification;
     }
 
@@ -280,11 +280,11 @@ public class Filler {
         Filler.row = row;
     }
 
-    public static ArrayList<Notification> getNotifications() {
+    public static ArrayList<Reminder> getNotifications() {
         return notifications;
     }
 
-    public static void setNotifications(ArrayList<Notification> notifications) {
+    public static void setNotifications(ArrayList<Reminder> notifications) {
         Filler.notifications = notifications;
     }
 
