@@ -6,6 +6,7 @@
 package Model;
 
 import Model.Interfaces.Reminder;
+import Model.Utilities.ImageFile;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,13 +26,13 @@ import java.util.logging.Logger;
  */
 public class Notification extends Reminder{
     
-    protected Date scheduledDay;
-    protected boolean warned;
-    protected File music;
-    protected String image;
+    private Date scheduledDay;
+    private boolean warned;
+    private File music;
+    private String image;
+    private ArrayList<File> Attachments;
     
-    
-         public String getImage() {
+    public String getImage() {
         return image;
     }
 
@@ -42,6 +44,16 @@ public class Notification extends Reminder{
         return music;
     }
 
+    public ArrayList<File> getAttachments() {
+        return Attachments;
+    }
+
+    public void setAttachments(ArrayList<File> Attachments) {
+        this.Attachments = Attachments;
+    }
+
+    
+    
     public void setMusic(File music) {
         this.music = music;
     }

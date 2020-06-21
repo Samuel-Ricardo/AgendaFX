@@ -11,7 +11,7 @@ import Model.*;
  *
  * @author Samuel
  */
-public class Reminder {
+public abstract class Reminder {
     
     protected int id;
     protected String title;
