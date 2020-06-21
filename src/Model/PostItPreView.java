@@ -118,6 +118,23 @@ public class PostItPreView extends VBox {
 
         body.setText(postIt.getBody());
         body.getStyleClass().add("text-area-empyt");
+        body.setOnMouseClicked((t) -> {
+            
+            if (MainPostItScreen.getWindow() != null) {
+                MainPostItScreen.getWindow().close();
+            }
+
+            try {
+
+                MainPostItScreen PostItScreen = new MainPostItScreen();
+
+                PostItScreen.start(new Stage());
+                PostItScreenController.loadPostIt(postIt);
+            } catch (Exception ex) {
+                Logger.getLogger(PostItPreView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
 
         this.getChildren().add(body);
     }
