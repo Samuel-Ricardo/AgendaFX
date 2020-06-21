@@ -6,7 +6,7 @@
 package DAO;
 
 import JDBC.ConnectionFactory;
-import Model.Reminder;
+import Model.Notification;
 import Model.Type;
 import Model.User;
 
@@ -40,13 +40,13 @@ public class NotificationDAO {
     private SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat horary = new SimpleDateFormat("HH:mm");
     private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yy HH:mm");
-    private static Reminder notification;
+    private static Notification notification;
 
     public NotificationDAO() {
 
     }
 
-    public boolean insert(Reminder notification) {
+    public boolean insert(Notification notification) {
         connect();
         PreparedStatement statement = null;
         String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo_notificacao , anexo , musica, userNotification , marcado ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -119,7 +119,7 @@ public class NotificationDAO {
         }
     }
 
-    public boolean update(Reminder notification) {
+    public boolean update(Notification notification) {
 
         connect();
         PreparedStatement statement = null;
@@ -192,7 +192,7 @@ public class NotificationDAO {
 
     }
 
-    public boolean delete(Reminder notification) {
+    public boolean delete(Notification notification) {
 
         connect();
         PreparedStatement statement = null;
@@ -234,12 +234,12 @@ public class NotificationDAO {
 
     }
 
-    public List<Reminder> selectAll() {
+    public List<Notification> selectAll() {
 
         connect();
         PreparedStatement statement = null;
         ResultSet result = null;
-        List<Reminder> notifications = new ArrayList<>();
+        List<Notification> notifications = new ArrayList<>();
         String sql = "SELECT * FROM notification_from_user ORDER BY marcado DESC;";
 
         /*
@@ -268,7 +268,7 @@ public class NotificationDAO {
 
             while (result.next()) {
 
-                Reminder notification = new Reminder();     // create Notification with database data  // criando notificacao com dados do banco de dados
+                Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
 
                 if (result.getDate("horario") != null && result.getDate("marcado") != null) {
 
@@ -338,12 +338,12 @@ public class NotificationDAO {
         return notifications;
     }
     
-    public List<Reminder> selectAllFromUser(int id) {
+    public List<Notification> selectAllFromUser(int id) {
 
         connect();
         PreparedStatement statement = null;
         ResultSet result = null;
-        List<Reminder> notifications = new ArrayList<>();
+        List<Notification> notifications = new ArrayList<>();
         String sql = "SELECT * FROM notification_from_user WHERE id = ? ORDER BY horario;";
 
         /*
@@ -374,7 +374,7 @@ public class NotificationDAO {
 
             while (result.next()) {
 
-                Reminder notification = new Reminder();     // create Notification with database data  // criando notificacao com dados do banco de dados
+                Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
 
                if (result.getDate("horario") != null && result.getDate("marcado") != null) {
 
@@ -444,12 +444,12 @@ public class NotificationDAO {
         return notifications;
     }
 
-    public List<Reminder> search(String search) {
+    public List<Notification> search(String search) {
 
         connect();
         PreparedStatement statement = null;
         ResultSet result = null;
-        List<Reminder> notifications = new ArrayList<>();
+        List<Notification> notifications = new ArrayList<>();
         String sql = "SELECT * FROM notification_from_user WHERE titutlo LIKE ? OR descricao LIKE ?;";
 
         /*
@@ -481,7 +481,7 @@ public class NotificationDAO {
 
             while (result.next()) {
 
-                Reminder notification = new Reminder();     // create Notification with database data  // criando notificacao com dados do banco de dados
+                Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
 
                if (result.getDate("horario") != null && result.getDate("marcado") != null) {
 
@@ -551,12 +551,12 @@ public class NotificationDAO {
         return notifications;
     }
 
-    public Reminder search(Reminder notification) {
+    public Notification search(Notification notification) {
 
         connect();
         PreparedStatement statement = null;
         ResultSet result = null;
-        Reminder findNotification = new Reminder();     // create Notification with database data  // criando notificacao com dados do banco de dados
+        Notification findNotification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
         String sql = "SELECT * FROM notification_from_user WHERE idNotific = ?;";
 
         /*
@@ -660,7 +660,7 @@ public class NotificationDAO {
 
     }
 
-    public boolean exist(Reminder Notification) {     // look for the Notification in the bank and return true if it exists  // procura o notificacao no banco e retorna verdadeiro se exisstir
+    public boolean exist(Notification Notification) {     // look for the Notification in the bank and return true if it exists  // procura o notificacao no banco e retorna verdadeiro se exisstir
 
         connect();
         PreparedStatement statement = null;
@@ -746,11 +746,11 @@ public class NotificationDAO {
         this.complet = complet;
     }
 
-    public static Reminder getNotification() {
+    public static Notification getNotification() {
         return notification;
     }
 
-    public static void setNotification(Reminder notification) {
+    public static void setNotification(Notification notification) {
         NotificationDAO.notification = notification;
     }
     

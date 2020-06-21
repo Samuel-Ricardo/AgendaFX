@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Model.Utilities.ImageFile;
+import Model.Interfaces.Reminder;
 import java.io.File;
 
 /**
@@ -13,13 +15,13 @@ import java.io.File;
  */
 public class PostIt extends Reminder{
 
-
+    protected ImageFile image;
+    
 
     public PostIt() {
     }
 
     public PostIt(User user) {
         super(user);
-        
     }
 }

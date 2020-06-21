@@ -9,7 +9,7 @@ import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
 import Main.MainNotificationCreator;
-import Model.Reminder;
+import Model.Notification;
 import Model.User;
 import Services.Downloader;
 import Controller.HomeController;
@@ -107,7 +107,7 @@ public class NotificationCreaterController implements Initializable {
 
     private File img = new File("");
 
-    private Reminder notification = new Reminder();
+    private Notification notification = new Notification();
 
     private boolean imgVissible = false;
 
@@ -500,11 +500,11 @@ public class NotificationCreaterController implements Initializable {
         this.img = img;
     }
 
-    public Reminder getNotification() {
+    public Notification getNotification() {
         return notification;
     }
 
-    public void setNotification(Reminder notification) {
+    public void setNotification(Notification notification) {
         this.notification = notification;
     }
 

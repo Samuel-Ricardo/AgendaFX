@@ -54,7 +54,7 @@ public class PostItCreatorController implements Initializable {
     private JFXTimePicker tmTime;
 
     @FXML
-    private JFXToggleButton tgSound;
+    private JFXToggleButton tgAttachment;
 
     @FXML
     private ComboBox<Type> cbTypes;
@@ -69,18 +69,14 @@ public class PostItCreatorController implements Initializable {
     private TextField txtTitle;
 
     @FXML
-    private Button btSound;
+    private Button btAttachment;
 
     @FXML
-    private Label lblSound;
+    private Label lblAttachment;
     
-    private boolean soundIsVisible = false;
+    private boolean attachmentIsVisible = false;
     
     private File sound;
-    
-    private LocalDate date;
-    
-    private LocalTime time;
     
     private PostItDAO dao = new PostItDAO();
     
@@ -101,15 +97,8 @@ public class PostItCreatorController implements Initializable {
 
         postIt.setTitle(txtTitle.getText());
         postIt.setBody(txtBody.getText());
-        postIt.setMusic(sound);
         postIt.setType(cbTypes.getSelectionModel().getSelectedItem());
         postIt.setUser(UserDAO.getUser());
-        postIt.setWarned(false);
-        
-        date = dpDate.getValue();
-        time = tmTime.getValue();
-        
-        postIt.setScheduledDay(date,time);
         
         if(dao.Insert(postIt)){
             
@@ -138,18 +127,8 @@ public class PostItCreatorController implements Initializable {
 
                 postIt.setTitle(txtTitle.getText());
                 postIt.setBody(txtBody.getText());
-                postIt.setMusic(sound);
                 postIt.setType(cbTypes.getSelectionModel().getSelectedItem());
                 postIt.setUser(UserDAO.getUser());
-                postIt.setWarned(false);
-
-                if(dpDate != null && tmTime != null){
-                    
-                    date = dpDate.getValue();
-                    time = tmTime.getValue();
-
-                    postIt.setScheduledDay(date,time);
-                }
 
                 PostItDAO.setPostIt(postIt);
             
@@ -162,19 +141,19 @@ public class PostItCreatorController implements Initializable {
     }
     
     @FXML
-    void changeSoundVisibility() {
+    void changeAttachmentVisibility() {
 
-        tgSound.fontProperty().get();
+        tgAttachment.fontProperty().get();
         
-        soundIsVisible = !soundIsVisible;
+        attachmentIsVisible = !attachmentIsVisible;
             
-            btSound.setVisible(soundIsVisible);
-            lblSound.setVisible(soundIsVisible);
+            btAttachment.setVisible(attachmentIsVisible);
+            lblAttachment.setVisible(attachmentIsVisible);
             
-        if(soundIsVisible == false){
+        if(attachmentIsVisible == false){
             
             sound = null;
-            lblSound.setText("Se nao escolher será selecionado o padrao");
+            lblAttachment.setText("Se nao escolher será selecionado o padrao");
             
         }        
     }
@@ -191,7 +170,7 @@ public class PostItCreatorController implements Initializable {
         
         if (sound != null) {
 
-            lblSound.setText(sound.getName());
+            lblAttachment.setText(sound.getName());
         }
         
     }

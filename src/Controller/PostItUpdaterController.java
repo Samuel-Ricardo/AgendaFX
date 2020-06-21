@@ -52,7 +52,7 @@ public class PostItUpdaterController implements Initializable {
     private JFXTimePicker tmTime;
 
     @FXML
-    private JFXToggleButton tgSound;
+    private JFXToggleButton tgAttachment;
 
     @FXML
     private ComboBox<Type> cbTypes;
@@ -70,11 +70,11 @@ public class PostItUpdaterController implements Initializable {
     private Button btSound;
 
     @FXML
-    private Label lblSound;
+    private Label lblAttachment;
     
-    private boolean soundIsVisible = false;
+    private boolean AttachmentIsVisible = false;
     
-    private File sound;
+    private File Attachment;
     
     private LocalDate date;
     
@@ -99,16 +99,9 @@ public class PostItUpdaterController implements Initializable {
 
         postIt.setTitle(txtTitle.getText());
         postIt.setBody(txtBody.getText());
-        postIt.setMusic(sound);
+        postIt.setAttachment(Attachment);
         postIt.setType(cbTypes.getSelectionModel().getSelectedItem());
         postIt.setUser(UserDAO.getUser());
-        postIt.setWarned(false);
-        
-        date = dpDate.getValue();
-        time = tmTime.getValue();
-        
-        postIt.setScheduledDay(date,time);
-        
         PostItDAO.setPostIt(postIt);
         
         if(dao.Insert(postIt)){
@@ -138,18 +131,9 @@ public class PostItUpdaterController implements Initializable {
 
                 postIt.setTitle(txtTitle.getText());
                 postIt.setBody(txtBody.getText());
-                postIt.setMusic(sound);
+                postIt.setAttachment(Attachment);
                 postIt.setType(cbTypes.getSelectionModel().getSelectedItem());
                 postIt.setUser(UserDAO.getUser());
-                postIt.setWarned(false);
-
-                if(dpDate != null && tmTime != null){
-                    
-                    date = dpDate.getValue();
-                    time = tmTime.getValue();
-
-                    postIt.setScheduledDay(date,time);
-                }
 
                 PostItDAO.setPostIt(postIt);
             
@@ -164,17 +148,17 @@ public class PostItUpdaterController implements Initializable {
     @FXML
     void changeSoundVisibility() {
 
-        tgSound.fontProperty().get();
+        tgAttachment.fontProperty().get();
         
-        soundIsVisible = !soundIsVisible;
+        AttachmentIsVisible = !AttachmentIsVisible;
             
-            btSound.setVisible(soundIsVisible);
-            lblSound.setVisible(soundIsVisible);
+            btSound.setVisible(AttachmentIsVisible);
+            lblAttachment.setVisible(AttachmentIsVisible);
             
-        if(soundIsVisible == false){
+        if(AttachmentIsVisible == false){
             
-            sound = null;
-            lblSound.setText("Se nao escolher será selecionado o padrao");
+            Attachment = null;
+            lblAttachment.setText("Se nao escolher será selecionado o padrao");
             
         }        
     }
@@ -187,11 +171,11 @@ public class PostItUpdaterController implements Initializable {
         FileChooser SoundChooser = new FileChooser();
         SoundChooser.getExtensionFilters().add(soundFilter);
         
-        sound = SoundChooser.showOpenDialog(new Stage());
+        Attachment = SoundChooser.showOpenDialog(new Stage());
         
-        if (sound != null) {
+        if (Attachment != null) {
 
-            lblSound.setText(sound.getName());
+            lblAttachment.setText(Attachment.getName());
         }
         
     }
@@ -232,27 +216,22 @@ public class PostItUpdaterController implements Initializable {
       
         PostIt postIt = PostItDAO.getPostIt();
 
-        if(postIt.getMusic() != null){
+        if(postIt.getAttachment() != null){
             
-            soundIsVisible = true;
+            AttachmentIsVisible = true;
             
-            btSound.setVisible(soundIsVisible);
-            lblSound.setVisible(soundIsVisible);
+            btSound.setVisible(AttachmentIsVisible);
+            lblAttachment.setVisible(AttachmentIsVisible);
         
-            tgSound.selectedProperty().set(soundIsVisible);
+            tgAttachment.selectedProperty().set(AttachmentIsVisible);
             
-            sound = postIt.getMusic();
-            lblSound.setText(sound.getName());
+            Attachment = postIt.getAttachment();
+            lblAttachment.setText(Attachment.getName());
     }
         
        cbTypes.getSelectionModel().select(postIt.getType());
        recType.setStyle("-fx-fill:"+postIt.getType().getPrimaryColor()+";");
        
-        if (postIt.getScheduledDay() != null) {
-            
-            dpDate.setValue(postIt.getScheduledLocalDate());
-            tmTime.setValue(postIt.getScheduledLocalTime());
-            
-        }
+
     }
 }

@@ -9,7 +9,7 @@ import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainNotificationScreen;
 import Main.MainNotificationUpdater;
-import Model.Reminder;
+import Model.Notification;
 import Model.User;
 import Services.SoundPlayer;
 import com.jfoenix.controls.JFXTextArea;
@@ -62,7 +62,7 @@ public class NotificationScreenController implements Initializable {
 
     private User user = UserDAO.getUser();
 
-    private Reminder notification = NotificationDAO.getNotification();
+    private Notification notification = NotificationDAO.getNotification();
 
     @FXML
     void Update() {     // updates this notification with new data //Atualiza esta notificaçao com os novos dados

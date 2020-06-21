@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.Utilities;
 
+import Model.Notification;
+import Model.PostIt;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -21,13 +23,13 @@ public class LiteRow extends BorderPane {
 
     protected ImageView image;
     protected Label title;
-    protected Reminder notification;
+    protected Notification notification;
     protected PostIt postIt;
     protected String style;
     protected JFXTextArea description;
 
     ///////Construtores  //  Constructos /////////
-    public LiteRow(ImageView image, Label title, JFXTextArea description, Reminder notification, String style) {
+    public LiteRow(ImageView image, Label title, JFXTextArea description, Notification notification, String style) {
         this.image = image;
         this.title = title;
         this.description = description;
@@ -37,7 +39,7 @@ public class LiteRow extends BorderPane {
 
     }
 
-    public LiteRow(Reminder notification) {
+    public LiteRow(Notification notification) {
 
         this.image = new ImageView();
         this.title = new Label();
@@ -65,7 +67,7 @@ public class LiteRow extends BorderPane {
     }
 
     ///////metodos  //  method /////////
-    private void loadPane(ImageView image, Label title, JFXTextArea description, Reminder notification, String style) {
+    private void loadPane(ImageView image, Label title, JFXTextArea description, Notification notification, String style) {
 
        this.setPrefWidth(411);
         this.setPrefHeight(100);
@@ -126,7 +128,7 @@ public class LiteRow extends BorderPane {
         this.setVisible(true);
     }
 
-    public void loadPane(Reminder notification) {
+    public void loadPane(Notification notification) {
 
         this.setPrefWidth(411);
         this.setPrefHeight(100);
@@ -255,11 +257,11 @@ public class LiteRow extends BorderPane {
         this.title = title;
     }
 
-    public Reminder getNotification() {
+    public Notification getNotification() {
         return notification;
     }
 
-    public void setNotification(Reminder notification) {
+    public void setNotification(Notification notification) {
         this.notification = notification;
     }
 

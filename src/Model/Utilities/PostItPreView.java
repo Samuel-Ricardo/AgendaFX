@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.Utilities;
 
 import Controller.PostItScreenController;
 import Main.MainPostItScreen;
+import Model.PostIt;
 import com.jfoenix.controls.JFXTextArea;
 import java.util.logging.Level;
 import java.util.logging.Logger;

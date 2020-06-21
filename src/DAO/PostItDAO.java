@@ -63,11 +63,7 @@ public class PostItDAO {
             statement.setInt(2, postIt.getUser().getId().intValue());
             statement.setString(3, postIt.getTitle());
             statement.setString(4, postIt.getBody());
-            statement.setString(5, postIt.getScheduledDate());
-            statement.setString(6, postIt.getScheduledHour());
-            statement.setBoolean(7, postIt.isWarned());
-            statement.setInt(8, postIt.getType().getId().intValue());
-            statement.setString(9, postIt.getMusic().getAbsolutePath());
+            statement.setInt(5, postIt.getType().getId().intValue());
             
             statement.execute();
             
@@ -95,11 +91,7 @@ public class PostItDAO {
             statement.setInt(1, postIt.getUser().getId().intValue());
             statement.setString(2, postIt.getTitle());
             statement.setString(3, postIt.getBody());
-            statement.setString(4, postIt.getScheduledDate());
-            statement.setString(5, postIt.getScheduledHour());
-            statement.setBoolean(6, postIt.isWarned());
-            statement.setInt(7, postIt.getType().getId().intValue());
-            statement.setString(8, postIt.getMusic().getAbsolutePath());
+            statement.setInt(4, postIt.getType().getId().intValue());
             
             statement.execute();
             
@@ -160,14 +152,6 @@ public class PostItDAO {
                 postIt.setId(result.getInt("idPostIt"));
                 postIt.setTitle(result.getString("title"));
                 postIt.setBody(result.getString("body"));
-                postIt.setMusic(new File(result.getString("sound")));
-                try {
-                    postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                postIt.setWarned(result.getBoolean("warned"));
-
                 User user = new User();
 
                 java.util.Date userDate = null;
@@ -233,14 +217,6 @@ public class PostItDAO {
                 postIt.setId(result.getInt("idPostIt"));
                 postIt.setTitle(result.getString("title"));
                 postIt.setBody(result.getString("body"));
-                postIt.setMusic(new File(result.getString("sound")));
-                try {
-                    postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                postIt.setWarned(result.getBoolean("warned"));
-
                 User user = new User();
 
                 java.util.Date userDate = null;
@@ -305,13 +281,6 @@ public class PostItDAO {
                 postIt.setId(result.getInt("idPostIt"));
                 postIt.setTitle(result.getString("title"));
                 postIt.setBody(result.getString("body"));
-                postIt.setMusic(new File(result.getString("sound")));
-                try {
-                    postIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                postIt.setWarned(result.getBoolean("warned"));
 
                 User user = new User();
 
@@ -375,14 +344,7 @@ public class PostItDAO {
                 findPostIt.setId(result.getInt("idPostIt"));
                 findPostIt.setTitle(result.getString("title"));
                 findPostIt.setBody(result.getString("body"));
-                findPostIt.setMusic(new File(result.getString("sound")));
-                try {
-                    findPostIt.setScheduledDay(complet.parse(result.getString("scheduled")+" "+result.getString("horary")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                findPostIt.setWarned(result.getBoolean("warned"));
-
+                
                 User user = new User();
 
                 java.util.Date userDate = null;

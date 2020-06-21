@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTimePicker?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -20,22 +18,20 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="simple-background">
                <children>
-                  <JFXDatePicker fx:id="dpDate" defaultColor="BLUE" layoutX="14.0" layoutY="53.0" style="-jfx-default-color: blue;" />
-                  <JFXTimePicker fx:id="tmTime" defaultColor="BLUE" layoutX="14.0" layoutY="112.0" />
-                  <Label layoutX="14.0" layoutY="21.0" text="Dia e Hora:" />
-                  <JFXToggleButton fx:id="tgSound" layoutX="14.0" layoutY="159.0" onAction="#changeSoundVisibility" text="Som na notificaçao" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="12.0" />
-                     </font>
-                  </JFXToggleButton>
-                  <Button fx:id="btSound" layoutX="25.0" layoutY="217.0" mnemonicParsing="false" onAction="#soundChoose" prefHeight="33.0" prefWidth="169.0" text="Escolher" visible="false" />
-                  <Label fx:id="lblSound" layoutX="34.0" layoutY="267.0" styleClass="coment" text="Se nao escolher será selecionado o padrao" visible="false" />
-                  <ComboBox fx:id="cbTypes" layoutX="233.0" layoutY="115.0" prefWidth="150.0" />
-                  <Label layoutX="212.0" layoutY="21.0" text="Tipo:" />
-                  <Rectangle fx:id="recType" arcHeight="5.0" arcWidth="5.0" height="13.0" layoutX="222.0" layoutY="78.0" stroke="TRANSPARENT" strokeType="INSIDE" width="161.0" />
+                  <Label fx:id="lblAttachment" layoutX="263.0" layoutY="159.0" styleClass="axis-label" text="Anexo" visible="false" />
+                  <ComboBox fx:id="cbTypes" layoutX="14.0" layoutY="66.0" prefWidth="150.0" />
+                  <Label layoutX="29.0" layoutY="31.0" text="Tipo:" />
+                  <Rectangle fx:id="recTypeBot" arcHeight="5.0" arcWidth="5.0" height="13.0" layoutX="8.0" layoutY="254.0" stroke="TRANSPARENT" strokeType="INSIDE" width="385.0" />
                   <Button layoutX="308.0" layoutY="316.0" mnemonicParsing="false" onAction="#create" text="Criar" />
                   <Button layoutX="29.0" layoutY="316.0" mnemonicParsing="false" onAction="#close" text="Fechar" />
                   <Button layoutX="135.0" layoutY="316.0" mnemonicParsing="false" onAction="#look" text="Ver como está" />
+                  <Rectangle fx:id="recTypeTop" arcHeight="5.0" arcWidth="5.0" height="13.0" layoutX="8.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="385.0" />
+                  <JFXToggleButton fx:id="tgAttachment" layoutX="209.0" layoutY="31.0" text="Anexo" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold Italic" size="18.0" />
+                     </font>
+                  </JFXToggleButton>
+                  <Button fx:id="btAttachment" layoutX="223.0" layoutY="105.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="120.0" text="Escolher" visible="false" />
                </children></AnchorPane>
       </content>
     </Tab>

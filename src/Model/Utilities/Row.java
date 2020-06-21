@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.Utilities;
 
+import Model.Notification;
+import Model.PostIt;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -20,13 +22,13 @@ public class Row extends HBox {
     protected Rectangle typeColor;
     protected Label title;
     protected Label date;
-    protected Reminder notification;
+    protected Notification notification;
     protected PostIt postIt;
     protected String style ;
     protected JFXTextArea description; 
 
     ///////Construtores  //  Constructos /////////
-    public Row(Rectangle typeColor, Label title, Label date, Reminder notification, String style) {
+    public Row(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
         this.typeColor = typeColor;
         this.title = title;
         this.date = date;
@@ -36,7 +38,7 @@ public class Row extends HBox {
 
     }
 
-    public Row(Reminder notification) {
+    public Row(Notification notification) {
 
         this.typeColor = new Rectangle(20, 20);
         this.title = new Label();
@@ -64,7 +66,7 @@ public class Row extends HBox {
     }
 
     ///////metodos  //  method /////////
-    private void loadPane(Rectangle typeColor, Label title, Label date, Reminder notification, String style) {
+    private void loadPane(Rectangle typeColor, Label title, Label date, Notification notification, String style) {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
@@ -101,7 +103,7 @@ public class Row extends HBox {
         this.setVisible(true);
     }
 
-    public void loadPane(Reminder notification) {
+    public void loadPane(Notification notification) {
 
         this.setPrefWidth(772);
         this.setPrefHeight(65);
@@ -200,11 +202,11 @@ public class Row extends HBox {
         this.date = description;
     }
 
-    public Reminder getNotification() {
+    public Notification getNotification() {
         return notification;
     }
 
-    public void setNotification(Reminder notification) {
+    public void setNotification(Notification notification) {
         this.notification = notification;
     }
 
