@@ -5,7 +5,8 @@
  */
 package DAO;
 
-import Helper.TypeFactory;
+import Factory.TypeFactory;
+import Factory.UserFactory;
 import JDBC.ConnectionFactory;
 import Model.Type;
 import Model.User;
@@ -167,24 +168,8 @@ public class TypeDAO {
             while (result.next()) {
 
                 Type type = TypeFactory.genereteType(result);
-                
-                User user = new User();     // create user with database data  // criando usuario com dados do banco de dados
 
-                if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                }
-
-                user.setId(result.getLong("id"));
-                user.setNome(result.getString("nome"));
-                user.setSexo(result.getString("sexo"));
-                user.setNascimento(userDate);
-                user.setTelefone(result.getString("telefone"));
-                user.setEmail(result.getString("email"));
-                user.setCPF(result.getString("cpf"));
-                user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("imagePerfil"));
-
-                type.setUser(user);
+                type.setUser(UserFactory.generateUser(result));
                 
                 types.add(type);
                 
