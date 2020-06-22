@@ -112,6 +112,54 @@ INSERT INTO `notificacao` VALUES (23,'Reuniao no Meet','Reuniao no meet para \nd
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `notification_from_user`
+--
+
+DROP TABLE IF EXISTS `notification_from_user`;
+/*!50001 DROP VIEW IF EXISTS `notification_from_user`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `notification_from_user` AS SELECT 
+ 1 AS `idNotific`,
+ 1 AS `titulo`,
+ 1 AS `descricao`,
+ 1 AS `horario`,
+ 1 AS `avisado`,
+ 1 AS `musica`,
+ 1 AS `userNotification`,
+ 1 AS `marcado`,
+ 1 AS `tipo_notificacao`,
+ 1 AS `id`,
+ 1 AS `nome`,
+ 1 AS `sexo`,
+ 1 AS `dataNascimento`,
+ 1 AS `telefone`,
+ 1 AS `email`,
+ 1 AS `cpf`,
+ 1 AS `senha`,
+ 1 AS `imagePerfil`,
+ 1 AS `id_tipo`,
+ 1 AS `tipo`,
+ 1 AS `cor`,
+ 1 AS `detalhes_de_cores`,
+ 1 AS `id_usuario_tipo`,
+ 1 AS `importancia`,
+ 1 AS `id_image`,
+ 1 AS `image_name`,
+ 1 AS `image_way`,
+ 1 AS `image_bytes`,
+ 1 AS `image_user_id`,
+ 1 AS `image_postIt_id`,
+ 1 AS `image_notification_id`,
+ 1 AS `id_file`,
+ 1 AS `file_name`,
+ 1 AS `file_way`,
+ 1 AS `file_bytes`,
+ 1 AS `file_postIt_id`,
+ 1 AS `file_notification_id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `postit`
 --
 
@@ -140,6 +188,50 @@ LOCK TABLES `postit` WRITE;
 INSERT INTO `postit` VALUES (1,'Compras no Mercado','-feijao\n-arroz\n-macarrao\n-ovo',2,0),(2,'pao','pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);pnMenuBackground.setVisible(menuVissible);',2,140);
 /*!40000 ALTER TABLE `postit` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `postit_from_user`
+--
+
+DROP TABLE IF EXISTS `postit_from_user`;
+/*!50001 DROP VIEW IF EXISTS `postit_from_user`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `postit_from_user` AS SELECT 
+ 1 AS `idPostIt`,
+ 1 AS `title`,
+ 1 AS `body`,
+ 1 AS `user_postit`,
+ 1 AS `type_postit`,
+ 1 AS `id`,
+ 1 AS `nome`,
+ 1 AS `sexo`,
+ 1 AS `dataNascimento`,
+ 1 AS `telefone`,
+ 1 AS `email`,
+ 1 AS `cpf`,
+ 1 AS `senha`,
+ 1 AS `imagePerfil`,
+ 1 AS `id_tipo`,
+ 1 AS `tipo`,
+ 1 AS `cor`,
+ 1 AS `detalhes_de_cores`,
+ 1 AS `id_usuario_tipo`,
+ 1 AS `importancia`,
+ 1 AS `id_image`,
+ 1 AS `image_name`,
+ 1 AS `image_way`,
+ 1 AS `image_bytes`,
+ 1 AS `image_user_id`,
+ 1 AS `image_postIt_id`,
+ 1 AS `image_notification_id`,
+ 1 AS `id_file`,
+ 1 AS `file_name`,
+ 1 AS `file_way`,
+ 1 AS `file_bytes`,
+ 1 AS `file_postIt_id`,
+ 1 AS `file_notification_id`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `tipo`
@@ -171,6 +263,32 @@ LOCK TABLES `tipo` WRITE;
 INSERT INTO `tipo` VALUES (140,'Urgente','#ff0000','#ff7373',2,10),(139,'Escola','#00faff','#aef3f4',2,8),(138,'Banal','#000080','#5b5ba4',2,1),(137,'Post-It','#ff00ff','#ee71ee',2,5),(136,'Especial','#ffd700','#ffe97e',2,6),(135,'Evento','#d4ff00','#e1f481',2,5),(134,'Exercicio','#00ff00','#7fff7f',2,5),(133,'Atividade','#8b008b','#a457a4',2,4),(132,'Trabalho','#8a2be2','#9370db',2,10),(131,'Meta','#0400f7','#7f7df1',2,8);
 /*!40000 ALTER TABLE `tipo` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `types_from_user`
+--
+
+DROP TABLE IF EXISTS `types_from_user`;
+/*!50001 DROP VIEW IF EXISTS `types_from_user`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `types_from_user` AS SELECT 
+ 1 AS `id_tipo`,
+ 1 AS `tipo`,
+ 1 AS `cor`,
+ 1 AS `detalhes_de_cores`,
+ 1 AS `id_usuario_tipo`,
+ 1 AS `importancia`,
+ 1 AS `id`,
+ 1 AS `nome`,
+ 1 AS `sexo`,
+ 1 AS `dataNascimento`,
+ 1 AS `telefone`,
+ 1 AS `email`,
+ 1 AS `cpf`,
+ 1 AS `senha`,
+ 1 AS `imagePerfil`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `usuario`
@@ -214,6 +332,60 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'agendafx'
 --
+
+--
+-- Final view structure for view `notification_from_user`
+--
+
+/*!50001 DROP VIEW IF EXISTS `notification_from_user`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `notification_from_user` AS select `notificacao`.`idNotific` AS `idNotific`,`notificacao`.`titulo` AS `titulo`,`notificacao`.`descricao` AS `descricao`,`notificacao`.`horario` AS `horario`,`notificacao`.`avisado` AS `avisado`,`notificacao`.`musica` AS `musica`,`notificacao`.`userNotification` AS `userNotification`,`notificacao`.`marcado` AS `marcado`,`notificacao`.`tipo_notificacao` AS `tipo_notificacao`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`image`.`id_image` AS `id_image`,`image`.`image_name` AS `image_name`,`image`.`image_way` AS `image_way`,`image`.`image_bytes` AS `image_bytes`,`image`.`image_user_id` AS `image_user_id`,`image`.`image_postIt_id` AS `image_postIt_id`,`image`.`image_notification_id` AS `image_notification_id`,`file`.`id_file` AS `id_file`,`file`.`file_name` AS `file_name`,`file`.`file_way` AS `file_way`,`file`.`file_bytes` AS `file_bytes`,`file`.`file_postIt_id` AS `file_postIt_id`,`file`.`file_notification_id` AS `file_notification_id` from ((((`notificacao` left join `usuario` on((`notificacao`.`userNotification` = `usuario`.`id`))) left join `tipo` on((`notificacao`.`tipo_notificacao` = `tipo`.`id_tipo`))) left join `image` on((`image`.`image_notification_id` = `notificacao`.`idNotific`))) left join `file` on((`file`.`file_notification_id` = `notificacao`.`idNotific`))) order by (`notificacao`.`marcado` and `notificacao`.`horario`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `postit_from_user`
+--
+
+/*!50001 DROP VIEW IF EXISTS `postit_from_user`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `postit_from_user` AS select `postit`.`idPostIt` AS `idPostIt`,`postit`.`title` AS `title`,`postit`.`body` AS `body`,`postit`.`user_postit` AS `user_postit`,`postit`.`type_postit` AS `type_postit`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`image`.`id_image` AS `id_image`,`image`.`image_name` AS `image_name`,`image`.`image_way` AS `image_way`,`image`.`image_bytes` AS `image_bytes`,`image`.`image_user_id` AS `image_user_id`,`image`.`image_postIt_id` AS `image_postIt_id`,`image`.`image_notification_id` AS `image_notification_id`,`file`.`id_file` AS `id_file`,`file`.`file_name` AS `file_name`,`file`.`file_way` AS `file_way`,`file`.`file_bytes` AS `file_bytes`,`file`.`file_postIt_id` AS `file_postIt_id`,`file`.`file_notification_id` AS `file_notification_id` from ((((`postit` join `usuario` on((`postit`.`user_postit` = `usuario`.`id`))) left join `tipo` on((`postit`.`type_postit` = `tipo`.`id_tipo`))) left join `image` on((`image`.`image_postIt_id` = `postit`.`idPostIt`))) left join `file` on((`file`.`file_postIt_id` = `postit`.`idPostIt`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `types_from_user`
+--
+
+/*!50001 DROP VIEW IF EXISTS `types_from_user`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `types_from_user` AS select `tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil` from (`tipo` join `usuario` on((`tipo`.`id_usuario_tipo` = `usuario`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -224,4 +396,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-22 16:21:09
+-- Dump completed on 2020-06-22 17:10:04
