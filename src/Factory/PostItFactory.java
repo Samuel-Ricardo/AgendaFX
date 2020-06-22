@@ -6,10 +6,8 @@
 package Factory;
 
 import Model.PostIt;
-import Model.Utilities.ImageFile;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *
@@ -20,9 +18,6 @@ public class PostItFactory {
         public static PostIt generatePostIt(ResultSet result) throws SQLException {
    
         PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
-     
-        ArrayList<ImageFile> images = new ArrayList<>();
-        
         
         postIt.setId(result.getInt("idPostIt"));
         postIt.setTitle(result.getString("title"));
@@ -30,9 +25,8 @@ public class PostItFactory {
         postIt.setUser(UserFactory.generateUser(result));
         postIt.setType(TypeFactory.genereteType(result));
         postIt.setAttachments(FileFactory.generateAttachment(result));
+        postIt.setImages(ImageFactory.generateImage(result));
         
-        
-      
         return postIt;
     }
     
