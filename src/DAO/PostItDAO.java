@@ -179,44 +179,7 @@ public class PostItDAO {
 
             while (result.next()) {
 
-                PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
-
-                postIt.setId(result.getInt("idPostIt"));
-                postIt.setTitle(result.getString("title"));
-                postIt.setBody(result.getString("body"));
-                User user = new User();
-
-                java.util.Date userDate = null;
-
-                if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                }
-
-                user.setId(result.getLong("id"));
-                user.setNome(result.getString("nome"));
-                user.setSexo(result.getString("sexo"));
-                user.setNascimento(userDate);
-                user.setTelefone(result.getString("telefone"));
-                user.setEmail(result.getString("email"));
-                user.setCPF(result.getString("cpf"));
-                user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("imagePerfil"));
-
-                postIt.setUser(user);
-
-                Type type = new Type();
-                
-                type.setId(result.getInt("id_tipo"));
-                type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("detalhes_de_cores"));
-                type.setPrimaryColor(result.getString("cor"));
-                type.setImportance(result.getInt("importancia"));
-                type.setImportance(result.getInt("importancia"));
-                type.setUser(user);
-
-                postIt.setType(type);
-
-                postits.add(postIt);    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
+                postits.add(PostItFactory.generatePostIt(result));    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -242,45 +205,8 @@ public class PostItDAO {
             result = statement.executeQuery();    //  execute sql statement returning result  //  executa instruçao sql retornando resultado
 
             while (result.next()) {
-
-                PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
-
-                postIt.setId(result.getInt("idPostIt"));
-                postIt.setTitle(result.getString("title"));
-                postIt.setBody(result.getString("body"));
-
-                User user = new User();
-
-                java.util.Date userDate = null;
-
-                if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                }
-
-                user.setId(result.getLong("id"));
-                user.setNome(result.getString("nome"));
-                user.setSexo(result.getString("sexo"));
-                user.setNascimento(userDate);
-                user.setTelefone(result.getString("telefone"));
-                user.setEmail(result.getString("email"));
-                user.setCPF(result.getString("cpf"));
-                user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("imagePerfil"));
-
-                postIt.setUser(user);
-
-                Type type = new Type();
                 
-                type.setId(result.getInt("id_tipo"));
-                type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("detalhes_de_cores"));
-                type.setPrimaryColor(result.getString("cor"));
-                type.setImportance(result.getInt("importancia"));
-                type.setUser(user);
-
-                postIt.setType(type);
-
-                postits.add(postIt);    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
+                postits.add(PostItFactory.generatePostIt(result));    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -308,42 +234,7 @@ public class PostItDAO {
 
             while (result.next()) {
                 
-                findPostIt.setId(result.getInt("idPostIt"));
-                findPostIt.setTitle(result.getString("title"));
-                findPostIt.setBody(result.getString("body"));
-                
-                User user = new User();
-
-                java.util.Date userDate = null;
-
-                if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                }
-
-                user.setId(result.getLong("id"));
-                user.setNome(result.getString("nome"));
-                user.setSexo(result.getString("sexo"));
-                user.setNascimento(userDate);
-                user.setTelefone(result.getString("telefone"));
-                user.setEmail(result.getString("email"));
-                user.setCPF(result.getString("cpf"));
-                user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("imagePerfil"));
-
-                findPostIt.setUser(user);
-
-                Type type = new Type();
-                
-                type.setId(result.getInt("id_tipo"));
-                type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("detalhes_de_cores"));
-                type.setPrimaryColor(result.getString("cor"));
-                type.setImportance(result.getInt("importancia"));
-                type.setUser(user);
-                
-                findPostIt.setType(type);
-                
-                findPostIt = findPostIt;
+                findPostIt = PostItFactory.generatePostIt(result);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
