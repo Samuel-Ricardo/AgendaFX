@@ -31,6 +31,7 @@ CREATE TABLE `file` (
   `file_bytes` varbinary(55530) DEFAULT NULL,
   `file_postIt_id` int(11) DEFAULT NULL,
   `file_notification_id` int(11) DEFAULT NULL,
+  `file_size` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_file`),
   KEY `FK_file_postIt` (`file_postIt_id`),
   KEY `FK_file_notification` (`file_notification_id`)
@@ -61,6 +62,7 @@ CREATE TABLE `image` (
   `image_user_id` int(11) DEFAULT NULL,
   `image_postIt_id` int(11) DEFAULT NULL,
   `image_notification_id` int(11) DEFAULT NULL,
+  `image_size` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_image`),
   KEY `FK_image_user` (`image_user_id`),
   KEY `FK_image_postIt` (`image_postIt_id`),
@@ -151,12 +153,14 @@ SET character_set_client = utf8;
  1 AS `image_user_id`,
  1 AS `image_postIt_id`,
  1 AS `image_notification_id`,
+ 1 AS `image_size`,
  1 AS `id_file`,
  1 AS `file_name`,
  1 AS `file_way`,
  1 AS `file_bytes`,
  1 AS `file_postIt_id`,
- 1 AS `file_notification_id`*/;
+ 1 AS `file_notification_id`,
+ 1 AS `file_size`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -225,12 +229,14 @@ SET character_set_client = utf8;
  1 AS `image_user_id`,
  1 AS `image_postIt_id`,
  1 AS `image_notification_id`,
+ 1 AS `image_size`,
  1 AS `id_file`,
  1 AS `file_name`,
  1 AS `file_way`,
  1 AS `file_bytes`,
  1 AS `file_postIt_id`,
- 1 AS `file_notification_id`*/;
+ 1 AS `file_notification_id`,
+ 1 AS `file_size`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -346,7 +352,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `notification_from_user` AS select `notificacao`.`idNotific` AS `idNotific`,`notificacao`.`titulo` AS `titulo`,`notificacao`.`descricao` AS `descricao`,`notificacao`.`horario` AS `horario`,`notificacao`.`avisado` AS `avisado`,`notificacao`.`musica` AS `musica`,`notificacao`.`userNotification` AS `userNotification`,`notificacao`.`marcado` AS `marcado`,`notificacao`.`tipo_notificacao` AS `tipo_notificacao`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`image`.`id_image` AS `id_image`,`image`.`image_name` AS `image_name`,`image`.`image_way` AS `image_way`,`image`.`image_bytes` AS `image_bytes`,`image`.`image_user_id` AS `image_user_id`,`image`.`image_postIt_id` AS `image_postIt_id`,`image`.`image_notification_id` AS `image_notification_id`,`file`.`id_file` AS `id_file`,`file`.`file_name` AS `file_name`,`file`.`file_way` AS `file_way`,`file`.`file_bytes` AS `file_bytes`,`file`.`file_postIt_id` AS `file_postIt_id`,`file`.`file_notification_id` AS `file_notification_id` from ((((`notificacao` left join `usuario` on((`notificacao`.`userNotification` = `usuario`.`id`))) left join `tipo` on((`notificacao`.`tipo_notificacao` = `tipo`.`id_tipo`))) left join `image` on((`image`.`image_notification_id` = `notificacao`.`idNotific`))) left join `file` on((`file`.`file_notification_id` = `notificacao`.`idNotific`))) order by (`notificacao`.`marcado` and `notificacao`.`horario`) */;
+/*!50001 VIEW `notification_from_user` AS select `notificacao`.`idNotific` AS `idNotific`,`notificacao`.`titulo` AS `titulo`,`notificacao`.`descricao` AS `descricao`,`notificacao`.`horario` AS `horario`,`notificacao`.`avisado` AS `avisado`,`notificacao`.`musica` AS `musica`,`notificacao`.`userNotification` AS `userNotification`,`notificacao`.`marcado` AS `marcado`,`notificacao`.`tipo_notificacao` AS `tipo_notificacao`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`image`.`id_image` AS `id_image`,`image`.`image_name` AS `image_name`,`image`.`image_way` AS `image_way`,`image`.`image_bytes` AS `image_bytes`,`image`.`image_user_id` AS `image_user_id`,`image`.`image_postIt_id` AS `image_postIt_id`,`image`.`image_notification_id` AS `image_notification_id`,`image`.`image_size` AS `image_size`,`file`.`id_file` AS `id_file`,`file`.`file_name` AS `file_name`,`file`.`file_way` AS `file_way`,`file`.`file_bytes` AS `file_bytes`,`file`.`file_postIt_id` AS `file_postIt_id`,`file`.`file_notification_id` AS `file_notification_id`,`file`.`file_size` AS `file_size` from ((((`notificacao` left join `usuario` on((`notificacao`.`userNotification` = `usuario`.`id`))) left join `tipo` on((`notificacao`.`tipo_notificacao` = `tipo`.`id_tipo`))) left join `image` on((`image`.`image_notification_id` = `notificacao`.`idNotific`))) left join `file` on((`file`.`file_notification_id` = `notificacao`.`idNotific`))) union select `notificacao`.`idNotific` AS `idNotific`,`notificacao`.`titulo` AS `titulo`,`notificacao`.`descricao` AS `descricao`,`notificacao`.`horario` AS `horario`,`notificacao`.`avisado` AS `avisado`,`notificacao`.`musica` AS `musica`,`notificacao`.`userNotification` AS `userNotification`,`notificacao`.`marcado` AS `marcado`,`notificacao`.`tipo_notificacao` AS `tipo_notificacao`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`image`.`id_image` AS `id_image`,`image`.`image_name` AS `image_name`,`image`.`image_way` AS `image_way`,`image`.`image_bytes` AS `image_bytes`,`image`.`image_user_id` AS `image_user_id`,`image`.`image_postIt_id` AS `image_postIt_id`,`image`.`image_notification_id` AS `image_notification_id`,`image`.`image_size` AS `image_size`,`file`.`id_file` AS `id_file`,`file`.`file_name` AS `file_name`,`file`.`file_way` AS `file_way`,`file`.`file_bytes` AS `file_bytes`,`file`.`file_postIt_id` AS `file_postIt_id`,`file`.`file_notification_id` AS `file_notification_id`,`file`.`file_size` AS `file_size` from (`file` left join (`image` left join ((`notificacao` left join `usuario` on((`notificacao`.`userNotification` = `usuario`.`id`))) left join `tipo` on((`notificacao`.`tipo_notificacao` = `tipo`.`id_tipo`))) on((`image`.`image_notification_id` = `notificacao`.`idNotific`))) on((`file`.`file_notification_id` = `notificacao`.`idNotific`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -364,7 +370,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `postit_from_user` AS select `postit`.`idPostIt` AS `idPostIt`,`postit`.`title` AS `title`,`postit`.`body` AS `body`,`postit`.`user_postit` AS `user_postit`,`postit`.`type_postit` AS `type_postit`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`image`.`id_image` AS `id_image`,`image`.`image_name` AS `image_name`,`image`.`image_way` AS `image_way`,`image`.`image_bytes` AS `image_bytes`,`image`.`image_user_id` AS `image_user_id`,`image`.`image_postIt_id` AS `image_postIt_id`,`image`.`image_notification_id` AS `image_notification_id`,`file`.`id_file` AS `id_file`,`file`.`file_name` AS `file_name`,`file`.`file_way` AS `file_way`,`file`.`file_bytes` AS `file_bytes`,`file`.`file_postIt_id` AS `file_postIt_id`,`file`.`file_notification_id` AS `file_notification_id` from ((((`postit` join `usuario` on((`postit`.`user_postit` = `usuario`.`id`))) left join `tipo` on((`postit`.`type_postit` = `tipo`.`id_tipo`))) left join `image` on((`image`.`image_postIt_id` = `postit`.`idPostIt`))) left join `file` on((`file`.`file_postIt_id` = `postit`.`idPostIt`))) */;
+/*!50001 VIEW `postit_from_user` AS select `postit`.`idPostIt` AS `idPostIt`,`postit`.`title` AS `title`,`postit`.`body` AS `body`,`postit`.`user_postit` AS `user_postit`,`postit`.`type_postit` AS `type_postit`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`image`.`id_image` AS `id_image`,`image`.`image_name` AS `image_name`,`image`.`image_way` AS `image_way`,`image`.`image_bytes` AS `image_bytes`,`image`.`image_user_id` AS `image_user_id`,`image`.`image_postIt_id` AS `image_postIt_id`,`image`.`image_notification_id` AS `image_notification_id`,`image`.`image_size` AS `image_size`,`file`.`id_file` AS `id_file`,`file`.`file_name` AS `file_name`,`file`.`file_way` AS `file_way`,`file`.`file_bytes` AS `file_bytes`,`file`.`file_postIt_id` AS `file_postIt_id`,`file`.`file_notification_id` AS `file_notification_id`,`file`.`file_size` AS `file_size` from ((((`postit` join `usuario` on((`postit`.`user_postit` = `usuario`.`id`))) left join `tipo` on((`postit`.`type_postit` = `tipo`.`id_tipo`))) left join `image` on((`image`.`image_postIt_id` = `postit`.`idPostIt`))) left join `file` on((`file`.`file_postIt_id` = `postit`.`idPostIt`))) union select `postit`.`idPostIt` AS `idPostIt`,`postit`.`title` AS `title`,`postit`.`body` AS `body`,`postit`.`user_postit` AS `user_postit`,`postit`.`type_postit` AS `type_postit`,`usuario`.`id` AS `id`,`usuario`.`nome` AS `nome`,`usuario`.`sexo` AS `sexo`,`usuario`.`dataNascimento` AS `dataNascimento`,`usuario`.`telefone` AS `telefone`,`usuario`.`email` AS `email`,`usuario`.`cpf` AS `cpf`,`usuario`.`senha` AS `senha`,`usuario`.`imagePerfil` AS `imagePerfil`,`tipo`.`id_tipo` AS `id_tipo`,`tipo`.`tipo` AS `tipo`,`tipo`.`cor` AS `cor`,`tipo`.`detalhes_de_cores` AS `detalhes_de_cores`,`tipo`.`id_usuario_tipo` AS `id_usuario_tipo`,`tipo`.`importancia` AS `importancia`,`image`.`id_image` AS `id_image`,`image`.`image_name` AS `image_name`,`image`.`image_way` AS `image_way`,`image`.`image_bytes` AS `image_bytes`,`image`.`image_user_id` AS `image_user_id`,`image`.`image_postIt_id` AS `image_postIt_id`,`image`.`image_notification_id` AS `image_notification_id`,`image`.`image_size` AS `image_size`,`file`.`id_file` AS `id_file`,`file`.`file_name` AS `file_name`,`file`.`file_way` AS `file_way`,`file`.`file_bytes` AS `file_bytes`,`file`.`file_postIt_id` AS `file_postIt_id`,`file`.`file_notification_id` AS `file_notification_id`,`file`.`file_size` AS `file_size` from (`file` left join (`image` left join ((`postit` join `usuario` on((`postit`.`user_postit` = `usuario`.`id`))) left join `tipo` on((`postit`.`type_postit` = `tipo`.`id_tipo`))) on((`image`.`image_postIt_id` = `postit`.`idPostIt`))) on((`file`.`file_postIt_id` = `postit`.`idPostIt`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -396,4 +402,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-22 17:10:04
+-- Dump completed on 2020-06-22 18:22:09
