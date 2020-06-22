@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Helper.TypeFactory;
 import JDBC.ConnectionFactory;
 import Model.Type;
 import Model.User;
@@ -165,13 +166,7 @@ public class TypeDAO {
 
             while (result.next()) {
 
-                Type type = new Type();
-                
-                type.setId(result.getInt("id_tipo"));
-                type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("detalhes_de_cores"));
-                type.setPrimaryColor(result.getString("cor"));
-                type.setImportance(result.getInt("importancia"));
+                Type type = TypeFactory.genereteType(result);
                 
                 User user = new User();     // create user with database data  // criando usuario com dados do banco de dados
 
@@ -202,9 +197,8 @@ public class TypeDAO {
         }
         
         return types;
-    } 
-         
-
+    }
+    
     public boolean exist(Type type) {  
         
         connect();
