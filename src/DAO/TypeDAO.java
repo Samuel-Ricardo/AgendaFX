@@ -168,8 +168,6 @@ public class TypeDAO {
             while (result.next()) {
 
                 Type type = TypeFactory.genereteType(result);
-
-                type.setUser(UserFactory.generateUser(result));
                 
                 types.add(type);
                 

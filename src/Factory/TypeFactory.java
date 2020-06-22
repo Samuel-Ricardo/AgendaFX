@@ -25,6 +25,7 @@ public class TypeFactory {
         type.setSecondaryColor(result.getString("detalhes_de_cores"));
         type.setPrimaryColor(result.getString("cor"));
         type.setImportance(result.getInt("importancia"));
+        type.setUser(UserFactory.generateUser(result));
         
         return type;
     }
