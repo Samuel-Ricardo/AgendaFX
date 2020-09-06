@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Controller.Creators.PostItCreatorController;
 import DAO.PostItDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;

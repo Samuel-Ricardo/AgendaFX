@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controller.Creators;
 
+import Controller.ChooserController;
 import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
@@ -12,6 +13,7 @@ import Main.MainNotificationCreator;
 import Model.Notification;
 import Model.User;
 import Services.Downloader;
+import Controller.HomeController;
 import Controller.HomeController;
 import DAO.TypeDAO;
 import Model.Type;
