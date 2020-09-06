@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="489.0" styleClass="simple-background" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Creators.NotificationCreaterController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="489.0" styleClass="simple-background" stylesheets="@../Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Creators.NotificationCreaterController">
    <children>
       <Label layoutX="206.0" layoutY="16.0" text="Título" />
       <TextField fx:id="txtTitle" layoutX="206.0" layoutY="44.0" prefHeight="28.0" prefWidth="272.0" promptText="Digite o título" style="-fx-border-radius: 5px;" styleClass="text-field-empyt" />
@@ -27,7 +27,7 @@
       <Rectangle fx:id="typeColor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="14.0" layoutY="226.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #d4ff00;" width="20.0" />
       <ImageView fx:id="imgNotific" fitHeight="139.0" fitWidth="187.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" visible="false">
          <image>
-            <Image url="@Images/image_White.png" />
+            <Image url="@../Images/image_White.png" />
          </image>
       </ImageView>
       <JFXToggleButton fx:id="tbSound" layoutX="225.0" layoutY="250.0" onAction="#showSound" text="Som na notificaçao" textFill="WHITE" toggleColor="BLUEVIOLET" toggleLineColor="MEDIUMPURPLE">
