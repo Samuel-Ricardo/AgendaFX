@@ -5,7 +5,7 @@
  */
 package Model.Utilities;
 
-import Controller.PostItScreenController;
+import Controller.Viewers.PostItScreenController;
 import Main.MainPostItScreen;
 import Model.PostIt;
 import com.jfoenix.controls.JFXTextArea;

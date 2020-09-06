@@ -6,7 +6,7 @@
 package Controller.Updaters;
 
 import Controller.Creators.PostItCreatorController;
-import Controller.PostItScreenController;
+import Controller.Viewers.PostItScreenController;
 import DAO.PostItDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;
