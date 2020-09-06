@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controller.Updaters;
 
 import Controller.Creators.PostItCreatorController;
+import Controller.PostItScreenController;
 import DAO.PostItDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controller.Updaters;
 
+import Controller.ChooserController;
+import Controller.HomeController;
 import DAO.NotificationDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;
