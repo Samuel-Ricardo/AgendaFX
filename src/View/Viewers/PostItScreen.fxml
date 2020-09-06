@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="310.0" stylesheets="@Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PostItScreenController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="310.0" stylesheets="@../Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Viewers.PostItScreenController">
    <children>
       <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="325.0">
          <content>
@@ -22,7 +22,7 @@
                <children>
                   <ImageView fx:id="imgMenu" fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
-                        <Image url="@Images/icons8-menu-gradiente.png" />
+                        <Image url="@../Images/icons8-menu-gradiente.png" />
                      </image>
                   </ImageView>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="                                                                                                     " />
@@ -37,7 +37,7 @@
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="33.0" pickOnBounds="true">
                      <image>
-                        <Image url="@Images/icons8-attach-40px.png" />
+                        <Image url="@../Images/icons8-attachment_white.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -49,7 +49,7 @@
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true">
                      <image>
-                        <Image url="@Images/icons8-calendar-30px.png" />
+                        <Image url="@../Images/icons8-calendar-30px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -58,7 +58,7 @@
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true">
                      <image>
-                        <Image url="@Images/icons8-note-40px.png" />
+                        <Image url="@../Images/icons8-note-40px.png" />
                      </image>
                   </ImageView>
                </graphic>
