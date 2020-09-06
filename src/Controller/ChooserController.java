@@ -6,8 +6,8 @@
 package Controller;
 
 import Main.MainChooser;
-import Main.MainNotificationCreator;
-import Main.MainPostItCreator;
+import Main.Creators.MainNotificationCreator;
+import Main.Creators.MainPostItCreator;
 import Main.MainTypeCreator;
 import java.net.URL;
 import java.util.ArrayList;

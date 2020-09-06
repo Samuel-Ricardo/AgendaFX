@@ -10,7 +10,7 @@ import Controller.Viewers.PostItScreenController;
 import DAO.PostItDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;
-import Main.MainPostItCreator;
+import Main.Creators.MainPostItCreator;
 import Main.MainPostItScreen;
 import Model.PostIt;
 import Model.Type;

@@ -7,7 +7,7 @@ package Controller.Creators;
 
 import DAO.UserDAO;
 import Main.MainLogin;
-import Main.MainRegister;
+import Main.Creators.MainRegister;
 import Model.User;
 import java.io.File;
 import java.net.URL;

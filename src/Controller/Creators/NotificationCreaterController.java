@@ -9,7 +9,7 @@ import Controller.ChooserController;
 import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
-import Main.MainNotificationCreator;
+import Main.Creators.MainNotificationCreator;
 import Model.Notification;
 import Model.User;
 import Services.Downloader;

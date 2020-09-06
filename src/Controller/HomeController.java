@@ -9,7 +9,7 @@ import DAO.NotificationDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
 import Main.MainLogin;
-import Main.MainRegister;
+import Main.Creators.MainRegister;
 import Main.MainTypeCreator;
 import Main.MainUpdate;
 import Model.Notification;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Main;
+package Main.Creators;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +16,14 @@ import javafx.stage.Stage;
  *
  * @author Samuel
  */
-public class MainNotificationCreator extends Application{
+public class MainRegister extends Application{
 
     private static Stage window;
     
     @Override
     public void start(Stage stage) throws Exception {
    
-    Parent root = FXMLLoader.load(getClass().getResource("/View/NotificationCreater.fxml"));  // Loading a Parent with the JavaFX window fxml  //  Carregando um Parent com o fxml da janela JavaFX
+    Parent root = FXMLLoader.load(getClass().getResource("/View/Register.fxml"));  // Loading a Parent with the JavaFX window fxml  //  Carregando um Parent com o fxml da janela JavaFX
     
         Scene scene = new Scene(root); // Loading Scene with Parent  //  Carregando Scene com o Parent 
         
@@ -48,7 +48,7 @@ public class MainNotificationCreator extends Application{
     }
 
     public static void setWindow(Stage window) {
-        MainNotificationCreator.window = window;
+        MainRegister.window = window;
     }
     
     
