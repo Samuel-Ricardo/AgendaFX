@@ -47,4 +47,19 @@ public class PostIt extends Reminder{
     public void setAttachments(ArrayList<File> Attachments) {
         this.Attachments = Attachments;
     }
+    
+    public File getAttachment() {
+        
+        return Attachments.get(0);
+    }
+
+    public void setAttachment(File Attachment) {
+        this.Attachments = new ArrayList<File>();
+        
+        Attachments.add(Attachment);
+    }
+    
+      public void addAttachment(File Attachment) {
+        this.Attachments.add(Attachment);
+    }
 }
