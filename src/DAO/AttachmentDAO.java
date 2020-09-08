@@ -100,18 +100,19 @@ public class AttachmentDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "UPDATE tipo SET tipo = ?, cor = ?, detalhes_de_cores = ?, importancia = ?, id_usuario_tipo = ? WHERE id_tipo = ?;";
+        String sql = "UPDATE tipo SET file_name = ? , file_way = ? , file_bytes = ? , file_postIt_id = ? , file_notificaton_id = ? , file_size = ? WHERE id_file = ?;";
 
         try {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(0, attachment.getName());
-            statement.setString(1, attachment.getSecondaryColor());
-            statement.setString(2, attachment.getPrimaryColor());
-            statement.setInt(3, attachment.getImportance().intValue());
-            statement.setInt(4, attachment.getUser().getId().intValue());
-            statement.setInt(5, attachment.getId().intValue());
+            statement.setString(1, attachment.getName());
+            statement.setString(2, attachment.getAbsolutPath());
+            statement.setBytes(3, attachment.getArrayBytes());
+            statement.setInt(4, attachment.getPostIt().getId());
+            statement.setInt(5, attachment.getNotification().getId());
+            statement.setString(6, attachment.getSize());
+            statement.setInt(7, attachment.getId().intValue());
 
             statement.execute();
 
