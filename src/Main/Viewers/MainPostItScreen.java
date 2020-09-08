@@ -23,7 +23,7 @@ public class MainPostItScreen extends Application{
     @Override
     public void start(Stage stage) throws Exception {
    
-    Parent root = FXMLLoader.load(getClass().getResource("/View/PostItScreen.fxml"));  // Loading a Parent with the JavaFX window fxml  //  Carregando um Parent com o fxml da janela JavaFX
+    Parent root = FXMLLoader.load(getClass().getResource("/View/Viewers/PostItScreen.fxml"));  // Loading a Parent with the JavaFX window fxml  //  Carregando um Parent com o fxml da janela JavaFX
     
         Scene scene = new Scene(root); // Loading Scene with Parent  //  Carregando Scene com o Parent 
         

@@ -23,7 +23,7 @@ public class MainNotificationScreen extends Application{
     @Override
     public void start(Stage stage) throws Exception {
       
-        Parent root = FXMLLoader.load(getClass().getResource("/View/NotificationScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/Viewers/NotificationScreen.fxml"));
         
         Scene scene = new Scene(root);
         
