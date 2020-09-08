@@ -7,7 +7,7 @@ package Controller.Viewers;
 
 import DAO.NotificationDAO;
 import DAO.UserDAO;
-import Main.MainNotificationScreen;
+import Main.Viewers.MainNotificationScreen;
 import Main.Updaters.MainNotificationUpdater;
 import Model.Notification;
 import Model.User;

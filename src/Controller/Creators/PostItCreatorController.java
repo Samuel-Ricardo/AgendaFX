@@ -10,7 +10,7 @@ import DAO.PostItDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;
 import Main.Creators.MainPostItCreator;
-import Main.MainPostItScreen;
+import Main.Viewers.MainPostItScreen;
 import Model.PostIt;
 import Model.Type;
 import com.jfoenix.controls.JFXDatePicker;

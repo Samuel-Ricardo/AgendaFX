@@ -6,7 +6,7 @@
 package Model.Utilities;
 
 import Controller.Viewers.PostItScreenController;
-import Main.MainPostItScreen;
+import Main.Viewers.MainPostItScreen;
 import Model.PostIt;
 import com.jfoenix.controls.JFXTextArea;
 import java.util.logging.Level;
