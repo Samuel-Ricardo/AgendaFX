@@ -1,17 +1,17 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template attachment, choose Tools | Templates
  * and open the template in the editor.
  */
 package DAO;
 
-import Factory.FileFactory;
+import Factory.AttachmentFactory;
 import Factory.UserFactory;
 import JDBC.ConnectionFactory;
-import Model.File;
+import Model.Attachment;
 import Model.User;
 import com.mysql.jdbc.Connection;
-import java.io.File;
+import java.io.Attachment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,11 +28,11 @@ import javax.swing.JOptionPane;
  */
 public class AttachmentDAO {
 
-    private static File file;
+    private static Attachment attachment;
     
     private Connection connection;
 
-    public boolean insert(File file) {
+    public boolean insert(Attachment attachment) {
         
         connect();
          
@@ -43,11 +43,11 @@ public class AttachmentDAO {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, file.getName());
-            statement.setString(2, file.getPrimaryColor());
-            statement.setString(3, file.getSecondaryColor());
-            statement.setInt(4, file.getImportance().intValue());
-            statement.setInt(5, file.getUser().getId().intValue());
+            statement.setString(1, attachment.getName());
+            statement.setString(2, attachment.getPrimaryColor());
+            statement.setString(3, attachment.getSecondaryColor());
+            statement.setInt(4, attachment.getImportance().intValue());
+            statement.setInt(5, attachment.getUser().getId().intValue());
 
             statement.execute();
 
@@ -59,7 +59,7 @@ public class AttachmentDAO {
             ConnectionFactory.closeConnection(connection, statement);
         }
     }
-    public boolean insertAll(ArrayList<File> files) {
+    public boolean insertAll(ArrayList<Attachment> attachments) {
   
         connect();
 
@@ -70,15 +70,15 @@ public class AttachmentDAO {
             
         try {
 
-             for (File file : files) {
+             for (Attachment attachment : attachments) {
             
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, file.getName());
-            statement.setString(2, file.getPrimaryColor());
-            statement.setString(3, file.getSecondaryColor());
-            statement.setInt(4, file.getImportance().intValue());
-            statement.setInt(5, file.getUser().getId().intValue());
+            statement.setString(1, attachment.getName());
+            statement.setString(2, attachment.getPrimaryColor());
+            statement.setString(3, attachment.getSecondaryColor());
+            statement.setInt(4, attachment.getImportance().intValue());
+            statement.setInt(5, attachment.getUser().getId().intValue());
 
             statement.execute();
             
@@ -94,7 +94,7 @@ public class AttachmentDAO {
         
     }
 
-    public boolean update(File file) {
+    public boolean update(Attachment attachment) {
 
         connect();
          
@@ -105,12 +105,12 @@ public class AttachmentDAO {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(0, file.getName());
-            statement.setString(1, file.getSecondaryColor());
-            statement.setString(2, file.getPrimaryColor());
-            statement.setInt(3, file.getImportance().intValue());
-            statement.setInt(4, file.getUser().getId().intValue());
-            statement.setInt(5, file.getId().intValue());
+            statement.setString(0, attachment.getName());
+            statement.setString(1, attachment.getSecondaryColor());
+            statement.setString(2, attachment.getPrimaryColor());
+            statement.setInt(3, attachment.getImportance().intValue());
+            statement.setInt(4, attachment.getUser().getId().intValue());
+            statement.setInt(5, attachment.getId().intValue());
 
             statement.execute();
 
@@ -123,17 +123,17 @@ public class AttachmentDAO {
         }
     }
 
-    public boolean delet(File file) {
+    public boolean delet(Attachment attachment) {
 
         connect();
 
         PreparedStatement statement = null;
-        String sql = "DELETE FROM file WHERE id_file = ?;";
+        String sql = "DELETE FROM attachment WHERE id_attachment = ?;";
 
         try {
             statement = connection.prepareStatement(sql);
 
-            statement.setInt(0, file.getId().intValue());
+            statement.setInt(0, attachment.getId().intValue());
 
             statement.execute();
 
@@ -148,14 +148,14 @@ public class AttachmentDAO {
 
     }
 
-    public List<File> selectAllFromUser(int id) {
+    public List<Attachment> selectAllFromUser(int id) {
 
         connect();
      
         PreparedStatement statement = null;
         ResultSet result = null;
-        List<File> files = new ArrayList<>();
-        String sql = "SELECT * FROM files_from_user WHERE id = ?;";
+        List<Attachment> attachments = new ArrayList<>();
+        String sql = "SELECT * FROM attachments_from_user WHERE id = ?;";
         Date userDate = null;
 
         try {
@@ -168,9 +168,9 @@ public class AttachmentDAO {
 
             while (result.next()) {
 
-                File file = FileFactory.genereteFile(result);
+                Attachment attachment = AttachmentFactory.genereteAttachment(result);
                 
-                files.add(file);
+                attachments.add(attachment);
                 
             }
 
@@ -180,23 +180,23 @@ public class AttachmentDAO {
             ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
         }
         
-        return files;
+        return attachments;
     }
     
-    public boolean exist(File file) {  
+    public boolean exist(Attachment attachment) {  
         
         connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM files_from_user WHERE id_tipo = ?;";
+        String sql = "SELECT * FROM attachments_from_user WHERE id_tipo = ?;";
         boolean exist = false;
 
         try {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setInt(1, file.getId().intValue());    
+            statement.setInt(1, attachment.getId().intValue());    
             
             result = statement.executeQuery();           
             
@@ -213,13 +213,13 @@ public class AttachmentDAO {
         
     }
     
-    public ArrayList<Boolean> exist(ArrayList<File> files) {  
+    public ArrayList<Boolean> exist(ArrayList<Attachment> attachments) {  
         
         ArrayList<Boolean> exist = new ArrayList<>();
         
-        for(File file: files){
+        for(Attachment attachment: attachments){
             
-         if(file.getId() == null){
+         if(attachment.getId() == null){
             exist.clear();
             exist.add(false);
             return exist;
@@ -231,18 +231,18 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM files_from_user WHERE id_tipo = ?;";
+        String sql = "SELECT * FROM attachments_from_user WHERE id_tipo = ?;";
         
 
        
         
         try {
 
-         for (File file : files) {
+         for (Attachment attachment : attachments) {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setInt(1, file.getId().intValue());    
+            statement.setInt(1, attachment.getId().intValue());    
             
             result = statement.executeQuery();           
             
@@ -261,20 +261,20 @@ public class AttachmentDAO {
         return exist;
     }
 
-    public boolean existByName(File file) {
+    public boolean existByName(Attachment attachment) {
 
         connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM files_from_user WHERE tipo = ?;";
+        String sql = "SELECT * FROM attachments_from_user WHERE tipo = ?;";
         boolean exist = false;
 
         try {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, file.getName());     
+            statement.setString(1, attachment.getName());     
             
             result = statement.executeQuery();           
             
@@ -291,13 +291,13 @@ public class AttachmentDAO {
         
     }
     
-    public ArrayList<Boolean> existByName(ArrayList<File> files) {  
+    public ArrayList<Boolean> existByName(ArrayList<Attachment> attachments) {  
         
         ArrayList<Boolean> exist = new ArrayList<>();
         
-        for(File file: files){
+        for(Attachment attachment: attachments){
             
-         if(file.getId() == null){
+         if(attachment.getId() == null){
             exist.clear();
             exist.add(false);
             return exist;
@@ -309,18 +309,18 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM files_from_user WHERE tipo = ?;";
+        String sql = "SELECT * FROM attachments_from_user WHERE tipo = ?;";
         
 
        
         
         try {
 
-         for (File file : files) {
+         for (Attachment attachment : attachments) {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, file.getName());    
+            statement.setString(1, attachment.getName());    
             
             result = statement.executeQuery();           
             
