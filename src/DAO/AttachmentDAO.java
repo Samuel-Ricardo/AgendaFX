@@ -227,7 +227,7 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file_from_postIt WHERE id_tipo = ?;";
+        String sql = "SELECT * FROM file WHERE id_file = ?;";
         boolean exist = false;
 
         try {
@@ -269,7 +269,7 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file_from_postIt WHERE id_tipo = ?;";
+        String sql = "SELECT * FROM file WHERE id_file = ?;";
         
 
        
@@ -305,7 +305,7 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file_from_postIt WHERE tipo = ?;";
+        String sql = "SELECT * FROM file WHERE file_name = ?;";
         boolean exist = false;
 
         try {
@@ -347,7 +347,85 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file_from_postIt WHERE tipo = ?;";
+        String sql = "SELECT * FROM file WHERE file_name = ?;";
+        
+
+       
+        
+        try {
+
+         for (Attachment attachment : attachments) {
+                
+            statement = connection.prepareStatement(sql);    
+            
+            statement.setString(1, attachment.getName());    
+            
+            result = statement.executeQuery();           
+            
+            exist.add(result.next());
+        }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            exist.clear();
+            exist.add(false);
+            return exist;
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement); 
+        }
+
+        return exist;
+    }
+    
+    public boolean existByPath(Attachment attachment) {
+
+        connect();
+        
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        String sql = "SELECT * FROM file WHERE file_way = ?;";
+        boolean exist = false;
+
+        try {
+
+            statement = connection.prepareStatement(sql);    
+            
+            statement.setString(1, attachment.getName());     
+            
+            result = statement.executeQuery();           
+            
+            exist = result.next();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex); 
+            return false;
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement); 
+        }
+
+        return exist;
+        
+    }
+    
+    public ArrayList<Boolean> existByPath(ArrayList<Attachment> attachments) {  
+        
+        ArrayList<Boolean> exist = new ArrayList<>();
+        
+        for(Attachment attachment: attachments){
+            
+         if(attachment.getId() == null){
+            exist.clear();
+            exist.add(false);
+            return exist;
+         }
+         
+        }
+
+        connect();
+        
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        String sql = "SELECT * FROM file WHERE file_way = ?;";
         
 
        
@@ -377,8 +455,7 @@ public class AttachmentDAO {
         return exist;
     }
 
-    private void connect() {
+       private void connect() {
         connection = ConnectionFactory.getConnection();
     }
-
 }
