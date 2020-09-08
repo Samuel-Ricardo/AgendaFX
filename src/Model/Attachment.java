@@ -59,6 +59,21 @@ public class Attachment {
     public ArrayList<Byte> getBytes() {
         return bytes;
     }
+    
+    public byte[] getArrayBytes() {
+        
+        int cont = 0;
+        byte [] arrayBytes = new byte[bytes.size()];
+        
+        for (Byte aByte : bytes) {
+            
+            arrayBytes[cont] = aByte;
+            
+            cont++;
+        }
+        
+        return arrayBytes;
+    }
 
     public void setBytes(ArrayList<Byte> bytes) {
         this.bytes = bytes;
@@ -86,5 +101,17 @@ public class Attachment {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getAbsolutPath() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getSize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

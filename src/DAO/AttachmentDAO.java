@@ -37,17 +37,18 @@ public class AttachmentDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO tipo (file_name, file_way, file_bytes, file_postIt_id, file_notificaton_id, file_size) VALUES (?,?,?,?,?,?);";
 
         try {
 
             statement = connection.prepareStatement(sql);
 
             statement.setString(1, attachment.getName());
-            statement.setString(2, attachment.getPrimaryColor());
-            statement.setString(3, attachment.getSecondaryColor());
-            statement.setInt(4, attachment.getImportance().intValue());
-            statement.setInt(5, attachment.getUser().getId().intValue());
+            statement.setString(2, attachment.getAbsolutPath());
+            statement.setBytes(3, attachment.getArrayBytes());
+            statement.setInt(4, attachment.getPostIt().getId());
+            statement.setInt(5, attachment.getNotification().getId());
+            statement.setString(6, attachment.getSize());
 
             statement.execute();
 
@@ -59,40 +60,40 @@ public class AttachmentDAO {
             ConnectionFactory.closeConnection(connection, statement);
         }
     }
-    public boolean insertAll(ArrayList<Attachment> attachments) {
-  
-        connect();
-
-        PreparedStatement statement = null;
-        String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
-
-       
-            
-        try {
-
-             for (Attachment attachment : attachments) {
-            
-            statement = connection.prepareStatement(sql);
-
-            statement.setString(1, attachment.getName());
-            statement.setString(2, attachment.getPrimaryColor());
-            statement.setString(3, attachment.getSecondaryColor());
-            statement.setInt(4, attachment.getImportance().intValue());
-            statement.setInt(5, attachment.getUser().getId().intValue());
-
-            statement.execute();
-            
-             }
-            return true;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Inserir: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
-            return false;
-        } finally {
-            ConnectionFactory.closeConnection(connection, statement);
-        }
-        
-        
-    }
+//    public boolean insertAll(ArrayList<Attachment> attachments) {
+//  
+//        connect();
+//
+//        PreparedStatement statement = null;
+//        String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
+//
+//       
+//            
+//        try {
+//
+//             for (Attachment attachment : attachments) {
+//            
+//            statement = connection.prepareStatement(sql);
+//
+//            statement.setString(1, attachment.getName());
+//            statement.setString(2, attachment.getPrimaryColor());
+//            statement.setString(3, attachment.getSecondaryColor());
+//            statement.setInt(4, attachment.getImportance().intValue());
+//            statement.setInt(5, attachment.getUser().getId().intValue());
+//
+//            statement.execute();
+//            
+//             }
+//            return true;
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Erro ao Inserir: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+//            return false;
+//        } finally {
+//            ConnectionFactory.closeConnection(connection, statement);
+//        }
+//        
+//        
+//    }
 
     public boolean update(Attachment attachment) {
 
