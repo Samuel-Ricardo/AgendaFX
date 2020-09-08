@@ -9,6 +9,7 @@ import Factory.AttachmentFactory;
 import Factory.UserFactory;
 import JDBC.ConnectionFactory;
 import Model.Attachment;
+import Model.Notification;
 import Model.PostIt;
 import Model.User;
 import com.mysql.jdbc.Connection;
@@ -151,14 +152,14 @@ public class AttachmentDAO {
 
     }
 
-    public List<Attachment> selectAllPostIt(PostIt postIt) {
+    public List<Attachment> selectAllFromPostIt(PostIt postIt) {
 
         connect();
      
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Attachment> attachments = new ArrayList<>();
-        String sql = "SELECT * FROM attachments_from_user WHERE id = ?;";
+        String sql = "SELECT * FROM file_from_postIt WHERE file_postIt_id = ?;";
         Date userDate = null;
 
         try {
@@ -185,6 +186,40 @@ public class AttachmentDAO {
         
         return attachments;
     }
+    public List<Attachment> selectAllFromNotification(Notification notification) {
+
+        connect();
+     
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        List<Attachment> attachments = new ArrayList<>();
+        String sql = "SELECT * FROM file_from_notification WHERE id = ?;";
+        Date userDate = null;
+
+        try {
+
+            statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, notification.getId());
+
+            result = statement.executeQuery();
+
+            while (result.next()) {
+
+                Attachment attachment = AttachmentFactory.genereteAttachment(result);
+                
+                attachments.add(attachment);
+                
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
+        }
+        
+        return attachments;
+    }
     
     public boolean exist(Attachment attachment) {  
         
@@ -192,7 +227,7 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM attachments_from_user WHERE id_tipo = ?;";
+        String sql = "SELECT * FROM file_from_postIt WHERE id_tipo = ?;";
         boolean exist = false;
 
         try {
@@ -234,7 +269,7 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM attachments_from_user WHERE id_tipo = ?;";
+        String sql = "SELECT * FROM file_from_postIt WHERE id_tipo = ?;";
         
 
        
@@ -270,7 +305,7 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM attachments_from_user WHERE tipo = ?;";
+        String sql = "SELECT * FROM file_from_postIt WHERE tipo = ?;";
         boolean exist = false;
 
         try {
@@ -312,7 +347,7 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM attachments_from_user WHERE tipo = ?;";
+        String sql = "SELECT * FROM file_from_postIt WHERE tipo = ?;";
         
 
        
