@@ -23,7 +23,7 @@ public class MainTypeCreator extends Application{
     @Override
     public void start(Stage stage) throws Exception {
      
-        Parent root = FXMLLoader.load(getClass().getResource("/View/TypeCreator.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/Creators/TypeCreator.fxml"));
         
         Scene scne = new Scene(root);
         

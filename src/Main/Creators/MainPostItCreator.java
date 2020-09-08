@@ -23,7 +23,7 @@ public class MainPostItCreator extends Application{
     @Override
     public void start(Stage stage) throws Exception {
      
-        Parent root = FXMLLoader.load(getClass().getResource("/View/PostItCreator.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/Creators/PostItCreator.fxml"));
         
         Scene scne = new Scene(root);
         
