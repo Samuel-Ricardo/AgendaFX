@@ -9,6 +9,7 @@ import Factory.AttachmentFactory;
 import Factory.UserFactory;
 import JDBC.ConnectionFactory;
 import Model.Attachment;
+import Model.PostIt;
 import Model.User;
 import com.mysql.jdbc.Connection;
 import java.io.Attachment;
@@ -130,12 +131,12 @@ public class AttachmentDAO {
         connect();
 
         PreparedStatement statement = null;
-        String sql = "DELETE FROM attachment WHERE id_attachment = ?;";
+        String sql = "DELETE FROM attachment WHERE id_file = ?;";
 
         try {
             statement = connection.prepareStatement(sql);
 
-            statement.setInt(0, attachment.getId().intValue());
+            statement.setInt(0, attachment.getId());
 
             statement.execute();
 
@@ -150,7 +151,7 @@ public class AttachmentDAO {
 
     }
 
-    public List<Attachment> selectAllFromUser(int id) {
+    public List<Attachment> selectAllPostIt(PostIt postIt) {
 
         connect();
      
@@ -164,7 +165,7 @@ public class AttachmentDAO {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setInt(1, id);
+            statement.setInt(1, postIt.getId());
 
             result = statement.executeQuery();
 
