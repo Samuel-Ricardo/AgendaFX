@@ -20,9 +20,9 @@ public class AttachmentFactory {
 
     Downloader downloader = new Downloader();
     
-    public static Attachment genereteAttachment(ResultSet result) {
+    public Attachment genereteAttachment(ResultSet result) {
      
-                    Attachment attachment = new Attachment();
+             Attachment attachment = new Attachment();
         
         try {
             
