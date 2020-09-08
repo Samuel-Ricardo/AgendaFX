@@ -55,6 +55,10 @@ public class Attachment {
     public void setFile(File file) {
         this.file = file;
     }
+    
+    public void setFile(String absolutPath) {
+        this.file = new File(absolutPath);
+    }
 
     public ArrayList<Byte> getBytes() {
         return bytes;
@@ -104,8 +108,9 @@ public class Attachment {
     }
 
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
+     return file.getName();
+   }
 
     public String getAbsolutPath() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
