@@ -10,7 +10,7 @@ import DAO.UserDAO;
 import Main.MainChooser;
 import Main.MainLogin;
 import Main.Creators.MainRegister;
-import Main.MainTypeCreator;
+import Main.Creators.MainTypeCreator;
 import Main.Updaters.MainUpdate;
 import Model.Notification;
 import Model.PostIt;

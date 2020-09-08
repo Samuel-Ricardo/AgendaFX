@@ -7,7 +7,7 @@ package Controller.Creators;
 
 import DAO.TypeDAO;
 import DAO.UserDAO;
-import Main.MainTypeCreator;
+import Main.Creators.MainTypeCreator;
 import Model.Type;
 import Services.Formater;
 import com.jfoenix.controls.JFXColorPicker;
