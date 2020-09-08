@@ -11,7 +11,7 @@ import DAO.NotificationDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;
 import Main.MainChooser;
-import Main.MainNotificationUpdater;
+import Main.Updaters.MainNotificationUpdater;
 import Model.Notification;
 import Model.Type;
 import Model.User;

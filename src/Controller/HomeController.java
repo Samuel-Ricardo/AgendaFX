@@ -11,7 +11,7 @@ import Main.MainChooser;
 import Main.MainLogin;
 import Main.Creators.MainRegister;
 import Main.MainTypeCreator;
-import Main.MainUpdate;
+import Main.Updaters.MainUpdate;
 import Model.Notification;
 import Model.PostIt;
 import Model.Utilities.Row;

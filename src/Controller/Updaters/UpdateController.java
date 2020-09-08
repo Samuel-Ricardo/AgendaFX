@@ -6,7 +6,7 @@
 package Controller.Updaters;
 
 import DAO.UserDAO;
-import Main.MainUpdate;
+import Main.Updaters.MainUpdate;
 import Model.User;
 import java.io.File;
 import java.net.URL;
