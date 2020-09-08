@@ -8,6 +8,9 @@ package Factory;
 import Model.Attachment;
 import Services.Downloader;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,19 +18,23 @@ import java.sql.ResultSet;
  */
 public class AttachmentFactory {
 
-    Downloader downloader;
+    Downloader downloader = new Downloader();
     
     public static Attachment genereteAttachment(ResultSet result) {
      
-    Attachment attachment = new Attachment();
-    
-        attachment.setId(result.getInt("id_file"));
-        attachment.setFile(result.getString("file_way"));
-        attachment.setId(result.get);
-        attachment.setId(result.get);
-        attachment.setId(result.get);
-        attachment.setId(result.get);
-        attachment.setId(result.get);
+                    Attachment attachment = new Attachment();
+        
+        try {
+            
+            attachment.setId(result.getInt("id_file"));
+            attachment.setFile(result.getString("file_way"));
+            attachment.setNotification();
+            attachment.setPostIt(result.get);
+            attachment.setBytes(downloader.download(result.getBinaryStream("file_bytes")));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AttachmentFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
     }
     
