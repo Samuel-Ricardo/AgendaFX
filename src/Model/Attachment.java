@@ -113,7 +113,7 @@ public class Attachment {
    }
 
     public String getAbsolutPath() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      return file.getAbsolutePath();
     }
 
     public String getSize() {
