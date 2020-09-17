@@ -9,7 +9,7 @@ import DAO.UserDAO;
 import Main.MainHome;
 import Main.MainLogin;
 import Main.MainRecoverPassword;
-import Main.MainRegister;
+import Main.Creators.MainRegister;
 import Model.User;
 import java.net.URL;
 import java.util.List;

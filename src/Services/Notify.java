@@ -13,7 +13,7 @@ import DAO.UserDAO;
 import Main.MainHome;
 import Main.MainNotificationList;
 
-import Main.MainNotificationScreen;
+import Main.Viewers.MainNotificationScreen;
 import Model.Notification;
 import Model.User;
 import java.awt.HeadlessException;

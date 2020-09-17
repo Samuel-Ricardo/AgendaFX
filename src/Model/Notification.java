@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Model.Interfaces.Reminder;
+import Model.Utilities.ImageFile;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +15,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,21 +24,15 @@ import java.util.logging.Logger;
  *
  * @author Samuel
  */
-public class Notification{
+public class Notification extends Reminder{
     
-     protected int id;
-    protected String title;
-    protected String body;
-    protected Date scheduledDay;
-    protected boolean warned;
-    protected User user;
-    protected File music;
-    protected Type type;
-    protected String image;
-    protected File attachment;
+    private Date scheduledDay;
+    private boolean warned;
+    private File music;
+    private String image;
+    private ArrayList<File> Attachments;
     
-    
-     public String getImage() {
+    public String getImage() {
         return image;
     }
 
@@ -43,18 +40,33 @@ public class Notification{
         this.image = image;
     }
     
-    public File getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(File attachment) {
-        this.attachment = attachment;
-    }
-
     public File getMusic() {
         return music;
     }
 
+    public ArrayList<File> getAttachments() {
+        return Attachments;
+    }
+
+    public void setAttachments(ArrayList<File> Attachments) {
+        this.Attachments = Attachments;
+    }
+
+    public File getAttachment() {
+        
+        return Attachments.get(0);
+    }
+
+    public void setAttachment(File Attachment) {
+        this.Attachments = new ArrayList<File>();
+        
+        Attachments.add(Attachment);
+    }
+    
+    public void addAttachment(File Attachment) {
+        this.Attachments.add(Attachment);
+    }
+    
     public void setMusic(File music) {
         this.music = music;
     }
@@ -67,42 +79,7 @@ public class Notification{
 
     public Notification() {
     }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
     
-    
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String description) {
-        this.body = description;
-    }
-
     public Date getScheduledDay() {
         return scheduledDay;
     }
@@ -159,14 +136,6 @@ public class Notification{
        
         return scheduledHour.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
     }
-    
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public void setScheduledDay(LocalDate date, LocalTime time) {
      
@@ -181,9 +150,5 @@ public class Notification{
         } catch (ParseException ex) {
             Logger.getLogger(PostIt.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-    
-    
-
 }

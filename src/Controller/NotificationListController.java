@@ -6,7 +6,7 @@
 package Controller;
 
 import Model.Notification;
-import Model.LiteRow;
+import Model.Utilities.LiteRow;
 import Services.Notify;
 import java.net.URL;
 import java.util.ArrayList;

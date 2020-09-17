@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="310.0" stylesheets="@../Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Viewers.PostItScreenController">
+   <children>
+      <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="325.0">
+         <content>
+            <TextFlow fx:id="txfBody" prefHeight="415.0" prefWidth="323.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <children>
+                  <ImageView fx:id="imgMenu" fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../Images/icons8-menu-gradiente.png" />
+                     </image>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="                                                                                                     " />
+               </children>
+            </TextFlow>
+         </content>
+      </ScrollPane>
+      <Pane fx:id="pnMenuBackground" opacity="0.33" prefHeight="418.0" prefWidth="325.0" style="-fx-background-color: white;" visible="false" />
+      <VBox fx:id="vbMenu" layoutX="10.0" layoutY="40.0" prefHeight="168.0" prefWidth="118.0" styleClass="semi-transparent-background" visible="false">
+         <children>
+            <Button fx:id="btAttachment" mnemonicParsing="false" onAction="#showAttachment" prefHeight="54.0" prefWidth="107.0" styleClass="litle-list" text="Anexo">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="33.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Images/icons8-attachment_white.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btSchedule" mnemonicParsing="false" onAction="#schedule" styleClass="litle-list" text="Agendar">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Images/icons8-calendar-30px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btInfo" mnemonicParsing="false" onAction="#showData" prefHeight="49.0" prefWidth="110.0" styleClass="litle-list" text="Dados">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Images/icons8-note-40px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>
