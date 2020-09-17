@@ -8,7 +8,7 @@ package Controller;
 import DAO.PostItDAO;
 import DAO.UserDAO;
 import Model.PostIt;
-import Model.PostItPreView;
+import Model.Utilities.PostItPreView;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

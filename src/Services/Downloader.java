@@ -5,6 +5,7 @@
  */
 package Services;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -193,4 +195,52 @@ public class Downloader extends Thread {
         this.megaByte = megaBytes;
     }
 
+    public ArrayList<Byte> download(InputStream input) {
+     
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+                
+        byte[] downloadedBytes = null;
+        
+        if(input != null){
+            
+            try {
+                
+                byte[] bytes = new byte[1024];
+                
+                int chek = 0;
+                
+                while((chek = input.read(bytes)) != -1){
+                    
+                    output.write(bytes, 0, chek);
+                    
+                }
+                
+             downloadedBytes = output.toByteArray();
+            } catch (IOException ex) {
+                Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                try {
+                    input.close();
+                    output.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    
+        if(downloadedBytes !=  null){
+            
+        ArrayList array = new ArrayList();
+        
+            for (byte downloadedByte : downloadedBytes) {
+
+                array.add(downloadedByte);
+            }
+            
+        return array;
+        }else{
+         
+         return null;
+        }
+    }
 }

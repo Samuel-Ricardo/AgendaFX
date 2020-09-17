@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="489.0" styleClass="simple-background" stylesheets="@../Styles/Dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Updaters.NotificationUpdaterController">
+   <children>
+      <Label layoutX="206.0" layoutY="16.0" text="Título" />
+      <TextField fx:id="txtTitle" layoutX="206.0" layoutY="44.0" prefHeight="28.0" prefWidth="272.0" promptText="Digite o título" style="-fx-border-radius: 5px;" styleClass="text-field-empyt" />
+      <JFXDatePicker fx:id="dpDate" defaultColor="#0c00ff" layoutX="206.0" layoutY="141.0" prefHeight="31.0" prefWidth="176.0" />
+      <Label layoutX="206.0" layoutY="101.0" text="Marcado para:" />
+      <Label layoutX="16.0" layoutY="268.0" text="Descriçao" />
+      <TextArea fx:id="txtDescription" layoutX="15.0" layoutY="298.0" prefHeight="216.0" prefWidth="203.0" style="-fx-background-color: #9370DB;" styleClass="text-area-empyt" />
+      <ComboBox fx:id="cbType" layoutX="43.0" layoutY="223.0" onAction="#changeTypeColor" prefHeight="26.0" prefWidth="147.0" promptText="Escolha o tipo" />
+      <Label layoutX="12.0" layoutY="189.0" text="Tipo" />
+      <Rectangle fx:id="typeColor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="14.0" layoutY="226.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #d4ff00;" width="20.0" />
+      <ImageView fx:id="imgNotific" fitHeight="139.0" fitWidth="187.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../Images/image_White.png" />
+         </image>
+      </ImageView>
+      <JFXToggleButton fx:id="tbSound" layoutX="225.0" layoutY="250.0" onAction="#showSound" text="Som na notificaçao" textFill="WHITE" toggleColor="BLUEVIOLET" toggleLineColor="MEDIUMPURPLE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXToggleButton>
+      <Button fx:id="btSound" layoutX="231.0" layoutY="292.0" mnemonicParsing="false" onAction="#chooseSound" text="Escolher som de toque" visible="false" />
+      <Label fx:id="lblSound" layoutX="221.0" layoutY="332.0" styleClass="coment" text="Se nao escolher nenhuma, usará a padrao" visible="false" />
+      <JFXToggleButton fx:id="tbAttachment" layoutX="227.0" layoutY="348.0" onAction="#showAttachment" text="Anexar Arquivo" textFill="WHITE" toggleColor="BLUEVIOLET" toggleLineColor="MEDIUMPURPLE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXToggleButton>
+      <Button fx:id="btAttachment" layoutX="236.0" layoutY="406.0" mnemonicParsing="false" onAction="#chooseFile" text="Escolher Arquivo" visible="false" />
+      <JFXToggleButton fx:id="tbImage" layoutX="-7.0" layoutY="133.0" onAction="#showImage" prefHeight="58.0" prefWidth="193.0" style="-fx-background-color: transoarent;" text="Imagem" textFill="WHITE" toggleColor="BLUEVIOLET" toggleLineColor="MEDIUMPURPLE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </JFXToggleButton>
+      <Label layoutX="215.0" layoutY="176.0" text="Horario:" />
+      <Button layoutX="395.0" layoutY="480.0" mnemonicParsing="false" onAction="#update" styleClass="rectangle" text="Atualizar" />
+      <Button layoutX="223.0" layoutY="480.0" mnemonicParsing="false" onAction="#close" styleClass="rectangle" text="Fechar" />
+      <JFXTimePicker fx:id="tpHorary" defaultColor="#0c00ff" layoutX="209.0" layoutY="213.0" prefHeight="31.0" prefWidth="176.0" styleClass="time-picker" />
+      <Label fx:id="lblAttachment" layoutX="231.0" layoutY="452.0" styleClass="coment" text="Se nao escolher nenhuma, usará a padrao" visible="false" />
+   </children>
+</Pane>
