@@ -24,7 +24,7 @@ public class PostItFactory {
         postIt.setBody(result.getString("body"));
         postIt.setUser(UserFactory.generateUser(result));
         postIt.setType(TypeFactory.genereteType(result));
-        postIt.setAttachments(FileFactory.generateAttachment(result));
+//        postIt.setAttachments(FileFactory.generateAttachment(result));
         postIt.setImages(ImageFactory.generateImage(result));
         
         return postIt;

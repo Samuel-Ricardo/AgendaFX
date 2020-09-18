@@ -13,7 +13,6 @@ import Model.Notification;
 import Model.PostIt;
 import Model.User;
 import com.mysql.jdbc.Connection;
-import java.io.Attachment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

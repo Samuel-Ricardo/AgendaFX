@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 public class AttachmentFactory {
 
     Downloader downloader = new Downloader();
+    P
     
     public Attachment genereteAttachment(ResultSet result) {
      
