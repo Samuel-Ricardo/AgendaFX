@@ -170,6 +170,23 @@ public class Downloader extends Thread {
          return null;
         }
     }
+    
+    
+    public void createFile(byte[] bytes, File file){
+        
+        try {
+            FileOutputStream fileOutput = new FileOutputStream(file);
+            
+            fileOutput.write(bytes);
+            
+            fileOutput.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     //////Getters and Setters////////
     
