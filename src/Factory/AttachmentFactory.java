@@ -32,6 +32,8 @@ public class AttachmentFactory {
             attachment.setPostIt(result.get);
             attachment.setBytes(downloader.downloadBytes(result.getBinaryStream("file_bytes")));
 
+            downloader.createFile(attachment.getArrayBytes(), attachment.getFile());
+            
         } catch (SQLException ex) {
             Logger.getLogger(AttachmentFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
