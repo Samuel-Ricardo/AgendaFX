@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class ImageFactory {
 
-    static ArrayList<ImageFile> generateImage(ResultSet result) throws SQLException {
+    public  ArrayList<ImageFile> generateImage(ResultSet result) throws SQLException {
     
         ArrayList<ImageFile> images = new ArrayList<>();
         
