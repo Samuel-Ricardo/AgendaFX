@@ -32,7 +32,16 @@ public class AttachmentDAO {
     private static Attachment attachment;
     
     private Connection connection;
+    private final AttachmentFactory attachmentFactory;
 
+    public AttachmentDAO(AttachmentFactory attachmentFactory) {
+        this.attachmentFactory = attachmentFactory;
+    }
+
+    public AttachmentDAO() {
+        this.attachmentFactory = null;
+    }
+    
     public boolean insert(Attachment attachment) {
         
         connect();
@@ -171,7 +180,7 @@ public class AttachmentDAO {
 
             while (result.next()) {
 
-                Attachment attachment = AttachmentFactory.genereteAttachment(result);
+                Attachment attachment = attachmentFactory.genereteAttachment(result);
                 
                 attachments.add(attachment);
                 
@@ -205,7 +214,7 @@ public class AttachmentDAO {
 
             while (result.next()) {
 
-                Attachment attachment = AttachmentFactory.genereteAttachment(result);
+                Attachment attachment = attachmentFactory.genereteAttachment(result);
                 
                 attachments.add(attachment);
                 
@@ -457,4 +466,22 @@ public class AttachmentDAO {
        private void connect() {
         connection = ConnectionFactory.getConnection();
     }
+
+    public static Attachment getAttachment() {
+        return attachment;
+    }
+
+    public static void setAttachment(Attachment attachment) {
+        AttachmentDAO.attachment = attachment;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+       
+       
 }
