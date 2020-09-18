@@ -37,9 +37,6 @@ public class NotificationDAO {
     private Date sqlDate;
     private Time sqlTime;
     private java.util.Date notificationDate;
-    private SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyyy");
-    private SimpleDateFormat horary = new SimpleDateFormat("HH:mm");
-    private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yy HH:mm");
     private static Notification notification;
 
     public NotificationDAO() {
