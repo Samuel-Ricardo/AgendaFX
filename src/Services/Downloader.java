@@ -120,6 +120,73 @@ public class Downloader extends Thread {
             Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+    public ArrayList<Byte> downloadBytes(InputStream input) {
+     
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+                
+        byte[] downloadedBytes = null;
+        
+        if(input != null){
+            
+            try {
+                
+                byte[] bytes = new byte[1024];
+                
+                int chek = 0;
+                
+                while((chek = input.read(bytes)) != -1){
+                    
+                    output.write(bytes, 0, chek);
+                    
+                }
+                
+             downloadedBytes = output.toByteArray();
+            } catch (IOException ex) {
+                Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                try {
+                    input.close();
+                    output.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    
+        if(downloadedBytes !=  null){
+            
+        ArrayList<Byte> array = new ArrayList<Byte>();
+        
+            for (byte downloadedByte : downloadedBytes) {
+
+                array.add(downloadedByte);
+            }
+            
+        return array;
+        }else{
+         
+         return null;
+        }
+    }
+    
+    
+    public void createFile(byte[] bytes, File file){
+        
+        try {
+            FileOutputStream fileOutput = new FileOutputStream(file);
+            
+            fileOutput.write(bytes);
+            
+            fileOutput.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     //////Getters and Setters////////
     
@@ -193,54 +260,5 @@ public class Downloader extends Thread {
 
     public void setMegaBytes(Double megaBytes) {
         this.megaByte = megaBytes;
-    }
-
-    public ArrayList<Byte> download(InputStream input) {
-     
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-                
-        byte[] downloadedBytes = null;
-        
-        if(input != null){
-            
-            try {
-                
-                byte[] bytes = new byte[1024];
-                
-                int chek = 0;
-                
-                while((chek = input.read(bytes)) != -1){
-                    
-                    output.write(bytes, 0, chek);
-                    
-                }
-                
-             downloadedBytes = output.toByteArray();
-            } catch (IOException ex) {
-                Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
-            }finally{
-                try {
-                    input.close();
-                    output.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    
-        if(downloadedBytes !=  null){
-            
-        ArrayList array = new ArrayList();
-        
-            for (byte downloadedByte : downloadedBytes) {
-
-                array.add(downloadedByte);
-            }
-            
-        return array;
-        }else{
-         
-         return null;
-        }
     }
 }
