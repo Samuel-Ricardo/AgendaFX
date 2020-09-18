@@ -15,6 +15,8 @@ import java.sql.SQLException;
  */
 public class PostItFactory {
     
+    ImageFactory imageFactory = new ImageFactory();
+    
         public PostIt generatePostIt(ResultSet result) throws SQLException {
    
         PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
@@ -25,7 +27,7 @@ public class PostItFactory {
         postIt.setUser(UserFactory.generateUser(result));
         postIt.setType(TypeFactory.genereteType(result));
 //        postIt.setAttachments(FileFactory.generateAttachment(result));
-        postIt.setImages(ImageFactory.generateImage(result));
+        postIt.setImages(imageFactory.generateImage(result));
         
         return postIt;
     }
