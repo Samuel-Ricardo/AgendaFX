@@ -34,7 +34,7 @@ public class PostItDAO {
     private Connection connection;
     private static PostIt postIt;
     private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    private PostItFactory postItFactory = new PostItFactory();
+    private final PostItFactory postItFactory;
 
     public PostItDAO() {
         
@@ -46,7 +46,9 @@ public class PostItDAO {
         this.postItFactory = postItFactory;
     }
 
-
+    public PostItDAO() {
+        this.postItFactory = new PostItFactory();
+    }
     
     public boolean Insert(PostIt postIt){
     

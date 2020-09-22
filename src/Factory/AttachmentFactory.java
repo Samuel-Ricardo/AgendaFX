@@ -30,7 +30,6 @@ public class AttachmentFactory {
             attachment.setId(result.getInt("id_file"));
             attachment.setFile(result.getString("file_way"));
             attachment.setNotification();
-
             attachment.setPostIt(postItFactory.generatePostIt(result));
             attachment.setBytes(downloader.download(result.getBinaryStream("file_bytes")));
 
@@ -39,7 +38,7 @@ public class AttachmentFactory {
         } catch (SQLException ex) {
             Logger.getLogger(AttachmentFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+    return attachment;
     }
     
 }

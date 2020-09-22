@@ -245,7 +245,7 @@ public class NotificationUpdaterController implements Initializable {
             notification.setMusic(music);
         }
 
-        System.out.println(notification.getScheduledDay().getTime());
+        System.out.println(notification.getScheduledDay().getOnlyTime());
 
         System.out.println(notification.getId() + "   id controle");
 
@@ -361,8 +361,8 @@ public class NotificationUpdaterController implements Initializable {
 
     private void loadScreen() {
 
-        dpDate.setValue(notification.getScheduledLocalDate());
-        tpHorary.setValue(notification.getScheduledLocalTime());
+        dpDate.setValue(notification.getScheduledDay().getLocalDate());
+        tpHorary.setValue(notification.getScheduledDay().getLocalTime());
 
         txtDescription.setText(notification.getBody());
         txtTitle.setText(notification.getTitle());
