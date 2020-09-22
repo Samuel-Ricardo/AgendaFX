@@ -171,7 +171,7 @@ public class AttachmentDAO {
 
             while (result.next()) {
 
-                Attachment attachment = AttachmentFactory.genereteAttachment(result);
+                Attachment attachment = attachmentFactory.genereteAttachment(result);
                 
                 attachments.add(attachment);
                 
@@ -205,7 +205,7 @@ public class AttachmentDAO {
 
             while (result.next()) {
 
-                Attachment attachment = AttachmentFactory.genereteAttachment(result);
+                Attachment attachment = attachmentFactory.genereteAttachment(result);
                 
                 attachments.add(attachment);
                 
