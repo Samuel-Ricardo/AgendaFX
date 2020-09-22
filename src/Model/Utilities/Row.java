@@ -92,7 +92,7 @@ public class Row extends HBox {
         date.setLayoutX(67);
         date.setLayoutY(25);
         if (notification.getScheduledDay() != null) {
-            date.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
+            date.setText(notification.getScheduledDay().getOnlyDate()+ " as " + notification.getScheduledDay().getOnlyTime());
         }else{
             date.setText("sem hora marcada");
         }
@@ -129,7 +129,7 @@ public class Row extends HBox {
         date.setLayoutX(67);
         date.setLayoutY(25);
         if (notification.getScheduledDay() != null) {
-            date.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
+            date.setText(notification.getScheduledDay().getOnlyDate()+ " as " + notification.getScheduledDay().getOnlyTime());
         }else{
             date.setText("sem hora marcada");
         }
@@ -166,7 +166,7 @@ public class Row extends HBox {
         date.setLayoutX(113);
         date.setLayoutY(42);
         if (notification.getScheduledDay() != null) {
-            date.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
+            date.setText(notification.getScheduledDay().getOnlyDate()+ " as " + notification.getScheduledDay().getOnlyTime());
         }else{
             date.setText("sem hora marcada");
         }
