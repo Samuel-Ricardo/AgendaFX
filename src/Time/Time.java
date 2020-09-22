@@ -237,12 +237,12 @@ public class Time {
         return shortDateFormat;
     } 
 
-    public java.sql.Date getDateSQL() {
+    public java.sql.Date toSQLDate() {
     
         return localDateConverter.toSQLDate(localDate);
     }
     
-    public java.sql.Time getTimeSQL() {
+    public java.sql.Time toSQLTime() {
     
         return localTimeConverter.toSQLTime(localTime);
     }

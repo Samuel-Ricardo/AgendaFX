@@ -6,7 +6,7 @@
 package Model;
 
 import Model.Interfaces.Reminder;
-import Model.Utilities.Time;
+import Time.Time;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -92,20 +92,6 @@ public class Notification extends Reminder{
 
     public void setWarned(boolean warned) {
         this.warned = warned;
-    }
-
-    public String getScheduledDate() {
-
-        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-
-        return date.format(scheduledDay);
-    }
-
-    public String getScheduledHour() {
-
-        SimpleDateFormat date = new SimpleDateFormat("HH:mm");
-
-        return date.format(scheduledDay);
     }
 
     public void setScheduledDay(LocalDateTime date) {
