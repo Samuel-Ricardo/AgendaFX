@@ -33,6 +33,8 @@ public class AttachmentFactory {
             attachment.setPostIt(postItFactory.generatePostIt(result));
             attachment.setBytes(downloader.download(result.getBinaryStream("file_bytes")));
 
+            downloader.createFile(attachment.getArrayBytes(), attachment.getFile());
+            
         } catch (SQLException ex) {
             Logger.getLogger(AttachmentFactory.class.getName()).log(Level.SEVERE, null, ex);
         }

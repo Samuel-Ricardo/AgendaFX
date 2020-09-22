@@ -36,12 +36,18 @@ public class PostItDAO {
     private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private final PostItFactory postItFactory;
 
+    public PostItDAO() {
+        
+        PostItFactory postItFactory = new PostItFactory();
+    }
+    
     public PostItDAO(PostItFactory postItFactory) {
+        
         this.postItFactory = postItFactory;
     }
 
     public PostItDAO() {
-        this.postItFactory = null;
+        this.postItFactory = new PostItFactory();
     }
     
     public boolean Insert(PostIt postIt){

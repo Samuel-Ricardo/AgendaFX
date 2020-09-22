@@ -32,6 +32,17 @@ public class AttachmentDAO {
     private static Attachment attachment;
     
     private Connection connection;
+    private AttachmentFactory attachmentFactory = new AttachmentFactory();
+
+    public AttachmentDAO() {
+        
+        AttachmentFactory AttachmentFactory = new AttachmentFactory();
+    }
+    
+    public AttachmentDAO(AttachmentFactory attachmentFactory) {
+        
+        this.attachmentFactory = attachmentFactory;
+    }
 
     public boolean insert(Attachment attachment) {
         
@@ -93,8 +104,8 @@ public class AttachmentDAO {
 //            ConnectionFactory.closeConnection(connection, statement);
 //        }
 //        
-//        
 //    }
+//        
 
     public boolean update(Attachment attachment) {
 
@@ -142,7 +153,7 @@ public class AttachmentDAO {
 
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(PostItDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AttachmentDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;
         } finally {
