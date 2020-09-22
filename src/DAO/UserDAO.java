@@ -8,6 +8,7 @@ package DAO;
 import Factory.UserFactory;
 import JDBC.ConnectionFactory;
 import Model.User;
+import Time.Time;
 import com.mysql.jdbc.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -56,11 +57,11 @@ public class UserDAO {
 
             statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
 
-            sqlDate = new Date(user.getNascimento().getTime());  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
+            //sqlDate = new Date(user.getNascimento().getTime());  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
 
             statement.setString(1, user.getNome());     // Filling in the camp "?"  //  Preenchendo os campos "?"
             statement.setString(2, user.getSexo());
-            statement.setDate(3, sqlDate);
+            statement.setDate(3, user.getNascimento().toSQLDate());
             statement.setString(4, user.getTelefone());
             statement.setString(5, user.getEmail());
             statement.setString(6, user.getCPF());
@@ -103,11 +104,11 @@ public class UserDAO {
 
             statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
 
-            sqlDate = new Date(user.getNascimento().getTime());  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
+            //sqlDate = new Date(user.getNascimento().getTime());  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
 
             statement.setString(1, user.getNome());     // Filling in the camp "?"  //  Preenchendo os campos "?"
             statement.setString(2, user.getSexo());
-            statement.setDate(3, sqlDate);
+            statement.setDate(3, user.getNascimento().toSQLDate());
             statement.setString(4, user.getTelefone());
             statement.setString(5, user.getEmail());
             statement.setString(6, user.getCPF());
@@ -294,13 +295,15 @@ public class UserDAO {
             if (result.next()) {
 
                 if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                    //userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
+                    
+                    findUser.setNascimento(new Time(result.getDate("dataNascimento")));
                 }
 
                 findUser.setId(result.getLong("id"));
                 findUser.setNome(result.getString("nome"));
                 findUser.setSexo(result.getString("sexo"));
-                findUser.setNascimento(userDate);
+             //   findUser.setNascimento(userDate);
                 findUser.setTelefone(result.getString("telefone"));
                 findUser.setEmail(result.getString("email"));
                 findUser.setCPF(result.getString("cpf"));
