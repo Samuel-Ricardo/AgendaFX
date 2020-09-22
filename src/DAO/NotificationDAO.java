@@ -36,7 +36,6 @@ public class NotificationDAO {
     private Connection connection;
     private Date sqlDate;
     private Time sqlTime;
-    private java.util.Date notificationDate;
     private static Notification notification;
 
     public NotificationDAO() {
