@@ -51,8 +51,19 @@ public class Time {
     public Time(java.sql.Date sqlDate) {
         
         this.date = new Date(sqlDate.getTime());
-        this.dateSql = new java.sql.Date(date.getTime());
+        this.dateSql = sqlDate;
         this.localDate = sqlDate.toLocalDate();
+        this.localTime = LocalTime.now();
+        this.localDateTime = LocalDateTime.now();
+        this.gregorianCalendar = new GregorianCalendar();
+        
+    }
+    
+    public Time(Date date) {
+        
+        this.date = date;
+        this.dateSql = new java.sql.Date(date.getTime());
+        this.localDate = l;
         this.localTime = LocalTime.now();
         this.localDateTime = LocalDateTime.now();
         this.gregorianCalendar = new GregorianCalendar();

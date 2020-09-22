@@ -6,19 +6,13 @@
 package Model;
 
 import Model.Interfaces.Reminder;
-import Model.Utilities.ImageFile;
+import Model.Utilities.Time;
+
 import java.io.File;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class Notification extends Reminder{
     
-    private Date scheduledDay;
+    private Time scheduledDay;
     private boolean warned;
     private File music;
     private String image;
@@ -80,27 +74,24 @@ public class Notification extends Reminder{
     public Notification() {
     }
     
-    public Date getScheduledDay() {
+    public Time getScheduledDay() {
         return scheduledDay;
     }
 
-    public void setScheduledDay(Date scheduledDay) {
+    public void setScheduledDay(Time scheduledDay) {
         this.scheduledDay = scheduledDay;
     }
-
+    
+    public void setScheduledDay(Date scheduledDay) {
+        this.scheduledDay = new Time(scheduledDay);
+    }
+    
     public boolean isWarned() {
         return warned;
     }
 
     public void setWarned(boolean warned) {
         this.warned = warned;
-    }
-    
-    public java.sql.Date getSQLScheduledDay() {
-
-        java.sql.Date sqlDate = new java.sql.Date(scheduledDay.getTime());
-
-        return sqlDate;
     }
 
     public String getScheduledDate() {
@@ -116,39 +107,9 @@ public class Notification extends Reminder{
 
         return date.format(scheduledDay);
     }
-    
-    public LocalDate getScheduledLocalDate(){
-        
-       // scheduledDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-       
-        return getSQLScheduledDay().toLocalDate();
-    }
-    public LocalTime getScheduledLocalTime(){
-        
-        SimpleDateFormat horary = new SimpleDateFormat("HH:mm");
-        
-      Date scheduledHour = null;
-        try {
-            scheduledHour = horary.parse(getScheduledHour());
-        } catch (ParseException ex) {
-            Logger.getLogger(PostIt.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        return scheduledHour.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
-    }
 
-    public void setScheduledDay(LocalDate date, LocalTime time) {
-     
-        SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-                
-        String stringDate = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-        String stringTime = time.format(dtf);
+    public void setScheduledDay(LocalDateTime date) {
         
-        try {
-            scheduledDay = complet.parse(stringDate+" "+stringTime);
-        } catch (ParseException ex) {
-            Logger.getLogger(PostIt.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            this.scheduledDay = new Time(date);
     }
 }
