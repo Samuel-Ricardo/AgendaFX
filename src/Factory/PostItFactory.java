@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class PostItFactory {
     
-        public static PostIt generatePostIt(ResultSet result) throws SQLException {
+        public PostIt generatePostIt(ResultSet result) throws SQLException {
    
         PostIt postIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
         

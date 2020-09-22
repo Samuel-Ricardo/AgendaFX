@@ -34,8 +34,16 @@ public class PostItDAO {
     private Connection connection;
     private static PostIt postIt;
     private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    private final PostItFactory postItFactory;
 
+    public PostItDAO(PostItFactory postItFactory) {
+        this.postItFactory = postItFactory;
+    }
 
+    public PostItDAO() {
+        this.postItFactory = null;
+    }
+    
     public boolean Insert(PostIt postIt){
     
       if(connection == null){
@@ -150,7 +158,7 @@ public class PostItDAO {
 
             while (result.next()) {
                 
-                postits.add(PostItFactory.generatePostIt(result));    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
+                postits.add(postItFactory.generatePostIt(result));    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -179,7 +187,7 @@ public class PostItDAO {
 
             while (result.next()) {
 
-                postits.add(PostItFactory.generatePostIt(result));    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
+                postits.add(postItFactory.generatePostIt(result));    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -206,7 +214,7 @@ public class PostItDAO {
 
             while (result.next()) {
                 
-                postits.add(PostItFactory.generatePostIt(result));    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
+                postits.add(postItFactory.generatePostIt(result));    // add PostIt created in List PostIts  //  adiciona o notificacao criado no List notificacaos
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
@@ -234,7 +242,7 @@ public class PostItDAO {
 
             while (result.next()) {
                 
-                findPostIt = PostItFactory.generatePostIt(result);
+                findPostIt = postItFactory.generatePostIt(result);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
