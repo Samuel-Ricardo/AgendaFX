@@ -148,7 +148,7 @@ public class Filler {
             });
 
             String today = day.format(new Date());
-            String notificationDay = day.format(row.getNotification().getScheduledDay().getOnlyDate());
+            String notificationDay = day.format(row.getNotification().getScheduledDay().toDate());
 
             if (today.equals(notificationDay) && row.getNotification().isWarned() == false) {
                 alPanes.add(row);

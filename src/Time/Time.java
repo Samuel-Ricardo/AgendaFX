@@ -145,7 +145,10 @@ public class Time {
         return localTimeConverter.shortFormat(localTime);
     }
     
-
+    public Date toDate() {
+       
+        return localDateConverter.toDate();
+    }
       
       //Getters and Setters
       
