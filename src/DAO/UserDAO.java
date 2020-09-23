@@ -26,11 +26,14 @@ public class UserDAO {
 
     private Connection connection;
     private static User user;
-    private Date sqlDate;
-    java.util.Date userDate;
+    private final UserFactory userFactory;
 
     public UserDAO() {
+        this.userFactory = null;
+    }
 
+    public UserDAO(UserFactory userFactory) {
+        this.userFactory = userFactory;
     }
 
     public boolean insert(User user) {
@@ -199,7 +202,7 @@ public class UserDAO {
 
             while (result.next()) {
 
-                User user = UserFactory.generateUser(result);
+                User user = userFactory.generateUser(result);
 
                 users.add(user);    // add user created in List users  //  adiciona o usuario criado no List usuarios
             }
@@ -247,7 +250,7 @@ public class UserDAO {
 
             while (result.next()) {
 
-                User user = UserFactory.generateUser(result);     // create user with database data  // criando usuario com dados do banco de dados
+                User user = userFactory.generateUser(result);     // create user with database data  // criando usuario com dados do banco de dados
 
                 users.add(user);    // add user created in List users  //  adiciona o usuario criado no List usuarios
             }

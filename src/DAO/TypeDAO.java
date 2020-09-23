@@ -28,8 +28,16 @@ import javax.swing.JOptionPane;
 public class TypeDAO {
 
     private static Type type;
-    
     private Connection connection;
+    private final TypeFactory typeFactory;
+
+    public TypeDAO() {
+        this.typeFactory = null;
+    }
+
+    public TypeDAO(TypeFactory typeFactory) {
+        this.typeFactory = typeFactory;
+    }
 
     public boolean insert(Type type) {
         
@@ -167,7 +175,7 @@ public class TypeDAO {
 
             while (result.next()) {
 
-                Type type = TypeFactory.genereteType(result);
+                Type type = typeFactory.genereteType(result);
                 
                 types.add(type);
                 
