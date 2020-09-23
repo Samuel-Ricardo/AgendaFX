@@ -15,6 +15,11 @@ import java.sql.SQLException;
  */
 public class TypeFactory {
     
+    private final UserFactory userFactory;
+
+    public TypeFactory() {
+        this.userFactory = new UserFactory();
+    }
     
         public Type genereteType(ResultSet result) throws SQLException {
         
@@ -25,7 +30,7 @@ public class TypeFactory {
         type.setSecondaryColor(result.getString("detalhes_de_cores"));
         type.setPrimaryColor(result.getString("cor"));
         type.setImportance(result.getInt("importancia"));
-        type.setUser(UserFactory.generateUser(result));
+        type.setUser(userFactory.generateUser(result));
         
         return type;
     }
