@@ -28,11 +28,12 @@ public class NotificationFactory {
         this.typeFactory = new TypeFactory();
     }
     
-     public Notification generateNotification(ResultSet result) {
+     public Notification generateNotification(ResultSet result) { // create Notification with database data  // criando notificacao com dados do banco de dados
        
+         Notification notification = new Notification();     
+         
          try {
-             
-                 Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
+                 
              
              if (result.getTime("horario") != null && result.getDate("marcado") != null) {
                  
@@ -48,11 +49,11 @@ public class NotificationFactory {
                 notification.setUser(userFactory.generateUser(result));
                 notification.setType(typeFactory.genereteType(result));
                 
-             return notification;
-             
          } catch (SQLException ex) {
              Logger.getLogger(NotificationFactory.class.getName()).log(Level.SEVERE, null, ex);
          }
+         
+         return notification;
     }
     
 }
