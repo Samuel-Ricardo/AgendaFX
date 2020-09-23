@@ -20,7 +20,6 @@ public class UserFactory {
         public User generateUser(ResultSet result) throws SQLException {
         
         User user = new User();     // create user with database data  // criando usuario com dados do banco de dados
-        java.util.Date userDate = null;
         
         if (result.getDate("dataNascimento") != null) {
        //   userDate = new java.util.Date(result.getDate("dataNascimento").getTime());

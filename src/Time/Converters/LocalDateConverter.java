@@ -64,4 +64,9 @@ public class LocalDateConverter {
 
         return SHORT_FORMAT.format(localDate);
     }
+
+    public Date toDate(LocalDate localDate) {
+       
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
 }
