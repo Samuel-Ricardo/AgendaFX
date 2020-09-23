@@ -15,7 +15,16 @@ import java.sql.SQLException;
  */
 public class PostItFactory {
     
-    ImageFactory imageFactory = new ImageFactory();
+    private final ImageFactory imageFactory;
+    private final UserFactory userFactory;
+    private final TypeFactory typeFactory;
+    
+    public PostItFactory() {
+        
+        this.userFactory = new UserFactory();
+        this.typeFactory = new TypeFactory();
+        this.imageFactory = new ImageFactory();
+    }
     
         public PostIt generatePostIt(ResultSet result) throws SQLException {
    
@@ -24,8 +33,8 @@ public class PostItFactory {
         postIt.setId(result.getInt("idPostIt"));
         postIt.setTitle(result.getString("title"));
         postIt.setBody(result.getString("body"));
-        postIt.setUser(UserFactory.generateUser(result));
-        postIt.setType(TypeFactory.genereteType(result));
+        postIt.setUser(userFactory.generateUser(result));
+        postIt.setType(typeFactory.genereteType(result));
 //        postIt.setAttachments(FileFactory.generateAttachment(result));
         postIt.setImages(imageFactory.generateImage(result));
         

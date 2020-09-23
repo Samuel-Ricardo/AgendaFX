@@ -35,11 +35,6 @@ public class PostItDAO {
     private static PostIt postIt;
     private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private final PostItFactory postItFactory;
-
-    public PostItDAO() {
-        
-        PostItFactory postItFactory = new PostItFactory();
-    }
     
     public PostItDAO(PostItFactory postItFactory) {
         
@@ -47,6 +42,7 @@ public class PostItDAO {
     }
 
     public PostItDAO() {
+        
         this.postItFactory = new PostItFactory();
     }
     

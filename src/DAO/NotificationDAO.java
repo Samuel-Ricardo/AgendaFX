@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Factory.NotificationFactory;
 import JDBC.ConnectionFactory;
 import Model.Notification;
 import Model.Type;
@@ -36,9 +37,15 @@ public class NotificationDAO {
 
     private Connection connection;
     private static Notification notification;
+    private final NotificationFactory notificationFactory;
 
     public NotificationDAO() {
+        this.notificationFactory = new NotificationFactory();
+    }
 
+    public NotificationDAO(Connection connection, NotificationFactory notificationFactory) {
+        this.connection = connection;
+        this.notificationFactory = notificationFactory;
     }
 
     public boolean insert(Notification notification) {
@@ -239,52 +246,7 @@ public class NotificationDAO {
 
             while (result.next()) {
 
-                Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
-
-                if (result.getTime("horario") != null && result.getDate("marcado") != null) {
-             
-                    notification.setScheduledDay(new Time(result.getDate("marcado"), result.getTime("horario")));
-                }
-
-                notification.setId(result.getInt("idNotific"));
-                notification.setTitle(result.getString("titulo"));
-                notification.setBody(result.getString("descricao"));
-                notification.setAttachment(new File(result.getString("anexo")));
-                notification.setImage(result.getString("image"));
-                notification.setMusic(new File(result.getString("musica")));
-                
-                notification.setWarned(result.getBoolean("avisado"));
-
-                User user = new User();
-
-                java.util.Date userDate = null;
-
-                if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                }
-
-                user.setId(result.getLong("id"));
-                user.setNome(result.getString("nome"));
-                user.setSexo(result.getString("sexo"));
-                user.setNascimento(userDate);
-                user.setTelefone(result.getString("telefone"));
-                user.setEmail(result.getString("email"));
-                user.setCPF(result.getString("cpf"));
-                user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("imagePerfil"));
-
-                notification.setUser(user);
-                
-                Type type = new Type();
-                
-                type.setId(result.getInt("id_tipo"));
-                type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("detalhes_de_cores"));
-                type.setPrimaryColor(result.getString("cor"));
-                type.setImportance(result.getInt("importancia"));
-                type.setUser(user);
-
-                notification.setType(type);
+                Notification notification = notificationFactory.generateNotification(result);
                 
                 notifications.add(notification);    // add Notification created in List Notifications  //  adiciona o notificacao criado no List notificacaos
             }
@@ -333,51 +295,7 @@ public class NotificationDAO {
 
             while (result.next()) {
 
-                Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
-
-              if (result.getTime("horario") != null && result.getDate("marcado") != null) {
-             
-                    notification.setScheduledDay(new Time(result.getDate("marcado"), result.getTime("horario")));
-                }
-
-                notification.setId(result.getInt("idNotific"));
-                notification.setTitle(result.getString("titulo"));
-                notification.setBody(result.getString("descricao"));
-                notification.setAttachment(new File(result.getString("anexo")));
-                notification.setImage(result.getString("image"));
-                notification.setMusic(new File(result.getString("musica")));
-                notification.setWarned(result.getBoolean("avisado"));
-
-                User user = new User();
-
-                java.util.Date userDate = null;
-
-                if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                }
-
-                user.setId(result.getLong("id"));
-                user.setNome(result.getString("nome"));
-                user.setSexo(result.getString("sexo"));
-                user.setNascimento(userDate);
-                user.setTelefone(result.getString("telefone"));
-                user.setEmail(result.getString("email"));
-                user.setCPF(result.getString("cpf"));
-                user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("imagePerfil"));
-
-                notification.setUser(user);
-                
-                Type type = new Type();
-                
-                type.setId(result.getInt("id_tipo"));
-                type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("detalhes_de_cores"));
-                type.setPrimaryColor(result.getString("cor"));
-                type.setImportance(result.getInt("importancia"));
-                type.setUser(user);
-
-                notification.setType(type);
+                Notification notification = notificationFactory.generateNotification(result);     // create Notification with database data  // criando notificacao com dados do banco de dados
                 
                 notifications.add(notification);    // add Notification created in List Notifications  //  adiciona o notificacao criado no List notificacaos
             }
@@ -427,51 +345,7 @@ public class NotificationDAO {
 
             while (result.next()) {
 
-                Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
-
-               if (result.getTime("horario") != null && result.getDate("marcado") != null) {
-             
-                    notification.setScheduledDay(new Time(result.getDate("marcado"), result.getTime("horario")));
-                }
-
-                notification.setId(result.getInt("idNotific"));
-                notification.setTitle(result.getString("titulo"));
-                notification.setBody(result.getString("descricao"));
-                notification.setAttachment(new File(result.getString("anexo")));
-                notification.setImage(result.getString("image"));
-                notification.setMusic(new File(result.getString("musica")));
-                notification.setWarned(result.getBoolean("avisado"));
-
-                User user = new User();
-
-                java.util.Date userDate = null;
-
-                if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                }
-
-                user.setId(result.getLong("id"));
-                user.setNome(result.getString("nome"));
-                user.setSexo(result.getString("sexo"));
-                user.setNascimento(userDate);
-                user.setTelefone(result.getString("telefone"));
-                user.setEmail(result.getString("email"));
-                user.setCPF(result.getString("cpf"));
-                user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("imagePerfil"));
-
-                notification.setUser(user);
-                
-                Type type = new Type();
-                
-                type.setId(result.getInt("id_tipo"));
-                type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("detalhes_de_cores"));
-                type.setPrimaryColor(result.getString("cor"));
-                type.setImportance(result.getInt("importancia"));
-                type.setUser(user);
-
-                notification.setType(type);
+                Notification notification = notificationFactory.generateNotification(result);     // create Notification with database data  // criando notificacao com dados do banco de dados
                 
                 notifications.add(notification);    // add Notification created in List Notifications  //  adiciona o notificacao criado no List notificacaos
             }
@@ -518,52 +392,8 @@ public class NotificationDAO {
             result = statement.executeQuery();          //  execute sql statement returning result  //  executa instruçao sql retornando resultado
 
             if (result.next()) {
-
-                if (result.getTime("horario") != null && result.getDate("marcado") != null) {
-             
-                    notification.setScheduledDay(new Time(result.getDate("marcado"), result.getTime("horario")));
-                }
-
-                notification.setId(result.getInt("idNotific"));
-                notification.setTitle(result.getString("titulo"));
-                notification.setBody(result.getString("descricao"));
-                notification.setAttachment(new File(result.getString("anexo")));
-                notification.setImage(result.getString("image"));
-                notification.setMusic(new File(result.getString("musica")));
-                notification.setWarned(result.getBoolean("avisado"));
-
-                User user = new User();
-
-                java.util.Date userDate = null;
-
-                if (result.getDate("dataNascimento") != null) {
-                    userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                }
-
-                user.setId(result.getLong("id"));
-                user.setNome(result.getString("nome"));
-                user.setSexo(result.getString("sexo"));
-                user.setNascimento(userDate);
-                user.setTelefone(result.getString("telefone"));
-                user.setEmail(result.getString("email"));
-                user.setCPF(result.getString("cpf"));
-                user.setSenha(result.getString("senha"));
-                user.setImage(result.getString("imagePerfil"));
-
-                notification.setUser(user);
                 
-                Type type = new Type();
-                
-                type.setId(result.getInt("id_tipo"));
-                type.setName(result.getString("tipo"));
-                type.setSecondaryColor(result.getString("detalhes_de_cores"));
-                type.setPrimaryColor(result.getString("cor"));
-                type.setImportance(result.getInt("importancia"));
-                type.setUser(user);
-
-                notification.setType(type);
-                
-                findNotification = notification;
+                findNotification = notificationFactory.generateNotification(result);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
