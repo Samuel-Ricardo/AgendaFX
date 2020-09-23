@@ -116,7 +116,7 @@ public class Notify extends Thread {
         boolean check;
         Date currentTime = new Date();
 
-        String scheduled = formater.format(notification.getScheduledDay());
+        String scheduled = formater.format(notification.getScheduledDay().toDate());
         String today = formater.format(currentTime);
 
         System.out.println(today);

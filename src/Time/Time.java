@@ -147,7 +147,7 @@ public class Time {
     
     public Date toDate() {
        
-        return localDateConverter.toDate();
+        return localDateConverter.toDate(localDate);
     }
       
       //Getters and Setters
