@@ -42,8 +42,8 @@ public class NotificationFactory {
                 notification.setId(result.getInt("idNotific"));
                 notification.setTitle(result.getString("titulo"));
                 notification.setBody(result.getString("descricao"));
-                notification.setAttachment(new File(result.getString("anexo")));
-                notification.setImage(result.getString("image"));
+                //notification.setAttachment(new File(result.getString("anexo")));
+                //notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
                 notification.setWarned(result.getBoolean("avisado"));
                 notification.setUser(userFactory.generateUser(result));
