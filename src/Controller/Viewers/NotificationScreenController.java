@@ -112,7 +112,7 @@ public class NotificationScreenController implements Initializable {
         txtaDescription.setText(notification.getBody());
 
         if (notification.getScheduledDay() != null) {   // set the scheduled time if it is not null // coloca o horario marcado caso  nao esteja nulo
-            lblScheduled.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
+            lblScheduled.setText(notification.getScheduledDay().getOnlyDate()+ " as " + notification.getScheduledDay().getOnlyTime());
         } else {
             lblScheduled.setText("Sem Hora Marcada");
         }

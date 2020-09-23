@@ -9,6 +9,7 @@ import JDBC.ConnectionFactory;
 import Model.Notification;
 import Model.Type;
 import Model.User;
+import Time.Time;
 
 import com.mysql.jdbc.Connection;
 import java.io.File;
@@ -16,9 +17,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -34,12 +35,6 @@ public class NotificationDAO {
 
 
     private Connection connection;
-    private Date sqlDate;
-    private Time sqlTime;
-    private java.util.Date notificationDate;
-    private SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyyy");
-    private SimpleDateFormat horary = new SimpleDateFormat("HH:mm");
-    private SimpleDateFormat complet = new SimpleDateFormat("dd/MM/yy HH:mm");
     private static Notification notification;
 
     public NotificationDAO() {
@@ -73,18 +68,6 @@ public class NotificationDAO {
 
             statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
 
-            sqlDate = notification.getSQLScheduledDay();  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
-
-            java.util.Date scheduled = null;
-
-            try {
-                scheduled = horary.parse(notification.getScheduledHour());
-            } catch (ParseException ex) {
-                Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            sqlTime = new Time(scheduled.getTime());
-
             statement.setString(1, notification.getTitle());     // Filling in the camp "?"  //  Preenchendo os campos "?"
             statement.setString(2, notification.getBody());
             if (notification.getImage() != null) {
@@ -92,7 +75,7 @@ public class NotificationDAO {
             } else {
                 statement.setString(3, "");
             }
-            statement.setTime(4, sqlTime);
+            statement.setTime(4, notification.getScheduledDay().toSQLTime());
             statement.setBoolean(5, notification.isWarned());
             statement.setInt(6, notification.getType().getId().intValue());
             if (notification.getAttachment() != null) {
@@ -106,7 +89,7 @@ public class NotificationDAO {
                 statement.setString(8, "");
             }
             statement.setInt(9, notification.getUser().getId().intValue());
-            statement.setDate(10, sqlDate);
+            statement.setDate(10, notification.getScheduledDay().toSQLDate());
 
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
@@ -147,23 +130,11 @@ public class NotificationDAO {
 
             statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
 
-            sqlDate = notification.getSQLScheduledDay();  // converting Date from java to Date from SQL  //  convertendo Date do java para o Date do SQL
-
-            String timeString = horary.format(notification.getSQLScheduledDay());
-            java.util.Date scheduled = null;
-
-            try {
-                scheduled = horary.parse(timeString);
-            } catch (ParseException ex) {
-                Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            sqlTime = new Time(scheduled.getTime());
-
+            
             statement.setString(1, notification.getTitle());     // Filling in the camp "?"  //  Preenchendo os campos "?"
             statement.setString(2, notification.getBody());
             statement.setString(3, notification.getImage());
-            statement.setTime(4, sqlTime);
+            statement.setTime(4, notification.getScheduledDay().toSQLTime());
             statement.setBoolean(5, notification.isWarned());
             statement.setInt(6, notification.getType().getId().intValue());
             
@@ -175,7 +146,7 @@ public class NotificationDAO {
                 
             statement.setString(8, notification.getMusic().getAbsolutePath());
             statement.setInt(9, notification.getUser().getId().intValue());
-            statement.setDate(10, sqlDate);
+            statement.setDate(10, notification.getScheduledDay().toSQLDate());
             statement.setInt(11, notification.getId());
 
             System.out.println(notification.getId()+"   id dao");
@@ -270,21 +241,9 @@ public class NotificationDAO {
 
                 Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
 
-                if (result.getDate("horario") != null && result.getDate("marcado") != null) {
-
-                    Date time = new Date (result.getTime("horario").getTime());
-                    Date date = new Date (result.getDate("marcado").getTime());
-                    String timeS = horary.format(time);
-                    String dateS = day.format(date);
-                    String scheduled = dateS + " " + timeS;
-                    
-
-                    try {
-                        notificationDate = complet.parse(scheduled);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
+                if (result.getTime("horario") != null && result.getDate("marcado") != null) {
+             
+                    notification.setScheduledDay(new Time(result.getDate("marcado"), result.getTime("horario")));
                 }
 
                 notification.setId(result.getInt("idNotific"));
@@ -293,7 +252,7 @@ public class NotificationDAO {
                 notification.setAttachment(new File(result.getString("anexo")));
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
-                notification.setScheduledDay(notificationDate);
+                
                 notification.setWarned(result.getBoolean("avisado"));
 
                 User user = new User();
@@ -376,21 +335,9 @@ public class NotificationDAO {
 
                 Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
 
-               if (result.getDate("horario") != null && result.getDate("marcado") != null) {
-
-                    Date time = new Date (result.getTime("horario").getTime());
-                    Date date = new Date (result.getDate("marcado").getTime());
-                    String timeS = horary.format(time);
-                    String dateS = day.format(date);
-                    String scheduled = dateS + " " + timeS;
-                    
-
-                    try {
-                        notificationDate = complet.parse(scheduled);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
+              if (result.getTime("horario") != null && result.getDate("marcado") != null) {
+             
+                    notification.setScheduledDay(new Time(result.getDate("marcado"), result.getTime("horario")));
                 }
 
                 notification.setId(result.getInt("idNotific"));
@@ -399,7 +346,6 @@ public class NotificationDAO {
                 notification.setAttachment(new File(result.getString("anexo")));
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
-                notification.setScheduledDay(notificationDate);
                 notification.setWarned(result.getBoolean("avisado"));
 
                 User user = new User();
@@ -483,21 +429,9 @@ public class NotificationDAO {
 
                 Notification notification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
 
-               if (result.getDate("horario") != null && result.getDate("marcado") != null) {
-
-                    Date time = new Date (result.getTime("horario").getTime());
-                    Date date = new Date (result.getDate("marcado").getTime());
-                    String timeS = horary.format(time);
-                    String dateS = day.format(date);
-                    String scheduled = dateS + " " + timeS;
-                    
-
-                    try {
-                        notificationDate = complet.parse(scheduled);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
+               if (result.getTime("horario") != null && result.getDate("marcado") != null) {
+             
+                    notification.setScheduledDay(new Time(result.getDate("marcado"), result.getTime("horario")));
                 }
 
                 notification.setId(result.getInt("idNotific"));
@@ -506,7 +440,6 @@ public class NotificationDAO {
                 notification.setAttachment(new File(result.getString("anexo")));
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
-                notification.setScheduledDay(notificationDate);
                 notification.setWarned(result.getBoolean("avisado"));
 
                 User user = new User();
@@ -586,21 +519,9 @@ public class NotificationDAO {
 
             if (result.next()) {
 
-                if (result.getDate("horario") != null && result.getDate("marcado") != null) {
-
-                    Date time = new Date (result.getTime("horario").getTime());
-                    Date date = new Date (result.getDate("marcado").getTime());
-                    String timeS = horary.format(time);
-                    String dateS = day.format(date);
-                    String scheduled = dateS + " " + timeS;
-                    
-
-                    try {
-                        notificationDate = complet.parse(scheduled);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(NotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
+                if (result.getTime("horario") != null && result.getDate("marcado") != null) {
+             
+                    notification.setScheduledDay(new Time(result.getDate("marcado"), result.getTime("horario")));
                 }
 
                 notification.setId(result.getInt("idNotific"));
@@ -609,7 +530,6 @@ public class NotificationDAO {
                 notification.setAttachment(new File(result.getString("anexo")));
                 notification.setImage(result.getString("image"));
                 notification.setMusic(new File(result.getString("musica")));
-                notification.setScheduledDay(notificationDate);
                 notification.setWarned(result.getBoolean("avisado"));
 
                 User user = new User();
@@ -697,55 +617,7 @@ public class NotificationDAO {
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
-
-    public Date getSqlDate() {
-        return sqlDate;
-    }
-
-    public void setSqlDate(Date sqlDate) {
-        this.sqlDate = sqlDate;
-    }
-
-    public Time getSqlTime() {
-        return sqlTime;
-    }
-
-    public void setSqlTime(Time sqlTime) {
-        this.sqlTime = sqlTime;
-    }
-
-    public java.util.Date getNotificationDate() {
-        return notificationDate;
-    }
-
-    public void setNotificationDate(java.util.Date notificationDate) {
-        this.notificationDate = notificationDate;
-    }
-
-    public SimpleDateFormat getDay() {
-        return day;
-    }
-
-    public void setDay(SimpleDateFormat day) {
-        this.day = day;
-    }
-
-    public SimpleDateFormat getHorary() {
-        return horary;
-    }
-
-    public void setHorary(SimpleDateFormat horary) {
-        this.horary = horary;
-    }
-
-    public SimpleDateFormat getComplet() {
-        return complet;
-    }
-
-    public void setComplet(SimpleDateFormat complet) {
-        this.complet = complet;
-    }
-
+    
     public static Notification getNotification() {
         return notification;
     }

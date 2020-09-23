@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class AttachmentFactory {
 
     Downloader downloader = new Downloader();
-    P
+    PostItFactory postItFactory = new PostItFactory();
     
     public Attachment genereteAttachment(ResultSet result) {
      
@@ -30,7 +30,7 @@ public class AttachmentFactory {
             attachment.setId(result.getInt("id_file"));
             attachment.setFile(result.getString("file_way"));
             attachment.setNotification();
-            attachment.setPostIt(result.get);
+            attachment.setPostIt(postItFactory.generatePostIt(result));
             attachment.setBytes(downloader.downloadBytes(result.getBinaryStream("file_bytes")));
 
             downloader.createFile(attachment.getArrayBytes(), attachment.getFile());
@@ -38,7 +38,7 @@ public class AttachmentFactory {
         } catch (SQLException ex) {
             Logger.getLogger(AttachmentFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+    return attachment;
     }
     
 }

@@ -76,7 +76,7 @@ public class Filler {
             });
 
             String today = day.format(new Date());
-            String notificationDay = day.format(row.getNotification().getSQLScheduledDay());
+            String notificationDay = day.format(row.getNotification().getScheduledDay().toSQLDate());
 
             if (today.equals(notificationDay)) {
                 alPanes.add(row);
@@ -112,7 +112,7 @@ public class Filler {
             });
 
             String today = day.format(new Date());
-            String notificationDay = day.format(row.getNotification().getSQLScheduledDay());
+            String notificationDay = day.format(row.getNotification().getScheduledDay().getOnlyDate());
 
             if (today.equals(notificationDay) && row.getNotification().isWarned() == true) {
                 alPanes.add(row);
@@ -148,7 +148,7 @@ public class Filler {
             });
 
             String today = day.format(new Date());
-            String notificationDay = day.format(row.getNotification().getSQLScheduledDay());
+            String notificationDay = day.format(row.getNotification().getScheduledDay().getOnlyDate());
 
             if (today.equals(notificationDay) && row.getNotification().isWarned() == false) {
                 alPanes.add(row);

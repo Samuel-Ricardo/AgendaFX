@@ -9,7 +9,7 @@ import DAO.TypeDAO;
 import DAO.UserDAO;
 import Main.Creators.MainTypeCreator;
 import Model.Type;
-import Services.Formater;
+import Services.HexadecimalFormater;
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXSlider;
 import java.net.URL;
@@ -84,8 +84,8 @@ public class TypeCreatorController implements Initializable {
 
         Type type = new Type();
         
-        String primaryColor = Formater.getHexString(cpPrimaryColor.getValue());
-        String secondaryColor = Formater.getHexString(cpSecondaryColor.getValue());
+        String primaryColor = HexadecimalFormater.getHexString(cpPrimaryColor.getValue());
+        String secondaryColor = HexadecimalFormater.getHexString(cpSecondaryColor.getValue());
         
         type.setName(txtName.getText());
         type.setPrimaryColor(primaryColor);
