@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class TypeFactory {
     
     
-        public static Type genereteType(ResultSet result) throws SQLException {
+        public Type genereteType(ResultSet result) throws SQLException {
         
         Type type = new Type();
         

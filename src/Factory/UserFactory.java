@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class UserFactory {
     
     
-        public static User generateUser(ResultSet result) throws SQLException {
+        public User generateUser(ResultSet result) throws SQLException {
         
         User user = new User();     // create user with database data  // criando usuario com dados do banco de dados
         java.util.Date userDate = null;
