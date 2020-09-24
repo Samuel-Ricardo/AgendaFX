@@ -32,7 +32,7 @@ public class TypeDAO {
     private final TypeFactory typeFactory;
 
     public TypeDAO() {
-        this.typeFactory = null;
+        this.typeFactory = new TypeFactory();
     }
 
     public TypeDAO(TypeFactory typeFactory) {

@@ -253,7 +253,6 @@ public class Filler {
         
          list.getItems().clear();
          list.setItems(oblRow);
-
     }
     
     public static HomeController getController() {
