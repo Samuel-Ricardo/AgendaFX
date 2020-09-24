@@ -9,6 +9,7 @@ import DAO.UserDAO;
 import Main.MainLogin;
 import Main.Creators.MainRegister;
 import Model.User;
+import Time.Time;
 import java.io.File;
 import java.net.URL;
 import java.text.ParseException;
@@ -74,27 +75,6 @@ public class RegisterController implements Initializable {
     @FXML
     void cadastrar() {      //register User  // Cadastra o usuario
         
-        LocalDate d =  dpNascimento.getValue();
-        
-       String day = ""+d.getDayOfMonth();
-       String month = ""+d.getMonthValue();
-       System.out.println(month);
-       String year = ""+d.getYear();
-       String date = day+"/"+month+"/"+year;        // convert LocalDate to String // converte LocalDate para Sring
-       
-         Date dateOfBirth = null;
-       
-        try {
-            
-           dateOfBirth = defaultFormat.parse(date); // convert String to Date // converte String para Date
-            
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Nao foi possivel gravar a data: "+ex);
-        }
-        
-        
-        
-        
         User user = new User();
         
         
@@ -108,7 +88,7 @@ public class RegisterController implements Initializable {
         user.setSenha(txtSenha.getText());
         user.setEmail(txtEmail.getText());
         user.setCPF(txtCPF.getText());
-        user.setNascimento(dateOfBirth);
+        user.setNascimento(new Time(dpNascimento.getValue()));
         user.setSexo(cbSexo.getSelectionModel().getSelectedItem());
         user.setTelefone(txtTelefone.getText());
         

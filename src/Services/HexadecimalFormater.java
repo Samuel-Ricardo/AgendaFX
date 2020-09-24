@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
  *
  * @author Samuel
  */
-public class Formater {
+public class HexadecimalFormater {
 
     private static String format(double val){
         

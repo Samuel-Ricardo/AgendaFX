@@ -116,7 +116,7 @@ public class Notify extends Thread {
         boolean check;
         Date currentTime = new Date();
 
-        String scheduled = formater.format(notification.getScheduledDay());
+        String scheduled = formater.format(notification.getScheduledDay().toDate());
         String today = formater.format(currentTime);
 
         System.out.println(today);
@@ -148,7 +148,7 @@ public class Notify extends Thread {
                                     notification.setWarned(true);
                                     
                                     notificationWarned.add(notification);
-                                    System.out.println(notificationWarned.get(0).getScheduledHour()+ " array Acorda");
+                                    System.out.println(notificationWarned.get(0).getScheduledDay().getOnlyTime()+ " array Acorda");
                                     
                                     dao.update(notification);
                                 }

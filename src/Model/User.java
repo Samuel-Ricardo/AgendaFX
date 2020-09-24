@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Time.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,13 +34,13 @@ public class User {
      private Long id;
      private String nome;
      private String sexo;
-     private Date nascimento;
+     private Time nascimento;
      private String telefone;
      private String email;
      private String CPF;
      private String senha;
 
-    public User(Long id, String nome, String sexo, Date nascimento, String telefone, String email, String CPF, String senha, String image) {
+    public User(Long id, String nome, String sexo, Time nascimento, String telefone, String email, String CPF, String senha, String image) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
@@ -80,11 +81,11 @@ public class User {
         this.sexo = sexo;
     }
 
-    public Date getNascimento() {
+    public Time getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(Date nascimento) {
+    public void setNascimento(Time nascimento) {
         this.nascimento = nascimento;
     }
 
@@ -127,12 +128,4 @@ public class User {
     public void setImage(String image) {
         this.image = image;
     }
-
-    public String getFormatedNascimento() {
-        SimpleDateFormat formated = new SimpleDateFormat("dd/MM/yyyy");
-        
-        return formated.format(nascimento);
-    }
-    
-     
 }

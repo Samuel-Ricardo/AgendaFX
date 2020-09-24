@@ -476,7 +476,7 @@ public class HomeController implements Initializable {
             lblNome.setText(logUser.getNome());
             lblEmail.setText(logUser.getEmail());
             if (logUser.getNascimento() != null) {
-                lblNascimento.setText(logUser.getFormatedNascimento());
+                lblNascimento.setText(logUser.getNascimento().getOnlyDate());
             }
             lblCPF.setText(logUser.getCPF());
             lblSexo.setText(logUser.getSexo());

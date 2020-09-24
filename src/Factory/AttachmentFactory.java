@@ -18,7 +18,21 @@ import java.util.logging.Logger;
  */
 public class AttachmentFactory {
 
-    Downloader downloader = new Downloader();
+    private final Downloader downloader;
+    private final PostItFactory postItFactory;
+    private final NotificationFactory notificationFactory;
+
+    public AttachmentFactory() {
+        this.downloader = null;
+        this.postItFactory = null;
+        this.notificationFactory = null;
+    }
+
+    public AttachmentFactory(Downloader downloader, PostItFactory postItFactory, NotificationFactory notificationFactory) {
+        this.downloader = downloader;
+        this.postItFactory = postItFactory;
+        this.notificationFactory = notificationFactory;
+    }
     
     public Attachment genereteAttachment(ResultSet result) {
      
@@ -28,8 +42,8 @@ public class AttachmentFactory {
             
             attachment.setId(result.getInt("id_file"));
             attachment.setFile(result.getString("file_way"));
-            attachment.setNotification();
-            attachment.setPostIt(result.get);
+            attachment.setNotification(notificationFactory.generateNotification(result));
+            attachment.setPostIt(postItFactory.generatePostIt(result));
             attachment.setBytes(downloader.downloadBytes(result.getBinaryStream("file_bytes")));
 
             downloader.createFile(attachment.getArrayBytes(), attachment.getFile());
@@ -37,7 +51,7 @@ public class AttachmentFactory {
         } catch (SQLException ex) {
             Logger.getLogger(AttachmentFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+    return attachment;
     }
     
 }

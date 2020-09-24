@@ -8,6 +8,7 @@ package Controller.Updaters;
 import DAO.UserDAO;
 import Main.Updaters.MainUpdate;
 import Model.User;
+import Time.Time;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
@@ -66,15 +67,13 @@ public class UpdateController implements Initializable {
     @FXML
     public void atualizar() {       // Update user data // atualiza os dados do usuario
 
-        User updatedUser = new User();  
-
-        Date nasc = Date.from(dpNascimento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-
+        User updatedUser = new User();
+        
         updatedUser.setId(user.getId());
         updatedUser.setNome(txtNome.getText());
         updatedUser.setCPF(txtCPF.getText());
         updatedUser.setEmail(txtEmail.getText());
-        updatedUser.setNascimento(nasc);
+        updatedUser.setNascimento(new Time(dpNascimento.getValue()));
         updatedUser.setSenha(txtSenha.getText());
         updatedUser.setTelefone(txtTelefone.getText());
         updatedUser.setSexo(cbSexo.getSelectionModel().getSelectedItem());
@@ -144,13 +143,10 @@ public class UpdateController implements Initializable {
             imgPerfil.setImage(new Image(getClass().getResource("/View/Images/user_white_2.png") + ""));
         }
 
-        LocalDate nasc = null;
         if (user.getNascimento() != null) {
-            nasc = user.getNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           
+          dpNascimento.setValue(user.getNascimento().getLocalDate());
         }
-
-        dpNascimento.setValue(nasc);
-
     }
 
 }

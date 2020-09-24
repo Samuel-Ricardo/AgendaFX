@@ -112,7 +112,7 @@ public class NotificationScreenController implements Initializable {
         txtaDescription.setText(notification.getBody());
 
         if (notification.getScheduledDay() != null) {   // set the scheduled time if it is not null // coloca o horario marcado caso  nao esteja nulo
-            lblScheduled.setText(notification.getScheduledDate() + " as " + notification.getScheduledHour());
+            lblScheduled.setText(notification.getScheduledDay().getOnlyDate()+ " as " + notification.getScheduledDay().getOnlyTime());
         } else {
             lblScheduled.setText("Sem Hora Marcada");
         }
@@ -124,8 +124,8 @@ public class NotificationScreenController implements Initializable {
             lblWarned.setText("Nao foi avisado");
         }
 
-        if (notification.getAttachment() != null) {  // show the attachment if you have // mostra o anexo caso tenha
-            lblAttenchement.setText(notification.getAttachment().getName());
+        if (notification.getAttachment().isEmpty() == false) {  // show the attachment if you have // mostra o anexo caso tenha
+            lblAttenchement.setText(notification.getAttachment().get(0).getName());
         } else {
             lblAttenchement.setText("Nenhum arquivo selecionado");
         }
