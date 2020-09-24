@@ -124,8 +124,8 @@ public class NotificationScreenController implements Initializable {
             lblWarned.setText("Nao foi avisado");
         }
 
-        if (notification.getAttachment() != null) {  // show the attachment if you have // mostra o anexo caso tenha
-            lblAttenchement.setText(notification.getAttachment().getName());
+        if (notification.getAttachment().isEmpty() == false) {  // show the attachment if you have // mostra o anexo caso tenha
+            lblAttenchement.setText(notification.getAttachment().get(0).getName());
         } else {
             lblAttenchement.setText("Nenhum arquivo selecionado");
         }

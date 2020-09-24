@@ -373,12 +373,15 @@ public class NotificationUpdaterController implements Initializable {
             fileVissible = true;
             btAttachment.setVisible(true);
             lblAttachment.setVisible(true);
-            lblAttachment.setText(notification.getAttachment().getName());
-            attachment = notification.getAttachment();
-
+            
+            if(notification.getAttachment().isEmpty() == false){
+                
+                lblAttachment.setText(notification.getAttachment().get(0).getName());
+                attachment = notification.getAttachment().get(0);
+            }
         }
 
-        if(notification.getImage()!= null || notification.getImage().equals("") == false){
+        if(notification.getImage()!= null ){ //|| notification.getImage().equals("") == false){
 
             tbImage.selectedProperty().set(true);
             imgVissible = true;

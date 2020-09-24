@@ -51,7 +51,7 @@ public class NotificationDAO {
     public boolean insert(Notification notification) {
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo_notificacao , anexo , musica, userNotification , marcado ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo_notificacao  , musica, userNotification , marcado ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         /*
             
@@ -64,7 +64,6 @@ public class NotificationDAO {
                 horario time 
                 avisado tinyint(1) 
                 tipo_notificacao int(11) 
-                anexo varchar(5000) 
                 musica varchar(5000)
                 varchar(20)
                 userNotification int(11)
@@ -85,18 +84,13 @@ public class NotificationDAO {
             statement.setTime(4, notification.getScheduledDay().toSQLTime());
             statement.setBoolean(5, notification.isWarned());
             statement.setInt(6, notification.getType().getId().intValue());
-            if (notification.getAttachment() != null) {
-                statement.setString(7, notification.getAttachment().getAbsolutePath());
-            } else {
+            if (notification.getMusic() != null) {
+                statement.setString(7, notification.getMusic().getAbsolutePath());
+            }else{
                 statement.setString(7, "");
             }
-            if (notification.getMusic() != null) {
-                statement.setString(8, notification.getMusic().getAbsolutePath());
-            }else{
-                statement.setString(8, "");
-            }
-            statement.setInt(9, notification.getUser().getId().intValue());
-            statement.setDate(10, notification.getScheduledDay().toSQLDate());
+            statement.setInt(8, notification.getUser().getId().intValue());
+            statement.setDate(9, notification.getScheduledDay().toSQLDate());
 
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
@@ -113,7 +107,7 @@ public class NotificationDAO {
 
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo_notificacao = ?, anexo = ?, musica = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
+        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo_notificacao = ?, musica = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
 
         /*
             
@@ -126,7 +120,6 @@ public class NotificationDAO {
                 horario time 
                 avisado tinyint(1) 
                 tipo_notificacao int(11) 
-                anexo varchar(5000) 
                 musica varchar(5000)
                 varchar(20)
                 userNotification int(11)
@@ -143,18 +136,11 @@ public class NotificationDAO {
             statement.setString(3, notification.getImage());
             statement.setTime(4, notification.getScheduledDay().toSQLTime());
             statement.setBoolean(5, notification.isWarned());
-            statement.setInt(6, notification.getType().getId().intValue());
-            
-            if(notification.getAttachment() != null){
-                statement.setString(7, notification.getAttachment().getAbsolutePath());
-            }else{
-                statement.setString(7, "");
-            }
-                
-            statement.setString(8, notification.getMusic().getAbsolutePath());
-            statement.setInt(9, notification.getUser().getId().intValue());
-            statement.setDate(10, notification.getScheduledDay().toSQLDate());
-            statement.setInt(11, notification.getId());
+            statement.setInt(6, notification.getType().getId().intValue());                
+            statement.setString(7, notification.getMusic().getAbsolutePath());
+            statement.setInt(8, notification.getUser().getId().intValue());
+            statement.setDate(9, notification.getScheduledDay().toSQLDate());
+            statement.setInt(10, notification.getId());
 
             System.out.println(notification.getId()+"   id dao");
             
@@ -187,7 +173,6 @@ public class NotificationDAO {
                 horario time 
                 avisado tinyint(1) 
                 tipo_notificacao int(11) 
-                anexo varchar(5000) 
                 musica varchar(5000)
                 varchar(20)
                 userNotification int(11)
@@ -231,7 +216,6 @@ public class NotificationDAO {
                 horario time 
                 avisado tinyint(1) 
                 tipo_notificacao int(11) 
-                anexo varchar(5000) 
                 musica varchar(5000).
                 varchar(20)
                 userNotification int(11)
@@ -278,7 +262,6 @@ public class NotificationDAO {
                 horario time 
                 avisado tinyint(1) 
                 tipo_notificacao int(11) 
-                anexo varchar(5000) 
                 musica varchar(5000).
                 varchar(20)
                 userNotification int(11)
@@ -327,7 +310,6 @@ public class NotificationDAO {
                 horario time 
                 avisado tinyint(1) 
                 tipo_notificacao int(11) 
-                anexo varchar(5000) 
                 musica varchar(5000)
                 varchar(20)
                 userNotification int(11)
@@ -377,7 +359,6 @@ public class NotificationDAO {
                 horario date 
                 avisado tinyint(1) 
                 tipo_notificacao int(11) 
-                anexo varchar(5000) 
                 musica varchar(5000)
                 varchar(20)
                 userNotification int(11)
