@@ -29,7 +29,7 @@ public class UserDAO {
     private final UserFactory userFactory;
 
     public UserDAO() {
-        this.userFactory = null;
+        this.userFactory = new UserFactory();
     }
 
     public UserDAO(UserFactory userFactory) {
