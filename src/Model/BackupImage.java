@@ -29,6 +29,46 @@ public class BackupImage {
 
     public BackupImage() {
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public ImageFile getImage() {
+        return image;
+    }
+
+    public void setImage(ImageFile image) {
+        this.image = image;
+    }
+
+    public PostIt getPostIt() {
+        return postIt;
+    }
+
+    public void setPostIt(PostIt postIt) {
+        this.postIt = postIt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
+    }
     
     
     
