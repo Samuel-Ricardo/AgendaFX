@@ -1,14 +1,13 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template attachment, choose Tools | Templates
+ * To change this template backupImage, choose Tools | Templates
  * and open the template in the editor.
  */
 package DAO;
 
-import Factory.AttachmentFactory;
 import Factory.ImageFactory;
 import JDBC.ConnectionFactory;
-import Model.Attachment;
+import Model.BackupImage;
 import Model.Notification;
 import Model.PostIt;
 import com.mysql.jdbc.Connection;
@@ -28,22 +27,22 @@ import javax.swing.JOptionPane;
  */
 public class ImageDAO {
 
-    private static Attachment attachment;
+    private static BackupImage backupImage;
     
     private Connection connection;
-    private AttachmentFactory attachmentFactory = new AttachmentFactory();
+    private BackupImage backupImageFactory = new BackupImage();
 
     public ImageDAO() {
         
-        AttachmentFactory AttachmentFactory = new AttachmentFactory();
+        BackupImage BackupImage = new BackupImage();
     }
     
-    public ImageDAO(AttachmentFactory attachmentFactory) {
+    public ImageDAO(BackupImage backupImageFactory) {
         
-        this.attachmentFactory = attachmentFactory;
+        this.backupImageFactory = backupImageFactory;
     }
 
-    public boolean insert(Attachment attachment) {
+    public boolean insert(BackupImage backupImage) {
         
         connect();
          
@@ -54,12 +53,12 @@ public class ImageDAO {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, attachment.getName());
-            statement.setString(2, attachment.getAbsolutPath());
-            statement.setBytes(3, attachment.getArrayBytes());
-            statement.setInt(4, attachment.getPostIt().getId());
-            statement.setInt(5, attachment.getNotification().getId());
-            statement.setString(6, attachment.getSize());
+            statement.setString(1, backupImage.getName());
+            statement.setString(2, backupImage.getAbsolutPath());
+            statement.setBytes(3, backupImage.getArrayBytes());
+            statement.setInt(4, backupImage.getPostIt().getId());
+            statement.setInt(5, backupImage.getNotification().getId());
+            statement.setString(6, backupImage.getSize());
 
             statement.execute();
 
@@ -71,7 +70,7 @@ public class ImageDAO {
             ConnectionFactory.closeConnection(connection, statement);
         }
     }
-//    public boolean insertAll(ArrayList<Attachment> attachments) {
+//    public boolean insertAll(ArrayList<BackupImage> backupImages) {
 //  
 //        connect();
 //
@@ -82,15 +81,15 @@ public class ImageDAO {
 //            
 //        try {
 //
-//             for (Attachment attachment : attachments) {
+//             for (BackupImage backupImage : backupImages) {
 //            
 //            statement = connection.prepareStatement(sql);
 //
-//            statement.setString(1, attachment.getName());
-//            statement.setString(2, attachment.getPrimaryColor());
-//            statement.setString(3, attachment.getSecondaryColor());
-//            statement.setInt(4, attachment.getImportance().intValue());
-//            statement.setInt(5, attachment.getUser().getId().intValue());
+//            statement.setString(1, backupImage.getName());
+//            statement.setString(2, backupImage.getPrimaryColor());
+//            statement.setString(3, backupImage.getSecondaryColor());
+//            statement.setInt(4, backupImage.getImportance().intValue());
+//            statement.setInt(5, backupImage.getUser().getId().intValue());
 //
 //            statement.execute();
 //            
@@ -106,7 +105,7 @@ public class ImageDAO {
 //    }
 //        
 
-    public boolean update(Attachment attachment) {
+    public boolean update(BackupImage backupImage) {
 
         connect();
          
@@ -117,13 +116,13 @@ public class ImageDAO {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, attachment.getName());
-            statement.setString(2, attachment.getAbsolutPath());
-            statement.setBytes(3, attachment.getArrayBytes());
-            statement.setInt(4, attachment.getPostIt().getId());
-            statement.setInt(5, attachment.getNotification().getId());
-            statement.setString(6, attachment.getSize());
-            statement.setInt(7, attachment.getId().intValue());
+            statement.setString(1, backupImage.getName());
+            statement.setString(2, backupImage.getAbsolutPath());
+            statement.setBytes(3, backupImage.getArrayBytes());
+            statement.setInt(4, backupImage.getPostIt().getId());
+            statement.setInt(5, backupImage.getNotification().getId());
+            statement.setString(6, backupImage.getSize());
+            statement.setInt(7, backupImage.getId().intValue());
 
             statement.execute();
 
@@ -136,17 +135,17 @@ public class ImageDAO {
         }
     }
 
-    public boolean delet(Attachment attachment) {
+    public boolean delet(BackupImage backupImage) {
 
         connect();
 
         PreparedStatement statement = null;
-        String sql = "DELETE FROM attachment WHERE id_file = ?;";
+        String sql = "DELETE FROM backupImage WHERE id_file = ?;";
 
         try {
             statement = connection.prepareStatement(sql);
 
-            statement.setInt(0, attachment.getId());
+            statement.setInt(0, backupImage.getId());
 
             statement.execute();
 
@@ -161,13 +160,13 @@ public class ImageDAO {
 
     }
 
-    public List<Attachment> selectAllFromPostIt(PostIt postIt) {
+    public List<BackupImage> selectAllFromPostIt(PostIt postIt) {
 
         connect();
      
         PreparedStatement statement = null;
         ResultSet result = null;
-        List<Attachment> attachments = new ArrayList<>();
+        List<BackupImage> backupImages = new ArrayList<>();
         String sql = "SELECT * FROM file_from_postIt WHERE file_postIt_id = ?;";
         Date userDate = null;
 
@@ -181,9 +180,9 @@ public class ImageDAO {
 
             while (result.next()) {
 
-                Attachment attachment = attachmentFactory.genereteAttachment(result);
+                BackupImage backupImage = BackupImage(result);
                 
-                attachments.add(attachment);
+                backupImages.add(backupImage);
                 
             }
 
@@ -193,15 +192,15 @@ public class ImageDAO {
             ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
         }
         
-        return attachments;
+        return backupImages;
     }
-    public List<Attachment> selectAllFromNotification(Notification notification) {
+    public List<BackupImage> selectAllFromNotification(Notification notification) {
 
         connect();
      
         PreparedStatement statement = null;
         ResultSet result = null;
-        List<Attachment> attachments = new ArrayList<>();
+        List<BackupImage> backupImages = new ArrayList<>();
         String sql = "SELECT * FROM file_from_notification WHERE id = ?;";
         Date userDate = null;
 
@@ -215,9 +214,9 @@ public class ImageDAO {
 
             while (result.next()) {
 
-                Attachment attachment = attachmentFactory.genereteAttachment(result);
+                BackupImage backupImage = BackupImage(result);
                 
-                attachments.add(attachment);
+                backupImages.add(backupImage);
                 
             }
 
@@ -227,10 +226,10 @@ public class ImageDAO {
             ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
         }
         
-        return attachments;
+        return backupImages;
     }
     
-    public boolean exist(Attachment attachment) {  
+    public boolean exist(BackupImage backupImage) {  
         
         connect();
         
@@ -243,7 +242,7 @@ public class ImageDAO {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setInt(1, attachment.getId().intValue());    
+            statement.setInt(1, backupImage.getId().intValue());    
             
             result = statement.executeQuery();           
             
@@ -260,13 +259,13 @@ public class ImageDAO {
         
     }
     
-    public ArrayList<Boolean> exist(ArrayList<Attachment> attachments) {  
+    public ArrayList<Boolean> exist(ArrayList<BackupImage> backupImages) {  
         
         ArrayList<Boolean> exist = new ArrayList<>();
         
-        for(Attachment attachment: attachments){
+        for(BackupImage backupImage: backupImages){
             
-         if(attachment.getId() == null){
+         if(backupImage.getId() == null){
             exist.clear();
             exist.add(false);
             return exist;
@@ -285,11 +284,11 @@ public class ImageDAO {
         
         try {
 
-         for (Attachment attachment : attachments) {
+         for (BackupImage backupImage : backupImages) {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setInt(1, attachment.getId().intValue());    
+            statement.setInt(1, backupImage.getId().intValue());    
             
             result = statement.executeQuery();           
             
@@ -308,7 +307,7 @@ public class ImageDAO {
         return exist;
     }
 
-    public boolean existByName(Attachment attachment) {
+    public boolean existByName(BackupImage backupImage) {
 
         connect();
         
@@ -321,7 +320,7 @@ public class ImageDAO {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, attachment.getName());     
+            statement.setString(1, backupImage.getName());     
             
             result = statement.executeQuery();           
             
@@ -338,13 +337,13 @@ public class ImageDAO {
         
     }
     
-    public ArrayList<Boolean> existByName(ArrayList<Attachment> attachments) {  
+    public ArrayList<Boolean> existByName(ArrayList<BackupImage> backupImages) {  
         
         ArrayList<Boolean> exist = new ArrayList<>();
         
-        for(Attachment attachment: attachments){
+        for(BackupImage backupImage: backupImages){
             
-         if(attachment.getId() == null){
+         if(backupImage.getId() == null){
             exist.clear();
             exist.add(false);
             return exist;
@@ -363,11 +362,11 @@ public class ImageDAO {
         
         try {
 
-         for (Attachment attachment : attachments) {
+         for (BackupImage backupImage : backupImages) {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, attachment.getName());    
+            statement.setString(1, backupImage.getName());    
             
             result = statement.executeQuery();           
             
@@ -386,7 +385,7 @@ public class ImageDAO {
         return exist;
     }
     
-    public boolean existByPath(Attachment attachment) {
+    public boolean existByPath(BackupImage backupImage) {
 
         connect();
         
@@ -399,7 +398,7 @@ public class ImageDAO {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, attachment.getName());     
+            statement.setString(1, backupImage.getName());     
             
             result = statement.executeQuery();           
             
@@ -416,13 +415,13 @@ public class ImageDAO {
         
     }
     
-    public ArrayList<Boolean> existByPath(ArrayList<Attachment> attachments) {  
+    public ArrayList<Boolean> existByPath(ArrayList<BackupImage> backupImages) {  
         
         ArrayList<Boolean> exist = new ArrayList<>();
         
-        for(Attachment attachment: attachments){
+        for(BackupImage backupImage: backupImages){
             
-         if(attachment.getId() == null){
+         if(backupImage.getId() == null){
             exist.clear();
             exist.add(false);
             return exist;
@@ -441,11 +440,11 @@ public class ImageDAO {
         
         try {
 
-         for (Attachment attachment : attachments) {
+         for (BackupImage backupImage : backupImages) {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, attachment.getName());    
+            statement.setString(1, backupImage.getName());    
             
             result = statement.executeQuery();           
             
