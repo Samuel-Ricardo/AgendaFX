@@ -132,8 +132,4 @@ public class FileManager extends Thread{
          return file;
     }
     
-     public void run() {
-
-    }
-    
 }
