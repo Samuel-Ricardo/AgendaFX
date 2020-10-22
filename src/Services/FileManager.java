@@ -29,12 +29,12 @@ public class FileManager extends Thread{
         File folder = new File (defaultFolderWay +"/"+name); 
         
         if(folder.exists()){
-            dialoger.succesMessage("A pasta: "+name+" Já existe. \n\n Caminho: "+folder.getAbsolutePath());
+            dialoger.successMessage("A pasta: "+name+" Já existe. \n\n Caminho: "+folder.getAbsolutePath());
         }else{
             if(folder.mkdirs()){
-            dialoger.succesMessage("A pasta: "+name+" foi criado com sucesso. \n\n Caminho: "+folder.getAbsolutePath());
+            dialoger.successMessage("A pasta: "+name+" foi criado com sucesso. \n\n Caminho: "+folder.getAbsolutePath());
             }else{
-                 dialoger.succesMessage("A pasta: "+name+" nao pode ser criado. \n\n Caminho: "+folder.getAbsolutePath());
+                 dialoger.successMessage("A pasta: "+name+" nao pode ser criado. \n\n Caminho: "+folder.getAbsolutePath());
              }
         }
         
@@ -44,10 +44,10 @@ public class FileManager extends Thread{
     public File createFolder(File folder){
         
         if(folder.exists()){
-            dialoger.succesMessage("A pasta: "+folder.getName()+" Já existe. \n\n Caminho: "+folder.getAbsolutePath());
+            dialoger.successMessage("A pasta: "+folder.getName()+" Já existe. \n\n Caminho: "+folder.getAbsolutePath());
         }else{
             folder.mkdir();
-            dialoger.succesMessage("A pasta: "+folder.getName()+" foi criado com sucesso. \n\n Caminho: "+folder.getAbsolutePath());
+            dialoger.successMessage("A pasta: "+folder.getName()+" foi criado com sucesso. \n\n Caminho: "+folder.getAbsolutePath());
         }
         
         return folder;
@@ -58,7 +58,7 @@ public class FileManager extends Thread{
         destinyFolder = new File(destinyFolder.getAbsolutePath()+"/"+originalFile.getName());
         
         if(destinyFolder.exists()){
-            dialoger.succesMessage("O arquivo: "+destinyFolder.getName()+" Já existe. \n\n Caminho: "+destinyFolder.getAbsolutePath());
+            dialoger.successMessage("O arquivo: "+destinyFolder.getName()+" Já existe. \n\n Caminho: "+destinyFolder.getAbsolutePath());
         }else{
 
             
@@ -72,7 +72,7 @@ public class FileManager extends Thread{
                
                 fcOrigin.transferTo(0, fcOrigin.size(), fcDestiny);
                 
-                dialoger.succesMessage("O arquivo: "+destinyFolder.getName()+" foi copiado com sucesso. \n\n Caminho: "+destinyFolder.getAbsolutePath());
+                dialoger.successMessage("O arquivo: "+destinyFolder.getName()+" foi copiado com sucesso. \n\n Caminho: "+destinyFolder.getAbsolutePath());
                 
                 input.close();
                 output.close();
@@ -91,7 +91,7 @@ public class FileManager extends Thread{
     public File copyFile(File originalFile, File destinyFile){
           
         if(destinyFile.exists()){
-            dialoger.succesMessage("O arquivo: "+destinyFile.getName()+" Já existe. \n\n Caminho: "+destinyFile.getAbsolutePath());
+            dialoger.successMessage("O arquivo: "+destinyFile.getName()+" Já existe. \n\n Caminho: "+destinyFile.getAbsolutePath());
         }else{
 
             
@@ -105,7 +105,7 @@ public class FileManager extends Thread{
                
                 fcOrigin.transferTo(0, fcOrigin.size(), fcDestiny);
                 
-                dialoger.succesMessage("O arquivo: "+destinyFile.getName()+" foi copiado com sucesso. \n\n Caminho: "+destinyFile.getAbsolutePath());
+                dialoger.successMessage("O arquivo: "+destinyFile.getName()+" foi copiado com sucesso. \n\n Caminho: "+destinyFile.getAbsolutePath());
                 
                 input.close();
                 output.close();
