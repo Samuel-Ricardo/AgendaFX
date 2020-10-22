@@ -30,14 +30,14 @@ public class ImageDAO {
     private static BackupImage backupImage;
     
     private Connection connection;
-    private BackupImage backupImageFactory = new BackupImage();
+    private BackupImageFactory backupImageFactory = new BackupImageFactory();
 
     public ImageDAO() {
         
-        BackupImage BackupImage = new BackupImage();
+      backupImageFactory = new BackupImageFactory();
     }
     
-    public ImageDAO(BackupImage backupImageFactory) {
+    public ImageDAO(BackupImageFactory backupImageFactory) {
         
         this.backupImageFactory = backupImageFactory;
     }
@@ -47,18 +47,18 @@ public class ImageDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "INSERT INTO tipo (file_name, file_way, file_bytes, file_postIt_id, file_notificaton_id, file_size) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO tipo (image_name, image_way, image_bytes, image_postIt_id, image_notificaton_id, image_user,image_size) VALUES (?,?,?,?,?,?,?);";
 
         try {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, backupImage.getName());
-            statement.setString(2, backupImage.getAbsolutPath());
-            statement.setBytes(3, backupImage.getArrayBytes());
+            statement.setString(1, backupImage.getImage().getFile().getName());
+            statement.setString(2, backupImage.getImage().getFile().getAbsolutePath());
+            statement.setBytes(3, backupImage.getImage().getBytes());
             statement.setInt(4, backupImage.getPostIt().getId());
             statement.setInt(5, backupImage.getNotification().getId());
-            statement.setString(6, backupImage.getSize());
+            statement.setString(6, backupImage.getImage().getLengthKB()+"");
 
             statement.execute();
 
@@ -110,7 +110,7 @@ public class ImageDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "UPDATE tipo SET file_name = ? , file_way = ? , file_bytes = ? , file_postIt_id = ? , file_notificaton_id = ? , file_size = ? WHERE id_file = ?;";
+        String sql = "UPDATE tipo SET image_name = ? , image_way = ? , image_bytes = ? , image_postIt_id = ? , image_notificaton_id = ? , image_size = ? WHERE id_image = ?;";
 
         try {
 
@@ -140,7 +140,7 @@ public class ImageDAO {
         connect();
 
         PreparedStatement statement = null;
-        String sql = "DELETE FROM backupImage WHERE id_file = ?;";
+        String sql = "DELETE FROM backupImage WHERE id_image = ?;";
 
         try {
             statement = connection.prepareStatement(sql);
@@ -167,7 +167,7 @@ public class ImageDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<BackupImage> backupImages = new ArrayList<>();
-        String sql = "SELECT * FROM file_from_postIt WHERE file_postIt_id = ?;";
+        String sql = "SELECT * FROM image_from_postIt WHERE image_postIt_id = ?;";
         Date userDate = null;
 
         try {
@@ -201,7 +201,7 @@ public class ImageDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<BackupImage> backupImages = new ArrayList<>();
-        String sql = "SELECT * FROM file_from_notification WHERE id = ?;";
+        String sql = "SELECT * FROM image_from_notification WHERE id = ?;";
         Date userDate = null;
 
         try {
@@ -235,7 +235,7 @@ public class ImageDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE id_file = ?;";
+        String sql = "SELECT * FROM image WHERE id_image = ?;";
         boolean exist = false;
 
         try {
@@ -277,7 +277,7 @@ public class ImageDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE id_file = ?;";
+        String sql = "SELECT * FROM image WHERE id_image = ?;";
         
 
        
@@ -313,7 +313,7 @@ public class ImageDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE file_name = ?;";
+        String sql = "SELECT * FROM image WHERE image_name = ?;";
         boolean exist = false;
 
         try {
@@ -355,7 +355,7 @@ public class ImageDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE file_name = ?;";
+        String sql = "SELECT * FROM image WHERE image_name = ?;";
         
 
        
@@ -391,7 +391,7 @@ public class ImageDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE file_way = ?;";
+        String sql = "SELECT * FROM image WHERE image_way = ?;";
         boolean exist = false;
 
         try {
@@ -433,7 +433,7 @@ public class ImageDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE file_way = ?;";
+        String sql = "SELECT * FROM image WHERE image_way = ?;";
         
 
        
