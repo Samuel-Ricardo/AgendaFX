@@ -22,7 +22,11 @@ public class FileManager extends Thread{
     
     public static final String pcUser = System.getProperty("user.");
     public static final String defaultFolderWay = System.getProperty("user.home") + "/Documents/Oasis";
-    private Dialoger dialoger = new Dialoger();
+    private Dialoger dialoger = new Dialoger();   
+
+    public void run() {
+
+    }
     
     public File createFolder(String name){
      

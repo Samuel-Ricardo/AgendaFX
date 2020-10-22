@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author Samuel
  */
+
 public class Dialoger {
     
             
