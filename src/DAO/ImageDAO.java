@@ -1,17 +1,16 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template attachment, choose Tools | Templates
+ * To change this template backupImage, choose Tools | Templates
  * and open the template in the editor.
  */
 package DAO;
 
-import Factory.AttachmentFactory;
-import Factory.UserFactory;
+import Factory.BackupImageFactory;
 import JDBC.ConnectionFactory;
-import Model.Attachment;
+import Model.BackupImage;
 import Model.Notification;
 import Model.PostIt;
-import Model.User;
+import Services.Dialoger;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,84 +20,85 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Samuel
  */
-public class AttachmentDAO {
+public class ImageDAO {
 
-    private static Attachment attachment;
+    private static BackupImage backupImage;
     
     private Connection connection;
-    private AttachmentFactory attachmentFactory = new AttachmentFactory();
+    private BackupImageFactory backupImageFactory = new BackupImageFactory();
+    private Dialoger dialoger;
 
-    public AttachmentDAO() {
+    public ImageDAO() {
         
-        AttachmentFactory AttachmentFactory = new AttachmentFactory();
+      backupImageFactory = new BackupImageFactory();
     }
     
-    public AttachmentDAO(AttachmentFactory attachmentFactory) {
+    public ImageDAO(BackupImageFactory backupImageFactory) {
         
-        this.attachmentFactory = attachmentFactory;
+        this.backupImageFactory = backupImageFactory;
     }
 
-    public boolean insert(Attachment attachment) {
+    public boolean insert(BackupImage backupImage) {
         
         connect();
          
         PreparedStatement statement = null;
-        String sql = "INSERT INTO file (file_name, file_way, file_bytes, file_postIt_id, file_notificaton_id, file_size) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO image (image_name, image_way, image_bytes, image_postIt_id, image_notificaton_id, image_user,image_size) VALUES (?,?,?,?,?,?,?);";
 
         try {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, attachment.getName());
-            statement.setString(2, attachment.getAbsolutPath());
-            statement.setBytes(3, attachment.getArrayBytes());
-            statement.setInt(4, attachment.getPostIt().getId());
-            statement.setInt(5, attachment.getNotification().getId());
-            statement.setString(6, attachment.getSize());
+            statement.setString(1, backupImage.getImage().getFile().getName());
+            statement.setString(2, backupImage.getImage().getFile().getAbsolutePath());
+            statement.setBinaryStream(3, backupImage.getImage().getInputStream());
+            statement.setInt(4, backupImage.getPostIt().getId());
+            statement.setInt(5, backupImage.getNotification().getId());
+            statement.setInt(6, backupImage.getUser().getId().intValue());
+            statement.setString(7, backupImage.getImage().getLengthKB()+"");
 
             statement.execute();
 
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Inserir: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao Inserir: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
         }
     }
-//    public boolean insertAll(ArrayList<Attachment> attachments) {
+//    public boolean insertAll(ArrayList<BackupImage> backupImages) {
 //  
 //        connect();
 //
 //        PreparedStatement statement = null;
-//        String sql = "INSERT INTO file (file, cor, detalhes_de_cores, importancia, id_usuario_file) VALUES (?,?,?,?,?);";
+//        String sql = "INSERT INTO image (image, cor, detalhes_de_cores, importancia, id_usuario_image) VALUES (?,?,?,?,?);";
 //
 //       
 //            
 //        try {
 //
-//             for (Attachment attachment : attachments) {
+//             for (BackupImage backupImage : backupImages) {
 //            
 //            statement = connection.prepareStatement(sql);
 //
-//            statement.setString(1, attachment.getName());
-//            statement.setString(2, attachment.getPrimaryColor());
-//            statement.setString(3, attachment.getSecondaryColor());
-//            statement.setInt(4, attachment.getImportance().intValue());
-//            statement.setInt(5, attachment.getUser().getId().intValue());
+//            statement.setString(1, getImgetNameage()ggetNameetFile()..getName());
+//            statement.setString(2, backupImage.getPrimaryColor());
+//            statement.setString(3, backupImage.getSecondaryColor());
+//            statement.setInt(4, backupImage.getImportance().intValue());
+//            statement.setInt(5, backupImage.getUser().getId().intValue());
 //
 //            statement.execute();
 //            
 //             }
 //            return true;
 //        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Erro ao Inserir: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+//            dialoger.errorMessage("Erro ao Inserir: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
 //            return false;
 //        } finally {
 //            ConnectionFactory.closeConnection(connection, statement);
@@ -107,54 +107,55 @@ public class AttachmentDAO {
 //    }
 //        
 
-    public boolean update(Attachment attachment) {
+    public boolean update(BackupImage backupImage) {
 
         connect();
          
         PreparedStatement statement = null;
-        String sql = "UPDATE file SET file_name = ? , file_way = ? , file_bytes = ? , file_postIt_id = ? , file_notificaton_id = ? , file_size = ? WHERE id_file = ?;";
+        String sql = "UPDATE image SET image_name = ? , image_way = ? , image_bytes = ? , image_postIt_id = ? , image_notificaton_id = ?, image_user_id = ? , image_size = ? WHERE id_image = ?;";
 
         try {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, attachment.getName());
-            statement.setString(2, attachment.getAbsolutPath());
-            statement.setBytes(3, attachment.getArrayBytes());
-            statement.setInt(4, attachment.getPostIt().getId());
-            statement.setInt(5, attachment.getNotification().getId());
-            statement.setString(6, attachment.getSize());
-            statement.setInt(7, attachment.getId().intValue());
+            statement.setString(1, backupImage.getImage().getFile().getName());
+            statement.setString(2, backupImage.getImage().getFile().getAbsolutePath());
+            statement.setBinaryStream(3, backupImage.getImage().getInputStream());
+            statement.setInt(4, backupImage.getPostIt().getId());
+            statement.setInt(5, backupImage.getNotification().getId());
+            statement.setInt(6, backupImage.getUser().getId().intValue());
+            statement.setString(7, backupImage.getImage().getLengthKB()+"");
+            statement.setInt(8, backupImage.getId().intValue());
 
             statement.execute();
 
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Atualizar : " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao Atualizar : ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
         }
     }
 
-    public boolean delet(Attachment attachment) {
+    public boolean delet(BackupImage backupImage) {
 
         connect();
 
         PreparedStatement statement = null;
-        String sql = "DELETE FROM attachment WHERE id_file = ?;";
+        String sql = "DELETE FROM image WHERE id_image = ?;";
 
         try {
             statement = connection.prepareStatement(sql);
 
-            statement.setInt(0, attachment.getId());
+            statement.setInt(0, backupImage.getId());
 
             statement.execute();
 
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(AttachmentDAO.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
+            dialoger.errorMessage("Erro ao Deletar: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
@@ -162,14 +163,14 @@ public class AttachmentDAO {
 
     }
 
-    public List<Attachment> selectAllFromPostIt(PostIt postIt) {
+    public List<BackupImage> selectAllFromPostIt(PostIt postIt) {
 
         connect();
      
         PreparedStatement statement = null;
         ResultSet result = null;
-        List<Attachment> attachments = new ArrayList<>();
-        String sql = "SELECT * FROM file_from_postIt WHERE file_postIt_id = ?;";
+        List<BackupImage> backupImages = new ArrayList<>();
+        String sql = "SELECT * FROM image WHERE image_postIt_id = ?;";
         Date userDate = null;
 
         try {
@@ -182,28 +183,28 @@ public class AttachmentDAO {
 
             while (result.next()) {
 
-                Attachment attachment = attachmentFactory.genereteAttachment(result);
+                BackupImage backupImage = backupImageFactory.genereteBackupImage(result);
                 
-                attachments.add(attachment);
+                backupImages.add(backupImage);
                 
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
         } finally {
             ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
         }
         
-        return attachments;
+        return backupImages;
     }
-    public List<Attachment> selectAllFromNotification(Notification notification) {
+    public List<BackupImage> selectAllFromNotification(Notification notification) {
 
         connect();
      
         PreparedStatement statement = null;
         ResultSet result = null;
-        List<Attachment> attachments = new ArrayList<>();
-        String sql = "SELECT * FROM file_from_notification WHERE id = ?;";
+        List<BackupImage> backupImages = new ArrayList<>();
+        String sql = "SELECT * FROM image WHERE image_notification_id = ?;";
         Date userDate = null;
 
         try {
@@ -216,42 +217,42 @@ public class AttachmentDAO {
 
             while (result.next()) {
 
-                Attachment attachment = attachmentFactory.genereteAttachment(result);
+                BackupImage backupImage = backupImageFactory.genereteBackupImage(result);
                 
-                attachments.add(attachment);
+                backupImages.add(backupImage);
                 
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
         } finally {
             ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
         }
         
-        return attachments;
+        return backupImages;
     }
     
-    public boolean exist(Attachment attachment) {  
+    public boolean exist(BackupImage backupImage) {  
         
         connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE id_file = ?;";
+        String sql = "SELECT * FROM image WHERE id_image = ?;";
         boolean exist = false;
 
         try {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setInt(1, attachment.getId().intValue());    
+            statement.setInt(1, backupImage.getId().intValue());    
             
             result = statement.executeQuery();           
             
             exist = result.next();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex); 
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex); 
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement); 
@@ -261,13 +262,13 @@ public class AttachmentDAO {
         
     }
     
-    public ArrayList<Boolean> exist(ArrayList<Attachment> attachments) {  
+    public ArrayList<Boolean> exist(ArrayList<BackupImage> backupImages) {  
         
         ArrayList<Boolean> exist = new ArrayList<>();
         
-        for(Attachment attachment: attachments){
+        for(BackupImage backupImage: backupImages){
             
-         if(attachment.getId() == null){
+         if(backupImage.getId() == null){
             exist.clear();
             exist.add(false);
             return exist;
@@ -279,18 +280,18 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE id_file = ?;";
+        String sql = "SELECT * FROM image WHERE id_image = ?;";
         
 
        
         
         try {
 
-         for (Attachment attachment : attachments) {
+         for (BackupImage backupImage : backupImages) {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setInt(1, attachment.getId().intValue());    
+            statement.setInt(1, backupImage.getId().intValue());    
             
             result = statement.executeQuery();           
             
@@ -298,7 +299,7 @@ public class AttachmentDAO {
         }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);
             exist.clear();
             exist.add(false);
             return exist;
@@ -309,27 +310,27 @@ public class AttachmentDAO {
         return exist;
     }
 
-    public boolean existByName(Attachment attachment) {
+    public boolean existByName(BackupImage backupImage) {
 
         connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE file_name = ?;";
+        String sql = "SELECT * FROM image WHERE image_name = ?;";
         boolean exist = false;
 
         try {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, attachment.getName());     
+            statement.setString(1, backupImage.getImage().getFile().getName());     
             
             result = statement.executeQuery();           
             
             exist = result.next();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex); 
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex); 
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement); 
@@ -339,13 +340,13 @@ public class AttachmentDAO {
         
     }
     
-    public ArrayList<Boolean> existByName(ArrayList<Attachment> attachments) {  
+    public ArrayList<Boolean> existByName(ArrayList<BackupImage> backupImages) {  
         
         ArrayList<Boolean> exist = new ArrayList<>();
         
-        for(Attachment attachment: attachments){
+        for(BackupImage backupImage: backupImages){
             
-         if(attachment.getId() == null){
+         if(backupImage.getId() == null){
             exist.clear();
             exist.add(false);
             return exist;
@@ -357,18 +358,18 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE file_name = ?;";
+        String sql = "SELECT * FROM image WHERE image_name = ?;";
         
 
        
         
         try {
 
-         for (Attachment attachment : attachments) {
+         for (BackupImage backupImage : backupImages) {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, attachment.getName());    
+            statement.setString(1, backupImage.getImage().getFile().getName());    
             
             result = statement.executeQuery();           
             
@@ -376,7 +377,7 @@ public class AttachmentDAO {
         }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);
             exist.clear();
             exist.add(false);
             return exist;
@@ -387,27 +388,27 @@ public class AttachmentDAO {
         return exist;
     }
     
-    public boolean existByPath(Attachment attachment) {
+    public boolean existByPath(BackupImage backupImage) {
 
         connect();
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE file_way = ?;";
+        String sql = "SELECT * FROM image WHERE image_way = ?;";
         boolean exist = false;
 
         try {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, attachment.getName());     
+            statement.setString(1, backupImage.getImage().getFile().getName());     
             
             result = statement.executeQuery();           
             
             exist = result.next();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex); 
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex); 
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement); 
@@ -417,13 +418,13 @@ public class AttachmentDAO {
         
     }
     
-    public ArrayList<Boolean> existByPath(ArrayList<Attachment> attachments) {  
+    public ArrayList<Boolean> existByPath(ArrayList<BackupImage> backupImages) {  
         
         ArrayList<Boolean> exist = new ArrayList<>();
         
-        for(Attachment attachment: attachments){
+        for(BackupImage backupImage: backupImages){
             
-         if(attachment.getId() == null){
+         if(backupImage.getId() == null){
             exist.clear();
             exist.add(false);
             return exist;
@@ -435,18 +436,18 @@ public class AttachmentDAO {
         
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM file WHERE file_way = ?;";
+        String sql = "SELECT * FROM image WHERE image_way = ?;";
         
 
        
         
         try {
 
-         for (Attachment attachment : attachments) {
+         for (BackupImage backupImage : backupImages) {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, attachment.getName());    
+            statement.setString(1, backupImage.getImage().getFile().getName());    
             
             result = statement.executeQuery();           
             
@@ -454,7 +455,7 @@ public class AttachmentDAO {
         }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);
             exist.clear();
             exist.add(false);
             return exist;

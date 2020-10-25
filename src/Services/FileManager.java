@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class FileManager extends Thread{
     
     public static final String pcUser = System.getProperty("user.");
-    public static final String defaultFolderWay = System.getProperty("user.home") + "/Documents/Oasis";
+    public static final String defaultFolder = System.getProperty("user.home") + "/Documents/AgendaFX";
     private Dialoger dialoger = new Dialoger();   
 
     public void run() {
@@ -30,7 +30,7 @@ public class FileManager extends Thread{
     
     public File createFolder(String name){
      
-        File folder = new File (defaultFolderWay +"/"+name); 
+        File folder = new File (defaultFolder +"/"+name); 
         
         if(folder.exists()){
             dialoger.successMessage("A pasta: "+name+" Já existe. \n\n Caminho: "+folder.getAbsolutePath());
@@ -127,9 +127,24 @@ public class FileManager extends Thread{
     
     public File getFile(String name){
         
-         File file = new File (defaultFolderWay +"/"+name); 
+         File file = new File (defaultFolder +"/"+name); 
          
          return file;
     }
-    
+
+    public Dialoger getDialoger() {
+        return dialoger;
+    }
+
+    public void setDialoger(Dialoger dialoger) {
+        this.dialoger = dialoger;
+    }
+
+    public static String getPcUser() {
+        return pcUser;
+    }
+
+    public static String getDefaultFolder() {
+        return defaultFolder;
+    }   
 }

@@ -6,6 +6,10 @@
 package Factory;
 
 import Model.Utilities.ImageFile;
+import Services.Downloader;
+import Services.FileManager;
+import java.io.File;
+import java.io.InputStream;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,13 +21,70 @@ import java.util.ArrayList;
  */
 public class ImageFactory {
 
-    public  ArrayList<ImageFile> generateImage(ResultSet result) throws SQLException {
+    private final Downloader downloader;
+
+    public ImageFactory() {
+        this.downloader = new Downloader();
+    }
+
+    public ImageFactory(Downloader downloader) {
+        this.downloader = downloader;
+    }
+    
+    public  ArrayList<ImageFile> generateImages(ResultSet result) throws SQLException {
+        
+        ArrayList<ImageFile> images = new ArrayList<>();
+        
+        downloader.start();
+        
+        while (result.next()) {
+            
+            File localImage = new File(FileManager.getDefaultFolder() + result.getString("image_name"));
+            
+            File downloadedImage = downloader.download(result.getBinaryStream("image_bytes"), localImage);
+            
+            ImageFile image = new ImageFile(downloadedImage);
+            
+            images.add(image);
+        }
+        
+        return images;
+    }
+    
+    public ImageFile generateImage(String name, InputStream input){
+        
+        File localImage = new File(FileManager.getDefaultFolder() + name);
+            
+        File downloadedImage = downloader.download(input, localImage);
+            
+        ImageFile image = new ImageFile(downloadedImage);
+        
+        return image;
+    }
+    
+    public  ArrayList<ImageFile> generateImageByFile(ResultSet result) throws SQLException {
     
         ArrayList<ImageFile> images = new ArrayList<>();
         
         while (result.next()) {
             
+            
+            
             ImageFile image = new ImageFile(result.getString("file_way"));
+            
+             images.add(image);
+        }
+        
+        return images;
+    }
+    
+    public  ArrayList<ImageFile> generateImagesByPath(ResultSet result, String field) throws SQLException {
+    
+        ArrayList<ImageFile> images = new ArrayList<>();
+        
+        while (result.next()) {
+            
+            ImageFile image = new ImageFile(result.getString(field));
             
              images.add(image);
         }

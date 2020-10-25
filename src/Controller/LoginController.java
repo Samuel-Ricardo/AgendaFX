@@ -11,6 +11,7 @@ import Main.MainLogin;
 import Main.MainRecoverPassword;
 import Main.Creators.MainRegister;
 import Model.User;
+import Services.FileManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -63,6 +64,8 @@ public class LoginController implements Initializable {
     private PasswordField txtSenha;
     
     private UserDAO dao = new UserDAO();
+  
+    private FileManager fileManager = new FileManager();
 
     @FXML
     void cadastrar() {  // open the register screen // abre a tela de cadastro
@@ -112,6 +115,8 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        createCache();
+        
         txtEsqueceu.setOnMouseClicked((t) -> {
         
             if(MainRecoverPassword.getWindow() != null){
@@ -131,5 +136,10 @@ public class LoginController implements Initializable {
         });
         
     }    
+
+    private void createCache() {
+   
+        fileManager.createFolder("Images");
+    }
     
 }
