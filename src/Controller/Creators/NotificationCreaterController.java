@@ -15,9 +15,13 @@ import Model.User;
 import Services.Downloader;
 import Controller.HomeController;
 import Controller.HomeController;
+import DAO.ImageDAO;
 import DAO.TypeDAO;
+import Model.BackupImage;
 import Model.Type;
+import Model.Utilities.ImageFile;
 import Services.Dialoger;
+import Services.FileManager;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
@@ -48,7 +52,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import javax.swing.dialoger;
 
 /**
  * FXML Controller class
@@ -124,7 +127,13 @@ public class NotificationCreaterController implements Initializable {
     private TypeDAO typeDao = new TypeDAO();
     
     private Dialoger dialoger = new Dialoger();
+    
+    private ImageDAO imageDAO = new ImageDAO();
 
+    private BackupImage backupImage = new BackupImage();
+    
+    private FileManager fileManager = new FileManager();
+    
     private User logUser = UserDAO.getUser();
 
     private static HomeController home;
@@ -233,7 +242,17 @@ public class NotificationCreaterController implements Initializable {
 
         notification.setBody(txtDescription.getText());
         if (img != null) {
-            notification.setImage(img.getAbsolutePath());
+            
+            backupImage.setImage(new ImageFile(img));
+            backupImage.setNotification(notification);
+            
+            imageDAO.insert(backupImage);
+            
+            notification.setImage(imageDAO.selectAllFromNotification(notification).get(0));
+            
+            
+            File destiny = new File(FileManager.getDefaultFolder()+"/Images"+img.getName());
+            fileManager.copyFile(backupImage.getImage().getFile(), destiny);
         }
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
