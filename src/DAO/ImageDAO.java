@@ -123,8 +123,8 @@ public class ImageDAO {
             statement.setInt(4, backupImage.getPostIt().getId());
             statement.setInt(5, backupImage.getNotification().getId());
             statement.setInt(6, backupImage.getUser().getId().intValue());
-            statement.setString(6, backupImage.getSize());
-            statement.setInt(7, backupImage.getId().intValue());
+            statement.setString(7, backupImage.getImage().getLengthKB()+"");
+            statement.setInt(8, backupImage.getId().intValue());
 
             statement.execute();
 
@@ -142,7 +142,7 @@ public class ImageDAO {
         connect();
 
         PreparedStatement statement = null;
-        String sql = "DELETE FROM backupImage WHERE id_image = ?;";
+        String sql = "DELETE FROM image WHERE id_image = ?;";
 
         try {
             statement = connection.prepareStatement(sql);
@@ -169,7 +169,7 @@ public class ImageDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<BackupImage> backupImages = new ArrayList<>();
-        String sql = "SELECT * FROM image_from_postIt WHERE image_postIt_id = ?;";
+        String sql = "SELECT * FROM image WHERE image_postIt_id = ?;";
         Date userDate = null;
 
         try {
@@ -203,7 +203,7 @@ public class ImageDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<BackupImage> backupImages = new ArrayList<>();
-        String sql = "SELECT * FROM image_from_notification WHERE id = ?;";
+        String sql = "SELECT * FROM image WHERE image_notification_id = ?;";
         Date userDate = null;
 
         try {
