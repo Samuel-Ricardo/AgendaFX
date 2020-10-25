@@ -31,4 +31,18 @@ public class ImageFactory {
         return images;
     }
     
+    public  ArrayList<ImageFile> generateImageByPath(ResultSet result, String field) throws SQLException {
+    
+        ArrayList<ImageFile> images = new ArrayList<>();
+        
+        while (result.next()) {
+            
+            ImageFile image = new ImageFile(result.getString(field));
+            
+             images.add(image);
+        }
+        
+        return images;
+    }
+    
 }
