@@ -131,5 +131,21 @@ public class FileManager extends Thread{
          
          return file;
     }
+
+    public Dialoger getDialoger() {
+        return dialoger;
+    }
+
+    public void setDialoger(Dialoger dialoger) {
+        this.dialoger = dialoger;
+    }
+
+    public static String getPcUser() {
+        return pcUser;
+    }
+
+    public static String getDefaultFolderWay() {
+        return defaultFolderWay;
+    }
     
 }

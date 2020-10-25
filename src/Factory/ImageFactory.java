@@ -6,6 +6,8 @@
 package Factory;
 
 import Model.Utilities.ImageFile;
+import Services.Downloader;
+import Services.FileManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,11 +19,27 @@ import java.util.ArrayList;
  */
 public class ImageFactory {
 
-    public  ArrayList<ImageFile> generateImageByFile(ResultSet result) throws SQLException {
+    private final Downloader downloader;
+
+    public ImageFactory() {
+        this.downloader = new Downloader();
+    }
+
+    public ImageFactory(Downloader downloader) {
+        this.downloader = downloader;
+    }
     
+    public  ArrayList<ImageFile> generateImageByFile(ResultSet result) throws SQLException {
+        
         ArrayList<ImageFile> images = new ArrayList<>();
         
+        downloader.start();
+        
         while (result.next()) {
+            
+            File localImage = new File(FileManager.g);
+            
+            File downloaded = downloader.download(result.getBinaryStream("image_bytes"), );
             
             ImageFile image = new ImageFile(result.getString("file_way"));
             
@@ -31,7 +49,23 @@ public class ImageFactory {
         return images;
     }
     
-    public  ArrayList<ImageFile> generateImageByPath(ResultSet result, String field) throws SQLException {
+    public  ArrayList<ImageFile> generateImageByImage(ResultSet result) throws SQLException {
+    
+        ArrayList<ImageFile> images = new ArrayList<>();
+        
+        while (result.next()) {
+            
+            
+            
+            ImageFile image = new ImageFile(result.getString("file_way"));
+            
+             images.add(image);
+        }
+        
+        return images;
+    }
+    
+    public  ArrayList<ImageFile> generateImagesByPath(ResultSet result, String field) throws SQLException {
     
         ArrayList<ImageFile> images = new ArrayList<>();
         
