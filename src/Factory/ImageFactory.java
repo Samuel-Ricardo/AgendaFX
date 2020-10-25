@@ -9,6 +9,7 @@ import Model.Utilities.ImageFile;
 import Services.Downloader;
 import Services.FileManager;
 import java.io.File;
+import java.io.InputStream;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ public class ImageFactory {
         this.downloader = downloader;
     }
     
-    public  ArrayList<ImageFile> generateImageByFile(ResultSet result) throws SQLException {
+    public  ArrayList<ImageFile> generateImages(ResultSet result) throws SQLException {
         
         ArrayList<ImageFile> images = new ArrayList<>();
         
@@ -40,17 +41,28 @@ public class ImageFactory {
             
             File localImage = new File(FileManager.getDefaultFolderWay() + result.getString("image_name"));
             
-            File downloaded = downloader.download(result.getBinaryStream("image_bytes"), localImage);
+            File downloadedImage = downloader.download(result.getBinaryStream("image_bytes"), localImage);
             
-            ImageFile image = new ImageFile(result.getString("file_way"));
+            ImageFile image = new ImageFile(downloadedImage);
             
-             images.add(image);
+            images.add(image);
         }
         
         return images;
     }
     
-    public  ArrayList<ImageFile> generateImageByImage(ResultSet result) throws SQLException {
+    public ImageFile generateImage(String name, InputStream input){
+        
+        File localImage = new File(FileManager.getDefaultFolderWay() + name);
+            
+        File downloadedImage = downloader.download(input, localImage);
+            
+        ImageFile image = new ImageFile(downloadedImage);
+        
+        return image;
+    }
+    
+    public  ArrayList<ImageFile> generateImageByFile(ResultSet result) throws SQLException {
     
         ArrayList<ImageFile> images = new ArrayList<>();
         

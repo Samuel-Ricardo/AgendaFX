@@ -44,7 +44,7 @@ public class BackupImageFactory {
         try {
             
             backupImage.setId(result.getInt("id_image"));
-            backupImage.setFile(result.getString("image_way"));
+            backupImage.setImage(result.getString("image_way"));
             backupImage.setNotification(notificationFactory.generateNotification(result));
             backupImage.setPostIt(postItFactory.generatePostIt(result));
             backupImage.setBytes(downloader.downloadBytes(result.getBinaryStream("image_bytes")));
