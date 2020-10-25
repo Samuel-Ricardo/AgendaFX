@@ -138,8 +138,8 @@ public class NotificationScreenController implements Initializable {
 
         }
 
-        if (notification.getImage() != null && notification.getImage() != "") { // show the image if you have // mostra a imagem caso tenha  
-            imgNotification.setImage(new Image("file:///" + notification.getImage()));
+        if (notification.getImage().getImage().getFile().exists()) { // show the image if you have // mostra a imagem caso tenha  
+            imgNotification.setImage(notification.getImage().getImage().getImageFX());
         }
 
 //        String fill = notification.getTypeColor();

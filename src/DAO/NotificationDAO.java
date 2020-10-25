@@ -51,7 +51,7 @@ public class NotificationDAO {
     public boolean insert(Notification notification) {
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO notificacao (titulo , descricao , image , horario , avisado, tipo_notificacao  , musica, userNotification , marcado ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notificacao (titulo , descricao, horario , avisado, tipo_notificacao  , musica, userNotification , marcado ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         /*
             
@@ -76,21 +76,16 @@ public class NotificationDAO {
 
             statement.setString(1, notification.getTitle());     // Filling in the camp "?"  //  Preenchendo os campos "?"
             statement.setString(2, notification.getBody());
-            if (notification.getImage() != null) {
-                statement.setString(3, notification.getImage());
-            } else {
-                statement.setString(3, "");
-            }
-            statement.setTime(4, notification.getScheduledDay().toSQLTime());
-            statement.setBoolean(5, notification.isWarned());
-            statement.setInt(6, notification.getType().getId().intValue());
+            statement.setTime(3, notification.getScheduledDay().toSQLTime());
+            statement.setBoolean(4, notification.isWarned());
+            statement.setInt(5, notification.getType().getId().intValue());
             if (notification.getMusic() != null) {
-                statement.setString(7, notification.getMusic().getAbsolutePath());
+                statement.setString(6, notification.getMusic().getAbsolutePath());
             }else{
-                statement.setString(7, "");
+                statement.setString(6, "");
             }
-            statement.setInt(8, notification.getUser().getId().intValue());
-            statement.setDate(9, notification.getScheduledDay().toSQLDate());
+            statement.setInt(7, notification.getUser().getId().intValue());
+            statement.setDate(8, notification.getScheduledDay().toSQLDate());
 
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
@@ -107,7 +102,7 @@ public class NotificationDAO {
 
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, image = ?, horario = ?, avisado = ?, tipo_notificacao = ?, musica = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
+        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, horario = ?, avisado = ?, tipo_notificacao = ?, musica = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
 
         /*
             
@@ -133,14 +128,13 @@ public class NotificationDAO {
             
             statement.setString(1, notification.getTitle());     // Filling in the camp "?"  //  Preenchendo os campos "?"
             statement.setString(2, notification.getBody());
-            statement.setString(3, notification.getImage());
-            statement.setTime(4, notification.getScheduledDay().toSQLTime());
-            statement.setBoolean(5, notification.isWarned());
-            statement.setInt(6, notification.getType().getId().intValue());                
-            statement.setString(7, notification.getMusic().getAbsolutePath());
-            statement.setInt(8, notification.getUser().getId().intValue());
-            statement.setDate(9, notification.getScheduledDay().toSQLDate());
-            statement.setInt(10, notification.getId());
+            statement.setTime(3, notification.getScheduledDay().toSQLTime());
+            statement.setBoolean(4, notification.isWarned());
+            statement.setInt(5, notification.getType().getId().intValue());                
+            statement.setString(6, notification.getMusic().getAbsolutePath());
+            statement.setInt(7, notification.getUser().getId().intValue());
+            statement.setDate(8, notification.getScheduledDay().toSQLDate());
+            statement.setInt(9, notification.getId());
 
             System.out.println(notification.getId()+"   id dao");
             

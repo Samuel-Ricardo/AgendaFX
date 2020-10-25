@@ -74,7 +74,7 @@ public class LiteRow extends BorderPane {
         this.setPadding(new Insets(20, 10, 10, 20));
 
         if (notification.getImage() != null || notification.getImage().equals("") == false) {
-            image.setImage(new Image("file:///" + notification.getImage()));
+            image.setImage(notification.getImage().getImage().getImageFX());
         }
 
         image.setFitWidth(88);
@@ -135,7 +135,7 @@ public class LiteRow extends BorderPane {
         this.setPadding(new Insets(20, 10, 10, 20));
 
         if (notification.getImage() != null || notification.getImage().equals("") == false) {
-            image.setImage(new Image("file:///" + notification.getImage()));
+            image.setImage(notification.getImage().getImage().getImageFX());
         }
 
         image.setFitWidth(88);
