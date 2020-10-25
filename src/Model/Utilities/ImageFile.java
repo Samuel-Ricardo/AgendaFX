@@ -29,8 +29,8 @@ public class ImageFile {
     private int length ;
     private int lengthKB;
     private int lengthMB;
-    private FileInputStream input;
-    private FileOutputStream output;
+    private FileInputStream inputStream;
+    private FileOutputStream outputStream;
     private ImageIcon imageSwing;
     private Image ImageFX;
     private static final String PCuser = System.getProperty("user.name");
@@ -79,18 +79,18 @@ public class ImageFile {
             
             file = new File("\"C:\\Users\\"+PCuser+"\\Documents\\AgendaFX\\images\\"+name);
             
-            input = new FileInputStream(file);
-            output = new FileOutputStream(file);
+            inputStream = new FileInputStream(file);
+            outputStream = new FileOutputStream(file);
             
                 System.out.println("Começou o download");
                 
                 while(inputS.read(bytes) != -1){
                     
-                    output.write(bytes);
+                    outputStream.write(bytes);
                     
                 }
                 
-            output.close();
+            outputStream.close();
             inputS.close();
             
             start();
@@ -114,8 +114,8 @@ public class ImageFile {
             this.lengthMB = lengthKB / 1024;
             
             this.bytes = new byte[length];
-            this.input = new FileInputStream(file);
-            this.output = new FileOutputStream(file);
+            this.inputStream = new FileInputStream(file);
+            this.outputStream = new FileOutputStream(file);
 
           //  input.read(bytes, 0, length);
 
@@ -172,20 +172,29 @@ public class ImageFile {
         this.lengthMB = lengthMB;
     }
 
-    public FileInputStream getInput() {
-        return input;
+    public FileInputStream getInputStream() {
+        
+        try {
+            
+            inputStream = new FileInputStream(file);
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ImageFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return inputStream;
     }
 
-    public void setInput(FileInputStream input) {
-        this.input = input;
+    public void setInputStream(FileInputStream inputStream) {
+        this.inputStream = inputStream;
     }
 
-    public FileOutputStream getOutput() {
-        return output;
+    public FileOutputStream getOutputStream() {
+        return outputStream;
     }
 
-    public void setOutput(FileOutputStream output) {
-        this.output = output;
+    public void setOutputStream(FileOutputStream outputStream) {
+        this.outputStream = outputStream;
     }
 
     public ImageIcon getImageSwing() {

@@ -47,7 +47,7 @@ public class ImageDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "INSERT INTO tipo (image_name, image_way, image_bytes, image_postIt_id, image_notificaton_id, image_user,image_size) VALUES (?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO image (image_name, image_way, image_bytes, image_postIt_id, image_notificaton_id, image_user,image_size) VALUES (?,?,?,?,?,?,?);";
 
         try {
 
@@ -58,7 +58,8 @@ public class ImageDAO {
             statement.setBytes(3, backupImage.getImage().getBytes());
             statement.setInt(4, backupImage.getPostIt().getId());
             statement.setInt(5, backupImage.getNotification().getId());
-            statement.setString(6, backupImage.getImage().getLengthKB()+"");
+            statement.setInt(6, backupImage.getUser().getId().intValue());
+            statement.setString(7, backupImage.getImage().getLengthKB()+"");
 
             statement.execute();
 
@@ -75,7 +76,7 @@ public class ImageDAO {
 //        connect();
 //
 //        PreparedStatement statement = null;
-//        String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
+//        String sql = "INSERT INTO image (image, cor, detalhes_de_cores, importancia, id_usuario_image) VALUES (?,?,?,?,?);";
 //
 //       
 //            
@@ -85,7 +86,7 @@ public class ImageDAO {
 //            
 //            statement = connection.prepareStatement(sql);
 //
-//            statement.setString(1, backupImage.getName());
+//            statement.setString(1, getImgetNameage()ggetNameetFile()..getName());
 //            statement.setString(2, backupImage.getPrimaryColor());
 //            statement.setString(3, backupImage.getSecondaryColor());
 //            statement.setInt(4, backupImage.getImportance().intValue());
@@ -110,17 +111,18 @@ public class ImageDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "UPDATE tipo SET image_name = ? , image_way = ? , image_bytes = ? , image_postIt_id = ? , image_notificaton_id = ? , image_size = ? WHERE id_image = ?;";
+        String sql = "UPDATE image SET image_name = ? , image_way = ? , image_bytes = ? , image_postIt_id = ? , image_notificaton_id = ? , image_size = ? WHERE id_image = ?;";
 
         try {
 
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, backupImage.getName());
-            statement.setString(2, backupImage.getAbsolutPath());
-            statement.setBytes(3, backupImage.getArrayBytes());
+            statement.setString(1, backupImage.getImage().getFile().getName());
+            statement.setString(2, backupImage.getImage().getFile().getAbsolutePath());
+            statement.setBinaryStream(3, backupImage.getImage().getInputStream());
             statement.setInt(4, backupImage.getPostIt().getId());
             statement.setInt(5, backupImage.getNotification().getId());
+            statement.setInt(6, backupImage.getUser().getId().intValue());
             statement.setString(6, backupImage.getSize());
             statement.setInt(7, backupImage.getId().intValue());
 
@@ -320,7 +322,7 @@ public class ImageDAO {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, backupImage.getName());     
+            statement.setString(1, backupImage.getImage().getFile().getName());     
             
             result = statement.executeQuery();           
             
@@ -366,7 +368,7 @@ public class ImageDAO {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, backupImage.getName());    
+            statement.setString(1, backupImage.getImage().getFile().getName());    
             
             result = statement.executeQuery();           
             
@@ -398,7 +400,7 @@ public class ImageDAO {
 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, backupImage.getName());     
+            statement.setString(1, backupImage.getImage().getFile().getName());     
             
             result = statement.executeQuery();           
             
@@ -444,7 +446,7 @@ public class ImageDAO {
                 
             statement = connection.prepareStatement(sql);    
             
-            statement.setString(1, backupImage.getName());    
+            statement.setString(1, backupImage.getImage().getFile().getName());    
             
             result = statement.executeQuery();           
             
