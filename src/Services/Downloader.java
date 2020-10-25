@@ -121,6 +121,10 @@ public class Downloader extends Thread {
         }
     }
     
+    public File download(InputStream input,File localFile ){
+        
+        
+    }
     
     public ArrayList<Byte> downloadBytes(InputStream input) {
      

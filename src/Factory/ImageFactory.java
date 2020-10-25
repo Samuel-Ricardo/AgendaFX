@@ -8,6 +8,7 @@ package Factory;
 import Model.Utilities.ImageFile;
 import Services.Downloader;
 import Services.FileManager;
+import java.io.File;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,9 +38,9 @@ public class ImageFactory {
         
         while (result.next()) {
             
-            File localImage = new File(FileManager.g);
+            File localImage = new File(FileManager.getDefaultFolderWay() + result.getString("image_name"));
             
-            File downloaded = downloader.download(result.getBinaryStream("image_bytes"), );
+            File downloaded = downloader.download(result.getBinaryStream("image_bytes"), localImage);
             
             ImageFile image = new ImageFile(result.getString("file_way"));
             
