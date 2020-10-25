@@ -17,6 +17,7 @@ import Controller.HomeController;
 import Controller.HomeController;
 import DAO.TypeDAO;
 import Model.Type;
+import Services.Dialoger;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
@@ -47,6 +48,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import javax.swing.dialoger;
 
 /**
  * FXML Controller class
@@ -120,6 +122,8 @@ public class NotificationCreaterController implements Initializable {
     private NotificationDAO dao = new NotificationDAO();
     
     private TypeDAO typeDao = new TypeDAO();
+    
+    private Dialoger dialoger = new Dialoger();
 
     private User logUser = UserDAO.getUser();
 
@@ -162,14 +166,14 @@ public class NotificationCreaterController implements Initializable {
                         notification.setAttachment(attachment);
                         lblAttachment.setText(attachment.getName());
                     } else {
-                        JOptionPane.showMessageDialog(null, "Nenhum arquivo foi escolhido");
+                        dialoger.errorMessage("Nenhum arquivo foi escolhido", "Nenhum arquivo selecionado, selecione um por favor e tente novamente");
                     }
 
                 break;
                 
             case 1:  // does the download of internet files // faz download de arquivo da internet
                 
-                    JOptionPane.showMessageDialog(null, "Escolha o nome e local do arquivo");
+                    dialoger.message("Escolha o nome e local do arquivo");
                     attachment = chooser.showSaveDialog(new Stage()); // choose place of file // escolhe o local do arquivo
                 
                     String link = JOptionPane.showInputDialog(null,"Digite o Link do arquivo"); // get the link typed by the user // pega o link digitado pelo usuario 
@@ -185,7 +189,7 @@ public class NotificationCreaterController implements Initializable {
                         lblAttachment.setText(attachment.getName());    // puts the file name on the screen // poe o nome do arquivo na tela
                     }
                     
-                    JOptionPane.showMessageDialog(null, "O arquivo está sendo baixado em 2° plano");
+                    dialoger.successMessage("O arquivo está sendo baixado em 2° plano");
                     
                 break;
         }
@@ -237,7 +241,7 @@ public class NotificationCreaterController implements Initializable {
         notification.setUser(logUser);
 
         if (dao.insert(notification)) {     // creates the notification  // cria a notificaçao
-            JOptionPane.showMessageDialog(null, "Criado com sucesso +,-");
+            dialoger.successMessage("Criado com sucesso +,-");
         }
     }
 
