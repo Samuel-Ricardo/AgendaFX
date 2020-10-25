@@ -190,6 +190,15 @@ public class ImageFile {
     }
 
     public FileOutputStream getOutputStream() {
+       
+        try {
+            
+            outputStream = new FileOutputStream(file);
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ImageFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return outputStream;
     }
 
