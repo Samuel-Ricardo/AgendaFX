@@ -5,11 +5,12 @@
  */
 package DAO;
 
-import Factory.ImageFactory;
+import Factory.BackupImageFactory;
 import JDBC.ConnectionFactory;
 import Model.BackupImage;
 import Model.Notification;
 import Model.PostIt;
+import Services.Dialoger;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +31,7 @@ public class ImageDAO {
     
     private Connection connection;
     private BackupImageFactory backupImageFactory = new BackupImageFactory();
+    private Dialoger dialoger;
 
     public ImageDAO() {
         
@@ -55,7 +56,7 @@ public class ImageDAO {
 
             statement.setString(1, backupImage.getImage().getFile().getName());
             statement.setString(2, backupImage.getImage().getFile().getAbsolutePath());
-            statement.setBytes(3, backupImage.getImage().getBytes());
+            statement.setBinaryStream(3, backupImage.getImage().getInputStream());
             statement.setInt(4, backupImage.getPostIt().getId());
             statement.setInt(5, backupImage.getNotification().getId());
             statement.setInt(6, backupImage.getUser().getId().intValue());
@@ -65,7 +66,7 @@ public class ImageDAO {
 
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Inserir: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao Inserir: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
@@ -97,7 +98,7 @@ public class ImageDAO {
 //             }
 //            return true;
 //        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Erro ao Inserir: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+//            dialoger.errorMessage("Erro ao Inserir: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
 //            return false;
 //        } finally {
 //            ConnectionFactory.closeConnection(connection, statement);
@@ -111,7 +112,7 @@ public class ImageDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "UPDATE image SET image_name = ? , image_way = ? , image_bytes = ? , image_postIt_id = ? , image_notificaton_id = ? , image_size = ? WHERE id_image = ?;";
+        String sql = "UPDATE image SET image_name = ? , image_way = ? , image_bytes = ? , image_postIt_id = ? , image_notificaton_id = ?, image_user_id = ? , image_size = ? WHERE id_image = ?;";
 
         try {
 
@@ -130,7 +131,7 @@ public class ImageDAO {
 
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Atualizar : " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao Atualizar : ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
@@ -154,7 +155,7 @@ public class ImageDAO {
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao Deletar: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
@@ -182,14 +183,14 @@ public class ImageDAO {
 
             while (result.next()) {
 
-                BackupImage backupImage = BackupImage(result);
+                BackupImage backupImage = backupImageFactory.genereteBackupImage(result);
                 
                 backupImages.add(backupImage);
                 
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
         } finally {
             ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
         }
@@ -216,14 +217,14 @@ public class ImageDAO {
 
             while (result.next()) {
 
-                BackupImage backupImage = BackupImage(result);
+                BackupImage backupImage = backupImageFactory.genereteBackupImage(result);
                 
                 backupImages.add(backupImage);
                 
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
         } finally {
             ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
         }
@@ -251,7 +252,7 @@ public class ImageDAO {
             exist = result.next();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex); 
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex); 
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement); 
@@ -298,7 +299,7 @@ public class ImageDAO {
         }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);
             exist.clear();
             exist.add(false);
             return exist;
@@ -329,7 +330,7 @@ public class ImageDAO {
             exist = result.next();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex); 
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex); 
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement); 
@@ -376,7 +377,7 @@ public class ImageDAO {
         }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);
             exist.clear();
             exist.add(false);
             return exist;
@@ -407,7 +408,7 @@ public class ImageDAO {
             exist = result.next();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex); 
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex); 
             return false;
         } finally {
             ConnectionFactory.closeConnection(connection, statement); 
@@ -454,7 +455,7 @@ public class ImageDAO {
         }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);
             exist.clear();
             exist.add(false);
             return exist;
