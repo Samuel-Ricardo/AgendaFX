@@ -378,6 +378,50 @@ public class NotificationDAO {
 
         return findNotification;
     }
+    public Notification searchById(int id) {
+
+        connect();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        Notification findNotification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
+        String sql = "SELECT * FROM notification_from_user WHERE idNotific = ?;";
+
+        /*
+            
+            // Columns:  //  Colunas: //
+            
+                idNotific int(11) AI PK 
+                titulo varchar(25) 
+                descricao varchar(1500) 
+                image varchar(5000) 
+                horario date 
+                avisado tinyint(1) 
+                tipo_notificacao int(11) 
+                musica varchar(5000)
+                varchar(20)
+                userNotification int(11)
+            
+         */
+        try {
+
+            statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
+
+            statement.setInt(1, id);   // Filling in the camp "?"  //  Preenchendo os campos "?"
+
+            result = statement.executeQuery();          //  execute sql statement returning result  //  executa instruçao sql retornando resultado
+
+            if (result.next()) {
+                
+                findNotification = notificationFactory.generateNotification(result);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
+        }
+
+        return findNotification;
+    }
 
     private void connect() {
 
@@ -430,7 +474,5 @@ public class NotificationDAO {
     public static void setNotification(Notification notification) {
         NotificationDAO.notification = notification;
     }
-    
-
 
 }

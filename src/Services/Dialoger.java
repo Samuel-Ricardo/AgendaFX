@@ -19,9 +19,6 @@ import javax.swing.JOptionPane;
 
 public class Dialoger {
     
-            
-         Alert alert = newAlert(Alert.AlertType.INFORMATION);
-    
     public static void message(Component component, String message){
         
         JOptionPane.showMessageDialog(component, message);
@@ -47,11 +44,11 @@ public class Dialoger {
 
     public Alert newAlert(Alert.AlertType type) {
 
-        Platform.runLater(() -> {
+       
 
         Alert alert = new Alert(type);
         
-        });
+
         
         return alert;
     }

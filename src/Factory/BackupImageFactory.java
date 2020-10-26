@@ -5,7 +5,11 @@
  */
 package Factory;
 
+import DAO.NotificationDAO;
+import DAO.PostItDAO;
+import DAO.UserDAO;
 import Model.BackupImage;
+import Model.Notification;
 import Model.Utilities.ImageFile;
 import Services.Downloader;
 import Services.FileManager;
@@ -22,24 +26,28 @@ import java.util.logging.Logger;
 public class BackupImageFactory {
 
     private final Downloader downloader;
-    private final PostItFactory postItFactory;
-    private final NotificationFactory notificationFactory;
-    private final UserFactory userFactory;
+//    private final PostItFactory postItFactory;
+//    private final NotificationFactory notificationFactory;
+//    private final UserFactory userFactory;
     private final ImageFactory imageFactory;
+    private PostItDAO pdao = new PostItDAO();
+    private NotificationDAO ndao = new NotificationDAO();
+    private UserDAO udao = new UserDAO();
+
 
     public BackupImageFactory() {
-        this.downloader = new Downloader();
-        this.postItFactory = new PostItFactory();
-        this.notificationFactory = new NotificationFactory();
-        this.userFactory = new UserFactory();
+        this.downloader = Downloader.getDownloader();
+//        this.postItFactory = new PostItFactory();
+//        this.notificationFactory = new NotificationFactory();
+//        this.userFactory = new UserFactory();
         this.imageFactory = new ImageFactory();
     }
 
     public BackupImageFactory(Downloader downloader, PostItFactory postItFactory, NotificationFactory notificationFactory, UserFactory userFactory, ImageFactory imageFactory) {
         this.downloader = downloader;
-        this.postItFactory = postItFactory;
-        this.notificationFactory = notificationFactory;
-        this.userFactory = userFactory;
+//        this.postItFactory = postItFactory;
+//        this.notificationFactory = notificationFactory;
+//        this.userFactory = userFactory;
         this.imageFactory = imageFactory;
     }
     
@@ -66,9 +74,12 @@ public class BackupImageFactory {
             }
             
             backupImage.setId(result.getInt("id_image"));
-            backupImage.setNotification(notificationFactory.generateNotification(result));
-            backupImage.setPostIt(postItFactory.generatePostIt(result));
-            backupImage.setUser(userFactory.generateUser(result));
+            backupImage.setNotification(ndao.searchById(result.getInt("image_notification_id")));
+            backupImage.setPostIt(pdao.searchById(result.getInt("image_notification_id")));
+            backupImage.setUser(udao.searchById(result.getInt("image_notification_id")));
+//            backupImage.setNotification(notificationFactory.generateNotification(result));
+//            backupImage.setPostIt(postItFactory.generatePostIt(result));
+//            backupImage.setUser(userFactory.generateUser(result));
             
         } catch (SQLException ex) {
             Logger.getLogger(BackupImageFactory.class.getName()).log(Level.SEVERE, null, ex);

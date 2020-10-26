@@ -34,6 +34,7 @@ public class Downloader extends Thread {
     private Double megaByte = new Double(0);
     private boolean downloading = false;
     private Dialoger dialoger;
+    private static Downloader downloader = new Downloader();
 
     
     ////Constructors/////
@@ -312,4 +313,46 @@ public class Downloader extends Thread {
     public void setMegaBytes(Double megaBytes) {
         this.megaByte = megaBytes;
     }
+
+    public Double getKiloByte() {
+        return kiloByte;
+    }
+
+    public void setKiloByte(Double kiloByte) {
+        this.kiloByte = kiloByte;
+    }
+
+    public Double getMegaByte() {
+        return megaByte;
+    }
+
+    public void setMegaByte(Double megaByte) {
+        this.megaByte = megaByte;
+    }
+
+    public boolean isDownloading() {
+        return downloading;
+    }
+
+    public void setDownloading(boolean downloading) {
+        this.downloading = downloading;
+    }
+
+    public Dialoger getDialoger() {
+        return dialoger;
+    }
+
+    public void setDialoger(Dialoger dialoger) {
+        this.dialoger = dialoger;
+    }
+
+    public static Downloader getDownloader() {
+        return downloader;
+    }
+
+    public static void setDownloader(Downloader downloader) {
+        Downloader.downloader = downloader;
+    }
+    
+    
 }

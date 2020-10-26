@@ -30,17 +30,19 @@ public class ImageDAO {
     private static BackupImage backupImage;
     
     private Connection connection;
-    private BackupImageFactory backupImageFactory = new BackupImageFactory();
+    private BackupImageFactory backupImageFactory; 
     private Dialoger dialoger;
 
     public ImageDAO() {
         
       backupImageFactory = new BackupImageFactory();
+      dialoger = new Dialoger();
     }
     
     public ImageDAO(BackupImageFactory backupImageFactory) {
         
         this.backupImageFactory = backupImageFactory;
+        dialoger = new Dialoger();
     }
 
     public boolean insert(BackupImage backupImage) {
@@ -48,7 +50,7 @@ public class ImageDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "INSERT INTO image (image_name, image_way, image_bytes, image_postIt_id, image_notificaton_id, image_user,image_size) VALUES (?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO image (image_name, image_way, image_bytes, image_postIt_id, image_notification_id, image_user_id,image_size) VALUES (?,?,?,?,?,?,?);";
 
         try {
 
@@ -57,9 +59,21 @@ public class ImageDAO {
             statement.setString(1, backupImage.getImage().getFile().getName());
             statement.setString(2, backupImage.getImage().getFile().getAbsolutePath());
             statement.setBinaryStream(3, backupImage.getImage().getInputStream());
-            statement.setInt(4, backupImage.getPostIt().getId());
-            statement.setInt(5, backupImage.getNotification().getId());
-            statement.setInt(6, backupImage.getUser().getId().intValue());
+            if(backupImage.getPostIt() != null){
+             statement.setInt(4, backupImage.getPostIt().getId());
+            }else{
+             statement.setInt(4, 0);
+            }
+            if(backupImage.getNotification() != null){
+             statement.setInt(5, backupImage.getNotification().getId());
+            }else{
+             statement.setInt(5, 0);
+            }
+            if(backupImage.getUser() != null){
+             statement.setInt(6, backupImage.getUser().getId().intValue());
+            }else{
+             statement.setInt(6, 0);
+            }
             statement.setString(7, backupImage.getImage().getLengthKB()+"");
 
             statement.execute();
@@ -112,7 +126,7 @@ public class ImageDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "UPDATE image SET image_name = ? , image_way = ? , image_bytes = ? , image_postIt_id = ? , image_notificaton_id = ?, image_user_id = ? , image_size = ? WHERE id_image = ?;";
+        String sql = "UPDATE image SET image_name = ? , image_way = ? , image_bytes = ? , image_postIt_id = ? , image_notification_id = ?, image_user_id = ? , image_size = ? WHERE id_image = ?;";
 
         try {
 

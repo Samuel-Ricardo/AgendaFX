@@ -24,7 +24,7 @@ public class ImageFactory {
     private final Downloader downloader;
 
     public ImageFactory() {
-        this.downloader = new Downloader();
+        this.downloader = Downloader.getDownloader();
     }
 
     public ImageFactory(Downloader downloader) {

@@ -60,6 +60,7 @@ public class Notification extends Reminder{
     }
     
     public BackupImage getImage() {
+        
         return backupImage;
     }
 
