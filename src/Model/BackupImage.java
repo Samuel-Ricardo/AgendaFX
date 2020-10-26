@@ -30,19 +30,22 @@ public class BackupImage {
     public BackupImage() {
     }
 
-    public BackupImage(Notification notification) {
+    public BackupImage(Notification notification, ImageFile image) {
     
         this.notification = notification;
+        this.image = image;
     }
     
-    public BackupImage(User user) {
+    public BackupImage(User user, ImageFile image) {
     
         this.user = user;
+        this.image = image;
     }
     
-    public BackupImage(PostIt postIt) {
+    public BackupImage(PostIt postIt, ImageFile image) {
     
         this.postIt = postIt;
+        this.image = image;
     }
 
     public Integer getId() {
