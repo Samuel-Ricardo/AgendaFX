@@ -259,6 +259,40 @@ public class ImageDAO {
         return backupImages;
     }
     
+    public List<BackupImage> searchByName (String name) {
+
+        connect();
+     
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        List<BackupImage> backupImages = new ArrayList<>();
+        String sql = "SELECT * FROM image WHERE image_name = ?;";
+
+        try {
+
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, name);
+
+            result = statement.executeQuery();
+
+            while (result.next()) {
+
+                BackupImage backupImage = backupImageFactory.genereteBackupImage(result);
+                
+                backupImages.add(backupImage);
+                
+            }
+
+        } catch (SQLException ex) {
+            dialoger.errorMessage("Erro ao consultar o banco: ", ex);  // error message if it occurs // mensagem de erro se ocorrer /
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
+        }
+        
+        return backupImages;
+    }
+    
     public boolean exist(BackupImage backupImage) {  
         
         connect();
@@ -495,5 +529,9 @@ public class ImageDAO {
 
        private void connect() {
         connection = ConnectionFactory.getConnection();
+    }
+
+    public Object search(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

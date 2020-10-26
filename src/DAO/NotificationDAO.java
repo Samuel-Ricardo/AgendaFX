@@ -51,7 +51,7 @@ public class NotificationDAO {
     public boolean insert(Notification notification) {
         connect();
         PreparedStatement statement = null;
-        String sql = "INSERT INTO notificacao (titulo , descricao, horario , avisado, tipo_notificacao  , musica, userNotification , marcado ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notificacao (titulo , descricao, horario , avisado, tipo_notificacao  , musica, userNotification , marcado, notification_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);";
 
         /*
             
@@ -86,7 +86,13 @@ public class NotificationDAO {
             }
             statement.setInt(7, notification.getUser().getId().intValue());
             statement.setDate(8, notification.getScheduledDay().toSQLDate());
-
+            
+            if ( notification.getImage() != null){
+            
+                 statement.setString(9, notification.getImage().getImage().getFile().getName());
+            }else{
+                 statement.setString(9, "empty"); 
+            }
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
             return true;    //returns true if successful // retorna verdadeiro se for bem sucedido
