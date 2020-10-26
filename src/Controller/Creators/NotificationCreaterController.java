@@ -246,7 +246,11 @@ public class NotificationCreaterController implements Initializable {
             backupImage.setImage(new ImageFile(img));
             backupImage.setNotification(notification);
             
-            imageDAO.insert(backupImage);
+            if(imageDAO.existByName(backupImage) == false){
+                
+                imageDAO.insert(backupImage);
+            }
+            
             
             notification.setImage(imageDAO.selectAllFromNotification(notification).get(0));
             
