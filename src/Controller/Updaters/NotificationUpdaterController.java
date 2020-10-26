@@ -243,11 +243,7 @@ public class NotificationUpdaterController implements Initializable {
             
             if(backupImage == null){
                 
-                backupImage = new BackupImage(notification);
-                
-                backupImage.setImage(image);
-                
-                backupImage = imageDAO.search(backupImage.getImage().getFile().getName()).get(0);
+                recoverImage();
             }
                 
             backupImage.setImage(new ImageFile(img));
@@ -292,6 +288,14 @@ public class NotificationUpdaterController implements Initializable {
         Filler.fillTodaysScheduledActivities(Filler.getController().getLvTodayNotifications());
         Filler.fillOutActivitiesDoneToday(Filler.getController().getLvActivitiesDone());
         
+    }
+
+    public void recoverImage() {
+        backupImage = new BackupImage(notification);
+        
+        backupImage.setImage(new ImageFile(img));
+        
+        backupImage = imageDAO.searchByName(backupImage.getImage().getFile().getName()).get(0);
     }
 
     @FXML

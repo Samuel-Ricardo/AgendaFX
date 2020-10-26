@@ -530,8 +530,4 @@ public class ImageDAO {
        private void connect() {
         connection = ConnectionFactory.getConnection();
     }
-
-    public Object search(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
