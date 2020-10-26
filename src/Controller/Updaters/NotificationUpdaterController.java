@@ -19,6 +19,7 @@ import Model.User;
 import Services.Downloader;
 import Helper.Filler;
 import Model.BackupImage;
+import Model.Utilities.ImageFile;
 import Services.Dialoger;
 import Services.FileManager;
 import com.jfoenix.controls.JFXDatePicker;
@@ -240,7 +241,18 @@ public class NotificationUpdaterController implements Initializable {
         notification.setBody(txtDescription.getText());
         if (img != null) {
             
-            if(imageDAO.exist(backupImage)){
+            if(backupImage == null){
+                
+                backupImage = new BackupImage(notification);
+                
+                backupImage.setImage(image);
+                
+                backupImage = imageDAO.selectAllFromNotification(notification).get(0);
+            }
+                
+            backupImage.setImage(new ImageFile(img));
+            
+            if(imageDAO.existByName(backupImage)){
                 
                 imageDAO.update(backupImage);
             }else{
@@ -248,7 +260,7 @@ public class NotificationUpdaterController implements Initializable {
                 imageDAO.insert(backupImage);
             }
             
-            File destiny = new File(FileManager.getDefaultFolder()+"/Images"+img.getName());
+            File destiny = new File(FileManager.getDefaultFolder()+"/Images/"+img.getName());
             fileManager.copyFile(backupImage.getImage().getFile(), destiny);
             
             notification.setImage(imageDAO.selectAllFromNotification(notification).get(0));

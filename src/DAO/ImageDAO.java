@@ -135,10 +135,23 @@ public class ImageDAO {
             statement.setString(1, backupImage.getImage().getFile().getName());
             statement.setString(2, backupImage.getImage().getFile().getAbsolutePath());
             statement.setBinaryStream(3, backupImage.getImage().getInputStream());
-            statement.setInt(4, backupImage.getPostIt().getId());
-            statement.setInt(5, backupImage.getNotification().getId());
-            statement.setInt(6, backupImage.getUser().getId().intValue());
+             if(backupImage.getPostIt() != null){
+             statement.setInt(4, backupImage.getPostIt().getId());
+            }else{
+             statement.setInt(4, 0);
+            }
+            if(backupImage.getNotification() != null){
+             statement.setInt(5, backupImage.getNotification().getId());
+            }else{
+             statement.setInt(5, 0);
+            }
+            if(backupImage.getUser() != null){
+             statement.setInt(6, backupImage.getUser().getId().intValue());
+            }else{
+             statement.setInt(6, 0);
+            }
             statement.setString(7, backupImage.getImage().getLengthKB()+"");
+
             statement.setInt(8, backupImage.getId().intValue());
 
             statement.execute();

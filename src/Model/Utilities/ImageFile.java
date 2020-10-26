@@ -109,9 +109,7 @@ public class ImageFile {
         
         try {
             
-            this.length = (int) file.length();
-            this.lengthKB = length / 1024;
-            this.lengthMB = lengthKB / 1024;
+            startSize();
             
             this.bytes = new byte[length];
             this.inputStream = new FileInputStream(file);
@@ -127,6 +125,12 @@ public class ImageFile {
         } catch (IOException ex) {
             Logger.getLogger(ImageFile.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void startSize() {
+        this.length = (int) file.length();
+        this.lengthKB = length / 1024;
+        this.lengthMB = lengthKB / 1024;
     }
     
     
@@ -149,6 +153,9 @@ public class ImageFile {
     }
 
     public int getLength() {
+        
+        startSize();
+        
         return length;
     }
 
@@ -157,6 +164,9 @@ public class ImageFile {
     }
 
     public int getLengthKB() {
+        
+        startSize();
+        
         return lengthKB;
     }
 
@@ -165,6 +175,9 @@ public class ImageFile {
     }
 
     public int getLengthMB() {
+        
+        startSize();
+        
         return lengthMB;
     }
 
