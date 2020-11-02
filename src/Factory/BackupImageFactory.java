@@ -74,12 +74,9 @@ public class BackupImageFactory {
             }
             
             backupImage.setId(result.getInt("id_image"));
-            backupImage.setNotification(ndao.searchById(result.getInt("image_notification_id")));
-            backupImage.setPostIt(pdao.searchById(result.getInt("image_notification_id")));
-            backupImage.setUser(udao.searchById(result.getInt("image_notification_id")));
-//            backupImage.setNotification(notificationFactory.generateNotification(result));
-//            backupImage.setPostIt(postItFactory.generatePostIt(result));
-//            backupImage.setUser(userFactory.generateUser(result));
+//            backupImage.setNotification(ndao.searchById(result.getInt("image_notification_id")));
+//            backupImage.setPostIt(pdao.searchById(result.getInt("image_notification_id")));
+//            backupImage.setUser(udao.searchById(result.getInt("image_notification_id")));
             
         } catch (SQLException ex) {
             Logger.getLogger(BackupImageFactory.class.getName()).log(Level.SEVERE, null, ex);

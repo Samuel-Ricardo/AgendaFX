@@ -242,25 +242,25 @@ public class NotificationUpdaterController implements Initializable {
       
         if (img != null) {
             
-            if(backupImage == null){
+//            if(backupImage == null){
+//                
+//                recoverImage();
+//            }
                 
-                recoverImage();
-            }
-                
+
+            backupImage = new BackupImage(notification, new ImageFile(img));
+
             backupImage.setImage(new ImageFile(img));
             
-            if(imageDAO.existByName(backupImage)){
-                
-                imageDAO.update(backupImage);
-            }else{
-                
+            if(imageDAO.existByName(backupImage) == false){
+               
                 imageDAO.insert(backupImage);
             }
             
             File destiny = new File(FileManager.getDefaultFolder()+"/Images/"+img.getName());
             fileManager.copyFile(backupImage.getImage().getFile(), destiny);
             
-            notification.setImage(imageDAO.selectAllFromNotification(notification).get(0));
+            notification.setImage(imageDAO.searchByName(backupImage.getImage().getFile().getName()).get(0));
         }
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
