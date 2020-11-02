@@ -53,7 +53,7 @@ public class ImageFactory {
     
     public ImageFile generateImage(String name, InputStream input){
         
-        File localImage = new File(FileManager.getDefaultFolder() + name);
+        File localImage = new File(FileManager.getDefaultFolder() + "/Images/" + name);
             
         File downloadedImage = downloader.download(input, localImage);
             

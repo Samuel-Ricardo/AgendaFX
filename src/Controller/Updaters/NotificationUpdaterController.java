@@ -297,7 +297,7 @@ public class NotificationUpdaterController implements Initializable {
         
         if(images.isEmpty()){
             
-            backupImage = null;
+            backupImage = new BackupImage(notification, new ImageFile(img));
         }else{
             backupImage = images.get(0);
         }

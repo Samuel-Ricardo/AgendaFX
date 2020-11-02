@@ -244,7 +244,7 @@ public class ImageDAO {
 
             while (result.next()) {
 
-                BackupImage backupImage = backupImageFactory.genereteBackupImage(result);
+                BackupImage backupImage = backupImageFactory.genereteBackupImage(result,notification);
                 
                 backupImages.add(backupImage);
                 
