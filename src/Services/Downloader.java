@@ -151,6 +151,8 @@ public class Downloader extends Thread {
                     output.write(buffer, 0, byt);
 
                     System.out.println("Tamanho: " + sizeInMegaBytes(localFile) + " MB");
+                    
+                    System.out.println("to aki_______: "+localFile.getAbsolutePath());
                 }
 
                 input.close();

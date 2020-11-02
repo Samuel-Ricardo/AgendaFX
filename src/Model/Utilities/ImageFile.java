@@ -32,7 +32,7 @@ public class ImageFile {
     private FileInputStream inputStream;
     private FileOutputStream outputStream;
     private ImageIcon imageSwing;
-    private Image ImageFX;
+    private Image imageFX;
     private static final String PCuser = System.getProperty("user.name");
 
     public ImageFile(String absolutePath) {
@@ -67,6 +67,8 @@ public class ImageFile {
     public ImageFile(File file) {
         
         this.file = file;
+        
+        start();
     }
     
    public ImageFile(InputStream inputS, String name) {
@@ -118,7 +120,7 @@ public class ImageFile {
           //  input.read(bytes, 0, length);
 
             this.imageSwing = new ImageIcon(file.getAbsolutePath());
-            this.ImageFX = new Image(file.getAbsolutePath());
+            this.imageFX = new Image("file:///"+file.getAbsolutePath());
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImageFile.class.getName()).log(Level.SEVERE, null, ex);
@@ -228,11 +230,16 @@ public class ImageFile {
     }
 
     public Image getImageFX() {
-        return ImageFX;
+        
+        System.out.println("UIDITI_____________________________________________________: "+ file.length()); 
+        
+        this.imageFX = new Image("file:///C:/Users/Samuel/Documents/AgendaFX/Images/"+file.getName());
+        
+        return imageFX;
     }
 
     public void setImageFX(Image ImageFX) {
-        this.ImageFX = ImageFX;
+        this.imageFX = ImageFX;
     }
 
     public File getFile() {
