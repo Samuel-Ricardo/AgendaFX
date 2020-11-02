@@ -293,7 +293,14 @@ public class NotificationUpdaterController implements Initializable {
     public void recoverImage() {
         backupImage = new BackupImage(notification, new ImageFile(img));
         
-        backupImage = imageDAO.searchByName(backupImage.getImage().getFile().getName()).get(0);
+        ArrayList<BackupImage> images = (ArrayList<BackupImage>) imageDAO.searchByName(backupImage.getImage().getFile().getName());
+        
+        if(images.isEmpty()){
+            
+            backupImage = null;
+        }else{
+            backupImage = images.get(0);
+        }
     }
 
     @FXML
