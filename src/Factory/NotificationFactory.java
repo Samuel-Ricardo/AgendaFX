@@ -55,7 +55,7 @@ public class NotificationFactory {
                 notification.setUser(userFactory.generateUser(result));
                 notification.setType(typeFactory.genereteType(result));
                 
-                ArrayList<BackupImage> images = (ArrayList<BackupImage>) imageDAO.selectAllFromNotification(notification);
+                ArrayList<BackupImage> images = (ArrayList<BackupImage>) imageDAO.searchByName(result.getString("notification_image"));
                 
                 if(images.isEmpty()){
                     

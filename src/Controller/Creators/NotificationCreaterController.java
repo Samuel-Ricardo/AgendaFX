@@ -244,18 +244,19 @@ public class NotificationCreaterController implements Initializable {
         if (img != null) {
             
             backupImage.setImage(new ImageFile(img));
-            backupImage.setNotification(notification);
             
             if(imageDAO.existByName(backupImage) == false){
                 
                 imageDAO.insert(backupImage);
+            }else{
+                imageDAO.update(backupImage);
             }
             
             
-            notification.setImage(imageDAO.selectAllFromNotification(notification).get(0));
+            notification.setImage(imageDAO.searchByName(backupImage.getImage().getFile().getName()).get(0));
             
             
-            File destiny = new File(FileManager.getDefaultFolder()+"/Images"+img.getName());
+            File destiny = new File(FileManager.getDefaultFolder()+"/Images/"+img.getName());
             fileManager.copyFile(backupImage.getImage().getFile(), destiny);
         }
         notification.setScheduledDay(scheduledDay);

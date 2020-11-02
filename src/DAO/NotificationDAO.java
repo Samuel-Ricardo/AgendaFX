@@ -93,6 +93,7 @@ public class NotificationDAO {
             }else{
                  statement.setString(9, "empty"); 
             }
+            
             statement.execute();    // executing sql instruction   //  executando instruçao sql
 
             return true;    //returns true if successful // retorna verdadeiro se for bem sucedido
@@ -108,7 +109,7 @@ public class NotificationDAO {
 
         connect();
         PreparedStatement statement = null;
-        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, horario = ?, avisado = ?, tipo_notificacao = ?, musica = ?, userNotification = ?, marcado = ? WHERE idNotific = ?;";
+        String sql = "UPDATE notificacao SET titulo = ? , descricao = ?, horario = ?, avisado = ?, tipo_notificacao = ?, musica = ?, userNotification = ?, marcado = ?, notification_image = ? WHERE idNotific = ?;";
 
         /*
             
@@ -140,7 +141,13 @@ public class NotificationDAO {
             statement.setString(6, notification.getMusic().getAbsolutePath());
             statement.setInt(7, notification.getUser().getId().intValue());
             statement.setDate(8, notification.getScheduledDay().toSQLDate());
-            statement.setInt(9, notification.getId());
+            if ( notification.getImage() != null){
+            
+                 statement.setString(9, notification.getImage().getImage().getFile().getName());
+            }else{
+                 statement.setString(9, "empty"); 
+            }
+            statement.setInt(10, notification.getId());
 
             System.out.println(notification.getId()+"   id dao");
             
@@ -203,7 +210,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Notification> notifications = new ArrayList<>();
-        String sql = "SELECT * FROM notification_from_user ORDER BY marcado DESC;";
+        String sql = "SELECT * FROM notification_view ORDER BY marcado DESC;";
 
         /*
             
@@ -249,7 +256,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Notification> notifications = new ArrayList<>();
-        String sql = "SELECT * FROM notification_from_user WHERE id = ? ORDER BY horario;";
+        String sql = "SELECT * FROM notification_view WHERE id = ? ORDER BY horario;";
 
         /*
             
@@ -297,7 +304,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         List<Notification> notifications = new ArrayList<>();
-        String sql = "SELECT * FROM notification_from_user WHERE titutlo LIKE ? OR descricao LIKE ?;";
+        String sql = "SELECT * FROM notification_view WHERE titutlo LIKE ? OR descricao LIKE ?;";
 
         /*
             
@@ -346,7 +353,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         Notification findNotification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
-        String sql = "SELECT * FROM notification_from_user WHERE idNotific = ?;";
+        String sql = "SELECT * FROM notification_view WHERE idNotific = ?;";
 
         /*
             
@@ -390,7 +397,7 @@ public class NotificationDAO {
         PreparedStatement statement = null;
         ResultSet result = null;
         Notification findNotification = new Notification();     // create Notification with database data  // criando notificacao com dados do banco de dados
-        String sql = "SELECT * FROM notification_from_user WHERE idNotific = ?;";
+        String sql = "SELECT * FROM notification_view WHERE idNotific = ?;";
 
         /*
             
@@ -440,7 +447,7 @@ public class NotificationDAO {
         connect();
         PreparedStatement statement = null;
         ResultSet result = null;
-        String sql = "SELECT * FROM notification_from_user WHERE idNotific = ?;";
+        String sql = "SELECT * FROM notification_view WHERE idNotific = ?;";
 
         try {
 

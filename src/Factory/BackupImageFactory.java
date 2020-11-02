@@ -88,30 +88,31 @@ public class BackupImageFactory {
     }
 
     public BackupImage genereteBackupImage(ResultSet result, Notification notification) {
-       BackupImage backupImage = new BackupImage();
-        
-        try {
-            
-            File localImage = new File(result.getString("image_way")); 
-            
-            File lcoalImage2 = new File(FileManager.getDefaultFolder()+"/"+localImage.getName());
-            
-            if (localImage.exists()) {
-                
-                backupImage.setImage(new ImageFile(localImage));
-                
-            }else if(lcoalImage2.exists()){
-                
-                backupImage.setImage(new ImageFile(lcoalImage2));
-            }else{
-            
-               backupImage.setImage(imageFactory.generateImage(result.getString("image_name"), result.getBinaryStream("image_bytes")));
+          BackupImage backupImage = new BackupImage();
+
+            try {
+
+                File localImage = new File(result.getString("image_way")); 
+
+                File lcoalImage2 = new File(FileManager.getDefaultFolder()+"/"+localImage.getName());
+
+                if (localImage.exists()) {
+
+                    backupImage.setImage(new ImageFile(localImage));
+
+                }else if(lcoalImage2.exists()){
+
+                    backupImage.setImage(new ImageFile(lcoalImage2));
+                }else{
+
+                   backupImage.setImage(imageFactory.generateImage(result.getString("image_name"), result.getBinaryStream("image_bytes")));
+                }
+
+                backupImage.setId(result.getInt("id_image"));
+                backupImage.setNotification(notification);
+            } catch (SQLException ex) {
+                Logger.getLogger(BackupImageFactory.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            backupImage.setId(result.getInt("id_image"));
-            backupImage.setNotification(notification);
-        } catch (SQLException ex) {
-            Logger.getLogger(BackupImageFactory.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return backupImage;
+        return backupImage;
+    }
 }

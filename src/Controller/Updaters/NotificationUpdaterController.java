@@ -239,6 +239,7 @@ public class NotificationUpdaterController implements Initializable {
         }
 
         notification.setBody(txtDescription.getText());
+      
         if (img != null) {
             
             if(backupImage == null){
@@ -291,7 +292,6 @@ public class NotificationUpdaterController implements Initializable {
     }
 
     public void recoverImage() {
-        backupImage = new BackupImage(notification, new ImageFile(img));
         
         ArrayList<BackupImage> images = (ArrayList<BackupImage>) imageDAO.searchByName(backupImage.getImage().getFile().getName());
         
