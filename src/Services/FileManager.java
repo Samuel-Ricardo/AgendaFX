@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class FileManager extends Thread{
     
     public static final String pcUser = System.getProperty("user.");
-    public static final String defaultFolder = System.getProperty("user.home") + "/Documents/AgendaFX";
+    public static final String defaultFolder = System.getProperty("user.home") + "/Documents/AgendaFX/";
     private Dialoger dialoger = new Dialoger();   
 
     public void run() {

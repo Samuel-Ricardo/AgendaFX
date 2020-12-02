@@ -39,7 +39,7 @@ public class ImageFactory {
         
         while (result.next()) {
             
-            File localImage = new File(FileManager.getDefaultFolder() + result.getString("image_name"));
+            File localImage = new File(FileManager.getDefaultFolder() +"images/"+ result.getString("image_name"));
             
             File downloadedImage = downloader.download(result.getBinaryStream("image_bytes"), localImage);
             
@@ -53,7 +53,7 @@ public class ImageFactory {
     
     public ImageFile generateImage(String name, InputStream input){
         
-        File localImage = new File(FileManager.getDefaultFolder() + "/Images/" + name);
+        File localImage = new File(FileManager.getDefaultFolder() + "Images/" + name);
             
         File downloadedImage = downloader.download(input, localImage);
             

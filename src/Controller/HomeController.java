@@ -445,19 +445,7 @@ public class HomeController implements Initializable {
 
         
         
-        imgPerfil.setOnMouseClicked((t) -> {
-
-            imgPerfilZoom.setImage(new Image("file:///" + logUser.getImage()));
-            imgPerfilZoom.setVisible(true);
-
-        });
-
-        imgPerfilZoom.setOnMouseClicked((t) -> {        // zoom
-
-            imgPerfilZoom.setVisible(false);
-
-            
-        });
+        ImageZoom();
         
          
          
@@ -466,6 +454,22 @@ public class HomeController implements Initializable {
         secondPlan.start(); // starts the program in the background // inicia  o programa em 2° plano
         
         Type.loadDefaultTypes();
+    }
+
+    public void ImageZoom() {
+        imgPerfil.setOnMouseClicked((t) -> {
+            
+            imgPerfilZoom.setImage(new Image("file:///" + logUser.getImage()));
+            imgPerfilZoom.setVisible(true);
+            
+        });
+        
+        imgPerfilZoom.setOnMouseClicked((t) -> {        // zoom
+            
+            imgPerfilZoom.setVisible(false);
+            
+            
+        });
     }
 
     private void loadPerfil() { // load  Profile  //  Carrega o perfil
