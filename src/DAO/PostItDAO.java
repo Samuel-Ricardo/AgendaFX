@@ -240,6 +240,37 @@ public class PostItDAO {
 
                 statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
             
+                statement.setInt(0, postIt.getId());
+                
+            result = statement.executeQuery();    //  execute sql statement returning result  //  executa instruçao sql retornando resultado
+
+            while (result.next()) {
+                
+                findPostIt = postItFactory.generatePostIt(result);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
+        }
+
+        return findPostIt;
+    }
+    
+    public PostIt searchById(int id) {
+
+        connect();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        PostIt findPostIt = new PostIt();     // create PostIt with database data  // criando notificacao com dados do banco de dados
+        String sql = "SELECT * FROM postit_from_user WHERE idPostIt = ?;";
+        
+        try {
+
+                statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
+            
+                statement.setInt(1, id);
+                
             result = statement.executeQuery();    //  execute sql statement returning result  //  executa instruçao sql retornando resultado
 
             while (result.next()) {

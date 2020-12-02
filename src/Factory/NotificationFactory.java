@@ -5,11 +5,14 @@
  */
 package Factory;
 
+import DAO.ImageDAO;
+import Model.BackupImage;
 import Model.Notification;
 import Time.Time;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,16 +24,19 @@ public class NotificationFactory {
     
     private final UserFactory userFactory;
     private final TypeFactory typeFactory;
+
     
     public NotificationFactory() {
         
         this.userFactory = new UserFactory();
         this.typeFactory = new TypeFactory();
+
     }
     
      public Notification generateNotification(ResultSet result) { // create Notification with database data  // criando notificacao com dados do banco de dados
        
-         Notification notification = new Notification();     
+         Notification notification = new Notification();   
+         ImageDAO imageDAO = new ImageDAO();
          
          try {
                  
@@ -48,6 +54,18 @@ public class NotificationFactory {
                 notification.setWarned(result.getBoolean("avisado"));
                 notification.setUser(userFactory.generateUser(result));
                 notification.setType(typeFactory.genereteType(result));
+                
+                ArrayList<BackupImage> images = (ArrayList<BackupImage>) imageDAO.searchByName(result.getString("notification_image"));
+                
+                if(images.isEmpty()){
+                    
+                    System.out.println("vAAZIO");
+                }else{
+                    
+                    notification.setImage(images.get(0));
+                }
+                
+                
                 
          } catch (SQLException ex) {
              Logger.getLogger(NotificationFactory.class.getName()).log(Level.SEVERE, null, ex);

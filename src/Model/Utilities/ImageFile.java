@@ -29,10 +29,10 @@ public class ImageFile {
     private int length ;
     private int lengthKB;
     private int lengthMB;
-    private FileInputStream input;
-    private FileOutputStream output;
+    private FileInputStream inputStream;
+    private FileOutputStream outputStream;
     private ImageIcon imageSwing;
-    private Image ImageFX;
+    private Image imageFX;
     private static final String PCuser = System.getProperty("user.name");
 
     public ImageFile(String absolutePath) {
@@ -67,6 +67,8 @@ public class ImageFile {
     public ImageFile(File file) {
         
         this.file = file;
+        
+        start();
     }
     
    public ImageFile(InputStream inputS, String name) {
@@ -79,18 +81,18 @@ public class ImageFile {
             
             file = new File("\"C:\\Users\\"+PCuser+"\\Documents\\AgendaFX\\images\\"+name);
             
-            input = new FileInputStream(file);
-            output = new FileOutputStream(file);
+            inputStream = new FileInputStream(file);
+            outputStream = new FileOutputStream(file);
             
                 System.out.println("Começou o download");
                 
                 while(inputS.read(bytes) != -1){
                     
-                    output.write(bytes);
+                    outputStream.write(bytes);
                     
                 }
                 
-            output.close();
+            outputStream.close();
             inputS.close();
             
             start();
@@ -109,24 +111,28 @@ public class ImageFile {
         
         try {
             
-            this.length = (int) file.length();
-            this.lengthKB = length / 1024;
-            this.lengthMB = lengthKB / 1024;
+            startSize();
             
             this.bytes = new byte[length];
-            this.input = new FileInputStream(file);
-            this.output = new FileOutputStream(file);
+            this.inputStream = new FileInputStream(file);
+            this.outputStream = new FileOutputStream(file);
 
           //  input.read(bytes, 0, length);
 
             this.imageSwing = new ImageIcon(file.getAbsolutePath());
-            this.ImageFX = new Image(file.getAbsolutePath());
+            this.imageFX = new Image("file:///"+file.getAbsolutePath());
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImageFile.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ImageFile.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void startSize() {
+        this.length = (int) file.length();
+        this.lengthKB = length / 1024;
+        this.lengthMB = lengthKB / 1024;
     }
     
     
@@ -149,6 +155,9 @@ public class ImageFile {
     }
 
     public int getLength() {
+        
+        startSize();
+        
         return length;
     }
 
@@ -157,6 +166,9 @@ public class ImageFile {
     }
 
     public int getLengthKB() {
+        
+        startSize();
+        
         return lengthKB;
     }
 
@@ -165,6 +177,9 @@ public class ImageFile {
     }
 
     public int getLengthMB() {
+        
+        startSize();
+        
         return lengthMB;
     }
 
@@ -172,20 +187,38 @@ public class ImageFile {
         this.lengthMB = lengthMB;
     }
 
-    public FileInputStream getInput() {
-        return input;
+    public FileInputStream getInputStream() {
+        
+        try {
+            
+            inputStream = new FileInputStream(file);
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ImageFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return inputStream;
     }
 
-    public void setInput(FileInputStream input) {
-        this.input = input;
+    public void setInputStream(FileInputStream inputStream) {
+        this.inputStream = inputStream;
     }
 
-    public FileOutputStream getOutput() {
-        return output;
+    public FileOutputStream getOutputStream() {
+       
+        try {
+            
+            outputStream = new FileOutputStream(file);
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ImageFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return outputStream;
     }
 
-    public void setOutput(FileOutputStream output) {
-        this.output = output;
+    public void setOutputStream(FileOutputStream outputStream) {
+        this.outputStream = outputStream;
     }
 
     public ImageIcon getImageSwing() {
@@ -197,11 +230,16 @@ public class ImageFile {
     }
 
     public Image getImageFX() {
-        return ImageFX;
+        
+        System.out.println("UIDITI_____________________________________________________: "+ file.length()); 
+        
+        this.imageFX = new Image("file:///C:/Users/Samuel/Documents/AgendaFX/Images/"+file.getName());
+        
+        return imageFX;
     }
 
     public void setImageFX(Image ImageFX) {
-        this.ImageFX = ImageFX;
+        this.imageFX = ImageFX;
     }
 
     public File getFile() {

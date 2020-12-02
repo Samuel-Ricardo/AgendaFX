@@ -29,7 +29,7 @@ public class UserDAO {
     private final UserFactory userFactory;
 
     public UserDAO() {
-        this.userFactory = null;
+        this.userFactory = new UserFactory();
     }
 
     public UserDAO(UserFactory userFactory) {
@@ -297,21 +297,51 @@ public class UserDAO {
 
             if (result.next()) {
 
-                if (result.getDate("dataNascimento") != null) {
-                    //userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                    
-                    findUser.setNascimento(new Time(result.getDate("dataNascimento")));
-                }
+                 findUser = userFactory.generateUser(result);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement);  // closes all connections regardless of success  // fecha todas as conexoes independente de sucesso
+        }
 
-                findUser.setId(result.getLong("id"));
-                findUser.setNome(result.getString("nome"));
-                findUser.setSexo(result.getString("sexo"));
-             //   findUser.setNascimento(userDate);
-                findUser.setTelefone(result.getString("telefone"));
-                findUser.setEmail(result.getString("email"));
-                findUser.setCPF(result.getString("cpf"));
-                findUser.setSenha(result.getString("senha"));
-                findUser.setImage(result.getString("imagePerfil"));
+        return findUser;
+    }
+    
+    public User searchById(int id) {
+
+        connect();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        User findUser = new User();     // create user with database data  // criando usuario com dados do banco de dados
+        String sql = "SELECT * FROM usuario WHERE id = ?;";
+
+        /*
+            
+            // Columns:  //  Colunas: //
+            
+            id int(11) AI PK
+            nome varchar(50)
+            sexo enum('Masculino','Feminino')
+            dataNascimento date
+            telefone varchar(20)
+            email varchar(1000)
+            cpf char(11)
+            senha varchar(50)
+            imagePerfil varchar(10000)
+            
+         */
+        try {
+
+            statement = connection.prepareStatement(sql);   // prepares the command to be executed  // prepara o comando para ser executado
+
+            statement.setInt(1, id);   // Filling in the camp "?"  //  Preenchendo os campos "?"
+
+            result = statement.executeQuery();          //  execute sql statement returning result  //  executa instruçao sql retornando resultado
+
+            if (result.next()) {
+
+                findUser = userFactory.generateUser(result);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /

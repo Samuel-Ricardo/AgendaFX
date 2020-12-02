@@ -15,8 +15,13 @@ import Model.User;
 import Services.Downloader;
 import Controller.HomeController;
 import Controller.HomeController;
+import DAO.ImageDAO;
 import DAO.TypeDAO;
+import Model.BackupImage;
 import Model.Type;
+import Model.Utilities.ImageFile;
+import Services.Dialoger;
+import Services.FileManager;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
@@ -120,7 +125,15 @@ public class NotificationCreaterController implements Initializable {
     private NotificationDAO dao = new NotificationDAO();
     
     private TypeDAO typeDao = new TypeDAO();
+    
+    private Dialoger dialoger = new Dialoger();
+    
+    private ImageDAO imageDAO = new ImageDAO();
 
+    private BackupImage backupImage = new BackupImage();
+    
+    private FileManager fileManager = new FileManager();
+    
     private User logUser = UserDAO.getUser();
 
     private static HomeController home;
@@ -162,14 +175,14 @@ public class NotificationCreaterController implements Initializable {
                         notification.setAttachment(attachment);
                         lblAttachment.setText(attachment.getName());
                     } else {
-                        JOptionPane.showMessageDialog(null, "Nenhum arquivo foi escolhido");
+                        dialoger.errorMessage("Nenhum arquivo foi escolhido", "Nenhum arquivo selecionado, selecione um por favor e tente novamente");
                     }
 
                 break;
                 
             case 1:  // does the download of internet files // faz download de arquivo da internet
                 
-                    JOptionPane.showMessageDialog(null, "Escolha o nome e local do arquivo");
+                    dialoger.message("Escolha o nome e local do arquivo");
                     attachment = chooser.showSaveDialog(new Stage()); // choose place of file // escolhe o local do arquivo
                 
                     String link = JOptionPane.showInputDialog(null,"Digite o Link do arquivo"); // get the link typed by the user // pega o link digitado pelo usuario 
@@ -185,7 +198,7 @@ public class NotificationCreaterController implements Initializable {
                         lblAttachment.setText(attachment.getName());    // puts the file name on the screen // poe o nome do arquivo na tela
                     }
                     
-                    JOptionPane.showMessageDialog(null, "O arquivo está sendo baixado em 2° plano");
+                    dialoger.successMessage("O arquivo está sendo baixado em 2° plano");
                     
                 break;
         }
@@ -229,7 +242,22 @@ public class NotificationCreaterController implements Initializable {
 
         notification.setBody(txtDescription.getText());
         if (img != null) {
-            notification.setImage(img.getAbsolutePath());
+            
+            backupImage.setImage(new ImageFile(img));
+            
+            if(imageDAO.existByName(backupImage) == false){
+                
+                imageDAO.insert(backupImage);
+            }else{
+                imageDAO.update(backupImage);
+            }
+            
+            
+            notification.setImage(imageDAO.searchByName(backupImage.getImage().getFile().getName()).get(0));
+            
+            
+            File destiny = new File(FileManager.getDefaultFolder()+"/Images/"+img.getName());
+            fileManager.copyFile(backupImage.getImage().getFile(), destiny);
         }
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
@@ -237,7 +265,7 @@ public class NotificationCreaterController implements Initializable {
         notification.setUser(logUser);
 
         if (dao.insert(notification)) {     // creates the notification  // cria a notificaçao
-            JOptionPane.showMessageDialog(null, "Criado com sucesso +,-");
+            dialoger.successMessage("Criado com sucesso +,-");
         }
     }
 
@@ -299,7 +327,7 @@ public class NotificationCreaterController implements Initializable {
 
             imgNotific.setImage(new Image("file:///" + img.getAbsolutePath()));    // set choosed image // define a imagem escolhida
             
-            notification.setImage(img.getAbsolutePath());   // set choosed image in notification// define a imagem escolhida na notificaçao
+          //  notification.setImage(img.getAbsolutePath());   // set choosed image in notification// define a imagem escolhida na notificaçao
             
         });
 

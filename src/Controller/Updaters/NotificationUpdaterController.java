@@ -7,6 +7,7 @@ package Controller.Updaters;
 
 import Controller.ChooserController;
 import Controller.HomeController;
+import DAO.ImageDAO;
 import DAO.NotificationDAO;
 import DAO.TypeDAO;
 import DAO.UserDAO;
@@ -17,6 +18,10 @@ import Model.Type;
 import Model.User;
 import Services.Downloader;
 import Helper.Filler;
+import Model.BackupImage;
+import Model.Utilities.ImageFile;
+import Services.Dialoger;
+import Services.FileManager;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.JFXToggleButton;
@@ -121,6 +126,14 @@ public class NotificationUpdaterController implements Initializable {
     private User logUser = UserDAO.getUser();
     
     private TypeDAO typeDao = new TypeDAO();
+    
+    private Dialoger dialoger = new Dialoger();
+    
+    private ImageDAO imageDAO = new ImageDAO();
+
+    private BackupImage backupImage = notification.getImage();
+    
+    private FileManager fileManager = new FileManager();
 
     private static HomeController home;
 
@@ -226,8 +239,28 @@ public class NotificationUpdaterController implements Initializable {
         }
 
         notification.setBody(txtDescription.getText());
+      
         if (img != null) {
-            notification.setImage(img.getAbsolutePath());
+            
+//            if(backupImage == null){
+//                
+//                recoverImage();
+//            }
+                
+
+            backupImage = new BackupImage(notification, new ImageFile(img));
+
+            backupImage.setImage(new ImageFile(img));
+            
+            if(imageDAO.existByName(backupImage) == false){
+               
+                imageDAO.insert(backupImage);
+            }
+            
+            File destiny = new File(FileManager.getDefaultFolder()+"/Images/"+img.getName());
+            fileManager.copyFile(backupImage.getImage().getFile(), destiny);
+            
+            notification.setImage(imageDAO.searchByName(backupImage.getImage().getFile().getName()).get(0));
         }
         notification.setScheduledDay(scheduledDay);
         notification.setTitle(txtTitle.getText());
@@ -239,7 +272,7 @@ public class NotificationUpdaterController implements Initializable {
             notification.setAttachment(attachment);
         }
         if (imgVissible) {
-            notification.setImage(img.getAbsolutePath());
+            notification.setImage(imageDAO.selectAllFromNotification(notification).get(0));
         }
         if (soundVissible) {
             notification.setMusic(music);
@@ -256,6 +289,18 @@ public class NotificationUpdaterController implements Initializable {
         Filler.fillTodaysScheduledActivities(Filler.getController().getLvTodayNotifications());
         Filler.fillOutActivitiesDoneToday(Filler.getController().getLvActivitiesDone());
         
+    }
+
+    public void recoverImage() {
+        
+        ArrayList<BackupImage> images = (ArrayList<BackupImage>) imageDAO.searchByName(backupImage.getImage().getFile().getName());
+        
+        if(images.isEmpty()){
+            
+            backupImage = new BackupImage(notification, new ImageFile(img));
+        }else{
+            backupImage = images.get(0);
+        }
     }
 
     @FXML
@@ -318,7 +363,7 @@ public class NotificationUpdaterController implements Initializable {
                 imgNotific.setImage(new Image("file:///" + img.getAbsolutePath()));    // set choosed image // define a imagem escolhida
             }
 
-            notification.setImage(img.getAbsolutePath());   // set choosed image in notification// define a imagem escolhida na notificaçao
+//            notification.setImage(img.getAbsolutePath());   // set choosed image in notification// define a imagem escolhida na notificaçao
 
         });
 
@@ -386,8 +431,8 @@ public class NotificationUpdaterController implements Initializable {
             tbImage.selectedProperty().set(true);
             imgVissible = true;
             imgNotific.setVisible(true);
-            imgNotific.setImage(new Image("file:///" + notification.getImage()));
-            img = new File(notification.getImage());
+            imgNotific.setImage(notification.getImage().getImage().getImageFX());
+            img = notification.getImage().getImage().getFile();
 
         }
 

@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +33,8 @@ public class Downloader extends Thread {
     private Double kiloByte = new Double(0);
     private Double megaByte = new Double(0);
     private boolean downloading = false;
+    private Dialoger dialoger;
+    private static Downloader downloader = new Downloader();
 
     
     ////Constructors/////
@@ -46,10 +49,12 @@ public class Downloader extends Thread {
         }
 
         this.localFile = new File(localFile);
+        dialoger = new Dialoger();
     }
 
     public Downloader() {
 
+        dialoger = new Dialoger();
     }
     
 
@@ -121,6 +126,49 @@ public class Downloader extends Thread {
         }
     }
     
+    public File download(InputStream input,File localFile ){
+        
+        if(localFile.exists()){
+            dialoger.message("Ops ;-;", "O arquivo: "+localFile.getName()+" ja existe;"
+                                                  + "\n"
+                                                  + "\n Ele está localizado em: "+localFile.getAbsolutePath(), Alert.AlertType.WARNING);
+            return localFile;
+        
+          }else{
+            
+            FileOutputStream output = null;
+            try {
+                downloading = true;
+
+                output = new FileOutputStream(localFile);
+
+                int byt = 0;
+
+                byte [] buffer = new byte [1024];
+
+                while ((byt = input.read()) != -1) {                
+
+                    output.write(buffer, 0, byt);
+
+                    System.out.println("Tamanho: " + sizeInMegaBytes(localFile) + " MB");
+                    
+                    System.out.println("to aki_______: "+localFile.getAbsolutePath());
+                }
+
+                input.close();
+                output.close();  
+
+                downloading = false;
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+          }      
+        }
+        
+        return localFile;
+    }
     
     public ArrayList<Byte> downloadBytes(InputStream input) {
      
@@ -261,4 +309,46 @@ public class Downloader extends Thread {
     public void setMegaBytes(Double megaBytes) {
         this.megaByte = megaBytes;
     }
+
+    public Double getKiloByte() {
+        return kiloByte;
+    }
+
+    public void setKiloByte(Double kiloByte) {
+        this.kiloByte = kiloByte;
+    }
+
+    public Double getMegaByte() {
+        return megaByte;
+    }
+
+    public void setMegaByte(Double megaByte) {
+        this.megaByte = megaByte;
+    }
+
+    public boolean isDownloading() {
+        return downloading;
+    }
+
+    public void setDownloading(boolean downloading) {
+        this.downloading = downloading;
+    }
+
+    public Dialoger getDialoger() {
+        return dialoger;
+    }
+
+    public void setDialoger(Dialoger dialoger) {
+        this.dialoger = dialoger;
+    }
+
+    public static Downloader getDownloader() {
+        return downloader;
+    }
+
+    public static void setDownloader(Downloader downloader) {
+        Downloader.downloader = downloader;
+    }
+    
+    
 }

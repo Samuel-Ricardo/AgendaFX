@@ -49,7 +49,7 @@ public class AttachmentDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "INSERT INTO tipo (file_name, file_way, file_bytes, file_postIt_id, file_notificaton_id, file_size) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO file (file_name, file_way, file_bytes, file_postIt_id, file_notificaton_id, file_size) VALUES (?,?,?,?,?,?);";
 
         try {
 
@@ -77,7 +77,7 @@ public class AttachmentDAO {
 //        connect();
 //
 //        PreparedStatement statement = null;
-//        String sql = "INSERT INTO tipo (tipo, cor, detalhes_de_cores, importancia, id_usuario_tipo) VALUES (?,?,?,?,?);";
+//        String sql = "INSERT INTO file (file, cor, detalhes_de_cores, importancia, id_usuario_file) VALUES (?,?,?,?,?);";
 //
 //       
 //            
@@ -112,7 +112,7 @@ public class AttachmentDAO {
         connect();
          
         PreparedStatement statement = null;
-        String sql = "UPDATE tipo SET file_name = ? , file_way = ? , file_bytes = ? , file_postIt_id = ? , file_notificaton_id = ? , file_size = ? WHERE id_file = ?;";
+        String sql = "UPDATE file SET file_name = ? , file_way = ? , file_bytes = ? , file_postIt_id = ? , file_notificaton_id = ? , file_size = ? WHERE id_file = ?;";
 
         try {
 

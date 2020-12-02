@@ -71,6 +71,7 @@ public class Filler {
                     notify.showNotification(row.getNotification());
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Nao foi Possivel Abrir a notificaçao " + ex);
+                    System.out.println("Nao foi Possivel Abrir a notificaçao " + ex);
                 }
 
             });

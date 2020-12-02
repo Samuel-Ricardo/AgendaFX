@@ -23,23 +23,23 @@ public class Notification extends Reminder{
     private Time scheduledDay;
     private boolean warned;
     private File music;
-    private String image;
+    private BackupImage backupImage;
     private ArrayList<File> Attachments;
 
-    public Notification(Time scheduledDay, boolean warned, File music, String image, ArrayList<File> Attachments, User user) {
+    public Notification(Time scheduledDay, boolean warned, File music, BackupImage backupImage, ArrayList<File> Attachments, User user) {
         super(user);
         this.scheduledDay = scheduledDay;
         this.warned = warned;
         this.music = music;
-        this.image = image;
+        this.backupImage = backupImage;
         this.Attachments = Attachments;
     }
 
-    public Notification(Time scheduledDay, boolean warned, File music, String image, ArrayList<File> Attachments) {
+    public Notification(Time scheduledDay, boolean warned, File music, BackupImage backupImage, ArrayList<File> Attachments) {
         this.scheduledDay = scheduledDay;
         this.warned = warned;
         this.music = music;
-        this.image = image;
+        this.backupImage = backupImage;
         this.Attachments = Attachments;
     }
     
@@ -59,13 +59,15 @@ public class Notification extends Reminder{
         this.Attachments = new ArrayList<>();
     }
     
-    public String getImage() {
-        return image;
+    public BackupImage getImage() {
+        
+        return backupImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+    public void setImage(BackupImage backupImage) {
+        
+        this.backupImage = backupImage;
+    }  
     
     public File getMusic() {
         return music;
