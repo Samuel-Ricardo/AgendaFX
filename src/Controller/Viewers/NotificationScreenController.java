@@ -5,10 +5,13 @@
  */
 package Controller.Viewers;
 
+import DAO.ImageDAO;
 import DAO.NotificationDAO;
 import DAO.UserDAO;
+import Factory.ImageFactory;
 import Main.Viewers.MainNotificationScreen;
 import Main.Updaters.MainNotificationUpdater;
+import Model.BackupImage;
 import Model.Notification;
 import Model.User;
 import Services.SoundPlayer;
@@ -63,6 +66,8 @@ public class NotificationScreenController implements Initializable {
     private User user = UserDAO.getUser();
 
     private Notification notification = NotificationDAO.getNotification();
+    
+    private ImageDAO imageDAO = new ImageDAO();
 
     @FXML
     void Update() {     // updates this notification with new data //Atualiza esta notificaçao com os novos dados
@@ -95,6 +100,12 @@ public class NotificationScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        if(notification.getImage().getImage().getFile().exists() == false){
+            
+          notification.setImage(imageDAO.searchByName(notification.getImage().getImage().getFile().getName()).get(0));
+    }
+  
+        
         loadScreen();  // loads the screen  //  carrega a tela
 
     }

@@ -59,7 +59,7 @@ public class BackupImageFactory {
             
             File localImage = new File(result.getString("image_way")); 
             
-            File lcoalImage2 = new File(FileManager.getDefaultFolder()+"/"+localImage.getName());
+            File lcoalImage2 = new File(FileManager.getDefaultFolder()+"images/"+localImage.getName());
             
             if (localImage.exists()) {
                 
