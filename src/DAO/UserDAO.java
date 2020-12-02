@@ -297,21 +297,7 @@ public class UserDAO {
 
             if (result.next()) {
 
-                if (result.getDate("dataNascimento") != null) {
-                    //userDate = new java.util.Date(result.getDate("dataNascimento").getTime());
-                    
-                    findUser.setNascimento(new Time(result.getDate("dataNascimento")));
-                }
-
-                findUser.setId(result.getLong("id"));
-                findUser.setNome(result.getString("nome"));
-                findUser.setSexo(result.getString("sexo"));
-             //   findUser.setNascimento(userDate);
-                findUser.setTelefone(result.getString("telefone"));
-                findUser.setEmail(result.getString("email"));
-                findUser.setCPF(result.getString("cpf"));
-                findUser.setSenha(result.getString("senha"));
-                findUser.setImage(result.getString("imagePerfil"));
+                 findUser = userFactory.generateUser(result);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco: " + ex);  // error message if it occurs // mensagem de erro se ocorrer /
