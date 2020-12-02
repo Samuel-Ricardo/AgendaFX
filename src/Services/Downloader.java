@@ -164,12 +164,6 @@ public class Downloader extends Thread {
                 Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    output.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
-                }
           }      
         }
         
