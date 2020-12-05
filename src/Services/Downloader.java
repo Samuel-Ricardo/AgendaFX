@@ -155,16 +155,20 @@ public class Downloader extends Thread {
                     System.out.println("to aki_______: "+localFile.getAbsolutePath());
                 }
 
-                input.close();
-                output.close();  
-
                 downloading = false;
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
-          }      
+          }finally{
+                try {
+                    input.close();
+                    output.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }      
         }
         
         return localFile;
